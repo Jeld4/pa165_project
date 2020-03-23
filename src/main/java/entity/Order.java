@@ -5,6 +5,7 @@ import enums.OrderState;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class representing entity Order
@@ -23,14 +24,6 @@ public class Order {
 
     @Enumerated
     private OrderState state;
-
-    public List<Tire> getTires() {
-        return tires;
-    }
-
-    public void setTires(List<Tire> tires) {
-        this.tires = tires;
-    }
 
     private List<Tire> tires;
 
@@ -68,5 +61,32 @@ public class Order {
         this.id = id;
     }
 
-    // TODO equals and hash method
+    public List<Tire> getTires() {
+        return tires;
+    }
+
+    public void setTires(List<Tire> tires) {
+        this.tires = tires;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -9,11 +9,34 @@ import java.util.List;
  */
 public interface OrderDao {
 
-    void create(Order p);
+    /**
+     * Method to create a new order.
+     * @param order
+     */
+    void create(Order order);
 
+    /**
+     * Method to find all orders.
+     * @return
+     */
     List<Order> findAll();
 
+    /**
+     * Method to find order by id.
+     * @param id
+     * @return
+     */
     Order findById(Long id);
 
-    void remove(Order p);
+    /**
+     * Method used to remove order.
+     * @param order
+     */
+    void remove(Order order);
+
+    /**
+     * Method to update existing order.
+     * @param order
+     */
+    void update(Order order);
 }
