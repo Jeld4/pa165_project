@@ -4,6 +4,7 @@ import enums.OrderState;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Class representing entity Order
@@ -23,8 +24,17 @@ public class Order {
     @Enumerated
     private OrderState state;
 
-    //private List<Tire> tires;
-    //private List<Service> services;
+    public List<Tire> getTires() {
+        return tires;
+    }
+
+    public void setTires(List<Tire> tires) {
+        this.tires = tires;
+    }
+
+    private List<Tire> tires;
+
+    private List<Service> services;
 
     public Long getId() {
         return id;
