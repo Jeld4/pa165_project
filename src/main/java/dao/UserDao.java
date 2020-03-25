@@ -7,8 +7,8 @@ import entity.Employee;
 import entity.User;
 
 public interface UserDao {
-	Customer createCustomer(Customer customer);
-	Employee createEmployee(Employee employee);
+	void createCustomer(Customer customer);
+	void createEmployee(Employee employee);
 	
 	Customer findCustomer(long id);
 	Employee findEmployee(long id);

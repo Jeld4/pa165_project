@@ -1,13 +1,23 @@
 package entity;
 
 import java.util.ArrayList;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 import java.util.List;
 
 /**
  * @author Michal Klíma
  */
-public class Customer extends User {
 
+@Entity
+@Table(name = "Customer")
+public class Customer extends User {
+	
 	public Customer(String n, String l, String p, String a, String tn) {
 		super(n, l, p);
 		listOfOrders = new ArrayList<Order>();
@@ -15,8 +25,13 @@ public class Customer extends User {
 		telephoneNumber = tn;
 	}
 
+	
+	@OneToMany(mappedBy="id", cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST})
 	private List<Order> listOfOrders;
+
+
 	private String address;
+	
 	private String telephoneNumber;
 	// private List<Car> cars;
 	

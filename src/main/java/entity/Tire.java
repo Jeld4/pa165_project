@@ -5,16 +5,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.util.Objects;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * @author Jakub Malý, 456389
  */
 @Entity
+@Table(name = "Tire", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Tire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private long id;
     private String manufacturer;
     private String type;
     private int size;
@@ -30,11 +33,11 @@ public class Tire {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
-    public void setId(Long id) {
-        Id = id;
+    public void setId(Long i) {
+        id = i;
     }
 
     public String getManufacturer() {
@@ -82,7 +85,7 @@ public class Tire {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tire tire = (Tire) o;
-        return Objects.equals(Id, tire.Id) &&
+        return Objects.equals(id, tire.id) &&
                 Objects.equals(type, tire.type) &&
                 Objects.equals(size, tire.size) &&
                 Objects.equals(season, tire.season) &&
@@ -91,6 +94,6 @@ public class Tire {
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, manufacturer, type, size, season, price);
+        return Objects.hash(id, manufacturer, type, size, season, price);
     }
 }

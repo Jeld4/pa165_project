@@ -11,6 +11,7 @@ import java.util.List;
  * @author Jan Jelínek
  */
 @Entity
+@Table(name="\"Order\"")
 public class Order {
 
     @Id
@@ -32,8 +33,10 @@ public class Order {
         this.tires = tires;
     }
 
+    @OneToMany(mappedBy="id", cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST})
     private List<Tire> tires;
 
+    @OneToMany(mappedBy="id", cascade = {CascadeType.ALL, CascadeType.MERGE, CascadeType.PERSIST})
     private List<Service> services;
 
     public Long getId() {

@@ -13,14 +13,12 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;
 
-	public Customer createCustomer(Customer customer) {
+	public void createCustomer(Customer customer) {
 		em.persist(customer);
-		return null;
 	}
 
-	public Employee createEmployee(Employee employee) {
+	public void createEmployee(Employee employee) {
 		em.persist(employee);
-		return null;
 	}
 
 	public Customer findCustomer(long id) {
