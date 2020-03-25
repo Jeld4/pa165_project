@@ -27,3 +27,4 @@ test-output
 
 # Maven target directories
 target
+/bin/
