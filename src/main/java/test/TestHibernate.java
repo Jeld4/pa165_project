@@ -1,17 +1,15 @@
 package test;
  
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import org.hibernate.Session;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import dao.OrderDaoImpl;
-import dao.TireDaoImpl;
 import dao.UserDaoImpl;
-import entity.Employee;
+import entity.Customer;
 import entity.Order;
-import entity.Tire;
-import util.HibernateUtil;
  
 public class TestHibernate
 {
@@ -19,17 +17,20 @@ public class TestHibernate
    private static EntityManagerFactory emf;
    public static void main(String[] args)
    {
-      Session session = HibernateUtil.getSessionFactory().openSession();
-      session.beginTransaction();
-      // Add new Employee object
-      //emf = Persistence.createEntityManagerFactory("pu1");
-      
-      
-      OrderDaoImpl orderDao = new OrderDaoImpl();
-      orderDao.create(new Order ());
-      //System.out.println(emp);
-      //session.save(emp);
-      session.getTransaction().commit();
-      HibernateUtil.shutdown();
+	   AnnotationConfigApplicationContext appContext = new AnnotationConfigApplicationContext(InMemoryDatabaseSpring.class);
+
+		emf = Persistence.createEntityManagerFactory("default");
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		UserDaoImpl ord = new UserDaoImpl();
+		ord.setEntityManager(em);
+		ord.createCustomer(new Customer("name", "login","password", "emial", "telephone"));
+		em.getTransaction().commit();
+		em.close();
+		
+		emf.close();
+		appContext.close();
    }
 }
