@@ -11,6 +11,7 @@ import java.util.List;
  * @author Jan Jelínek
  */
 @Entity
+@Table(name="ORDER_ITEM")
 public class Order {
 
     @Id
@@ -31,9 +32,9 @@ public class Order {
     public void setTires(List<Tire> tires) {
         this.tires = tires;
     }
-
+    @OneToMany
     private List<Tire> tires;
-
+    @OneToMany
     private List<Service> services;
 
     public Long getId() {
