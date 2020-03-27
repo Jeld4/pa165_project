@@ -1,13 +1,13 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
-import enums.OrderState;
+import cz.fi.muni.pa165.enums.OrderState;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 /**
- * Class representing entity Order
+ * Class representing cz.fi.muni.pa165.entity Order
  * @author Jan Jelínek
  */
 @Entity

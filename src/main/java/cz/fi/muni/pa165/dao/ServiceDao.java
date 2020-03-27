@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.Service;
+import cz.fi.muni.pa165.entity.Service;
 
 import java.util.List;
 
