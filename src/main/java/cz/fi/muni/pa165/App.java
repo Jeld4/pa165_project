@@ -1,5 +1,6 @@
-import entity.Car;
-import org.springframework.context.ApplicationContext;
+package cz.fi.muni.pa165;
+
+import cz.fi.muni.pa165.entity.Car;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.persistence.EntityManager;

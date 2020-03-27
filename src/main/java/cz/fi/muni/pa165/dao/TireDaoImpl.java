@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.Tire;
+import cz.fi.muni.pa165.entity.Tire;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

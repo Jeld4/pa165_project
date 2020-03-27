@@ -1,4 +1,4 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

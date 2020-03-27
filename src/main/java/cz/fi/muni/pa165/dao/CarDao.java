@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.Car;
+import cz.fi.muni.pa165.entity.Car;
 
 import java.util.List;
 

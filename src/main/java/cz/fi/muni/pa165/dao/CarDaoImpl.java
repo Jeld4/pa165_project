@@ -1,11 +1,10 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.Car;
+import cz.fi.muni.pa165.entity.Car;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 
 @Repository
-public class CarDaoImpl implements CarDao {
+public class CarDaoImpl implements CarDao{
 
     @PersistenceContext
     private EntityManager entityManager;
