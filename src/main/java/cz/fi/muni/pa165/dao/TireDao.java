@@ -9,11 +9,34 @@ import java.util.List;
  */
 public interface TireDao {
 
-    void create(Tire t);
+    /**
+     * Method used to create a new tire
+     * @param tire
+     */
+    void create(Tire tire);
 
+    /**
+     * Method used to find all tires
+     * @return
+     */
     List<Tire> findAll();
 
+    /**
+     * Method used to find tire by id
+     * @param id
+     * @return
+     */
     Tire findById(Long id);
 
-    void remove(Tire t);
+    /**
+     * Method used to remove order.
+     * @param tire
+     */
+    void remove(Tire tire);
+
+    /**
+     * Method used to update existing tire
+     * @param tire
+     */
+    void update(Tire tire);
 }

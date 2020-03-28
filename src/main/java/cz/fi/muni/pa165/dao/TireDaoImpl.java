@@ -35,4 +35,9 @@ public class TireDaoImpl implements TireDao {
     public void remove(Tire t) {
         em.remove(t);
     }
+
+    @Override
+    public void update (Tire tire) {
+        em.merge(tire);
+    }
 }
