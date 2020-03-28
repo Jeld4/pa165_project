@@ -1,4 +1,4 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
 
 import javax.persistence.Entity;
@@ -21,6 +21,10 @@ public class Car {
     private String licencePlate;
     private String model;
     private String tireType; //TODO Potentially refactor to Tire type
+
+    public Long getId() {
+        return Id;
+    }
 
     public String getLicencePlate() {
         return licencePlate;

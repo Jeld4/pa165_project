@@ -1,4 +1,4 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +20,9 @@ public class Tire {
     private int size;
     private String season;
     private int price;
+
+    public Tire() {
+    }
 
     public Tire(String manufacturer, String type, int size, String season, int price) {
         this.manufacturer = manufacturer;

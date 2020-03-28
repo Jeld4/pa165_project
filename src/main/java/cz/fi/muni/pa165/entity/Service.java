@@ -1,4 +1,4 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +23,10 @@ public class Service {
     private BigDecimal price;
 
     public Service() {
+    }
+
+    public Long getId() {
+        return Id;
     }
 
     public String getName() {

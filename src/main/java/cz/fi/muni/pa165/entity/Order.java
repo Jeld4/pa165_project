@@ -1,6 +1,6 @@
-package entity;
+package cz.fi.muni.pa165.entity;
 
-import enums.OrderState;
+import cz.fi.muni.pa165.enums.OrderState;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Class representing entity Order
+ * Class representing cz.fi.muni.pa165.entity Order
  * @author Jan Jelínek
  */
 @Entity
+@Table(name="ORDER_ITEM")
 public class Order {
 
     @Id
@@ -25,8 +26,19 @@ public class Order {
     @Enumerated
     private OrderState state;
 
-    private List<Tire> tires;
+<<<<<<< HEAD:src/main/java/entity/Order.java
+=======
+    public List<Tire> getTires() {
+        return tires;
+    }
 
+    public void setTires(List<Tire> tires) {
+        this.tires = tires;
+    }
+    @OneToMany
+>>>>>>> master:src/main/java/cz/fi/muni/pa165/entity/Order.java
+    private List<Tire> tires;
+    @OneToMany
     private List<Service> services;
 
     public Long getId() {
