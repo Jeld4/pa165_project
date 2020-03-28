@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.Tire;
@@ -11,9 +13,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -86,13 +86,13 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findAll(){
         List<Order> f = orderDao.findAll();
-        Assert.assertEquals(f.size(), 2);
+        AssertJUnit.assertEquals(f.size(), 2);
     }
     
     @Test
     public void findById(){
         Order f = orderDao.findById(o1.getId());
-        Assert.assertEquals(f.getId(), o1.getId());
+        AssertJUnit.assertEquals(f, o1);
     }
     
     
@@ -100,19 +100,25 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     public void remove(){
         orderDao.remove(o1);
         List<Order> li =  orderDao.findAll();
-        Assert.assertEquals(li.get(0).getId(), o2.getId());
-        Assert.assertEquals(li.size(), 1);
-        assert(orderDao.findById(o1.getId()) == null);
+        AssertJUnit.assertEquals(li.get(0).getId(), o2.getId());
+        AssertJUnit.assertEquals(li.size(), 1);
+        AssertJUnit.assertEquals(orderDao.findById(o1.getId()), null);
     }
     
     @Test
     public void update() {
     	o1.setState(OrderState.DONE);
     	orderDao.update(o1);
-    	Assert.assertEquals(orderDao.findById(o1.getId()).getState(), o1.getState());
-    	
+    	AssertJUnit.assertEquals(orderDao.findById(o1.getId()), o1);
     }
     
-    
-
+    @Test
+    public void createAnotherOrder() {
+        List<Order> bef = orderDao.findAll();
+        Order o3 = new Order();
+        orderDao.create(o3);
+        List<Order> aft = orderDao.findAll();
+        AssertJUnit.assertEquals(aft.size(), bef.size() + 1);
+        AssertJUnit.assertEquals(orderDao.findById(o3.getId()),o3);
+    }
 }

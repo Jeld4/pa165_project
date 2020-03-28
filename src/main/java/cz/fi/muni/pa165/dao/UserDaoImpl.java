@@ -4,60 +4,91 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import cz.fi.muni.pa165.entity.Customer;
 import cz.fi.muni.pa165.entity.Employee;
+import cz.fi.muni.pa165.entity.Order;
+import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
+
+/**
+ * @author Michal Klíma
+ */
 
 @Repository
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;
 
-	public Customer createCustomer(Customer customer) {
+    @Override
+	public void createCustomer(Customer customer) {
 		em.persist(customer);
-		return null;
 	}
 
-	public Employee createEmployee(Employee employee) {
+    @Override
+	public void createEmployee(Employee employee) {
 		em.persist(employee);
-		return null;
+	}
+    
+    @Override
+	public void createUser(User user) {
+		em.persist(user);
 	}
 
+    @Override
 	public Customer findCustomer(long id) {
 		return em.find(Customer.class, id);
 	}
 
+    @Override
 	public Employee findEmployee(long id) {
 		return em.find(Employee.class, id);
 	}
 	
+    @Override
 	public User findUser(long id) {
 		return em.find(User.class, id);
 	}
-
-	public void removeUser(long id) {
-		em.remove(findUser(id));
-	}
 	
+    @Override
 	public void removeUser(User user) {
 		em.remove(user);
 	}
 
-	public List<Customer> getAllCustomers() {
-		// TODO Auto-generated method stub
-		return null;
+    @Override
+	public List<Customer> findAllCustomers() {
+        Query query = em.createQuery("SELECT c FROM Customer c");
+        return (List<Customer>) query.getResultList();
 	}
 
-	public List<Employee> getAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+    @Override
+	public List<Employee> findAllEmployees() {
+        Query query = em.createQuery("SELECT e FROM Employee e");
+        return (List<Employee>) query.getResultList();
 	}
 
-	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+    @Override
+	public List<User> findAllUsers() {
+        Query query = em.createQuery("SELECT u FROM User u");
+        return (List<User>) query.getResultList();
 	}
+    
+    @Override
+    public void updateUser (User u) {
+        em.merge(u);
+    }
+    
+    @Override
+    public void updateCustomer (Customer c) {
+        em.merge(c);
+    }
+
+    @Override
+    public void updateEmployee (Employee e) {
+        em.merge(e);
+    }
+
 
 }
