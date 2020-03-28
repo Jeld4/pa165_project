@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Michal Klíma
+ * @author Michal Klima
  */
 public class Customer extends User {
 

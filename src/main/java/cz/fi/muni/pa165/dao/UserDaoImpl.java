@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import cz.fi.muni.pa165.entity.Customer;
 import cz.fi.muni.pa165.entity.Employee;
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;

@@ -23,7 +23,7 @@ public class TireDaoImpl implements TireDao {
 
     @Override
     public List<Tire> findAll() {
-        return null;
+        return em.createQuery("select t from Tire t", Tire.class).getResultList();
     }
 
     @Override
