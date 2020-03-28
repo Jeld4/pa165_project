@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -12,22 +13,20 @@ import java.util.List;
  */
 
 @Repository
-public class CarDaoImpl implements CarDao{
+public class CarDaoImpl implements CarDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void crate(Car car) {
+    public void create(Car car) {
         entityManager.persist(car);
     }
 
     @Override
     public List<Car> findAll() {
-//        TypedQuery<Car> query = entityManager.createQuery("SELECT c FROM Car c", Car.class);
-
-//        return  query.getResultList();
-        return null;
+        Query query = entityManager.createQuery("SELECT c FROM Car c");
+        return (List<Car>) query.getResultList();
     }
 
     @Override
@@ -38,5 +37,10 @@ public class CarDaoImpl implements CarDao{
     @Override
     public void remove(Car car) {
         entityManager.remove(car);
+    }
+
+    @Override
+    public void update (Car car) {
+        entityManager.merge(car);
     }
 }

@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.enums.OrderState;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Class representing cz.fi.muni.pa165.entity Order
@@ -25,17 +26,18 @@ public class Order {
     @Enumerated
     private OrderState state;
 
-    public List<Tire> getTires() {
-        return tires;
-    }
-
-    public void setTires(List<Tire> tires) {
-        this.tires = tires;
-    }
     @OneToMany
     private List<Tire> tires;
     @OneToMany
     private List<Service> services;
+
+    public Order() {}
+
+    public Order(int totalPrice, Date dateOfOrder, OrderState state) {
+        this.totalPrice = totalPrice;
+        this.dateOfOrder = dateOfOrder;
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
@@ -47,6 +49,14 @@ public class Order {
 
     public OrderState getState() {
         return state;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     public int getTotalPrice() {
@@ -69,5 +79,24 @@ public class Order {
         this.id = id;
     }
 
-    // TODO equals and hash method
+    public List<Tire> getTires() {
+        return tires;
+    }
+
+    public void setTires(List<Tire> tires) {
+        this.tires = tires;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

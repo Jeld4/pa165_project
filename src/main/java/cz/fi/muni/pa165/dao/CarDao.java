@@ -10,11 +10,13 @@ import java.util.List;
 
 public interface CarDao {
 
-    void crate(Car car);
+    void create(Car car);
 
     List<Car> findAll();
 
     Car findById(Long id);
 
-    void remove(Car p);
+    void remove(Car car);
+
+    void update(Car car);
 }

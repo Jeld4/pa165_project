@@ -23,7 +23,7 @@ public class TireDaoImpl implements TireDao {
 
     @Override
     public List<Tire> findAll() {
-        return null;
+        return em.createQuery("select t from Tire t", Tire.class).getResultList();
     }
 
     @Override
@@ -34,5 +34,10 @@ public class TireDaoImpl implements TireDao {
     @Override
     public void remove(Tire t) {
         em.remove(t);
+    }
+
+    @Override
+    public void update (Tire tire) {
+        em.merge(tire);
     }
 }

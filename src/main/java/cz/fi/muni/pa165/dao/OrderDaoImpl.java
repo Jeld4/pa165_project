@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -14,25 +15,31 @@ import java.util.List;
 public class OrderDaoImpl implements OrderDao {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Override
-    public void create(Order o) {
-        em.persist(o);
+    public void create(Order order) {
+        entityManager.persist(order);
     }
 
     @Override
     public List<Order> findAll() {
-        return null;
+        Query query = entityManager.createQuery("SELECT o FROM Order o");
+        return (List<Order>) query.getResultList();
     }
 
     @Override
     public Order findById(Long id) {
-        return em.find(Order.class, id);
+        return entityManager.find(Order.class, id);
     }
 
     @Override
-    public void remove(Order o) {
-        em.remove(o);
+    public void remove(Order order) {
+        entityManager.remove(order);
+    }
+
+    @Override
+    public void update (Order order) {
+        entityManager.merge(order);
     }
 }

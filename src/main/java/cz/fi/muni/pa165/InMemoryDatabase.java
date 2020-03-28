@@ -8,6 +8,10 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Radim Sasinka, 456315
+ */
+
 @Configuration
 public class InMemoryDatabase{
 
