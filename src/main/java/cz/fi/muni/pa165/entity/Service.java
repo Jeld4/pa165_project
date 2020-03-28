@@ -30,7 +30,7 @@ public class Service {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
