@@ -26,20 +26,18 @@ public class Order {
     @Enumerated
     private OrderState state;
 
-<<<<<<< HEAD:src/main/java/entity/Order.java
-=======
-    public List<Tire> getTires() {
-        return tires;
-    }
-
-    public void setTires(List<Tire> tires) {
-        this.tires = tires;
-    }
     @OneToMany
->>>>>>> master:src/main/java/cz/fi/muni/pa165/entity/Order.java
     private List<Tire> tires;
     @OneToMany
     private List<Service> services;
+
+    public Order() {}
+
+    public Order(int totalPrice, Date dateOfOrder, OrderState state) {
+        this.totalPrice = totalPrice;
+        this.dateOfOrder = dateOfOrder;
+        this.state = state;
+    }
 
     public Long getId() {
         return id;
@@ -51,6 +49,14 @@ public class Order {
 
     public OrderState getState() {
         return state;
+    }
+
+    public List<Service> getServices() {
+        return services;
+    }
+
+    public void setServices(List<Service> services) {
+        this.services = services;
     }
 
     public int getTotalPrice() {
@@ -79,14 +85,6 @@ public class Order {
 
     public void setTires(List<Tire> tires) {
         this.tires = tires;
-    }
-
-    public List<Service> getServices() {
-        return services;
-    }
-
-    public void setServices(List<Service> services) {
-        this.services = services;
     }
 
     @Override

@@ -2,7 +2,7 @@ package cz.fi.muni.pa165.entity;
 
 
 /**
- * @author Michal Klíma
+ * @author Michal KlÃ­ma
  */
 public class Employee extends User {
 
