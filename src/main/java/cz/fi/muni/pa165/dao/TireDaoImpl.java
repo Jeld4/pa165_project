@@ -1,6 +1,6 @@
-package dao;
+package cz.fi.muni.pa165.dao;
 
-import entity.Tire;
+import cz.fi.muni.pa165.entity.Tire;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -23,7 +23,7 @@ public class TireDaoImpl implements TireDao {
 
     @Override
     public List<Tire> findAll() {
-        return null;
+        return em.createQuery("select t from Tire t", Tire.class).getResultList();
     }
 
     @Override
