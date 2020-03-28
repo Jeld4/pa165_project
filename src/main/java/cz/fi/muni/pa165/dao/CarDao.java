@@ -13,7 +13,7 @@ public interface CarDao {
      * Creates new Car object and insert it into database through entityManager
      * @param car Car object
      */
-    void crate(Car car);
+    void create(Car car);
 
     /**
      * Finds all cars in database

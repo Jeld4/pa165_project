@@ -17,8 +17,6 @@ public class CarDaoImpl implements CarDao{
     @PersistenceContext
     private EntityManager entityManager;
 
-
-
     @Override
     public void create(Car car) {
         entityManager.persist(car);
