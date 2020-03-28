@@ -5,7 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
  */
 
 @Repository
-public class CarDaoImpl implements CarDao {
+public class CarDaoImpl implements CarDao{
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -25,9 +24,9 @@ public class CarDaoImpl implements CarDao {
 
     @Override
     public List<Car> findAll() {
-        Query query = entityManager.createQuery("SELECT c FROM Car c");
-        return (List<Car>) query.getResultList();
+        return  entityManager.createQuery("SELECT c FROM Car c", Car.class).getResultList();
     }
+
 
     @Override
     public Car findById(Long id) {
@@ -40,7 +39,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public void update (Car car) {
-        entityManager.merge(car);
+    public void update(Car c) {
+        entityManager.merge(c);
     }
 }

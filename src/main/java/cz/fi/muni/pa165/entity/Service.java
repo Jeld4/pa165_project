@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -12,11 +15,12 @@ import java.util.Objects;
  */
 
 @Entity
+@Table(name = "Service", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Service {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String name;
     private String description;
@@ -26,7 +30,7 @@ public class Service {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getName() {
@@ -58,11 +62,11 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return Objects.equals(Id, service.Id);
+        return Objects.equals(id, service.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id);
+        return Objects.hash(id);
     }
 }
