@@ -59,6 +59,12 @@ public class TireDaoImplTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void findByID() {
+        Tire f = tireDao.findById(t1.getId());
+        Assert.assertEquals(f, t1);
+    }
+
+    @Test
     public void remove(){
         Assert.assertNotNull(tireDao.findById(t1.getId()));
         tireDao.remove(t1);
