@@ -2,20 +2,24 @@ package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.entity.Car;
-import org.junit.Before;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.transaction.annotation.Transactional;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
+/**
+ * @author Jan Jelínek
+ */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class CarDaoImplTest extends AbstractTestNGSpringContextTests {
-    @PersistenceContext
-    public EntityManager em;
 
     @Autowired
     public CarDao carDao;
@@ -23,7 +27,7 @@ public class CarDaoImplTest extends AbstractTestNGSpringContextTests {
     private Car ferrari;
     private Car porsche;
 
-    @Before
+    @BeforeMethod
     public void createCar() {
         ferrari = new Car("4A2 3000", "Cabriolet");
         porsche = new Car("4B1 3244", "SUV");
@@ -66,5 +70,10 @@ public class CarDaoImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findCarTest() {
         assert(carDao.findById(ferrari.getId()) != null);
+    }
+
+    @Test
+    public void findAllTest() {
+        assert(carDao.findAll().size() == 2);
     }
 }

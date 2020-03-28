@@ -17,6 +17,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import javax.sql.DataSource;
 
+/**
+ * @author Radim Sasinka, 456315
+ */
+
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories

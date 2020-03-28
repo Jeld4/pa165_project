@@ -3,7 +3,7 @@ package cz.fi.muni.pa165.entity;
 import javax.persistence.*;
 
 /**
- * @author Michal Kl�ma
+ * @author Michal Klima
  */
 @Entity
 @Table(name = "Users")
