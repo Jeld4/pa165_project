@@ -17,6 +17,8 @@ public class CarDaoImpl implements CarDao{
     @PersistenceContext
     private EntityManager entityManager;
 
+
+
     @Override
     public void create(Car car) {
         entityManager.persist(car);
@@ -26,6 +28,7 @@ public class CarDaoImpl implements CarDao{
     public List<Car> findAll() {
         return  entityManager.createQuery("SELECT c FROM Car c", Car.class).getResultList();
     }
+
 
     @Override
     public Car findById(Long id) {
