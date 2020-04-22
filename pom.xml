@@ -4,14 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fi.muni</groupId>
+    <groupId>cz.fi.muni.pa165</groupId>
     <artifactId>PneuServiceApp</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>persistence</module>
+        <module>api</module>
+        <module>service</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>8</java.version>
     </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -25,7 +31,7 @@
             </plugin>
         </plugins>
     </build>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <dependencies>
         <dependency>
