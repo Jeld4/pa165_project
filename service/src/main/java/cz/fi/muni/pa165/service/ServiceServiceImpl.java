@@ -4,11 +4,12 @@ import cz.fi.muni.pa165.dao.ServiceDao;
 import cz.fi.muni.pa165.entity.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import java.util.List;
 /**
  * @author Radim Sasinka. 456315
  */
-
+@org.springframework.stereotype.Service
 public class ServiceServiceImpl implements ServiceService {
 
     @Autowired

@@ -9,10 +9,13 @@ import cz.fi.muni.pa165.facade.CarFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
-
+@Service
+@Transactional
 public class CarFacadeImpl implements CarFacade {
 
     @Inject
@@ -33,7 +36,7 @@ public class CarFacadeImpl implements CarFacade {
 
     @Override
     public void deleteCar(Long carId) {
-
+        carService.remove(carService.findById(carId));
     }
 
     @Override

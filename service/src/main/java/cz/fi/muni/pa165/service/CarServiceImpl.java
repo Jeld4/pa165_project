@@ -5,13 +5,13 @@ import cz.fi.muni.pa165.entity.Car;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.entity.Tire;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 /**
  * @author Radim Sasinka. 456315
  */
-
+@Service
 public class CarServiceImpl implements CarService {
 
     @Inject
