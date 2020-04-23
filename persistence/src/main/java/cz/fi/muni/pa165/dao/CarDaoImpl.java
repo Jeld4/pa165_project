@@ -42,4 +42,9 @@ public class CarDaoImpl implements CarDao{
     public void update(Car c) {
         entityManager.merge(c);
     }
+
+    @Override
+    public Car findByLicencePlate(String licencePlate) {
+        return entityManager.find(Car.class, licencePlate);
+    }
 }

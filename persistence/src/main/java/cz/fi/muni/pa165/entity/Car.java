@@ -20,7 +20,7 @@ public class Car {
     private Long Id;
     private String licencePlate;
     private String model;
-    private String tireType; //TODO Potentially refactor to Tire type
+    private String tireType;
 
     public Long getId() {
         return Id;

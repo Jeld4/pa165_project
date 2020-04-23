@@ -37,4 +37,8 @@ public interface CarDao {
       * @param c Car to be updated
      */
     void update(Car c);
+
+
+    // TODO JAVADOC
+    Car findByLicencePlate(String licencePlate);
 }
