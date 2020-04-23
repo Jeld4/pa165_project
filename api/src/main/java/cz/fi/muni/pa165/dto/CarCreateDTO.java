@@ -1,21 +1,16 @@
 package cz.fi.muni.pa165.dto;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
-public class CarDTO {
+public class CarCreateDTO {
 
-    private Long Id;
+    @NotNull
+    @Size(min = 4, max=20)
     private String licencePlate;
+    @NotNull
     private String model;
-    private String tireType;
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
 
     public String getLicencePlate() {
         return licencePlate;
@@ -33,25 +28,25 @@ public class CarDTO {
         this.model = model;
     }
 
-    public String getTireType() {
-        return tireType;
-    }
-
-    public void setTireType(String tireType) {
-        this.tireType = tireType;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CarDTO carDTO = (CarDTO) o;
-        return Id.equals(carDTO.Id) &&
-                licencePlate.equals(carDTO.licencePlate);
+        CarCreateDTO that = (CarCreateDTO) o;
+        return Objects.equals(licencePlate, that.licencePlate) &&
+                Objects.equals(model, that.model);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Id, licencePlate);
+        return Objects.hash(licencePlate, model);
+    }
+
+    @Override
+    public String toString() {
+        return "CarCreateDTO{" +
+                "licencePlate='" + licencePlate + '\'' +
+                ", model='" + model + '\'' +
+                '}';
     }
 }

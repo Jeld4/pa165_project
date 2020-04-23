@@ -1,4 +1,4 @@
 package cz.fi.muni.pa165.facade;
 
-public interface ServiceInterface {
+public interface ServiceFacade {
 }

@@ -1,21 +1,21 @@
 package cz.fi.muni.pa165.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-public class ServiceDTO {
-    private Long id;
+public class ServiceCreateDTO {
+
+    @NotNull
+    @Size(min = 3, max = 50)
     private String name;
+    @NotNull
+    @Size(min = 3, max = 200)
     private String description;
+
     private BigDecimal price;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -45,13 +45,22 @@ public class ServiceDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ServiceDTO that = (ServiceDTO) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name);
+        ServiceCreateDTO that = (ServiceCreateDTO) o;
+        return name.equals(that.name) &&
+                description.equals(that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name, description);
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceCreateDTO{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
     }
 }
