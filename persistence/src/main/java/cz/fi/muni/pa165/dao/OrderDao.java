@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Order;
+import cz.fi.muni.pa165.entity.User;
 
 import java.util.List;
 
@@ -39,4 +40,21 @@ public interface OrderDao {
      * @param order
      */
     void update(Order order);
+
+    /**
+     * Finds order by user
+     * @param u
+     * @return
+     */
+    List<Order> findByUser(User u);
+
+    /**
+     * Adds service to order
+     */
+    void addService(Long orderId, Long serviceId);
+
+    /**
+     * Adds tire to order
+     */
+    void addTire(Long orderId, Long tireId);
 }

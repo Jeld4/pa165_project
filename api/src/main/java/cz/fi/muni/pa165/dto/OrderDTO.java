@@ -1,62 +1,38 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.enums.OrderState;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Class representing cz.fi.muni.pa165.entity Order
- * @author Jan Jelínek
+ * @author Jan Jelínek 445416
  */
-@Entity
-@Table(name="ORDER_ITEM")
-public class Order {
+public class OrderDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int totalPrice;
 
     private Date dateOfOrder;
 
-    @Enumerated
     private OrderState state;
 
-    @OneToMany
-    private List<Tire> tires;
-    @OneToMany
-    private List<Service> services;
+    private List<TireDTO> tires;
 
-    @ManyToOne(optional=false)
-    @NotNull
-    private User user;
+    private List<ServiceDTO> services;
 
-    public User getUser() {
+    //private UserDTO user;
+
+    /*
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
-
-    public Order() {
-        this.tires = new ArrayList<>();
-        this.services = new ArrayList<>();
-    }
-
-    public Order(int totalPrice, Date dateOfOrder, OrderState state) {
-        this.totalPrice = totalPrice;
-        this.dateOfOrder = dateOfOrder;
-        this.state = state;
-        this.tires = new ArrayList<>();
-        this.services = new ArrayList<>();
-    }
+     */
 
     public Long getId() {
         return id;
@@ -70,11 +46,11 @@ public class Order {
         return state;
     }
 
-    public List<Service> getServices() {
+    public List<ServiceDTO> getServices() {
         return services;
     }
 
-    public void setServices(List<Service> services) {
+    public void setServices(List<ServiceDTO> services) {
         this.services = services;
     }
 
@@ -98,11 +74,11 @@ public class Order {
         this.id = id;
     }
 
-    public List<Tire> getTires() {
+    public List<TireDTO> getTires() {
         return tires;
     }
 
-    public void setTires(List<Tire> tires) {
+    public void setTires(List<TireDTO> tires) {
         this.tires = tires;
     }
 
@@ -110,7 +86,7 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
+        OrderDTO order = (OrderDTO) o;
         return Objects.equals(id, order.id);
     }
 
