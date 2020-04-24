@@ -1,71 +1,40 @@
-package cz.fi.muni.pa165.entity;
+package cz.fi.muni.pa165.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class UserDTO {
 
-/**
- * @author Michal Klima
- */
-@Entity
-@Table(name = "\"User\"")
-public class User {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private String login;
 	private String password;
 	private Boolean isAdmin;
-
-	public User() {
-	}
-
-	public User(String n, String l, String p) {
-		name = n;
-		login = l;
-		password = p;
-	}
 	
 	public Long getId() {
 		return id;
 	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getName() {
 		return name;
 	}
-	
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 	public String getLogin() {
 		return login;
 	}
-	
-	public void setLogin(String l) {
-		login = l;
+	public void setLogin(String login) {
+		this.login = login;
 	}
-	
 	public String getPassword() {
 		return password;
 	}
-	
-	public void setPassword(String p) {
-		password = p;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
-
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
@@ -81,7 +50,6 @@ public class User {
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -90,7 +58,7 @@ public class User {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserDTO other = (UserDTO) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
