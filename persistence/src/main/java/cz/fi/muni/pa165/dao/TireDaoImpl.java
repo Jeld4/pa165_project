@@ -32,6 +32,11 @@ public class TireDaoImpl implements TireDao {
     }
 
     @Override
+    public Tire findByManufacturer(String manufacturer) {
+        return em.find(Tire.class, manufacturer);
+    }
+
+    @Override
     public void remove(Tire t) {
         em.remove(t);
     }

@@ -29,6 +29,13 @@ public interface TireDao {
     Tire findById(Long id);
 
     /**
+     * Method used to find tire by manufacturer
+     * @param manufacturer
+     * @return
+     */
+    Tire findByManufacturer(String manufacturer);
+
+    /**
      * Method used to remove order.
      * @param tire
      */
