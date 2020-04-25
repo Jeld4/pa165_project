@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface TireService {
     Tire findById(Long id);
-    Tire findByManufacturer(String manufacturer);
+    List<Tire> findByManufacturer(String manufacturer);
     List<Tire> findAll();
     void create(Tire tire);
     void remove(Tire tire);

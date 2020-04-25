@@ -15,5 +15,5 @@ public interface TireFacade {
     void deleteTire(Long tireId);
     List<TireDTO> getAllTires();
     TireDTO getTireWithId(Long id);
-    TireDTO getTireWithManufacturer(String manufacturer);
+    List<TireDTO> getTiresByManufacturer(String manufacturer);
 }

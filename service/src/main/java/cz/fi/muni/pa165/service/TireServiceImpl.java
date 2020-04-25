@@ -21,7 +21,7 @@ public class TireServiceImpl implements TireService {
     }
 
     @Override
-    public Tire findByManufacturer(String manufacturer) {
+    public List<Tire> findByManufacturer(String manufacturer) {
         return tireDao.findByManufacturer(manufacturer);
     }
 
