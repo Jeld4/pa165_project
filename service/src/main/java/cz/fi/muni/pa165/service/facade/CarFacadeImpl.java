@@ -14,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
+
+/**
+ * @author Radim Sasinka
+ */
 @Service
 @Transactional
 public class CarFacadeImpl implements CarFacade {
