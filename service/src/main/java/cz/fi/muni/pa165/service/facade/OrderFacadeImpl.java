@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.enums.OrderState;
 import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.OrderService;
+import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +21,7 @@ import java.util.List;
 @Transactional
 public class OrderFacadeImpl implements OrderFacade {
 
-    @Autowired
+    @Inject
     private OrderService orderService;
 
     //@Autowired

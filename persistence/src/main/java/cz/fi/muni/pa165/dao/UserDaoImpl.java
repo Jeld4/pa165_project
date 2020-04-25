@@ -52,7 +52,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByLogin(String login) {
-		return em.find(User.class, login);
+		return em.createQuery("SELECT u FROM User u WHERE u.login=:login", User.class)
+				.setParameter("login", login)
+				.getSingleResult();
 	}
 
 }

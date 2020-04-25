@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class    BeanMappingSerivceImpl implements BeanMappingService {
+public class BeanMappingSerivceImpl implements BeanMappingService {
     @Autowired
     private Mapper dozer;
 
