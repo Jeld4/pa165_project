@@ -1,0 +1,132 @@
+package cz.fi.muni.cz.pa165.service;
+
+import cz.fi.muni.pa165.dto.TireCreateDTO;
+import cz.fi.muni.pa165.dto.TireDTO;
+import cz.fi.muni.pa165.entity.Tire;
+import cz.fi.muni.pa165.facade.TireFacade;
+import cz.fi.muni.pa165.service.BeanMappingService;
+import cz.fi.muni.pa165.service.TireService;
+import cz.fi.muni.pa165.service.config.ServiceConfiguration;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.List;
+
+@ContextConfiguration(classes = ServiceConfiguration.class)
+public class TireFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
+
+
+    @Autowired
+    @InjectMocks
+    private TireFacade tireFacade;
+
+    @Mock
+    private BeanMappingService beanMappingService;
+
+    @Mock
+    private TireService tireService;
+
+
+
+    private Tire tire;
+
+    private TireCreateDTO tireCreateDTO;
+    private TireCreateDTO tireCreateDTO2;
+    private TireCreateDTO tireCreateDTO3;
+    private TireCreateDTO tireCreateDTO4;
+
+
+
+    @BeforeClass
+    void initMocks(){
+        MockitoAnnotations.initMocks(this);
+    }
+
+
+    @BeforeMethod
+    void init(){
+        tireCreateDTO = new TireCreateDTO();
+        tireCreateDTO.setManufacturer("Michellin");
+        tireCreateDTO.setPrice(7500);
+        tireCreateDTO.setType("SuperBlack");
+
+        tireCreateDTO3 = new TireCreateDTO();
+        tireCreateDTO3.setManufacturer("Michellin");
+        tireCreateDTO3.setPrice(7500);
+        tireCreateDTO3.setType("SuperDuper");
+
+        tireCreateDTO4 = new TireCreateDTO();
+        tireCreateDTO4.setManufacturer("Michellin");
+        tireCreateDTO4.setPrice(7500);
+        tireCreateDTO4.setType("SuperTrooper");
+
+        tireCreateDTO2 = new TireCreateDTO();
+        tireCreateDTO2.setManufacturer("Barumm");
+        tireCreateDTO2.setPrice(7500);
+        tireCreateDTO2.setType("White");
+
+        tire = new Tire();
+        tire.setManufacturer("Michellin");
+        tire.setPrice(7500);
+        tire.setType("SuperBlack");
+
+
+    }
+
+    @AfterMethod
+    void reset(){
+        Mockito.reset(tireService);
+    }
+
+
+    @Test
+    public void create(){
+        tireFacade.createTire(tireCreateDTO);
+        assert(tireFacade.getAllTires().size() == 1);
+    }
+
+    @Test
+    public void remove(){
+        Long id1 = tireFacade.createTire(tireCreateDTO);
+        Long id2 = tireFacade.createTire(tireCreateDTO2);
+        assert(tireFacade.getAllTires().size() == 2);
+        tireFacade.deleteTire(id1);
+        assert(tireFacade.getAllTires().size() == 1);
+        assert(tireFacade.getTireWithId(id2).getType().equals("White"));
+    }
+
+    @Test
+    public void getAll() {
+        tireFacade.createTire(tireCreateDTO);
+        tireFacade.createTire(tireCreateDTO2);
+        List<TireDTO> result = tireFacade.getAllTires();
+        assert(result.size() == 2);
+        assert(result.get(1).getType().equals("White"));
+        assert(result.get(0).getManufacturer().equals("Michellin"));
+    }
+
+    @Test
+    public void getTireWithManufacturer(){
+        tireFacade.createTire(tireCreateDTO);
+        tireFacade.createTire(tireCreateDTO3);
+        tireFacade.createTire(tireCreateDTO4);
+        // TODO
+    }
+
+
+
+
+
+
+}
+
+
