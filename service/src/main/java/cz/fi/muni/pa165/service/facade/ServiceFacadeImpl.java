@@ -12,6 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
+
+/**
+ * @author Radim Sasinka
+ */
+
 @org.springframework.stereotype.Service
 @Transactional
 public class ServiceFacadeImpl implements ServiceFacade {

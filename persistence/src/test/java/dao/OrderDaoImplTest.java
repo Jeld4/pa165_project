@@ -3,8 +3,10 @@ package dao;
 import cz.fi.muni.pa165.PersistenceSampleApplicationContext;
 import cz.fi.muni.pa165.dao.OrderDao;
 import cz.fi.muni.pa165.dao.TireDao;
+import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.Tire;
+import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,6 +35,9 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
     public TireDao tireDao;
+
+    @Autowired
+    public UserDao userDao;
     
     Order o1;
     Order o2;
@@ -78,7 +83,13 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         
         o1.setTires(l1);
         o2.setTires(l2);
-        
+
+        User user = new User();
+        userDao.createUser(user);
+
+        o1.setUser(user);
+        o2.setUser(user);
+
         orderDao.create(o1);
         orderDao.create(o2);
     }
@@ -114,8 +125,12 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void createAnotherOrder() {
+        User user = new User();
+        userDao.createUser(user);
         List<Order> bef = orderDao.findAll();
         Order o3 = new Order();
+        o3.setUser(user);
+        userDao.createUser(user);
         orderDao.create(o3);
         List<Order> aft = orderDao.findAll();
         AssertJUnit.assertEquals(aft.size(), bef.size() + 1);

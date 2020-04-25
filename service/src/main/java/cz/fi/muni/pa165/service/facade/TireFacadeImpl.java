@@ -54,7 +54,7 @@ public class TireFacadeImpl implements TireFacade {
     }
 
     @Override
-    public TireDTO getTireWithManufacturer(String manufacturer) {
+    public List<TireDTO> getTiresByManufacturer(String manufacturer) {
         return beanMappingService.mapTo(tireService.findByManufacturer(manufacturer), TireDTO.class);
     }
 }

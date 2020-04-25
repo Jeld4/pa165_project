@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
     @Override
-	public User findUser(long id) {
+	public User getUserById(long id) {
 		return em.find(User.class, id);
 	}
 	
@@ -43,5 +44,17 @@ public class UserDaoImpl implements UserDao {
     public void updateUser (User u) {
         em.merge(u);
     }
+
+	@Override
+	public User getUserByEmail(String email) {
+		return em.find(User.class, email);
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		return em.createQuery("SELECT u FROM User u WHERE u.login=:login", User.class)
+				.setParameter("login", login)
+				.getSingleResult();
+	}
 
 }

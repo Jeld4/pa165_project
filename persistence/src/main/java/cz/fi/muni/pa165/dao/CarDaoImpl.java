@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Car;
+import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -45,6 +46,9 @@ public class CarDaoImpl implements CarDao{
 
     @Override
     public Car findByLicencePlate(String licencePlate) {
-        return entityManager.find(Car.class, licencePlate);
+        return entityManager.createQuery("SELECT c From Car c where c.licencePlate=:licencePlate", Car.class)
+                .setParameter("licencePlate", licencePlate)
+                .getSingleResult();
     }
+
 }

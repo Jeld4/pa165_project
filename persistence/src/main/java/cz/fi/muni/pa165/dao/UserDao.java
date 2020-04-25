@@ -21,7 +21,7 @@ public interface UserDao {
      * Method to find a User by id.
      * @param id
      */
-	User findUser(long id);
+	User getUserById(long id);
 	
 	
     /**
@@ -40,5 +40,15 @@ public interface UserDao {
      * Method to update User
      */
 	void updateUser(User u);
+	
+	 /**
+     * Get User by email
+     */
+	User getUserByEmail(String email);
+	
+	 /**
+     * Get user by Login
+     */
+	User getUserByLogin(String login);
 
 }
