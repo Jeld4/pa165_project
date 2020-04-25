@@ -44,7 +44,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
     
      @Test
      public void testFindUser(){
-         Assert.assertEquals(userDao.findUser(u1.getId()), u1);
+         Assert.assertEquals(userDao.getUserById(u1.getId()), u1);
      }
      @Test
      public void testFindAll(){
@@ -53,7 +53,7 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
      @Test
      public void testRemove(){
          userDao.removeUser(u1);
-         Assert.assertNull(userDao.findUser(u1.getId()));
+         Assert.assertNull(userDao.getUserById(u1.getId()));
          Assert.assertEquals(userDao.findAllUsers().size(), 1);
      }
     
