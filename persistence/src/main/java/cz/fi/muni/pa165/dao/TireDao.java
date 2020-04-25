@@ -33,7 +33,7 @@ public interface TireDao {
      * @param manufacturer
      * @return
      */
-    Tire findByManufacturer(String manufacturer);
+    List<Tire> findByManufacturer(String manufacturer);
 
     /**
      * Method used to remove order.

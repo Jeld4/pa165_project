@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.persistence.TypedQuery;
 
 /**
  * @author Jakub Malý, 456389
@@ -32,8 +33,13 @@ public class TireDaoImpl implements TireDao {
     }
 
     @Override
-    public Tire findByManufacturer(String manufacturer) {
-        return em.find(Tire.class, manufacturer);
+    public List<Tire> findByManufacturer(String manufacturer) {
+        TypedQuery<Tire> query = em.createQuery(
+                "Select tires from manufacturer = :manufacturer",
+                Tire.class);
+
+        query.setParameter("manufacturer", manufacturer);
+        return query.getResultList();
     }
 
     @Override
