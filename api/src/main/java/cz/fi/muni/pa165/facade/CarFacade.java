@@ -14,5 +14,5 @@ public interface CarFacade {
     List<CarDTO> getAllCars();
     CarDTO getCarWithId(Long id);
     CarDTO getCarWithLicencePlate(String licencePlate);
-    void changeTireType(Car car, TireDTO tire);
+    void changeTireType(CarDTO car, TireDTO tire);
 }
