@@ -22,9 +22,8 @@ public class OrderDTO {
 
     private List<ServiceDTO> services;
 
-    //private UserDTO user;
+    private UserDTO user;
 
-    /*
     public UserDTO getUser() {
         return user;
     }
@@ -32,7 +31,6 @@ public class OrderDTO {
     public void setUser(UserDTO user) {
         this.user = user;
     }
-     */
 
     public Long getId() {
         return id;
