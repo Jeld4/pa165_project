@@ -7,6 +7,12 @@ import javax.inject.Inject;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 
+
+/**
+ * 
+ * @author Michal KLíma
+ *
+ */
 @org.springframework.stereotype.Service
 public class UserServiceImpl implements UserService {
 

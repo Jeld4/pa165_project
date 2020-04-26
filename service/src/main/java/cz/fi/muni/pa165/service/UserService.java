@@ -3,7 +3,11 @@ package cz.fi.muni.pa165.service;
 import java.util.List;
 
 import cz.fi.muni.pa165.entity.User;
-
+/**
+ * 
+ * @author Michal KLíma
+ *
+ */
 public interface UserService {
     /**
      * Return User by id
