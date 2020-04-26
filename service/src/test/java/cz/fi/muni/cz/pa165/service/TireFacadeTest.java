@@ -21,6 +21,9 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+/**
+ * @author Radim Sasinka
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class TireFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 

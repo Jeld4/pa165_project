@@ -9,7 +9,9 @@ import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
+/**
+ * @author Radim Sasinka
+ */
 @Configuration
 @Import(PersistenceSampleApplicationContext.class)
 public class ServiceConfiguration {

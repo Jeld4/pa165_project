@@ -18,7 +18,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+/**
+ * @author Radim Sasinka
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 
