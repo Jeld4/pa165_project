@@ -62,7 +62,7 @@ public class CarFacadeImpl implements CarFacade {
 
     @Override
     public void changeTireType(CarDTO car, TireDTO tire) {
-        carService.changeTire(beanMappingService.mapTo(car, Car.class)
+        carService.changeTire(car.getId()
                 , beanMappingService.mapTo(tire, Tire.class));
 
     }

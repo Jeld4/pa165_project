@@ -136,6 +136,6 @@ public class CarFacadeTest extends AbstractTransactionalTestNGSpringContextTests
 
         carFacade.changeTireType(carFacade.getCarWithId(id1), tireFacade.getTireWithId(tireId));
 
-        //Assert.assertEquals(carFacade.getCarWithId(id1).getTireType(), tire.getType());
+        Assert.assertEquals(carFacade.getCarWithId(id1).getTireType(), tire.getType());
     }
 }
