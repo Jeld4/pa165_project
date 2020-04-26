@@ -18,7 +18,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
+/**
+ * @author Radim Sasinka
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 
@@ -36,6 +38,8 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
     private UserCreateDTO userCreateDTO1;
     private UserCreateDTO userCreateDTO2;
     private UserCreateDTO userCreateDTO3;
+
+    private UserDTO userDTO;
 
     @BeforeClass
     void initMocks(){
@@ -55,6 +59,8 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
         userCreateDTO3 = new UserCreateDTO();
         userCreateDTO3.setName("Felix Saulovich");
         userCreateDTO3.setLogin("bigSaul_302");
+
+
     }
 
     @AfterMethod

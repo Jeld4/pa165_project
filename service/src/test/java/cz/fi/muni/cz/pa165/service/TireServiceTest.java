@@ -13,7 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-
+/**
+ * @author Radim Sasinka
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class TireServiceTest extends AbstractTransactionalTestNGSpringContextTests {
 

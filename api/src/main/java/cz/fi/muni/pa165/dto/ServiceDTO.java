@@ -2,7 +2,9 @@ package cz.fi.muni.pa165.dto;
 
 import java.math.BigDecimal;
 import java.util.Objects;
-
+/**
+ * @author Radim Sasinka
+ */
 public class ServiceDTO {
     private Long id;
     private String name;

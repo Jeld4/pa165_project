@@ -2,6 +2,9 @@ package cz.fi.muni.pa165.dto;
 
 import java.util.Objects;
 
+/**
+ * @author Radim Sasinka
+ */
 public class CarDTO {
 
     private Long Id;
