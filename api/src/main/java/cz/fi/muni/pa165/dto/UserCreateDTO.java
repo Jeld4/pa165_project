@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -20,7 +22,7 @@ public class UserCreateDTO {
     
     
 	private Boolean isAdmin;
-
+	private List<OrderDTO> orders;
 
 	public String getName() {
 		return name;
@@ -61,13 +63,25 @@ public class UserCreateDTO {
 		this.isAdmin = isAdmin;
 	}
 
-    @Override
+	
+    public List<OrderDTO> getOrders() {
+		return orders;
+	}
+
+
+	public void setOrders(List<OrderDTO> orders) {
+		this.orders = orders;
+	}
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((isAdmin == null) ? 0 : isAdmin.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((orders == null) ? 0 : orders.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		return result;
 	}
@@ -97,6 +111,11 @@ public class UserCreateDTO {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (orders == null) {
+			if (other.orders != null)
+				return false;
+		} else if (!orders.equals(other.orders))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -104,12 +123,8 @@ public class UserCreateDTO {
 			return false;
 		return true;
 	}
-	
-	@Override
-	public String toString() {
-		return "UserCreateDTO [name=" + name + ", login=" + login + ", password=" + password + ", isAdmin=" + isAdmin
-				+ "]";
-	}
+
+
 
 
 }

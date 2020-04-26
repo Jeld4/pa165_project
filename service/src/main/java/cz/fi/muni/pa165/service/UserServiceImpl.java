@@ -7,6 +7,12 @@ import javax.inject.Inject;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 
+
+/**
+ * 
+ * @author Michal KLíma
+ *
+ */
 @org.springframework.stereotype.Service
 public class UserServiceImpl implements UserService {
 
@@ -21,11 +27,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> findAll() {
         return userDao.findAllUsers();
-	}
-
-	@Override
-	public User findByEmail(String email) {
-	     return userDao.getUserByEmail(email);
 	}
 
 	@Override
@@ -44,5 +45,19 @@ public class UserServiceImpl implements UserService {
 		userDao.removeUser(user);
 		
 	}
+
+	@Override
+	public void addOrderToUser(Long userId, Long orderId) {
+		userDao.addOrder(userId, orderId);
+		
+	}
+
+	@Override
+	public void removeOrderFromUser(Long userId, Long orderId) {
+		userDao.removeOrder(userId, orderId);
+		
+	}
+	
+	
 
 }

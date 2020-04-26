@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Car;
+import cz.fi.muni.pa165.entity.Order;
+import cz.fi.muni.pa165.entity.Service;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -56,5 +58,24 @@ public class UserDaoImpl implements UserDao {
 				.setParameter("login", login)
 				.getSingleResult();
 	}
+
+	@Override
+	public void addOrder(Long userId, Long orderId) {
+        User user = getUserById(userId);
+        Order order = em.find(Order.class, orderId);
+        user.getOrders().add(order);
+        updateUser(user);
+		
+	}
+
+	@Override
+	public void removeOrder(Long userId, Long orderId) {
+		User user = getUserById(userId);
+        Order order = em.find(Order.class, orderId);
+        user.getOrders().remove(order);
+        updateUser(user);
+	}
+	
+	
 
 }

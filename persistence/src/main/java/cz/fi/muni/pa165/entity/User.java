@@ -1,9 +1,12 @@
 package cz.fi.muni.pa165.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +23,9 @@ public class User {
 	private String login;
 	private String password;
 	private Boolean isAdmin;
+	
+    @OneToMany
+	private List<Order> orders;
 
 	public User() {
 	}
@@ -68,6 +74,14 @@ public class User {
 
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	
+	public void setOrders (List<Order> o) {
+		orders = o;
+	}
+	
+	public List<Order> getOrders () {
+		return orders;
 	}
 
 	@Override

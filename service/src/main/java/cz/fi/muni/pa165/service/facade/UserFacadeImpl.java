@@ -61,9 +61,16 @@ public class UserFacadeImpl implements UserFacade {
 	}
 
 	@Override
-	public UserDTO getUserWithEmail(String email) {
-        User foundUser = userService.findByEmail(email);
-        return (foundUser == null) ? null : beanMappingService.mapTo(foundUser, UserDTO.class);
+	public void addOrderToUser(Long userId, Long orderId) {
+		userService.addOrderToUser(userId, orderId);
+		
 	}
 
+	@Override
+	public void removeOrderFromUser(Long userId, Long orderId) {
+		userService.removeOrderFromUser(userId, orderId);
+		
+	}
+	
+	
 } 
