@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.facade;
 import cz.fi.muni.pa165.dto.CarCreateDTO;
 import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.TireDTO;
-import cz.fi.muni.pa165.entity.Car;
 
 import java.util.List;
 /**
@@ -48,5 +47,5 @@ public interface CarFacade {
      * @param car Car which tires should be changed
      * @param tire Tire which should be changed
      */
-    void changeTireType(Car car, TireDTO tire);
+    void changeTireType(CarDTO car, TireDTO tire);
 }

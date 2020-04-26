@@ -8,19 +8,63 @@ import cz.fi.muni.pa165.dto.OrderDTO;
  * @author Jan Jelínek 445416
  */
 public interface OrderFacade {
-    public List<OrderDTO> getAllOrders();
 
-    public List<OrderDTO> getOrdersByUser(Long userId);
+    /**
+     * Returns all orders in system
+     * @return list of all orders in system
+     */
+    List<OrderDTO> getAllOrders();
 
-    public OrderDTO getOrderById(Long id);
+    /**
+     * Returns user´s orders
+     * @param userId id of user
+     * @return list of user´s orders
+     */
+    List<OrderDTO> getOrdersByUser(Long userId);
 
-    public void finishOrder(Long id);
-    public void cancelOrder(Long id);
-    public void removeOrder(Long id);
+    /**
+     * Returns order by its id
+     * @param id of the order
+     * @return order
+     */
+    OrderDTO getOrderById(Long id);
 
-    public Long createOrder();
+    /**
+     * Changes the status of the order to Finished
+     * @param id of the order
+     */
+    void finishOrder(Long id);
 
-    public void addTireToOrder(Long orderId, Long tireId);
-    public void addServiceToOrder(Long orderId, Long serviceId);
+    /**
+     * Changes the status of the order to Canceled
+     * @param id of the order
+     */
+    void cancelOrder(Long id);
+
+    /**
+     * Removes the specific order from the system
+     * @param id of the order we want to remove
+     */
+    void removeOrder(Long id);
+
+    /**
+     * Creates new order
+     * @return id of the new order
+     */
+    Long createOrder();
+
+    /**
+     * Adds tire to the order
+     * @param orderId id of the order
+     * @param tireId id of the tire
+     */
+    void addTireToOrder(Long orderId, Long tireId);
+
+    /**
+     * Adds service to the order
+     * @param orderId id of the order
+     * @param serviceId id of the service
+     */
+    void addServiceToOrder(Long orderId, Long serviceId);
 
 }
