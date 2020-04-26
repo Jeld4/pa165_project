@@ -1,7 +1,10 @@
 package cz.fi.muni.cz.pa165.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 
+import cz.fi.muni.pa165.dto.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -15,10 +18,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import cz.fi.muni.pa165.dto.OrderDTO;
-import cz.fi.muni.pa165.dto.ServiceCreateDTO;
-import cz.fi.muni.pa165.dto.TireCreateDTO;
-import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.enums.OrderState;
 import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.facade.ServiceFacade;
@@ -65,7 +64,9 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Mock
     private BeanMappingService beanMappingService;
 
-	private OrderDTO orderDTO;
+	private OrderCreateDTO order1;
+
+	private UserCreateDTO user1;
     
     @BeforeClass
     void initMocks(){
@@ -74,9 +75,20 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
 
     @BeforeMethod
     void init(){
+        order1 = new OrderCreateDTO();
+        order1.setDateOfOrder(new Date());
+        order1.setServices(new ArrayList<>());
+        order1.setState(OrderState.PENDING);
+        order1.setTires(new ArrayList<>());
 
-        
-        
+        user1 = new UserCreateDTO();
+        user1.setLogin("aaa");
+        user1.setPassword("aaa");
+        user1.setIsAdmin(false);
+
+        Long userId = userFacade.createUser(user1);
+
+        order1.setUser(userFacade.getUserWithId(userId));
     }
     
     @AfterMethod
@@ -86,16 +98,16 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     
     @Test
     public void createOrderAndGetAllOrders(){
-        orderFacade.createOrder();
-        orderFacade.createOrder();
+        orderFacade.createOrder(order1, user1.getLogin());
+        orderFacade.createOrder(order1, user1.getLogin());
         assert(orderFacade.getAllOrders().size() == 2);
     }
     
     @Test
     public void removeOrder() {
-    	Long id1 = orderFacade.createOrder();
-    	Long id2 = orderFacade.createOrder();
-    	Long id3 = orderFacade.createOrder();
+    	Long id1 = orderFacade.createOrder(order1, user1.getLogin());
+    	Long id2 = orderFacade.createOrder(order1, user1.getLogin());
+    	Long id3 = orderFacade.createOrder(order1, user1.getLogin());
     	
     	assert(orderFacade.getAllOrders().size() == 3);
     	
@@ -124,14 +136,14 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     
     @Test
     public void finishOrder() {
-    	Long id = orderFacade.createOrder();
+    	Long id = orderFacade.createOrder(order1, user1.getLogin());
     	orderFacade.finishOrder(id);
     	assert(orderFacade.getOrderById(id).getState() == OrderState.DONE);    	
     }
     
     @Test
     public void cancelOrder() {
-    	Long id = orderFacade.createOrder();
+    	Long id = orderFacade.createOrder(order1, user1.getLogin());
     	orderFacade.finishOrder(id);
     	assert(orderFacade.getOrderById(id).getState() == OrderState.CANCELED);    	
     }
@@ -144,7 +156,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         userCreateDTO.setLogin("TestSubjectOne");
         
         Long userId = userFacade.createUser(userCreateDTO);
-    	Long orderId = orderFacade.createOrder();
+    	Long orderId = orderFacade.createOrder(order1, user1.getLogin());
     	
     	userService.addOrderToUser(userId, orderId);
     	
@@ -161,7 +173,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         tireCreateDTO.setType("SuperBlack");
         
         Long tireId = tireFacade.createTire(tireCreateDTO);
-        Long orderId = orderFacade.createOrder();
+        Long orderId = orderFacade.createOrder(order1, user1.getLogin());
         
         orderFacade.addTireToOrder(orderId, tireId);
         
@@ -176,7 +188,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         serviceCreteDTO.setPrice(new BigDecimal("10000"));
         
         Long serviceId = serviceFacade.createService(serviceCreteDTO);
-        Long orderId = orderFacade.createOrder();
+        Long orderId = orderFacade.createOrder(order1, user1.getLogin());
         
         orderFacade.addServiceToOrder(orderId, serviceId);
         
