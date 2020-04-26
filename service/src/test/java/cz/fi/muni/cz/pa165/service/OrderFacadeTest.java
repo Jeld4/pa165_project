@@ -65,13 +65,17 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     private BeanMappingService beanMappingService;
 
 	private OrderCreateDTO order1;
-
+	private OrderCreateDTO order2;
+	private OrderCreateDTO order3;
+	
 	private UserCreateDTO user1;
     
     @BeforeClass
     void initMocks(){
         MockitoAnnotations.initMocks(this);
     }
+    
+    private long userId;
 
     @BeforeMethod
     void init(){
@@ -80,15 +84,29 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         order1.setServices(new ArrayList<>());
         order1.setState(OrderState.PENDING);
         order1.setTires(new ArrayList<>());
+        
+        order2 = new OrderCreateDTO();
+        order2.setDateOfOrder(new Date());
+        order2.setServices(new ArrayList<>());
+        order2.setState(OrderState.PENDING);
+        order2.setTires(new ArrayList<>());
+        
+        order3 = new OrderCreateDTO();
+        order3.setDateOfOrder(new Date());
+        order3.setServices(new ArrayList<>());
+        order3.setState(OrderState.PENDING);
+        order3.setTires(new ArrayList<>());
 
         user1 = new UserCreateDTO();
-        user1.setLogin("aaa");
-        user1.setPassword("aaa");
+        user1.setLogin("TestSubject");
+        user1.setPassword("Number62");
         user1.setIsAdmin(false);
 
-        Long userId = userFacade.createUser(user1);
+        userId = userFacade.createUser(user1);
 
         order1.setUser(userFacade.getUserWithId(userId));
+        order2.setUser(userFacade.getUserWithId(userId));
+        order3.setUser(userFacade.getUserWithId(userId));
     }
     
     @AfterMethod
@@ -99,15 +117,15 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void createOrderAndGetAllOrders(){
         orderFacade.createOrder(order1, user1.getLogin());
-        orderFacade.createOrder(order1, user1.getLogin());
+        orderFacade.createOrder(order2, user1.getLogin());
         assert(orderFacade.getAllOrders().size() == 2);
     }
     
     @Test
     public void removeOrder() {
     	Long id1 = orderFacade.createOrder(order1, user1.getLogin());
-    	Long id2 = orderFacade.createOrder(order1, user1.getLogin());
-    	Long id3 = orderFacade.createOrder(order1, user1.getLogin());
+    	Long id2 = orderFacade.createOrder(order2, user1.getLogin());
+    	Long id3 = orderFacade.createOrder(order3, user1.getLogin());
     	
     	assert(orderFacade.getAllOrders().size() == 3);
     	
@@ -115,23 +133,23 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     	
     	assert(orderFacade.getAllOrders().size() == 2);
     	assert(!orderFacade.getOrderById(id1).equals(null));
-    	assert(orderFacade.getOrderById(id2).equals(null));
+    	assert(orderFacade.getOrderById(id2) == null);
     	assert(!orderFacade.getOrderById(id3).equals(null));
     	
     	orderFacade.removeOrder(id1);
     	
     	assert(orderFacade.getAllOrders().size() == 1);
-    	assert(orderFacade.getOrderById(id1).equals(null));
-    	assert(orderFacade.getOrderById(id2).equals(null));
+    	assert(orderFacade.getOrderById(id1) == null);
+    	assert(orderFacade.getOrderById(id2) == null);
     	assert(!orderFacade.getOrderById(id3).equals(null));
     	
     	
     	orderFacade.removeOrder(id3);
     	
     	assert(orderFacade.getAllOrders().size() == 0);
-    	assert(orderFacade.getOrderById(id1).equals(null));
-    	assert(orderFacade.getOrderById(id2).equals(null));
-    	assert(orderFacade.getOrderById(id3).equals(null));	
+    	assert(orderFacade.getOrderById(id1) == null);
+    	assert(orderFacade.getOrderById(id2) == null);
+    	assert(orderFacade.getOrderById(id3) == null);	
     }
     
     @Test
@@ -144,18 +162,13 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Test
     public void cancelOrder() {
     	Long id = orderFacade.createOrder(order1, user1.getLogin());
-    	orderFacade.finishOrder(id);
+    	orderFacade.cancelOrder(id);
     	assert(orderFacade.getOrderById(id).getState() == OrderState.CANCELED);    	
     }
     
     @Test
     public void getOrdersByUser() {
-    	UserCreateDTO userCreateDTO;
-        userCreateDTO = new UserCreateDTO();
-        userCreateDTO.setName("Test subject one");
-        userCreateDTO.setLogin("TestSubjectOne");
-        
-        Long userId = userFacade.createUser(userCreateDTO);
+    	
     	Long orderId = orderFacade.createOrder(order1, user1.getLogin());
     	
     	userService.addOrderToUser(userId, orderId);
@@ -177,6 +190,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
 
         orderFacade.addTireToOrder(orderId, tireId);
 
+        assert(tireFacade.getTireWithId(tireId).equals(tireFacade.getTireWithId(tireId)) );
         assert(orderFacade.getOrderById(orderId).getTires().get(0).equals(tireFacade.getTireWithId(tireId)));
     }
     @Test
