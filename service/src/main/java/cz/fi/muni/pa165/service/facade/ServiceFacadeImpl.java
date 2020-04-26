@@ -28,7 +28,7 @@ public class ServiceFacadeImpl implements ServiceFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long crateService(ServiceCreateDTO serviceCreateDTO) {
+    public Long createService(ServiceCreateDTO serviceCreateDTO) {
         Service newService = new cz.fi.muni.pa165.entity.Service();
         newService.setName(serviceCreateDTO.getName());
         newService.setDescription(serviceCreateDTO.getDescription());
