@@ -7,6 +7,7 @@ import cz.fi.muni.pa165.enums.OrderState;
 import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.OrderService;
+import cz.fi.muni.pa165.service.UserService;
 import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,8 @@ public class OrderFacadeImpl implements OrderFacade {
     @Inject
     private OrderService orderService;
 
-    //@Autowired
-    //private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -50,14 +51,10 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public List<OrderDTO> getOrdersByUser(Long userId) {
-        /*
-        User user = userService.findUserById(userId);
+        User user = userService.findById(userId);
         List<Order> orders = orderService.getOrdersByUser(user);
 
         return beanMappingService.mapTo(orders, OrderDTO.class);
-
-         */
-        return null;
     }
 
     @Override
