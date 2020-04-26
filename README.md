@@ -11,5 +11,5 @@ System in which the customer can choose a new tire for their vehicle from the ti
 ### Developers
 * Jakub Malý
 * Jan Jelínek
-* Michal Myclal
+* Michal Klíma
 * Radim Šašinka
