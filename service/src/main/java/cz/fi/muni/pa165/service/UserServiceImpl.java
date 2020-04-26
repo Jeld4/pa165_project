@@ -24,11 +24,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findByEmail(String email) {
-	     return userDao.getUserByEmail(email);
-	}
-
-	@Override
 	public User findByLogin(String login) {
 	     return userDao.getUserByLogin(login);
 	}
@@ -44,5 +39,19 @@ public class UserServiceImpl implements UserService {
 		userDao.removeUser(user);
 		
 	}
+
+	@Override
+	public void addOrderToUser(Long userId, Long orderId) {
+		userDao.addOrder(userId, orderId);
+		
+	}
+
+	@Override
+	public void removeOrderFromUser(Long userId, Long orderId) {
+		userDao.removeOrder(userId, orderId);
+		
+	}
+	
+	
 
 }

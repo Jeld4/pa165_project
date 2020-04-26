@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
+import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 
 import java.util.List;
@@ -50,5 +51,17 @@ public interface UserDao {
      * Get user by Login
      */
 	User getUserByLogin(String login);
+	
+	/**
+	 * Add order to User
+	 * @param o
+	 */
+	void addOrder(Long userId, Long orderId); 
 
+	/**
+	 * Remove order from User
+	 * @param o
+	 */
+	void removeOrder(Long userId, Long orderId);
+	
 }
