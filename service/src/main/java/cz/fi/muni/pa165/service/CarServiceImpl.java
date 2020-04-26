@@ -43,7 +43,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public void changeTire(Car car, Tire tire) {
+    public void changeTire(Long carId, Tire tire) {
+        Car car = findById(carId);
         car.setTireType(tire.getType());
     }
 

@@ -178,16 +178,16 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     
     
     @Test
-    public void addTireToOrder() {    	
+    public void addTireToOrder() {
     	TireCreateDTO tireCreateDTO;
         tireCreateDTO = new TireCreateDTO();
         tireCreateDTO.setManufacturer("Michellin");
         tireCreateDTO.setPrice(7500);
         tireCreateDTO.setType("SuperBlack");
-        
+
         Long tireId = tireFacade.createTire(tireCreateDTO);
         Long orderId = orderFacade.createOrder(order1, user1.getLogin());
-        
+
         orderFacade.addTireToOrder(orderId, tireId);
 
         assert(tireFacade.getTireWithId(tireId).equals(tireFacade.getTireWithId(tireId)) );

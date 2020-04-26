@@ -45,8 +45,8 @@ public interface CarService {
 
     /**
      * Changes a tires in the given car
-     * @param car Car which tires should be changed
+     * @param carId id of car which tires should be changed
      * @param tire Tire to be changed
      */
-    void changeTire(Car car, Tire tire);
+    void changeTire(Long carId, Tire tire);
 }
