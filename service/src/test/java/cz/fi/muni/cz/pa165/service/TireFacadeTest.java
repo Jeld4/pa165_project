@@ -117,9 +117,13 @@ public class TireFacadeTest extends AbstractTransactionalTestNGSpringContextTest
     @Test
     public void getTireWithManufacturer(){
         tireFacade.createTire(tireCreateDTO);
+        tireFacade.createTire(tireCreateDTO2);
         tireFacade.createTire(tireCreateDTO3);
         tireFacade.createTire(tireCreateDTO4);
-        // TODO
+
+        List<TireDTO> result = tireFacade.getTiresByManufacturer("Michellin");
+        assert(result.size() == 3);
+        assert(result.get(0).getType().equals("SuperBlack"));
     }
 
 

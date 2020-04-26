@@ -37,6 +37,8 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
     private UserCreateDTO userCreateDTO2;
     private UserCreateDTO userCreateDTO3;
 
+    private UserDTO userDTO;
+
     @BeforeClass
     void initMocks(){
         MockitoAnnotations.initMocks(this);
@@ -55,6 +57,8 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
         userCreateDTO3 = new UserCreateDTO();
         userCreateDTO3.setName("Felix Saulovich");
         userCreateDTO3.setLogin("bigSaul_302");
+
+
     }
 
     @AfterMethod
