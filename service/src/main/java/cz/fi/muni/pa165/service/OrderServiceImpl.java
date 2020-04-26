@@ -5,15 +5,18 @@ import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.*;
 
 /**
  * @author Jan Jelínek 445416
  */
+@Service
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
+    @Inject
     private OrderDao orderDao;
 
     @Override

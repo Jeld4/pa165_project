@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.facade;
 
 import java.util.List;
 
+import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
 
 /**
@@ -48,10 +49,12 @@ public interface OrderFacade {
     void removeOrder(Long id);
 
     /**
-     * Creates new order
+     * Creates order to the user specified by users login
+     * @param order
+     * @param userLogin
      * @return id of the new order
      */
-    Long createOrder();
+    Long createOrder(OrderCreateDTO order, String userLogin);
 
     /**
      * Adds tire to the order
