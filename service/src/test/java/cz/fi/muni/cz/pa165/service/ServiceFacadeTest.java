@@ -20,6 +20,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.math.BigDecimal;
 
+/**
+ * @author Jakub Malý, 456389
+ */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class ServiceFacadeTest extends AbstractTransactionalTestNGSpringContextTests {
 
@@ -69,15 +72,15 @@ public class ServiceFacadeTest extends AbstractTransactionalTestNGSpringContextT
 
     @Test
     public void create(){
-        serviceFacade.crateService(service1);
-        serviceFacade.crateService(service2);
+        serviceFacade.createService(service1);
+        serviceFacade.createService(service2);
         assert(serviceFacade.getAllServices().size() == 2);
     }
 
     @Test
     public void delete(){
-        Long id1 = serviceFacade.crateService(service1);
-        Long id2 = serviceFacade.crateService(service2);
+        Long id1 = serviceFacade.createService(service1);
+        Long id2 = serviceFacade.createService(service2);
         assert(serviceFacade.getAllServices().size() == 2);
         serviceFacade.deleteService(id1);
         assert(serviceFacade.getAllServices().size() == 1);
@@ -88,15 +91,10 @@ public class ServiceFacadeTest extends AbstractTransactionalTestNGSpringContextT
 
     @Test
     public void getServiceWithId(){
-        /*serviceFacade.crateService(service1);
-        serviceFacade.crateService(service2);
-        serviceFacade.crateService(service3);
-        ServiceDTO service = serviceFacade.getServiceWithId(service3.getId());
+        serviceFacade.createService(service1);
+        serviceFacade.createService(service2);
+        Long id3 = serviceFacade.createService(service3);
+        ServiceDTO service = serviceFacade.getServiceWithId(id3);
         Assert.assertEquals(service.getName(), service3.getName());
-        */
-        //TODO
     }
-
-
-
 }

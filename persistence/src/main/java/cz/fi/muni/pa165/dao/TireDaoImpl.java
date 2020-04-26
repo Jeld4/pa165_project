@@ -35,7 +35,7 @@ public class TireDaoImpl implements TireDao {
     @Override
     public List<Tire> findByManufacturer(String manufacturer) {
         TypedQuery<Tire> query = em.createQuery(
-                "Select tires from manufacturer = :manufacturer",
+                "Select tires from Tire tires WHERE manufacturer = :manufacturer",
                 Tire.class);
 
         query.setParameter("manufacturer", manufacturer);
