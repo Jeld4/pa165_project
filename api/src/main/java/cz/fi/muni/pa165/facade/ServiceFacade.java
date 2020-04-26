@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ServiceFacade {
 
-    Long crateService(ServiceCreateDTO serviceCreateDTO);
+    Long createService(ServiceCreateDTO serviceCreateDTO);
     void deleteService(Long id);
     List<ServiceDTO> getAllServices();
     ServiceDTO getServiceWithId(Long id);
