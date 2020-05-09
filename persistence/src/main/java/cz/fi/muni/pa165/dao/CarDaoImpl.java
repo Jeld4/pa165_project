@@ -40,8 +40,8 @@ public class CarDaoImpl implements CarDao{
     }
 
     @Override
-    public void update(Car c) {
-        entityManager.merge(c);
+    public void update(Car car) {
+        entityManager.merge(car);
     }
 
     @Override

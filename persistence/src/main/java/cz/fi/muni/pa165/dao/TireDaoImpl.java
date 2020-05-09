@@ -18,8 +18,8 @@ public class TireDaoImpl implements TireDao {
     private EntityManager em;
 
     @Override
-    public void create(Tire t) {
-        em.persist(t);
+    public void create(Tire tire) {
+        em.persist(tire);
     }
 
     @Override
@@ -43,8 +43,8 @@ public class TireDaoImpl implements TireDao {
     }
 
     @Override
-    public void remove(Tire t) {
-        em.remove(t);
+    public void remove(Tire tire) {
+        em.remove(tire);
     }
 
     @Override

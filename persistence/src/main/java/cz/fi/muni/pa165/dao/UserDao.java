@@ -40,7 +40,7 @@ public interface UserDao {
 	 /**
      * Method to update User
      */
-	void updateUser(User u);
+	void updateUser(User user);
 	
 	 /**
      * Get User by email
