@@ -18,7 +18,7 @@ public interface TireService {
 
     /**
      * Returns list of tires manufactured by specific manufacturer
-     * @param name of the manufacturer
+     * @param manufacturer name of the manufacturer
      * @return list of tires
      */
     List<Tire> findByManufacturer(String manufacturer);
@@ -30,13 +30,13 @@ public interface TireService {
 
     /**
      * creates tire in the system
-     * @param Tire object to be created
+     * @param tire object to be created
      */
     void create(Tire tire);
 
     /**
      * removes tire from the system
-     * @param Tire object to be removed
+     * @param tire object to be removed
      */
     void remove(Tire tire);
 }

@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 
 import java.util.List;

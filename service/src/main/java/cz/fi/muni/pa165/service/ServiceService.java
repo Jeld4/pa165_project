@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.service;
 
-import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Service;
 
 import java.util.List;

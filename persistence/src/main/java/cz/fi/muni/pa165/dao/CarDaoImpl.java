@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
 import cz.fi.muni.pa165.entity.Car;
-import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
