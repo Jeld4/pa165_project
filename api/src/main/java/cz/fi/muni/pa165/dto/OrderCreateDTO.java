@@ -114,7 +114,7 @@ public class OrderCreateDTO {
     @Override
     public String toString() {
         return "OrderCreateDTO{" +
-                "user='" + user.getName() + '\'' +
+                "user='" + user + '\'' +
                 ", date of order ='" + dateOfOrder + '\'' +
                 ", state =" + state +
                 '}';

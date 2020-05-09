@@ -169,7 +169,10 @@ public class UserDTO {
 		return true;
 	}
 
-
+	@Override
+	public String toString() {
+		return name;
+	}
 
 
 }
