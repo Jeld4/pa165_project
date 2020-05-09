@@ -19,26 +19,50 @@ public class ServiceCreateDTO {
 
     private BigDecimal price;
 
+    /**
+     * get name
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * set name
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * get description
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * set description
+     * @param description
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * get price
+     * @return
+     */
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * set price
+     * @param price
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }

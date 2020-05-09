@@ -11,10 +11,10 @@ import cz.fi.muni.pa165.entity.User;
 public interface UserService {
     /**
      * Return User by id
-     * @param user
+     * @param id
      */
-	
 	User findById(Long id);
+
 	/**
 	 * return all Users
 	 * @return

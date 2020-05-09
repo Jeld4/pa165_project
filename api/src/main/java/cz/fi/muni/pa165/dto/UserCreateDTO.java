@@ -25,55 +25,86 @@ public class UserCreateDTO {
 	private Boolean isAdmin;
 	private List<OrderDTO> orders;
 
+
+	/**
+	 * get name
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
 
-
+	/**
+	 * set name
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
+	/**
+	 * get login
+	 * @return login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
-
+	/**
+	 * set login
+	 * @param login
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-
+	/**
+	 * get password
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
-
+	/**
+	 * set password
+	 * @param password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
+	/**
+	 * get isAdmin
+	 * @return isAdmin
+	 */
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-
+	/**
+	 * set isAdmin
+	 * @param isAdmin
+	 */
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 
-	
+	/**
+	 * get orders
+	 * @return orders
+	 */
     public List<OrderDTO> getOrders() {
 		return orders;
 	}
 
-
+	/**
+	 * set orders
+	 * @param orders
+	 */
 	public void setOrders(List<OrderDTO> orders) {
 		this.orders = orders;
 	}
-
 
 	@Override
 	public boolean equals(Object o) {

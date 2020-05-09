@@ -15,54 +15,101 @@ public class TireDTO {
     private String season;
     private int price;
 
+    /**
+     * get ID
+     * @return ID
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * get manufacturer
+     * @return manufacturer
+     */
     public String getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * get type
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * get size
+     * @return size
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * get season
+     * @return season
+     */
     public String getSeason() {
         return season;
     }
 
+    /**
+     * get price
+     * @return price
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * set ID
+     * @param id
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * set manufacturer
+     * @param manufacturer
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    /**
+     * set type
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * set size
+     * @param size
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
+    /**
+     * set season
+     * @param season
+     */
     public void setSeason(String season) {
         this.season = season;
     }
 
+    /**
+     * set price
+     * @param price
+     */
     public void setPrice(int price) {
         this.price = price;
     }
-
 
     @Override
     public boolean equals(Object o) {

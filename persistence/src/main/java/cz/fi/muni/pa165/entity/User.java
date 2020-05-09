@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * class representing user
  * @author Michal Klima
  */
 @Entity
@@ -28,59 +29,116 @@ public class User {
     @OneToMany
 	private List<Order> orders;
 
+	/**
+	 * user nonparametric constructor
+	 */
 	public User() {
 	}
 
-	public User(String n, String l, String p) {
-		name = n;
-		login = l;
-		password = p;
+	/**
+	 * user parametric constructor
+	 * @param name
+	 * @param login
+	 * @param password
+	 */
+	public User(String name, String login, String password) {
+		this.name = name;
+		this.login = login;
+		this.password = password;
 	}
-	
+
+	/**
+	 * get ID
+	 * @return ID
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * set ID
+	 * @param id
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	/**
+	 * get name
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
-	
+
+	/**
+	 * set name
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
+	/**
+	 * get login
+	 * @return login
+	 */
 	public String getLogin() {
 		return login;
 	}
-	
-	public void setLogin(String l) {
-		login = l;
+
+	/**
+	 * set login
+	 * @param login
+	 */
+	public void setLogin(String login) {
+		this.login = login;
 	}
-	
+
+	/**
+	 * get password
+	 * @return password
+	 */
 	public String getPassword() {
 		return password;
 	}
-	
-	public void setPassword(String p) {
-		password = p;
+
+	/**
+	 * set password
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
-	
+
+	/**
+	 * get isAdmin
+	 * @return isAdmin
+	 */
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
+	/**
+	 * set isAdmin
+	 * @param isAdmin
+	 */
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	public void setOrders (List<Order> o) {
-		orders = o;
+
+	/**
+	 * set orders
+	 * @param orders
+	 */
+	public void setOrders (List<Order> orders) {
+		this.orders = orders;
 	}
-	
+
+	/**
+	 * get orders
+	 * @return orders
+	 */
 	public List<Order> getOrders () {
 		return orders;
 	}

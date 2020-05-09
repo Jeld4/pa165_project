@@ -17,31 +17,53 @@ public class TireCreateDTO {
 
     private int price;
 
-
+    /**
+     * get manufacturer
+     * @return manufacturer
+     */
     public String getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * get type
+     * @return type
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * set manufacturer
+     * @param manufacturer
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    /**
+     * set type
+     * @param type
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * get price
+     * @return
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * set price
+     * @param price
+     */
     public void setPrice(int price) {
         this.price = price;
     }
-
 
     @Override
     public boolean equals(Object o) {
