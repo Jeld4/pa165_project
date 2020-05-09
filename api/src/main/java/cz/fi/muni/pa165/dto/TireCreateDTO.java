@@ -42,27 +42,28 @@ public class TireCreateDTO {
         this.price = price;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        TireCreateDTO that = (TireCreateDTO) object;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TireCreateDTO that = (TireCreateDTO) o;
         return price == that.price &&
-                java.util.Objects.equals(manufacturer, that.manufacturer) &&
-                java.util.Objects.equals(type, that.type);
+                Objects.equals(manufacturer, that.manufacturer) &&
+                Objects.equals(type, that.type);
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), manufacturer, type, price);
+        return Objects.hash(manufacturer, type, price);
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "TireCreateDTO{" +
                 "manufacturer='" + manufacturer + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 '}';
     }
-
 }

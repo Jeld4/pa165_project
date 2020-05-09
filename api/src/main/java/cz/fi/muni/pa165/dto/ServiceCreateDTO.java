@@ -44,25 +44,26 @@ public class ServiceCreateDTO {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ServiceCreateDTO that = (ServiceCreateDTO) o;
-        return name.equals(that.name) &&
-                description.equals(that.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description);
-    }
-
-    @Override
     public String toString() {
         return "ServiceCreateDTO{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ServiceCreateDTO that = (ServiceCreateDTO) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(description, that.description) &&
+                Objects.equals(price, that.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, price);
     }
 }

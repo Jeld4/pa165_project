@@ -63,19 +63,22 @@ public class TireDTO {
         this.price = price;
     }
 
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        TireDTO tireDTO = (TireDTO) object;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TireDTO tireDTO = (TireDTO) o;
         return id == tireDTO.id &&
                 size == tireDTO.size &&
                 price == tireDTO.price &&
-                java.util.Objects.equals(manufacturer, tireDTO.manufacturer) &&
-                java.util.Objects.equals(type, tireDTO.type) &&
-                java.util.Objects.equals(season, tireDTO.season);
+                Objects.equals(manufacturer, tireDTO.manufacturer) &&
+                Objects.equals(type, tireDTO.type) &&
+                Objects.equals(season, tireDTO.season);
     }
 
+    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, manufacturer, type, size, season, price);
+        return Objects.hash(id, manufacturer, type, size, season, price);
     }
 }
