@@ -1,10 +1,7 @@
 package cz.fi.muni.pa165.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 
@@ -13,6 +10,7 @@ import java.util.Objects;
  */
 
 @Entity
+@Table(name="Car", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Car {
 
     @Id
