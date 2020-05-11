@@ -77,7 +77,8 @@ public class OrderDaoImpl implements OrderDao {
     public void addService(Long orderId, Long serviceID) {
         if (orderId == null) {
             throw new DataAccessException("Cannot add service to order, because orderId is null."){};
-        } else if (serviceID == null) {
+        }
+        if (serviceID == null) {
             throw new DataAccessException("Cannot add service to order, because serviceID is null."){};
         }
         Order order = findById(orderId);
@@ -90,7 +91,8 @@ public class OrderDaoImpl implements OrderDao {
     public void addTire(Long orderId, Long tireID) {
         if (orderId == null) {
             throw new DataAccessException("Cannot add service to order, because orderId is null."){};
-        } else if (tireID == null) {
+        }
+        if (tireID == null) {
             throw new DataAccessException("Cannot add service to order, because tireID is null."){};
         }
         Order order = findById(orderId);
