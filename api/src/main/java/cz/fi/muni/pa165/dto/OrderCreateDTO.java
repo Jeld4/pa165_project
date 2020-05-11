@@ -22,42 +22,82 @@ public class OrderCreateDTO {
 
     private List<ServiceDTO> services;
 
+    /**
+     * Method used to get user of the order
+     * @return user of the order
+     */
     public UserDTO getUser() {
         return user;
     }
 
+    /**
+     * Method to set user of the order
+     * @param user of the order
+     */
     public void setUser(UserDTO user) {
         this.user = user;
     }
 
+    /**
+     * Method which return the date of the order
+     * @return date of the order
+     */
     public Date getDateOfOrder() {
         return dateOfOrder;
     }
 
+    /**
+     * Method to set date of the order
+     * @param dateOfOrder
+     */
     public void setDateOfOrder(Date dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
 
+    /**
+     * Method used to get state of the order
+     * @return state of the order
+     */
     public OrderState getState() {
         return state;
     }
 
+    /**
+     * Method used to set state of the order
+     * @param state of the order
+     */
     public void setState(OrderState state) {
         this.state = state;
     }
 
+    /**
+     * Method used to get tires included in order
+     * @return tires within the order
+     */
     public List<TireDTO> getTires() {
         return tires;
     }
 
+    /**
+     * Method to set tires of the order
+     * @param tires of the order
+     */
     public void setTires(List<TireDTO> tires) {
         this.tires = tires;
     }
 
+    /**
+     * Method used to get services of the order
+     * @return services of the order
+     */
     public List<ServiceDTO> getServices() {
         return services;
     }
 
+    /**
+     * Method used to set services of the order
+     * @param services of the order
+     */
     public void setServices(List<ServiceDTO> services) {
         this.services = services;
     }

@@ -15,54 +15,103 @@ public class TireDTO {
     private String season;
     private int price;
 
+    /**
+     * Method used to get id of the tire
+     * @return id of the tire
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * Method used to get manufacturer of the tire
+     * @return manufacturer of the tire
+     */
     public String getManufacturer() {
         return manufacturer;
     }
 
+    /**
+     * Method used to get type of tire
+     * @return type of the tire
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Method used to get size of the tire
+     * @return size of the tire
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Method used to get season, when the tire should be used
+     * @return season of the year
+     */
     public String getSeason() {
         return season;
     }
 
+    /**
+     * Method to get price of the tire
+     * @return price of the tire
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * Method used to set id of the tire
+     * @param id of the tire
+     */
     public void setId(long id) {
         this.id = id;
     }
 
+    /**
+     * Method to set the manufacturer of the tire
+     * @param manufacturer of the tire
+     */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
+    /**
+     * Method to set type of the tire
+     * @param type of tire
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * Method used to set size of the tire
+     * @param size of the tire
+     */
     public void setSize(int size) {
         this.size = size;
     }
 
+    /**
+     * Method used to set season, when the tire should be used
+     * @param season of the year
+     */
     public void setSeason(String season) {
         this.season = season;
     }
 
+    /**
+     * Method used to set price of the tire
+     * @param price
+     */
     public void setPrice(int price) {
         this.price = price;
     }
 
+    @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
@@ -75,6 +124,7 @@ public class TireDTO {
                 java.util.Objects.equals(season, tireDTO.season);
     }
 
+    @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id, manufacturer, type, size, season, price);
     }
