@@ -11,6 +11,9 @@
         <module>persistence</module>
         <module>api</module>
         <module>service</module>
+        <module>security</module>
+        <module>REST</module>
+        <module>UI</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
