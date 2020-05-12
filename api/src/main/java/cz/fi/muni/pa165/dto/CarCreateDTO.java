@@ -2,13 +2,14 @@ package cz.fi.muni.pa165.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Radim Sasinka
  */
 
-public class CarCreateDTO {
+public class CarCreateDTO implements Serializable {
 
     @NotNull
     @Size(min = 4, max=20)

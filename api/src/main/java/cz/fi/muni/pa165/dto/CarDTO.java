@@ -1,11 +1,12 @@
 package cz.fi.muni.pa165.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * @author Radim Sasinka
  */
-public class CarDTO {
+public class CarDTO implements Serializable {
 
     private Long Id;
     private String licencePlate;
