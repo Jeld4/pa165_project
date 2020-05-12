@@ -1,8 +1,5 @@
 package cz.fi.muni.pa165.entity;
 
-
-import com.sun.javaws.exceptions.InvalidArgumentException;
-
 import javax.persistence.Entity;
 
 
@@ -23,9 +20,12 @@ public class Car extends AbstractEntity{
      * @param licencePlate
      * @param model
      */
-    public Car(String licencePlate, String model) throws InvalidArgumentException {
+    public Car(String licencePlate, String model){
         if(licencePlate.isEmpty()){
-            throw new InvalidArgumentException("Licence plate cannot be empty");
+            throw new IllegalArgumentException("Licence plate cannot be empty");
+        }
+        if(model.isEmpty()){
+            throw new IllegalArgumentException("Car model cannot be empty");
         }
         this.licencePlate = licencePlate;
         this.model = model;
