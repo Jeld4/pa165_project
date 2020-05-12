@@ -2,7 +2,6 @@ package cz.fi.muni.pa165.service.facade;
 
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
-import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.facade.OrderFacade;

@@ -12,34 +12,66 @@ public class CarDTO {
     private String model;
     private String tireType;
 
+    /**
+     * get ID
+     * @return ID
+     */
     public Long getId() {
         return Id;
     }
 
+    /**
+     * set ID
+     * @param id
+     */
     public void setId(Long id) {
         Id = id;
     }
 
+    /**
+     * get licence plate
+     * @return licence plate
+     */
     public String getLicencePlate() {
         return licencePlate;
     }
 
+    /**
+     * set licence plate
+     * @param licencePlate
+     */
     public void setLicencePlate(String licencePlate) {
         this.licencePlate = licencePlate;
     }
 
+    /**
+     * get model
+     * @return model
+     */
     public String getModel() {
         return model;
     }
 
+    /**
+     * set model
+     * @param model
+     */
     public void setModel(String model) {
         this.model = model;
     }
 
+    /**
+     * get tire type
+     * @return tire type
+     */
     public String getTireType() {
         return tireType;
     }
 
+    /**
+     * set tire type
+     * @param tireType
+     */
     public void setTireType(String tireType) {
         this.tireType = tireType;
     }

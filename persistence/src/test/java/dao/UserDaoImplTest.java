@@ -24,27 +24,27 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
      @Autowired
      private UserDao userDao;
     
-     private User u1;
-     private User u2;
+     private User user1;
+     private User user2;
     
      @BeforeMethod
      public void prepare(){
-         u1 = new User();
-         u2 = new User();
+         user1 = new User();
+         user2 = new User();
     
-         u1.setLogin("xlogin1");
-         u2.setLogin("xlogin2");
+         user1.setLogin("xlogin1");
+         user2.setLogin("xlogin2");
     
-         u1.setName("user1");
-         u2.setName("user2");
+         user1.setName("user1");
+         user2.setName("user2");
     
-         userDao.createUser(u1);
-         userDao.createUser(u2);
+         userDao.createUser(user1);
+         userDao.createUser(user2);
      }
     
      @Test
      public void testFindUser(){
-         Assert.assertEquals(userDao.getUserById(u1.getId()), u1);
+         Assert.assertEquals(userDao.getUserById(user1.getId()), user1);
      }
      @Test
      public void testFindAll(){
@@ -52,14 +52,14 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
      }
      @Test
      public void testRemove(){
-         userDao.removeUser(u1);
-         Assert.assertNull(userDao.getUserById(u1.getId()));
+         userDao.removeUser(user1);
+         Assert.assertNull(userDao.getUserById(user1.getId()));
          Assert.assertEquals(userDao.findAllUsers().size(), 1);
      }
     
      @Test
      public void updateUser(){
-         u1.setLogin("newLogin1");
+         user1.setLogin("newLogin1");
          //TODO
      }
 

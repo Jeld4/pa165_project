@@ -1,8 +1,6 @@
 package cz.fi.muni.pa165.dao;
 
-import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
-import cz.fi.muni.pa165.entity.Service;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.stereotype.Repository;
 
@@ -43,8 +41,8 @@ public class UserDaoImpl implements UserDao {
 	}
     
     @Override
-    public void updateUser (User u) {
-        em.merge(u);
+    public void updateUser (User user) {
+        em.merge(user);
     }
 
 	@Override

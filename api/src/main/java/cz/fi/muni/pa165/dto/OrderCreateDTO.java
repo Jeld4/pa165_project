@@ -2,9 +2,9 @@ package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.enums.OrderState;
 
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -22,101 +22,111 @@ public class OrderCreateDTO {
 
     private List<ServiceDTO> services;
 
+    /**
+     * get user
+     * @return user
+     */
     public UserDTO getUser() {
         return user;
     }
 
+    /**
+     * set user
+     * @param user
+     */
     public void setUser(UserDTO user) {
         this.user = user;
     }
 
+    /**
+     * get date of order
+     * @return date of order
+     */
     public Date getDateOfOrder() {
         return dateOfOrder;
     }
 
+    /**
+     * set date of order
+     * @param dateOfOrder
+     */
     public void setDateOfOrder(Date dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
     }
 
+    /**
+     * get state
+     * @return state
+     */
     public OrderState getState() {
         return state;
     }
 
+    /**
+     * set state
+     * @param state
+     */
     public void setState(OrderState state) {
         this.state = state;
     }
 
+    /**
+     * get tires
+     * @return tires
+     */
     public List<TireDTO> getTires() {
         return tires;
     }
 
+    /**
+     * set tires
+     * @param tires
+     */
     public void setTires(List<TireDTO> tires) {
         this.tires = tires;
     }
 
+    /**
+     * get services
+     * @return services
+     */
     public List<ServiceDTO> getServices() {
         return services;
     }
 
+    /**
+     * set services
+     * @param services
+     */
     public void setServices(List<ServiceDTO> services) {
         this.services = services;
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
-        result = prime * result + ((dateOfOrder == null) ? 0 : dateOfOrder.hashCode());
-        result = prime * result + ((state == null) ? 0 : state.hashCode());
-        result = prime * result + ((tires == null) ? 0 : tires.hashCode());
-        result = prime * result + ((services == null) ? 0 : services.hashCode());
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderCreateDTO that = (OrderCreateDTO) o;
+        return Objects.equals(user, that.user) &&
+                Objects.equals(dateOfOrder, that.dateOfOrder) &&
+                state == that.state &&
+                Objects.equals(tires, that.tires) &&
+                Objects.equals(services, that.services);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        OrderCreateDTO other = (OrderCreateDTO) obj;
-        if (user == null) {
-            if (other.user != null)
-                return false;
-        } else if (!user.equals(other.user))
-            return false;
-        if (dateOfOrder == null) {
-            if (other.dateOfOrder != null)
-                return false;
-        } else if (!dateOfOrder.equals(other.dateOfOrder))
-            return false;
-        if (state == null) {
-            if (other.state != null)
-                return false;
-        } else if (!state.equals(other.state))
-            return false;
-        if (tires == null) {
-            if (other.tires != null)
-                return false;
-        } else if (!tires.equals(other.tires))
-            return false;
-        if (services == null) {
-            if (other.services != null)
-                return false;
-        } else if (!services.equals(other.services))
-            return false;
-        return true;
+    public int hashCode() {
+        return Objects.hash(user, dateOfOrder, state, tires, services);
     }
 
     @Override
     public String toString() {
         return "OrderCreateDTO{" +
-                "user='" + user.getName() + '\'' +
-                ", date of order ='" + dateOfOrder + '\'' +
-                ", state =" + state +
+                "user=" + user +
+                ", dateOfOrder=" + dateOfOrder +
+                ", state=" + state +
+                ", tires=" + tires +
+                ", services=" + services +
                 '}';
     }
 }

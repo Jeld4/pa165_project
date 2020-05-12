@@ -9,6 +9,7 @@ import java.util.Objects;
 
 
 /**
+ * class representing car
  * @author Radim Sasinka, 456315
  */
 
@@ -22,40 +23,76 @@ public class Car {
     private String model;
     private String tireType;
 
-    public Long getId() {
-        return Id;
-    }
-
-    public String getLicencePlate() {
-        return licencePlate;
-    }
-
-    public void setLicencePlate(String licencePlate) {
-        this.licencePlate = licencePlate;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getTireType() {
-        return tireType;
-    }
-
-    public void setTireType(String tireType) {
-        this.tireType = tireType;
-    }
-
+    /**
+     * car parametric constructor
+     * @param licencePlate
+     * @param model
+     */
     public Car(String licencePlate, String model) {
         this.licencePlate = licencePlate;
         this.model = model;
     }
 
+    /**
+     * car nonparametric constructor
+     */
     public Car() {
+    }
+
+    /**
+     * get ID
+     * @return ID
+     */
+    public Long getId() {
+        return Id;
+    }
+
+    /**
+     * get licence plate
+     * @return licence plate
+     */
+    public String getLicencePlate() {
+        return licencePlate;
+    }
+
+    /**
+     * set licence plate
+     * @param licencePlate
+     */
+    public void setLicencePlate(String licencePlate) {
+        this.licencePlate = licencePlate;
+    }
+
+    /**
+     * get model
+     * @return model
+     */
+    public String getModel() {
+        return model;
+    }
+
+    /**
+     * set model
+     * @param model
+     */
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    /**
+     * get tire type
+     * @return tire type
+     */
+    public String getTireType() {
+        return tireType;
+    }
+
+    /**
+     * set tire type
+     * @param tireType
+     */
+    public void setTireType(String tireType) {
+        this.tireType = tireType;
     }
 
     @Override

@@ -12,6 +12,14 @@
      unit tests to fail, see https://issues.apache.org/jira/browse/SUREFIRE-1588 -->
 
     <artifactId>persistence</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.5.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

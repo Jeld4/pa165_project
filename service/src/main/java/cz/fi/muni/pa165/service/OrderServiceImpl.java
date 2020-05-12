@@ -4,11 +4,10 @@ import cz.fi.muni.pa165.dao.OrderDao;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.*;
+import java.util.List;
 
 /**
  * @author Jan Jelínek 445416

@@ -11,9 +11,9 @@ import java.util.List;
 public interface ServiceDao {
     /**
      * Creates new service
-     * @param s Service object
+     * @param service Service object
      */
-    void create(Service s);
+    void create(Service service);
 
     /**
      * Find all services in database and returns them as a list
@@ -30,13 +30,13 @@ public interface ServiceDao {
 
     /**
      * Removes given Service from database
-     * @param s Service to be deleted
+     * @param service Service to be deleted
      */
-    void remove(Service s);
+    void remove(Service service);
 
     /**
      * Updates given Service in database
-     * @param s Service to be updated
+     * @param service Service to be updated
      */
-    void update(Service s);
+    void update(Service service);
 }

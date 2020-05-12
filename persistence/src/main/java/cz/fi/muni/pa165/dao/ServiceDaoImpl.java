@@ -19,8 +19,8 @@ public class ServiceDaoImpl implements ServiceDao {
 
 
     @Override
-    public void create(Service s) {
-        entityManager.persist(s);
+    public void create(Service service) {
+        entityManager.persist(service);
     }
 
     @Override
@@ -34,12 +34,12 @@ public class ServiceDaoImpl implements ServiceDao {
     }
 
     @Override
-    public void remove(Service s) {
-        entityManager.remove(s);
+    public void remove(Service service) {
+        entityManager.remove(service);
     }
 
     @Override
-    public void update(Service s) {
-        entityManager.merge(s);
+    public void update(Service service) {
+        entityManager.merge(service);
     }
 }
