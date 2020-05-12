@@ -1,11 +1,9 @@
 package cz.fi.muni.pa165.entity;
 
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
 
 
 /**
@@ -14,11 +12,8 @@ import java.util.Objects;
  */
 
 @Entity
-public class Car {
+public class Car extends AbstractEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
     private String licencePlate;
     private String model;
     private String tireType;
@@ -28,7 +23,10 @@ public class Car {
      * @param licencePlate
      * @param model
      */
-    public Car(String licencePlate, String model) {
+    public Car(String licencePlate, String model) throws InvalidArgumentException {
+        if(licencePlate.isEmpty()){
+            throw new InvalidArgumentException("Licence plate cannot be empty");
+        }
         this.licencePlate = licencePlate;
         this.model = model;
     }
@@ -37,14 +35,6 @@ public class Car {
      * car nonparametric constructor
      */
     public Car() {
-    }
-
-    /**
-     * get ID
-     * @return ID
-     */
-    public Long getId() {
-        return Id;
     }
 
     /**
@@ -95,17 +85,4 @@ public class Car {
         this.tireType = tireType;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Car car = (Car) o;
-        return Objects.equals(Id, car.Id) &&
-                Objects.equals(licencePlate, car.licencePlate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(Id, licencePlate);
-    }
 }
