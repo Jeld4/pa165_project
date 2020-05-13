@@ -20,7 +20,7 @@ public class UserDTO {
 	
 	/**
 	 * Gets User's ID
-	 * @return
+	 * @return id of user
 	 */
 	public Long getId() {
 		return id;
@@ -28,7 +28,7 @@ public class UserDTO {
 	
 	/**
 	 * Sets User's ID
-	 * @param id
+	 * @param id of user
 	 */
 	public void setId(Long id) {
 		this.id = id;
@@ -36,7 +36,7 @@ public class UserDTO {
 	
 	/**
 	 * Gets User's Name
-	 * @return
+	 * @return user's name
 	 */
 	public String getName() {
 		return name;
@@ -44,7 +44,7 @@ public class UserDTO {
 	
 	/**
 	 * Sets User's Name
-	 * @param name
+	 * @param name of user
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -52,7 +52,7 @@ public class UserDTO {
 	
 	/**
 	 * Gets User's Login
-	 * @return
+	 * @return login of user
 	 */
 	public String getLogin() {
 		return login;
@@ -60,7 +60,7 @@ public class UserDTO {
 	
 	/**
 	 * Sets User's Login
-	 * @param login
+	 * @param login of user
 	 */
 	public void setLogin(String login) {
 		this.login = login;
@@ -68,7 +68,7 @@ public class UserDTO {
 	
 	/**
 	 * Gets User's Password
-	 * @return
+	 * @return password of user
 	 */
 	public String getPassword() {
 		return password;
@@ -76,15 +76,15 @@ public class UserDTO {
 	
 	/**
 	 * Sets User's Password
-	 * @param password
+	 * @param password of user
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
-	/** Gets User's Admin's Assess
-	 * 
-	 * @return
+	/**
+	 * Gets User's Admin's Assess
+	 * @return wheter the user is admin
 	 */
 	public Boolean getIsAdmin() {
 		return isAdmin;
@@ -92,16 +92,15 @@ public class UserDTO {
 	
 	/**
 	 * sets User Admin's Access
-	 * @param isAdmin
+	 * @param isAdmin wheter the user is admin
 	 */
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-	
-	
+
 	/**
 	 * Gets User's orders
-	 * @return
+	 * @return user's orders
 	 */
 	public List<Order> getOrders() {
 		return orders;
@@ -109,7 +108,7 @@ public class UserDTO {
 
 	/**
 	 * Sets User's orders
-	 * @param orders
+	 * @param orders of the user
 	 */
 	public void setOrders(List<Order> orders) {
 		this.orders = orders;
@@ -133,4 +132,10 @@ public class UserDTO {
 	public int hashCode() {
 		return Objects.hash(id, name, login, password, isAdmin, orders);
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
 }

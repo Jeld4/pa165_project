@@ -13,6 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+import java.math.BigDecimal;
+
 /**
  * @author Radim Sasinka
  */
@@ -38,7 +41,7 @@ public class TireServiceTest extends AbstractTransactionalTestNGSpringContextTes
         tire = new Tire();
         tire.setType("Super Swift");
         tire.setManufacturer("Barum");
-        tire.setPrice(6500);
+        tire.setPrice(new BigDecimal(6500));
         tire.setSeason("Summer");
         tire.setSize(16);
     }

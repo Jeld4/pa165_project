@@ -23,31 +23,31 @@ public class OrderCreateDTO {
     private List<ServiceDTO> services;
 
     /**
-     * get user
-     * @return user
+     * Method used to get user of the order
+     * @return user of the order
      */
     public UserDTO getUser() {
         return user;
     }
 
     /**
-     * set user
-     * @param user
+     * Method to set user of the order
+     * @param user of the order
      */
     public void setUser(UserDTO user) {
         this.user = user;
     }
 
     /**
-     * get date of order
-     * @return date of order
+     * Method which return the date of the order
+     * @return date of the order
      */
     public Date getDateOfOrder() {
         return dateOfOrder;
     }
 
     /**
-     * set date of order
+     * Method to set date of the order
      * @param dateOfOrder
      */
     public void setDateOfOrder(Date dateOfOrder) {
@@ -55,48 +55,48 @@ public class OrderCreateDTO {
     }
 
     /**
-     * get state
-     * @return state
+     * Method used to get state of the order
+     * @return state of the order
      */
     public OrderState getState() {
         return state;
     }
 
     /**
-     * set state
-     * @param state
+     * Method used to set state of the order
+     * @param state of the order
      */
     public void setState(OrderState state) {
         this.state = state;
     }
 
     /**
-     * get tires
-     * @return tires
+     * Method used to get tires included in order
+     * @return tires within the order
      */
     public List<TireDTO> getTires() {
         return tires;
     }
 
     /**
-     * set tires
-     * @param tires
+     * Method to set tires of the order
+     * @param tires of the order
      */
     public void setTires(List<TireDTO> tires) {
         this.tires = tires;
     }
 
     /**
-     * get services
-     * @return services
+     * Method used to get services of the order
+     * @return services of the order
      */
     public List<ServiceDTO> getServices() {
         return services;
     }
 
     /**
-     * set services
-     * @param services
+     * Method used to set services of the order
+     * @param services of the order
      */
     public void setServices(List<ServiceDTO> services) {
         this.services = services;
@@ -122,11 +122,9 @@ public class OrderCreateDTO {
     @Override
     public String toString() {
         return "OrderCreateDTO{" +
-                "user=" + user +
-                ", dateOfOrder=" + dateOfOrder +
-                ", state=" + state +
-                ", tires=" + tires +
-                ", services=" + services +
+                "user='" + user + '\'' +
+                ", date of order ='" + dateOfOrder + '\'' +
+                ", state =" + state +
                 '}';
     }
 }

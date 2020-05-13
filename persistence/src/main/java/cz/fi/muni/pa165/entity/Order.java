@@ -2,15 +2,10 @@ package cz.fi.muni.pa165.entity;
 
 import cz.fi.muni.pa165.enums.OrderState;
 
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,21 +16,25 @@ import java.util.Objects;
  * @author Jan Jelínek
  */
 @Entity
-@Table(name="ORDER_ITEM")
+@Table(name="ORDER_ITEM", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int totalPrice;
+    @Min(0)
+    @NotNull
+    private BigDecimal totalPrice;
 
+    @NotNull
     private Date dateOfOrder;
 
     @Enumerated
     private OrderState state;
 
     @OneToMany
+    @NotNull
     private List<Tire> tires;
     @OneToMany
     private List<Service> services;
@@ -48,6 +47,7 @@ public class Order {
      * order nonparametric constructor
      */
     public Order() {
+        this.dateOfOrder = new Date();
         this.tires = new ArrayList<>();
         this.services = new ArrayList<>();
     }
@@ -58,7 +58,7 @@ public class Order {
      * @param dateOfOrder
      * @param state
      */
-    public Order(int totalPrice, Date dateOfOrder, OrderState state) {
+    public Order(BigDecimal totalPrice, Date dateOfOrder, OrderState state) {
         this.totalPrice = totalPrice;
         this.dateOfOrder = dateOfOrder;
         this.state = state;
@@ -126,7 +126,7 @@ public class Order {
      * get total price
      * @return total price
      */
-    public int getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
@@ -134,7 +134,7 @@ public class Order {
      * set total price
      * @param totalPrice
      */
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.dao;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -57,4 +58,11 @@ public interface OrderDao {
      * Adds tire to order
      */
     void addTire(Long orderId, Long tireId);
+
+    /**
+     * Calculates and set total price of order
+     * @param order to be set
+     * @return total price of orde
+     */
+    BigDecimal calculateTotalPrice(Order order);
 }

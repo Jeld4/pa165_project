@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -15,61 +16,62 @@ public class TireCreateDTO {
     @NotNull
     private String type;
 
-    private int price;
+    private BigDecimal price;
 
     /**
-     * get manufacturer
-     * @return manufacturer
+     * Method used to get manufacturer of the tire
+     * @return manufacturer of the tire
      */
     public String getManufacturer() {
         return manufacturer;
     }
 
     /**
-     * get type
-     * @return type
+     * Method used to get type of tire
+     * @return type of the tire
      */
     public String getType() {
         return type;
     }
 
     /**
-     * set manufacturer
-     * @param manufacturer
+     * Method to set the manufacturer of the tire
+     * @param manufacturer of the tire
      */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
     /**
-     * set type
-     * @param type
+     * Method to set type of the tire
+     * @param type of tire
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * get price
-     * @return
+     * Method used to get price of the tire
+     * @return price of the tire
      */
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
     /**
-     * set price
-     * @param price
+     * Method used to set price of hte tire
+     * @param price of the tire
      */
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TireCreateDTO that = (TireCreateDTO) o;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        if (!super.equals(object)) return false;
+        TireCreateDTO that = (TireCreateDTO) object;
         return price == that.price &&
                 Objects.equals(manufacturer, that.manufacturer) &&
                 Objects.equals(type, that.type);

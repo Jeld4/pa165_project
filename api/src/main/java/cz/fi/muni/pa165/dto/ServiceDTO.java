@@ -13,64 +13,64 @@ public class ServiceDTO implements Serializable {
     private BigDecimal price;
 
     /**
-     * get ID
-     * @return ID
+     * Method to get id of the service
+     * @return id of the service
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * set ID
-     * @param id
+     * Method used to set id of the service
+     * @param id of the service
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * get name
-     * @return name
+     * Method used to get name of the service
+     * @return name of service
      */
     public String getName() {
         return name;
     }
 
     /**
-     * set name
-     * @param name
+     * Method used to set name of the service
+     * @param name of the service
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * get description
-     * @return description
+     * Method used to get description of the service
+     * @return description of the service
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * set description
-     * @param description
+     * Method used to set description of the service
+     * @param description of the service
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * get price
-     * @return
+     * Method used to get price of the service
+     * @return price of the service
      */
     public BigDecimal getPrice() {
         return price;
     }
 
     /**
-     * set price
-     * @param price
+     * Method used to set the price of the service
+     * @param price of the service
      */
     public void setPrice(BigDecimal price) {
         this.price = price;

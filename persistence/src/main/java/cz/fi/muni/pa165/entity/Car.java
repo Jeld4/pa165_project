@@ -1,6 +1,9 @@
 package cz.fi.muni.pa165.entity;
 
+
 import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.Objects;
 
 
 /**
@@ -9,7 +12,9 @@ import javax.persistence.Entity;
  */
 
 @Entity
+@Table(name="Car", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Car extends AbstractEntity{
+public class Car {
 
     private String licencePlate;
     private String model;

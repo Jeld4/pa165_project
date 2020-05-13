@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -13,109 +14,109 @@ public class TireDTO {
     private String type;
     private int size;
     private String season;
-    private int price;
+    private BigDecimal price;
 
     /**
-     * get ID
-     * @return ID
+     * Method used to get id of the tire
+     * @return id of the tire
      */
     public long getId() {
         return id;
     }
 
     /**
-     * get manufacturer
-     * @return manufacturer
+     * Method used to get manufacturer of the tire
+     * @return manufacturer of the tire
      */
     public String getManufacturer() {
         return manufacturer;
     }
 
     /**
-     * get type
-     * @return type
+     * Method used to get type of tire
+     * @return type of the tire
      */
     public String getType() {
         return type;
     }
 
     /**
-     * get size
-     * @return size
+     * Method used to get size of the tire
+     * @return size of the tire
      */
     public int getSize() {
         return size;
     }
 
     /**
-     * get season
-     * @return season
+     * Method used to get season, when the tire should be used
+     * @return season of the year
      */
     public String getSeason() {
         return season;
     }
 
     /**
-     * get price
-     * @return price
+     * Method to get price of the tire
+     * @return price of the tire
      */
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
     /**
-     * set ID
-     * @param id
+     * Method used to set id of the tire
+     * @param id of the tire
      */
     public void setId(long id) {
         this.id = id;
     }
 
     /**
-     * set manufacturer
-     * @param manufacturer
+     * Method to set the manufacturer of the tire
+     * @param manufacturer of the tire
      */
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
 
     /**
-     * set type
-     * @param type
+     * Method to set type of the tire
+     * @param type of tire
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * set size
-     * @param size
+     * Method used to set size of the tire
+     * @param size of the tire
      */
     public void setSize(int size) {
         this.size = size;
     }
 
     /**
-     * set season
-     * @param season
+     * Method used to set season, when the tire should be used
+     * @param season of the year
      */
     public void setSeason(String season) {
         this.season = season;
     }
 
     /**
-     * set price
+     * Method used to set price of the tire
      * @param price
      */
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TireDTO tireDTO = (TireDTO) o;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        TireDTO tireDTO = (TireDTO) object;
         return id == tireDTO.id &&
                 size == tireDTO.size &&
                 price == tireDTO.price &&

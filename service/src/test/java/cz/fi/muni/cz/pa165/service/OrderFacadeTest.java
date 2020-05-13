@@ -184,7 +184,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     	TireCreateDTO tireCreateDTO;
         tireCreateDTO = new TireCreateDTO();
         tireCreateDTO.setManufacturer("Michellin");
-        tireCreateDTO.setPrice(7500);
+        tireCreateDTO.setPrice(new BigDecimal(7500));
         tireCreateDTO.setType("SuperBlack");
 
         Long tireId = tireFacade.createTire(tireCreateDTO);
