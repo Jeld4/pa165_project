@@ -119,13 +119,13 @@ public class TireDTO {
         return id == tireDTO.id &&
                 size == tireDTO.size &&
                 price == tireDTO.price &&
-                java.util.Objects.equals(manufacturer, tireDTO.manufacturer) &&
-                java.util.Objects.equals(type, tireDTO.type) &&
-                java.util.Objects.equals(season, tireDTO.season);
+                Objects.equals(manufacturer, tireDTO.manufacturer) &&
+                Objects.equals(type, tireDTO.type) &&
+                Objects.equals(season, tireDTO.season);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, manufacturer, type, size, season, price);
+        return Objects.hash(id, manufacturer, type, size, season, price);
     }
 }

@@ -30,28 +30,28 @@ public class TireDaoImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public CarDao carDao;
 
-    private Tire t1;
-    private Tire t2;
+    private Tire tire1;
+    private Tire tire2;
 
     @BeforeMethod
     public void prepare(){
-        t1 = new Tire();
-        t2 = new Tire();
+        tire1 = new Tire();
+        tire2 = new Tire();
 
-        t1.setType("black");
-        t2.setType("white");
+        tire1.setType("black");
+        tire2.setType("white");
 
-        t1.setSeason("winter");
-        t2.setSeason("summer");
+        tire1.setSeason("winter");
+        tire2.setSeason("summer");
 
-        t1.setPrice(4500);
-        t2.setPrice(4567);
+        tire1.setPrice(4500);
+        tire2.setPrice(4567);
 
-        t1.setSize(340);
-        t2.setSize(340);
+        tire1.setSize(340);
+        tire2.setSize(340);
 
-        tireDao.create(t1);
-        tireDao.create(t2);
+        tireDao.create(tire1);
+        tireDao.create(tire2);
     }
 
     @Test
@@ -62,15 +62,15 @@ public class TireDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByID() {
-        Tire f = tireDao.findById(t1.getId());
-        Assert.assertEquals(f, t1);
+        Tire found = tireDao.findById(tire1.getId());
+        Assert.assertEquals(found, tire1);
     }
 
     @Test
     public void remove(){
-        Assert.assertNotNull(tireDao.findById(t1.getId()));
-        tireDao.remove(t1);
-        org.testng.Assert.assertNull(tireDao.findById(t1.getId()));
+        Assert.assertNotNull(tireDao.findById(tire1.getId()));
+        tireDao.remove(tire1);
+        org.testng.Assert.assertNull(tireDao.findById(tire1.getId()));
         Assert.assertEquals(tireDao.findAll().size(), 1);
     }
 

@@ -28,15 +28,15 @@ public interface CarDao {
     Car findById(Long id);
     /**
      * Remove Car from database
-     * @param p Car object to be deleted
+     * @param car Car object to be deleted
      */
-    void remove(Car p);
+    void remove(Car car);
 
     /**
      * Updates Car information
       * @param c Car to be updated
      */
-    void update(Car c);
+    void update(Car car);
 
 
     // TODO JAVADOC

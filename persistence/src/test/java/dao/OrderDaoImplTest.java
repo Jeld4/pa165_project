@@ -46,50 +46,50 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public ServiceDao serviceDao;
     
-    Order o1;
-    Order o2;
+    Order order1;
+    Order order2;
  
     @BeforeMethod
     public void createOrder() {
-    	o1 = new Order();
-    	o2 = new Order();
+    	order1 = new Order();
+    	order2 = new Order();
     	
-    	o1.setDateOfOrder(new Date());
-    	o2.setDateOfOrder(new Date());
+    	order1.setDateOfOrder(new Date());
+    	order2.setDateOfOrder(new Date());
     	
-    	o1.setState(OrderState.CONFIRMED);
-    	o2.setState(OrderState.DONE);
+    	order1.setState(OrderState.CONFIRMED);
+    	order2.setState(OrderState.DONE);
     	
-    	o1.setTotalPrice(11250);
-    	o2.setTotalPrice(18560);
+    	order1.setTotalPrice(11250);
+    	order2.setTotalPrice(18560);
     	
     	
-        Tire t1 = new Tire();
-        Tire t2 = new Tire();
+        Tire tire1 = new Tire();
+        Tire tire2 = new Tire();
 
-        t1.setManufacturer("Black");
-        t2.setManufacturer("White");
+        tire1.setManufacturer("Black");
+        tire2.setManufacturer("White");
 
-        t1.setPrice(3500);
-        t2.setPrice(3400);
+        tire1.setPrice(3500);
+        tire2.setPrice(3400);
 
-        t1.setSeason("summer");
-        t2.setSeason("winter");
+        tire1.setSeason("summer");
+        tire2.setSeason("winter");
 
-        t1.setType("Big");
-        t2.setType("Small");
+        tire1.setType("Big");
+        tire2.setType("Small");
         
-        tireDao.create(t1);
-        tireDao.create(t2);
+        tireDao.create(tire1);
+        tireDao.create(tire2);
 
-        List<Tire> l1 = new ArrayList<Tire>();
-        List<Tire> l2 = new ArrayList<Tire>();
+        List<Tire> list1 = new ArrayList<Tire>();
+        List<Tire> list2 = new ArrayList<Tire>();
        
-        l1.add(t1);
-        l2.add(t2);
+        list1.add(tire1);
+        list2.add(tire2);
         
-        o1.setTires(l1);
-        o2.setTires(l2);
+        order1.setTires(list1);
+        order2.setTires(list2);
 
         Service s1 = new Service();
         s1.setName("Change pneu");
@@ -101,16 +101,16 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         List<Service> services = new ArrayList<>();
         services.add(s1);
 
-        o1.setServices(services);
+        order1.setServices(services);
 
         User user = new User();
         userDao.createUser(user);
 
-        o1.setUser(user);
-        o2.setUser(user);
+        order1.setUser(user);
+        order2.setUser(user);
 
-        orderDao.create(o1);
-        orderDao.create(o2);
+        orderDao.create(order1);
+        orderDao.create(order2);
     }
 
     @Test
@@ -121,25 +121,25 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void findById(){
-        Order f = orderDao.findById(o1.getId());
-        AssertJUnit.assertEquals(f, o1);
+        Order found = orderDao.findById(order1.getId());
+        AssertJUnit.assertEquals(found, order1);
     }
     
     
     @Test
     public void remove(){
-        orderDao.remove(o1);
-        List<Order> li =  orderDao.findAll();
-        AssertJUnit.assertEquals(li.get(0).getId(), o2.getId());
-        AssertJUnit.assertEquals(li.size(), 1);
-        AssertJUnit.assertEquals(orderDao.findById(o1.getId()), null);
+        orderDao.remove(order1);
+        List<Order> list =  orderDao.findAll();
+        AssertJUnit.assertEquals(list.get(0).getId(), order2.getId());
+        AssertJUnit.assertEquals(list.size(), 1);
+        AssertJUnit.assertEquals(orderDao.findById(order1.getId()), null);
     }
     
     @Test
     public void update() {
-    	o1.setState(OrderState.DONE);
-    	orderDao.update(o1);
-    	AssertJUnit.assertEquals(orderDao.findById(o1.getId()), o1);
+    	order1.setState(OrderState.DONE);
+    	orderDao.update(order1);
+    	AssertJUnit.assertEquals(orderDao.findById(order1.getId()), order1);
     }
     
     @Test
@@ -147,13 +147,13 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         User user = new User();
         userDao.createUser(user);
         List<Order> bef = orderDao.findAll();
-        Order o3 = new Order();
-        o3.setUser(user);
+        Order order3 = new Order();
+        order3.setUser(user);
         userDao.createUser(user);
-        orderDao.create(o3);
+        orderDao.create(order3);
         List<Order> aft = orderDao.findAll();
         AssertJUnit.assertEquals(aft.size(), bef.size() + 1);
-        AssertJUnit.assertEquals(orderDao.findById(o3.getId()),o3);
+        AssertJUnit.assertEquals(orderDao.findById(order3.getId()),order3);
     }
 
     @Test(expectedExceptions = DataAccessException.class)
@@ -178,7 +178,7 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @Test(expectedExceptions = DataAccessException.class)
     public void addTireWithNullTireId() {
-        orderDao.addTire(o1.getId(), null);
+        orderDao.addTire(order1.getId(), null);
     }
 
     @Test(expectedExceptions = DataAccessException.class)
@@ -188,7 +188,7 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @Test(expectedExceptions = DataAccessException.class)
     public void addServiceWithNullServiceId() {
-        orderDao.addService(o1.getId(), null);
+        orderDao.addService(order1.getId(), null);
     }
 
     @Test(expectedExceptions = DataAccessException.class)

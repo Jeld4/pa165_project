@@ -78,7 +78,7 @@ public class TireCreateDTO {
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), manufacturer, type, price);
+        return Objects.hash(manufacturer, type, price);
     }
 
     @Override
@@ -89,5 +89,4 @@ public class TireCreateDTO {
                 ", price=" + price +
                 '}';
     }
-
 }
