@@ -1,11 +1,12 @@
 package cz.fi.muni.pa165.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 /**
  * @author Radim Sasinka
  */
-public class ServiceDTO {
+public class ServiceDTO implements Serializable {
     private Long id;
     private String name;
     private String description;

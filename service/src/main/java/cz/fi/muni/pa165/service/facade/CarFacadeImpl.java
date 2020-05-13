@@ -30,6 +30,15 @@ public class CarFacadeImpl implements CarFacade {
 
     @Override
     public Long createCar(CarCreateDTO car) {
+        if(car == null){
+            throw new IllegalArgumentException("Car cannot be null");
+        }
+        if(car.getLicencePlate().isEmpty()){
+            throw new IllegalArgumentException("Car needs to have assigned licence plate.");
+        }
+        if(car.getModel().isEmpty()){
+            throw new IllegalArgumentException("Carr needs to have assigned model type");
+        }
         Car newCar = new Car();
         newCar.setModel(car.getModel());
         newCar.setLicencePlate(car.getLicencePlate());
@@ -39,7 +48,11 @@ public class CarFacadeImpl implements CarFacade {
     }
 
     @Override
-    public void deleteCar(Long carId) {
+    public void deleteCar(Long carId)
+    {
+        if(carId == null){
+            throw new IllegalArgumentException("ID cannot be null");
+        }
         carService.remove(carService.findById(carId));
     }
 
@@ -62,6 +75,15 @@ public class CarFacadeImpl implements CarFacade {
 
     @Override
     public void changeTireType(CarDTO car, TireDTO tire) {
+
+        if(car == null){
+            throw new IllegalArgumentException("Car cannot be null");
+        }
+
+        if(tire == null){
+            throw new IllegalArgumentException("Car cannot be null");
+        }
+
         carService.changeTire(car.getId()
                 , beanMappingService.mapTo(tire, Tire.class));
 

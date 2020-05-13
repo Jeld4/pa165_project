@@ -8,7 +8,7 @@ import java.util.List;
  * @author Radim Sasinka, 456315
  */
 
-public interface CarDao {
+public interface CarDao{
     /**
      * Creates new Car object and insert it into database through entityManager
      * @param car Car object
@@ -34,7 +34,7 @@ public interface CarDao {
 
     /**
      * Updates Car information
-      * @param c Car to be updated
+      * @param car Car to be updated
      */
     void update(Car car);
 

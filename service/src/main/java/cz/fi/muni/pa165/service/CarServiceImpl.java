@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.entity.Car;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.entity.Tire;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,32 +20,67 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(Long id) {
-        return carDao.findById(id);
+        Car car = null;
+        try {
+            car = carDao.findById(id);
+        } catch (DataAccessException ex) {
+            throw new RuntimeException(ex);
+        }
+        return car;
     }
 
     @Override
     public List<Car> findAll() {
-        return carDao.findAll();
+        List<Car> cars = null;
+        try {
+            cars = carDao.findAll();
+        } catch (DataAccessException ex){
+            throw new RuntimeException(ex);
+        }
+        return cars;
     }
 
     @Override
     public Car findByLicencePlate(String licencePlate) {
-        return carDao.findByLicencePlate(licencePlate);
+        if(licencePlate.isEmpty()){
+            throw new IllegalArgumentException("Licence plate cannot be empty");
+        }
+        Car car = null;
+        try {
+            car = carDao.findByLicencePlate(licencePlate);
+        } catch (DataAccessException ex) {
+            throw new RuntimeException(ex);
+        }
+        return car;
     }
 
     @Override
     public void create(Car car) {
-        carDao.create(car);
+        try {
+            carDao.create(car);
+        }catch (DataAccessException ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void remove(Car car) {
-        carDao.remove(car);
+        try {
+            carDao.remove(car);
+        }catch (DataAccessException ex){
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void changeTire(Long carId, Tire tire) {
-        Car car = findById(carId);
+        if(carId == null){
+            throw new IllegalArgumentException("Car ID cannot be null");
+        }
+        if(tire == null){
+            throw new IllegalArgumentException("Tire cannot be null");
+        }
+        Car car = this.findById(carId);
         car.setTireType(tire.getType());
     }
 

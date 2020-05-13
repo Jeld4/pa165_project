@@ -29,6 +29,20 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public Long createService(ServiceCreateDTO serviceCreateDTO) {
+
+        if(serviceCreateDTO == null){
+            throw new IllegalArgumentException("Service cannot be null");
+        }
+        if(serviceCreateDTO.getName().isEmpty()){
+            throw new IllegalArgumentException("Service name cannot be empty");
+        }
+        if(serviceCreateDTO.getDescription().isEmpty()){
+            throw new IllegalArgumentException("Service description cannot be empty");
+        }
+        if(serviceCreateDTO.getPrice() == null){
+            throw new IllegalArgumentException("Service price cannot be null");
+        }
+
         Service newService = new cz.fi.muni.pa165.entity.Service();
         newService.setName(serviceCreateDTO.getName());
         newService.setDescription(serviceCreateDTO.getDescription());

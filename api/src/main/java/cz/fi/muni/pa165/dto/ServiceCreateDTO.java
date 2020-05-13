@@ -2,13 +2,14 @@ package cz.fi.muni.pa165.dto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
  * @author Radim Sasinka
  */
-public class ServiceCreateDTO {
+public class ServiceCreateDTO implements Serializable {
 
     @NotNull
     @Size(min = 3, max = 50)
