@@ -14,7 +14,6 @@ import java.util.Objects;
 @Entity
 @Table(name="Car", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class Car extends AbstractEntity{
-public class Car {
 
     private String licencePlate;
     private String model;
