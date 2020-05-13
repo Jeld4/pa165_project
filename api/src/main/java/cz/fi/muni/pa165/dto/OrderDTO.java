@@ -25,79 +25,79 @@ public class OrderDTO {
     private UserDTO user;
 
     /**
-     * get user
-     * @return user
+     * Method used to get user of the order
+     * @return user of the order
      */
     public UserDTO getUser() {
         return user;
     }
 
     /**
-     * set user
-     * @param user
+     * Method to set user of the order
+     * @param user of the order
      */
     public void setUser(UserDTO user) {
         this.user = user;
     }
 
     /**
-     * get ID
-     * @return ID
+     * Method used to get id of the order
+     * @return id of the order
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * get date of order
-     * @return date of order
+     * Method which return the date of the order
+     * @return date of the order
      */
     public Date getDateOfOrder() {
         return dateOfOrder;
     }
 
     /**
-     * get state
-     * @return state
+     * Method used to get state of the order
+     * @return state of the order
      */
     public OrderState getState() {
         return state;
     }
 
     /**
-     * get services
-     * @return services
+     * Method used to get services of the order
+     * @return services of the order
      */
     public List<ServiceDTO> getServices() {
         return services;
     }
 
     /**
-     * set services
-     * @param services
+     * Method used to set services of the order
+     * @param services of the order
      */
     public void setServices(List<ServiceDTO> services) {
         this.services = services;
     }
 
     /**
-     * get total price
-     * @return
+     * Method to get total price of the order
+     * @return total price of order
      */
     public int getTotalPrice() {
         return totalPrice;
     }
 
     /**
-     * set total price
-     * @param totalPrice
+     * Method used to set the total price of the order
+     * @param totalPrice of the order
      */
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
     /**
-     * set date of order
+     * Method to set date of the order
      * @param dateOfOrder
      */
     public void setDateOfOrder(Date dateOfOrder) {
@@ -105,32 +105,32 @@ public class OrderDTO {
     }
 
     /**
-     * set state
-     * @param state
+     * Method used to set state of the order
+     * @param state of the order
      */
     public void setState(OrderState state) {
         this.state = state;
     }
 
     /**
-     * set ID
-     * @param id
+     * Method used to set id of the order
+     * @param id of the order
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * get tires
-     * @return tires
+     * Method used to get tires included in order
+     * @return tires within the order
      */
     public List<TireDTO> getTires() {
         return tires;
     }
 
     /**
-     * set tires
-     * @param tires
+     * Method to set tires of the order
+     * @param tires of the order
      */
     public void setTires(List<TireDTO> tires) {
         this.tires = tires;

@@ -6,6 +6,9 @@ import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * @author Michal Klíma
+ */
 public class UserCreateDTO {
 	
 	@NotNull
@@ -25,82 +28,81 @@ public class UserCreateDTO {
 	private Boolean isAdmin;
 	private List<OrderDTO> orders;
 
-
 	/**
-	 * get name
-	 * @return name
+	 * Gets User's Name
+	 * @return user's name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * set name
-	 * @param name
+	 * Sets User's Name
+	 * @param name of user
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * get login
-	 * @return login
+	 * Gets User's Login
+	 * @return login of user
 	 */
 	public String getLogin() {
 		return login;
 	}
 
 	/**
-	 * set login
-	 * @param login
+	 * Sets User's Login
+	 * @param login of user
 	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	/**
-	 * get password
-	 * @return password
+	 * Gets User's Password
+	 * @return password of user
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * set password
-	 * @param password
+	 * Sets User's Password
+	 * @param password of user
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * get isAdmin
-	 * @return isAdmin
+	 * Gets User's Admin's Assess
+	 * @return wheter the user is admin
 	 */
 	public Boolean getIsAdmin() {
 		return isAdmin;
 	}
 
 	/**
-	 * set isAdmin
-	 * @param isAdmin
+	 * sets User Admin's Access
+	 * @param isAdmin wheter the user is admin
 	 */
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 
 	/**
-	 * get orders
-	 * @return orders
+	 * Gets User's orders
+	 * @return user's orders
 	 */
     public List<OrderDTO> getOrders() {
 		return orders;
 	}
 
 	/**
-	 * set orders
-	 * @param orders
+	 * Sets User's orders
+	 * @param orders of the user
 	 */
 	public void setOrders(List<OrderDTO> orders) {
 		this.orders = orders;

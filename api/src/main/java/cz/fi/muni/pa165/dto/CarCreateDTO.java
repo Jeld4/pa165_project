@@ -17,32 +17,32 @@ public class CarCreateDTO {
     private String model;
 
     /**
-     * get licence plate string
-     * @return licence plate string
+     * This method is used to get licence plate of the car
+     * @return licence plate
      */
     public String getLicencePlate() {
         return licencePlate;
     }
 
     /**
-     * set licence plate
-     * @param licencePlate
+     * This method is used to set licence plate of the car
+     * @param licencePlate to be assigned to the car
      */
     public void setLicencePlate(String licencePlate) {
         this.licencePlate = licencePlate;
     }
 
     /**
-     * get model
-     * @return model
+     * Method to get model of the car
+     * @return model of the car
      */
     public String getModel() {
         return model;
     }
 
     /**
-     * set model
-     * @param model
+     * Method used to set model of the car
+     * @param model of the car
      */
     public void setModel(String model) {
         this.model = model;

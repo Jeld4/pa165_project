@@ -3,19 +3,14 @@ package cz.fi.muni.pa165.entity;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * class representing user
  * @author Michal Klima
  */
 @Entity
-@Table(name = "\"User\"")
+@Table(name = "\"User\"", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
 public class User {
 
 	@Id
