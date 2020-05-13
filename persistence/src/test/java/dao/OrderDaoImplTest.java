@@ -60,8 +60,8 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     	order1.setState(OrderState.CONFIRMED);
     	order2.setState(OrderState.DONE);
     	
-    	order1.setTotalPrice(11250);
-    	order2.setTotalPrice(18560);
+    	order1.setTotalPrice(new BigDecimal(11250));
+    	order2.setTotalPrice(new BigDecimal(18560));
     	
     	
         Tire tire1 = new Tire();
@@ -70,8 +70,8 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         tire1.setManufacturer("Black");
         tire2.setManufacturer("White");
 
-        tire1.setPrice(3500);
-        tire2.setPrice(3400);
+        tire1.setPrice(new BigDecimal(3500));
+        tire2.setPrice(new BigDecimal(3400));
 
         tire1.setSeason("summer");
         tire2.setSeason("winter");

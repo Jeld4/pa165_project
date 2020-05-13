@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -15,7 +16,7 @@ public class TireCreateDTO {
     @NotNull
     private String type;
 
-    private int price;
+    private BigDecimal price;
 
     /**
      * Method used to get manufacturer of the tire
@@ -53,7 +54,7 @@ public class TireCreateDTO {
      * Method used to get price of the tire
      * @return price of the tire
      */
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -61,7 +62,7 @@ public class TireCreateDTO {
      * Method used to set price of hte tire
      * @param price of the tire
      */
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

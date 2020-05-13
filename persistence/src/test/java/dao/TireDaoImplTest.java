@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ public class TireDaoImplTest extends AbstractTestNGSpringContextTests {
         tire1.setSeason("winter");
         tire2.setSeason("summer");
 
-        tire1.setPrice(4500);
-        tire2.setPrice(4567);
+        tire1.setPrice(new BigDecimal(45000));
+        tire2.setPrice(new BigDecimal(4567));
 
         tire1.setSize(340);
         tire2.setSize(340);

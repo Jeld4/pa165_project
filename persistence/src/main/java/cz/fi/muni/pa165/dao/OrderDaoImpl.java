@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class OrderDaoImpl implements OrderDao {
         if (order == null) {
             throw new DataAccessException("Attempting to create null order."){};
         }
+        calculateTotalPrice(order);
         entityManager.persist(order);
     }
 
@@ -57,6 +59,7 @@ public class OrderDaoImpl implements OrderDao {
         if (order == null) {
             throw new DataAccessException("Attempting to update null order."){};
         }
+        calculateTotalPrice(order);
         entityManager.merge(order);
     }
 
@@ -99,5 +102,20 @@ public class OrderDaoImpl implements OrderDao {
         Tire tire = entityManager.find(Tire.class, tireID);
         order.getTires().add(tire);
         update(order);
+    }
+
+    @Override
+    public BigDecimal calculateTotalPrice(Order order) {
+        BigDecimal totalPrice = new BigDecimal(0);
+        for (Tire tire : order.getTires()) {
+            totalPrice.add(tire.getPrice());
+        }
+
+        for (Service service : order.getServices()) {
+            totalPrice.add(service.getPrice());
+        }
+
+        order.setTotalPrice(totalPrice);
+        return totalPrice;
     }
 }
