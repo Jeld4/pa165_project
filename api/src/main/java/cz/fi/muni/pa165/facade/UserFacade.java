@@ -36,8 +36,8 @@ public interface UserFacade {
     
 	/**
 	 * Gets user with given login
-	 * @param id
-	 * @return
+	 * @param login uesrs login
+	 * @return user by login
 	 */
 	UserDTO getUserWithLogin(String login);
 	

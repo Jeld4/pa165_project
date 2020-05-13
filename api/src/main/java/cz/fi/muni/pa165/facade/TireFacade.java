@@ -20,7 +20,7 @@ public interface TireFacade {
 
     /**
      * Deletes tire from the system
-     * @param Long tireId ID number of the tire
+     * @param tireId ID number of the tire
      */
     void deleteTire(Long tireId);
 

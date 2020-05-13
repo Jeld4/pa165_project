@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -23,7 +24,7 @@ public class Tire {
     private String type;
     private int size;
     private String season;
-    private int price;
+    private BigDecimal price;
 
     /**
      * tire nonparametric constructor
@@ -39,7 +40,7 @@ public class Tire {
      * @param season
      * @param price
      */
-    public Tire(String manufacturer, String type, int size, String season, int price) {
+    public Tire(String manufacturer, String type, int size, String season, BigDecimal price) {
         this.manufacturer = manufacturer;
         this.type = type;
         this.size = size;
@@ -131,7 +132,7 @@ public class Tire {
      * get price
      * @return price
      */
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -139,7 +140,7 @@ public class Tire {
      * set price
      * @param price
      */
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

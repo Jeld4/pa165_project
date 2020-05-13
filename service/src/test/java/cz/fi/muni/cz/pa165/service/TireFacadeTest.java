@@ -19,6 +19,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -59,30 +60,28 @@ public class TireFacadeTest extends AbstractTransactionalTestNGSpringContextTest
     void init(){
         tireCreateDTO = new TireCreateDTO();
         tireCreateDTO.setManufacturer("Michellin");
-        tireCreateDTO.setPrice(7500);
+        tireCreateDTO.setPrice(new BigDecimal(7500));
         tireCreateDTO.setType("SuperBlack");
 
         tireCreateDTO3 = new TireCreateDTO();
         tireCreateDTO3.setManufacturer("Michellin");
-        tireCreateDTO3.setPrice(7500);
+        tireCreateDTO3.setPrice(new BigDecimal(7500));
         tireCreateDTO3.setType("SuperDuper");
 
         tireCreateDTO4 = new TireCreateDTO();
         tireCreateDTO4.setManufacturer("Michellin");
-        tireCreateDTO4.setPrice(7500);
+        tireCreateDTO4.setPrice(new BigDecimal(7500));
         tireCreateDTO4.setType("SuperTrooper");
 
         tireCreateDTO2 = new TireCreateDTO();
         tireCreateDTO2.setManufacturer("Barumm");
-        tireCreateDTO2.setPrice(7500);
+        tireCreateDTO2.setPrice(new BigDecimal(7500));
         tireCreateDTO2.setType("White");
 
         tire = new Tire();
         tire.setManufacturer("Michellin");
-        tire.setPrice(7500);
+        tire.setPrice(new BigDecimal(7500));
         tire.setType("SuperBlack");
-
-
     }
 
     @AfterMethod

@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.dto;
 
 import cz.fi.muni.pa165.enums.OrderState;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +14,7 @@ public class OrderDTO {
 
     private Long id;
 
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     private Date dateOfOrder;
 
@@ -84,7 +86,7 @@ public class OrderDTO {
      * Method to get total price of the order
      * @return total price of order
      */
-    public int getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
@@ -92,7 +94,7 @@ public class OrderDTO {
      * Method used to set the total price of the order
      * @param totalPrice of the order
      */
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 

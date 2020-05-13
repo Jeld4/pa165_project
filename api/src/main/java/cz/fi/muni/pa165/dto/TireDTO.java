@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 
@@ -13,7 +14,7 @@ public class TireDTO {
     private String type;
     private int size;
     private String season;
-    private int price;
+    private BigDecimal price;
 
     /**
      * Method used to get id of the tire
@@ -59,7 +60,7 @@ public class TireDTO {
      * Method to get price of the tire
      * @return price of the tire
      */
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -107,7 +108,7 @@ public class TireDTO {
      * Method used to set price of the tire
      * @param price
      */
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
