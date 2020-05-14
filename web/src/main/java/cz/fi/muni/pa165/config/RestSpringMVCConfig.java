@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.config;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import cz.fi.muni.pa165.entity.Service;
+import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,9 +11,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.validation.Validator;
 import java.text.SimpleDateFormat;
@@ -20,9 +20,14 @@ import java.util.Locale;
 
 @EnableWebMvc
 @Configuration
-//@Import({EshopWithSampleDataConfiguration.class})
+@Import({ServiceConfiguration.class})
 @ComponentScan(basePackages = {"cz.fi.muni.pa165"})
 public class RestSpringMVCConfig implements WebMvcConfigurer {
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 
     @Bean
     public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
