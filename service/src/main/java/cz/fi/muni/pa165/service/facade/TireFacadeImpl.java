@@ -8,6 +8,7 @@ import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.TireService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * @author Jakub Malý, 456389
  */
-@org.springframework.stereotype.Service
+@Service
 @Transactional
 public class TireFacadeImpl implements TireFacade {
 
