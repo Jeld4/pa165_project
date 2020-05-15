@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.dto;
 import java.util.List;
 import java.util.Objects;
 
+import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 
 /**
@@ -17,6 +18,7 @@ public class UserDTO {
 	private Boolean isAdmin;
 	
 	private List<Order> orders;
+	private List<Car> cars;
 	
 	/**
 	 * Gets User's ID
@@ -114,6 +116,21 @@ public class UserDTO {
 		this.orders = orders;
 	}
 
+	/**
+	 * Gets User's cars
+	 * @return user's cars
+	 */
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	/**
+	 * Sets User's cars
+	 * @param orders of the user
+	 */
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}	
 
 	@Override
 	public boolean equals(Object o) {
@@ -125,12 +142,13 @@ public class UserDTO {
 				Objects.equals(login, userDTO.login) &&
 				Objects.equals(password, userDTO.password) &&
 				Objects.equals(isAdmin, userDTO.isAdmin) &&
-				Objects.equals(orders, userDTO.orders);
+				Objects.equals(orders, userDTO.orders) &&
+				Objects.equals(cars, userDTO.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, login, password, isAdmin, orders);
+		return Objects.hash(id, name, login, password, isAdmin, orders, cars);
 	}
 
 	@Override

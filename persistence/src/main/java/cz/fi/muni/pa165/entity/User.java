@@ -23,6 +23,10 @@ public class User {
 	
     @OneToMany
 	private List<Order> orders;
+    
+    @OneToMany
+	private List<Car> cars;
+
 
 	/**
 	 * user nonparametric constructor
@@ -138,6 +142,25 @@ public class User {
 		return orders;
 	}
 
+	
+
+	/**
+	 * get cars
+	 * @return orders
+	 */
+	public List<Car> getCars() {
+		return cars;
+	}
+
+
+	/**
+	 * set cars
+	 * @param cars
+	 */
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -148,11 +171,12 @@ public class User {
 				Objects.equals(login, user.login) &&
 				Objects.equals(password, user.password) &&
 				Objects.equals(isAdmin, user.isAdmin) &&
-				Objects.equals(orders, user.orders);
+				Objects.equals(orders, user.orders) &&
+				Objects.equals(cars, user.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, login, password, isAdmin, orders);
+		return Objects.hash(id, name, login, password, isAdmin, orders, cars);
 	}
 }

@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.dto;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -11,22 +12,23 @@ import javax.validation.constraints.Size;
  */
 public class UserCreateDTO {
 	
-	@NotNull
+	@NotBlank
     @Size(min = 2, max=32)	
 	private String name;
     
-    @NotNull
+	@NotBlank
     @Size(min = 8, max=32)
 	private String login;
 
     
-    @NotNull
+	@NotBlank
     @Size(min = 8, max=32)
 	private String password;
     
     
 	private Boolean isAdmin;
 	private List<OrderDTO> orders;
+	private List<CarDTO> cars;
 
 	/**
 	 * Gets User's Name
@@ -107,6 +109,22 @@ public class UserCreateDTO {
 	public void setOrders(List<OrderDTO> orders) {
 		this.orders = orders;
 	}
+	
+	/**
+	 * Gets User's cars
+	 * @return user's cars
+	 */
+    public List<CarDTO> getCars() {
+		return cars;
+	}
+
+	/**
+	 * Sets User's cars
+	 * @param cars of the user
+	 */
+	public void setCars(List<CarDTO> cars) {
+		this.cars = cars;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -117,12 +135,13 @@ public class UserCreateDTO {
 				Objects.equals(login, that.login) &&
 				Objects.equals(password, that.password) &&
 				Objects.equals(isAdmin, that.isAdmin) &&
-				Objects.equals(orders, that.orders);
+				Objects.equals(orders, that.orders) &&
+				Objects.equals(cars, that.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, login, password, isAdmin, orders);
+		return Objects.hash(name, login, password, isAdmin, orders,cars);
 	}
 
 	@Override
@@ -133,6 +152,7 @@ public class UserCreateDTO {
 				", password='" + password + '\'' +
 				", isAdmin=" + isAdmin +
 				", orders=" + orders +
+				", cars=" + cars +
 				'}';
 	}
 }
