@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -18,16 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class})
-@ComponentScan(basePackages = {"cz.fi.muni.pa165"})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.controllers", "cz.fi.muni.pa165.hateoas"})
 public class RestSpringMVCConfig implements WebMvcConfigurer {
-
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
 
     @Bean
     public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
@@ -39,6 +37,12 @@ public class RestSpringMVCConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.add(customJackson2HttpMessageConverter());
+    }
+
+    // see  http://stackoverflow.com/questions/25709672/how-to-change-hal-links-format-using-spring-hateoas
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer c) {
+        c.defaultContentType(MediaTypes.HAL_JSON);
     }
 
 

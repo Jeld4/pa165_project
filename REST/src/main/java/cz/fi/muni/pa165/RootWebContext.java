@@ -24,7 +24,7 @@ package cz.fi.muni.pa165;
 
 @EnableWebMvc
 @Configuration
-@Import({ServiceConfiguration.class, EshopWithSampleDataConfiguration.class})
+@Import({ServiceConfiguration.class})
 @ComponentScan(basePackages = {"cz.fi.muni.pa165"})
 public class RootWebContext implements WebMvcConfigurer {
 
