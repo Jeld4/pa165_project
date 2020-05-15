@@ -1,11 +1,10 @@
-package java.cz.fi.muni.pa165.config;
+package cz.fi.muni.pa165.config;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import java.cz.fi.muni.pa165.sampledata.EshopWithSampleDataConfiguration;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import cz.fi.muni.pa165.EshopWithSampleDataConfig;
+import cz.fi.muni.pa165.entity.Service;
+import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,36 +14,19 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 import javax.validation.Validator;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
-import static org.springframework.hateoas.config.EnableHypermediaSupport.HypermediaType;
-
-/**
- * Configures a REST application with HATEOAS responses using HAL format. See
- * <ul>
- * <li><a href="http://docs.spring.io/spring-hateoas/docs/current/reference/html/">Spring HATEOAS</a></li>
- * <li><a href="https://apigility.org/documentation/api-primer/halprimer">Hypertext Application Language (HAL)</a></li>
- * <li><a href="https://en.wikipedia.org/wiki/Hypertext_Application_Language">Hypertext Application Language (Wikipedia)</a></li>
- * </ul>
- * Controllers responses use the content-type "application/hal+json", the response is a JSON object
- * with "_links" property for entities, or with "_links" and "_embedded" properties for collections.
- *
- * @author Martin Kuba makub@ics.muni.cz
- */
-
-@EnableHypermediaSupport(type = HypermediaType.HAL)
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 @EnableWebMvc
 @Configuration
-@Import({EshopWithSampleDataConfiguration.class})
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.restapi.controllers", "cz.muni.fi.pa165.restapi.hateoas"})
-public class RestSpringMvcConfig implements WebMvcConfigurer {
+@Import({EshopWithSampleDataConfig.class})
+@ComponentScan(basePackages = {"cz.fi.muni.pa165.controllers", "cz.fi.muni.pa165.hateoas"})
+public class RestSpringMVCConfig implements WebMvcConfigurer {
 
     @Bean
     public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
@@ -82,6 +64,5 @@ public class RestSpringMvcConfig implements WebMvcConfigurer {
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
-
 
 }
