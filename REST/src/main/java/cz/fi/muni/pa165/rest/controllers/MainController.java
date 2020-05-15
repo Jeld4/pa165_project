@@ -23,6 +23,7 @@ public class MainController {
 
         Map<String, String> resourcesMap = new HashMap<>();
         resourcesMap.put("tire_uri", ApiUris.ROOT_URI_TIRES);
+        resourcesMap.put("order_uri", ApiUris.ROOT_URI_ORDERS);
 
         return Collections.unmodifiableMap(resourcesMap);
     }
