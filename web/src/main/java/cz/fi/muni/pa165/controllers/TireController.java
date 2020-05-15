@@ -42,8 +42,8 @@ public class TireController {
     public final HttpEntity<CollectionModel<EntityModel<TireDTO>>> getTires(){
         // log.debug("rest getProducts");
         CollectionModel<EntityModel<TireDTO>> tiresCollectionModel = tireRepresentationModelAssembler.toCollectionModel(tireFacade.getAllTires());
-        tiresCollectionModel.add(linkTo(TireController.class).withSelfRel());
-        tiresCollectionModel.add(linkTo(TireController.class).slash("/create").withRel("create"));
+        //tiresCollectionModel.add(linkTo(TireController.class).withSelfRel());
+        //tiresCollectionModel.add(linkTo(TireController.class).slash("/create").withRel("create"));
         return new ResponseEntity<>(tiresCollectionModel, HttpStatus.OK);
     }
 

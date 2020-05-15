@@ -15,6 +15,7 @@
         <module>REST</module>
         <module>UI</module>
         <module>web</module>
+        <module>sample-data</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
