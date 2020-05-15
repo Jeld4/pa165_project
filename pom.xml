@@ -15,6 +15,7 @@
         <module>REST</module>
         <module>UI</module>
         <module>web</module>
+        <module>sample-data</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,57 +23,25 @@
         <java.version>8</java.version>
     </properties>
 
-<parent>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-parent</artifactId>
-<version>2.2.4.RELEASE</version>
-<relativePath/>
-</parent>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
 
-<build>
-<pluginManagement>
-<plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-compiler-plugin</artifactId>
-<configuration>
-<compilerArgument>-Xlint:unchecked,deprecation</compilerArgument>
-</configuration>
-</plugin>
- <!--
- embedded Tomcat 9 plugin configuration, use "mvn cargo:run" to run 
--->
-<plugin>
-<groupId>org.codehaus.cargo</groupId>
-<artifactId>cargo-maven2-plugin</artifactId>
-<version>1.7.9</version>
-<configuration>
-<container>
-<containerId>tomcat9x</containerId>
-<artifactInstaller>
-<groupId>org.apache.tomcat</groupId>
-<artifactId>tomcat</artifactId>
-<version>${tomcat.version}</version>
-</artifactInstaller>
-</container>
-</configuration>
-</plugin>
- <!--
- workaround for broken OpenJDK 8u181-b13-2 on Debian/Ubuntu which causes
-                     unit tests to fail, see https://issues.apache.org/jira/browse/SUREFIRE-1588 
--->
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-surefire-plugin</artifactId>
-<configuration>
-<argLine>
--Djdk.net.URLClassPath.disableClassPathURLCheck=true
-</argLine>
-</configuration>
-</plugin>
-</plugins>
-</pluginManagement>
-</build>
+        </plugins>
+    </build>
     <packaging>pom</packaging>
 
     <dependencies>
@@ -145,36 +114,17 @@
             <artifactId>javax.el</artifactId>
             <version>3.0.1-b08</version>
         </dependency>
-<dependency>
-<groupId>net.sf.dozer</groupId>
-<artifactId>dozer</artifactId>
-<version>5.5.1</version>
-</dependency>
-<dependency>
-<groupId>org.testng</groupId>
-<artifactId>testng</artifactId>
-<version>6.14.3</version>
-</dependency>
-<dependency>
-<groupId>javax.inject</groupId>
-<artifactId>javax.inject</artifactId>
-<version>1</version>
-</dependency>
-<dependency>
-<groupId>org.apache.taglibs</groupId>
-<artifactId>taglibs-standard-impl</artifactId>
-<version>1.2.5</version>
-</dependency>
-<dependency>
-<groupId>org.apache.taglibs</groupId>
-<artifactId>taglibs-standard-spec</artifactId>
-<version>1.2.5</version>
-</dependency>
-<dependency>
-<groupId>com.sun.activation</groupId>
-<artifactId>javax.activation</artifactId>
-<version>1.2.0</version>
-</dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.6.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
 
     </dependencies>
 

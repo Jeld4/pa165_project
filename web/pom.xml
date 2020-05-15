@@ -1,164 +1,104 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<modelVersion>4.0.0</modelVersion>
-<parent>
-<groupId>cz.fi.muni.pa165</groupId>
-<artifactId>PneuServiceApp</artifactId>
-<version>1.0-SNAPSHOT</version>
-</parent>
-<artifactId>eshop-angular</artifactId>
-<packaging>war</packaging>
-<name>Web front end implemented in AngularJS and REST</name>
-<developers>
-<developer>
-<name>Martin Kuba</name>
-<email>makub@ics.muni.cz</email>
-<organization>ÚVT MU Brno</organization>
-</developer>
-</developers>
-<dependencies>
- <!--
- dependency on eshop sample data, other eshop parts are imported by transitive dependencies of this one
--->
-<dependency>
-<groupId>cz.muni.fi.pa165</groupId>
-<artifactId>eshop-sample-data</artifactId>
-<version>${project.parent.version}</version>
-</dependency>
- <!--  servlet, JSP, JSTL  -->
- <!--
- must be this instead of javaee-web for the springmvc-tests to succeed 
--->
-<dependency>
-<groupId>cz.fi.muni.pa165</groupId>
-<artifactId>api</artifactId>
-<version>${project.parent.version}</version>
-</dependency>
-<dependency>
-<groupId>cz.fi.muni.pa165</groupId>
-<artifactId>service</artifactId>
-<version>${project.parent.version}</version>
-</dependency>
-<dependency>
-<groupId>javax.servlet</groupId>
-<artifactId>servlet-api</artifactId>
-<version>2.3</version>
-<scope>provided</scope>
-</dependency>
-<dependency>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<groupId>org.apache.tomcat</groupId>
-<artifactId>tomcat-api</artifactId>
-<version>${tomcat.version}</version>
-<scope>provided</scope>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-spec</artifactId>
-    <version>1.2.5</version>
-</dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-<!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
-<dependency>
-    <groupId>org.apache.taglibs</groupId>
-    <artifactId>taglibs-standard-impl</artifactId>
-    <version>1.2.1</version>
-</dependency>
+    <groupId>cz.fi.muni.pa165</groupId>
+    <artifactId>web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
- <!--  Spring MVC  -->
-<dependency>
-<groupId>org.springframework</groupId>
-<artifactId>spring-webmvc</artifactId>
-</dependency>
-<dependency>
-<groupId>org.springframework.hateoas</groupId>
-<artifactId>spring-hateoas</artifactId>
-</dependency>
-<dependency>
-<groupId>com.jayway.jsonpath</groupId>
-<artifactId>json-path</artifactId>
-<version>${json-path.version}</version>
-</dependency>
-<dependency>
-<groupId>com.fasterxml.jackson.core</groupId>
-<artifactId>jackson-annotations</artifactId>
-</dependency>
-<dependency>
-<groupId>com.fasterxml.jackson.core</groupId>
-<artifactId>jackson-databind</artifactId>
-</dependency>
-<dependency>
-<groupId>javax.validation</groupId>
-<artifactId>validation-api</artifactId>
-</dependency>
-<dependency>
-<groupId>org.hibernate.validator</groupId>
-<artifactId>hibernate-validator</artifactId>
-</dependency>
- <!--
- must provide logging implementation, this is a runnable project 
--->
-<dependency>
-<groupId>org.springframework.boot</groupId>
-<artifactId>spring-boot-starter-logging</artifactId>
-</dependency>
- <!--  libraries needed for unit tests  -->
-<!-- https://mvnrepository.com/artifact/org.testng/testng -->
-<dependency>
-    <groupId>org.testng</groupId>
-    <artifactId>testng</artifactId>
-    <version>7.1.0</version>
-    <scope>test</scope>
-</dependency>
+    <name>web Maven Webapp</name>
+    <!-- FIXME change it to the project's website -->
+    <url>http://www.example.com</url>
 
-<dependency>
-<groupId>org.springframework</groupId>
-<artifactId>spring-test</artifactId>
-<scope>test</scope>
-</dependency>
-<dependency>
-<groupId>org.mockito</groupId>
-<artifactId>mockito-core</artifactId>
-<scope>test</scope>
-</dependency>
-</dependencies>
-<build>
- <!--  what to do when only "mvn" is run  -->
-<defaultGoal>cargo:run</defaultGoal>
- <!--
- name of the produced war and the context path in URL 
--->
-<finalName>eshop</finalName>
-<plugins>
- <!--   embedded tomcat 8  -->
-<plugin>
-<groupId>org.codehaus.cargo</groupId>
-<artifactId>cargo-maven2-plugin</artifactId>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <tomcat.version>9.0.31</tomcat.version>
+    </properties>
 
-</plugin>
- <!--
- try "mvn javadoc:javadoc" and see target/site/apidocs 
--->
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-javadoc-plugin</artifactId>
-<configuration>
-<detectLinks>false</detectLinks>
-<links>
-<link>https://javaee.github.io/javaee-spec/javadocs/</link>
-<link>
-https://docs.spring.io/spring/docs/current/javadoc-api/
-</link>
-<link>
-https://docs.spring.io/spring-hateoas/docs/current/api/
-</link>
-<link>
-https://fasterxml.github.io/jackson-annotations/javadoc/2.8/
-</link>
-<link>https://docs.oracle.com/javase/8/docs/api/</link>
-</links>
-</configuration>
-</plugin>
-</plugins>
-</build>
+    <build>
+        <plugins>
+            <!-- embedded Tomcat 9 plugin configuration, use "mvn cargo:run" to run -->
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.7.10</version>
+                <configuration>
+                    <container>
+                        <containerId>tomcat9x</containerId>
+                        <artifactInstaller>
+                            <groupId>org.apache.tomcat</groupId>
+                            <artifactId>tomcat</artifactId>
+                            <version>${tomcat.version}</version>
+                        </artifactInstaller>
+                    </container>
+                    <deployables>
+                        <deployable>
+                            <properties>
+                                <context>/pa165</context>
+                            </properties>
+                        </deployable>
+                    </deployables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>${tomcat.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.3.RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <artifactId>api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <artifactId>service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>1.0.5.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>cz.fi.muni.pa165</groupId>
+            <artifactId>sample-data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
