@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Jan Jelínek
  */
 @Entity
-@Table(name="ORDER_ITEM", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
+@Table(name="ORDER_ITEM")
 public class Order {
 
     @Id
