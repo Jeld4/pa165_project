@@ -10,7 +10,7 @@ import javax.persistence.*;
  * @author Michal Klima
  */
 @Entity
-@Table(name = "\"User\"", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
+@Table(name = "Usersss")
 public class User {
 
 	@Id

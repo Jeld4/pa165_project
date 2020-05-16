@@ -10,10 +10,13 @@ import java.util.Objects;
  * class representing car
  * @author Radim Sasinka, 456315
  */
-
 @Entity
-@Table(name="Car", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
-public class Car extends AbstractEntity{
+@Table(name = "Carsss")
+public class Car {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
 
     private String licencePlate;
     private String model;
@@ -39,6 +42,22 @@ public class Car extends AbstractEntity{
      * car nonparametric constructor
      */
     public Car() {
+    }
+
+    /**
+     * get ID
+     * @return ID
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * set ID
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**

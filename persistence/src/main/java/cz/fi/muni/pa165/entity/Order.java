@@ -16,31 +16,27 @@ import java.util.Objects;
  * @author Jan Jelínek
  */
 @Entity
-@Table(name="ORDER_ITEM")
+@Table(name = "Ordersss")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Min(0)
-    @NotNull
     private BigDecimal totalPrice;
 
-    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateOfOrder;
 
     @Enumerated
     private OrderState state;
 
     @OneToMany
-    @NotNull
     private List<Tire> tires;
     @OneToMany
     private List<Service> services;
 
     @ManyToOne(optional=false)
-    @NotNull
     private User user;
 
     /**
@@ -50,6 +46,7 @@ public class Order {
         this.dateOfOrder = new Date();
         this.tires = new ArrayList<>();
         this.services = new ArrayList<>();
+        this.state = OrderState.PENDING;
     }
 
     /**

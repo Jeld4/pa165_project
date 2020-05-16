@@ -14,12 +14,12 @@ import java.util.Objects;
  * @author Jakub Malý, 456389
  */
 @Entity
-@Table(name = "Tire", uniqueConstraints = {@UniqueConstraint(columnNames = "id")})
+@Table(name = "Tiresss")
 public class Tire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String manufacturer;
     private String type;
     private int size;
