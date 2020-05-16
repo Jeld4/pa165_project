@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 /**
@@ -18,6 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Inject
     private UserDao userDao;
+
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
 	public User findById(Long id) {
@@ -36,8 +41,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void create(User user) {
+		user.setPassword(encryptPassword(user.getPassword()));
 		userDao.createUser(user);
 		
+	}
+
+	private String encryptPassword(String password) {
+		return passwordEncoder.encode(password);
 	}
 
 	@Override
