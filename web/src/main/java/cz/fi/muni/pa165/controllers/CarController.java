@@ -30,7 +30,7 @@ import javax.validation.Valid;
  */
 
 @RestController
-@ExposesResourceFor(CarDao.class)
+@ExposesResourceFor(CarDTO.class)
 @RequestMapping("/cars")
 public class CarController {
 
