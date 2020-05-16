@@ -32,10 +32,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#!/allUsers">All users</a></li>
-                <li><a href="#!/allOrders">All orders</a></li>
-                <li><a href="#!/allServices">All services</a></li>
+                <li><a href="#!/allUsers">Users</a></li>
                 <li><a href="#!/allOrders">Orders</a></li>
+                <li><a href="#!/allServices">Services</a></li>
                 <li><a href="#!/allTires">Tires</a></li>
                 <li><a href="#!/userRegister">Register</a></li>
             </ul>
