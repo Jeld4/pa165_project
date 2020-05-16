@@ -11,8 +11,6 @@
         <module>persistence</module>
         <module>api</module>
         <module>service</module>
-        <module>security</module>
-        <module>UI</module>
         <module>web</module>
         <module>sample-data</module>
     </modules>
