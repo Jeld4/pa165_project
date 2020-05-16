@@ -13,6 +13,8 @@ pneuApp.config(['$routeProvider',
         when('/allUsers', {templateUrl: 'partials/all_users.html', controller: 'AllUsersCtrl'}).
         when('/user/:userId', {templateUrl: 'partials/user_info.html', controller: 'UserInfoCtrl'}).
         when('/userRegister', {templateUrl: 'partials/user_register.html', controller: 'UserRegisterCtrl'}).
+        when('/allOrders', {templateUrl: 'partials/all_orders.html', controller: 'AllOrdersCtrl'}).
+        when('/order/:orderId', {templateUrl: 'partials/order_info.html', controller: 'OrderInfoCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -22,7 +24,7 @@ pneuApp.config(['$routeProvider',
         //    controller: 'AdminNewCategoryCtrl'
         //}).
         otherwise({redirectTo: '/'});
-        
+
     }]);
 
 eshopControllers.controller('AllUsersCtrl',
@@ -32,6 +34,14 @@ eshopControllers.controller('AllUsersCtrl',
         console.log('AJAX loaded all users ');
     });
 	        })
+
+eshopControllers.controller('AllOrdersCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        $http.get('/pa165/api/v1/orders').then(function (response) {
+            $scope.orders = response.data['_embedded']['orderDTOList'];
+            console.log('AJAX loaded all orders ');
+        });
+    })
 
 
 pneuApp.run(function ($rootScope,$http) {
@@ -80,6 +90,22 @@ eshopControllers.controller('TireDetailCtrl',
         );
     });
 
+eshopControllers.controller('OrderInfoCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var orderId = $routeParams.orderId;
+        $http.get('/pa165/api/v1/orders/' + orderId).then(
+            function (response) {
+                console.log(response)
+                $scope.order = response.data;
+                console.log('AJAX loaded detail of order ' + $scope.order.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load order: '+response.data.message;
+            }
+        );
+    });
+
 
 eshopControllers.controller('MainPageCtrl',
 	    function ($scope, $rootScope, $routeParams, $http) {
@@ -94,24 +120,24 @@ eshopControllers.controller('UserInfoCtrl',
         // get user id from URL fragment #/user/:userId
 		var userId = $routeParams.userId;
         $http.get('/pa165/api/v1/users/' + userId).then(
-        		
+
             function (response) {
-            	
+
                 $scope.user = response.data;
                 console.log(response.data)
                 console.log('AJAX loaded detail of user ' + $scope.user.name);
             },
-            
+
             function error(response) {
                 console.log("failed to load user "+userId);
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
             },
-            
+
     		$scope.deleteUser = (user) => {
                 console.log("deleting user with id=" + user.id + ' (' + user.name + ')');
                 $http.delete(user._links.delete.href).then(
-                    
+
                     function success(response) {
                         console.log('deleted user ' + user.id + ' on server');
                         //display confirmation alert
@@ -144,9 +170,9 @@ eshopControllers.controller('UserRegisterCtrl',
 	            'login': '',
 	            'password': '',
 	            'isAdmin': false,
-	            
+
 	        };
-	       
+
 	        // function called when submit button is clicked, creates product on server
 	        $scope.create = function (user) {
 	        	console.log(user)
