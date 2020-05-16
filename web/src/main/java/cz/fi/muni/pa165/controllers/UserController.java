@@ -18,10 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerErrorException;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @ExposesResourceFor(UserDTO.class)

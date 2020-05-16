@@ -3,8 +3,6 @@ package cz.fi.muni.pa165.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.fi.muni.pa165.EshopWithSampleDataConfig;
-import cz.fi.muni.pa165.entity.Service;
-import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +12,9 @@ import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.validation.Validator;
 import java.text.SimpleDateFormat;
