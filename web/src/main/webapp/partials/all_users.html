@@ -1,51 +1,21 @@
-
-<H2> All users</H2>
-<table >
-	<tr ng-repeat="user in users track by $index">
+<H2>All users</H2>
+<table class="table">
+	<thead>
+	<tr>
+		<th scope="col">Name</th>
+		<th scope="col">Login</th>
+		<th scope="col">Is Admin</th>
+		<th scope="col">Detail</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="user in users track by $index">
+	<tr>
+		<td>{{user.name}}</td>
+		<td>{{user.login}}</td>
+		<td>{{user.isAdmin}}</td>
 		<td>
-			<table>
-			
-				<tr>
-					<td>
-						<p>Name: </p>
-					</td>
-					<td>
-						<p>{{user.name}}</p>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p>Login </p>
-					</td>
-					<td>
-						<p>{{user.login}}</p>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p>Password: </p>
-					</td>
-					<td>
-						<p>{{user.password}}</p>
-					</td>
-				</tr>
-				
-				<tr>
-					<td>
-						<p>IsAdmin</p>
-					</td>
-					<td>
-						<p>{{user.isAdmin}}</p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<a href="#!/user/{{user.id}}"> Details</a>
-					</td>
-				</tr>
-			</table>
+			<a class="btn btn-primary" target="_blank" href="#!/user/{{user.id}}">Detail</a>
 		</td>
 	</tr>
+	</tbody>
 </table>
