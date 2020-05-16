@@ -12,7 +12,6 @@
         <module>api</module>
         <module>service</module>
         <module>security</module>
-        <module>REST</module>
         <module>UI</module>
         <module>web</module>
         <module>sample-data</module>
