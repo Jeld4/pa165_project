@@ -1,0 +1,51 @@
+
+<H2> All users</H2>
+<table >
+	<tr ng-repeat="user in users track by $index">
+		<td>
+			<table>
+			
+				<tr>
+					<td>
+						<p>Name: </p>
+					</td>
+					<td>
+						<p>{{user.name}}</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p>Login </p>
+					</td>
+					<td>
+						<p>{{user.login}}</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p>Password: </p>
+					</td>
+					<td>
+						<p>{{user.password}}</p>
+					</td>
+				</tr>
+				
+				<tr>
+					<td>
+						<p>IsAdmin</p>
+					</td>
+					<td>
+						<p>{{user.isAdmin}}</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href="#!/user/{{user.id}}"> Details</a>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

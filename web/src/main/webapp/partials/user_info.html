@@ -1,0 +1,45 @@
+<H2> User info</H2>
+<h3>ID# {{user.id}}</h3>
+
+<table>
+
+	<tr>
+		<td>
+			<p>Name: </p>
+		</td>
+		<td>
+			<p>{{user.name}}</p>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<p>Login </p>
+		</td>
+		<td>
+			<p>{{user.login}}</p>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<p>Password: </p>
+		</td>
+		<td>
+			<p>{{user.password}}</p>
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<p>IsAdmin</p>
+		</td>
+		<td>
+			<p>{{user.isAdmin}}</p>
+		</td>
+	</tr>	
+</table>
+
+<div>
+	<button ng-click="deleteUser(user)" type="submit" class="btn btn-primary">Delete</button>
+</div>

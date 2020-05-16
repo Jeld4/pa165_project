@@ -58,6 +58,18 @@ public class UserServiceImpl implements UserService {
 		
 	}
 	
+	@Override
+	public void addCarToUser(Long userId, Long carId) {
+		userDao.addCar(userId, carId);
+		
+	}
+
+	@Override
+	public void removeCarFromUser(Long userId, Long carId) {
+		userDao.removeCar(userId, carId);
+		
+	}
+	
 	
 
 }

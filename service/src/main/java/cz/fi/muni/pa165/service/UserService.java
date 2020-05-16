@@ -53,4 +53,18 @@ public interface UserService {
      * @param orderId
      */
     void removeOrderFromUser(Long userId, Long orderId);
+    
+    /**
+     * add Car to user
+     * @param userId
+     * @param carId
+     */
+    void addCarToUser(Long userId, Long carId);
+  
+    /**
+     * add Car to user
+     * @param userId
+     * @param carId
+     */
+    void removeCarFromUser(Long userId, Long carId);
 }

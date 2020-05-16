@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author Jakub Malý, 456389
  */
 @Entity
-@Table(name = "Tiresss")
+@Table(name = "Tires")
 public class Tire {
 
     @Id

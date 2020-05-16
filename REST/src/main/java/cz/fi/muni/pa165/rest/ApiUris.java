@@ -6,5 +6,9 @@ package cz.fi.muni.pa165.rest;
 
 public class ApiUris {
     public static final String ROOT_URI_TIRES = "/tires";
+
     public static final String ROOT_URI_ORDERS = "/orders";
+
+    public static final String ROOT_URI_USERS = "/users";
+
 }

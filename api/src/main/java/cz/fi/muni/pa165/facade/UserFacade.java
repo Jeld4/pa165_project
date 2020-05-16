@@ -55,4 +55,20 @@ public interface UserFacade {
 	 * @param orderId
 	 */
 	void removeOrderFromUser(Long userId, Long orderId);
+	
+	/**
+	 * Adds car to user
+	 * @param userId
+	 * @param carrId
+	 */
+	void addCarToUser(Long userId, Long carId);
+	
+
+	/**
+	 * Remove car to user
+	 * @param userId
+	 * @param carId
+	 */
+	void removeCarFromUser(Long userId, Long carId);
+	
 }
