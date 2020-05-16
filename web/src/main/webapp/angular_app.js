@@ -15,6 +15,7 @@ pneuApp.config(['$routeProvider',
         when('/userRegister', {templateUrl: 'partials/user_register.html', controller: 'UserRegisterCtrl'}).
         when('/allOrders', {templateUrl: 'partials/all_orders.html', controller: 'AllOrdersCtrl'}).
         when('/order/:orderId', {templateUrl: 'partials/order_info.html', controller: 'OrderInfoCtrl'}).
+        when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -40,6 +41,14 @@ eshopControllers.controller('AllOrdersCtrl',
         $http.get('/pa165/api/v1/orders').then(function (response) {
             $scope.orders = response.data['_embedded']['orderDTOList'];
             console.log('AJAX loaded all orders ');
+        });
+    })
+
+eshopControllers.controller('AllTiresCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        $http.get('/pa165/api/v1/tires').then(function (response) {
+            $scope.tires = response.data['_embedded']['tireDTOList'];
+            console.log('AJAX loaded all tires ');
         });
     })
 
