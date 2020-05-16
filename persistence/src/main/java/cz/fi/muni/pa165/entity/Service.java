@@ -1,7 +1,6 @@
 package cz.fi.muni.pa165.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
@@ -10,8 +9,12 @@ import java.math.BigDecimal;
  */
 
 @Entity
-@Table(name = "Service")
-public class Service extends AbstractEntity{
+@Table(name = "Servicesss")
+public class Service {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String description;
@@ -21,6 +24,22 @@ public class Service extends AbstractEntity{
      * service nonparametric constructor
      */
     public Service() {
+    }
+
+    /**
+     * get ID
+     * @return ID
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * set ID
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
