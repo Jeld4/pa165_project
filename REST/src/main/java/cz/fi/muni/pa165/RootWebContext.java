@@ -1,22 +1,21 @@
 package cz.fi.muni.pa165;
 
-        import cz.fi.muni.pa165.dto.UserDTO;
-        import cz.fi.muni.pa165.service.config.ServiceConfiguration;
-        import org.springframework.context.annotation.*;
-        import org.springframework.http.converter.HttpMessageConverter;
-        import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-        import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-        import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-        import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-        import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-        import com.fasterxml.jackson.databind.DeserializationFeature;
-        import com.fasterxml.jackson.databind.ObjectMapper;
-        import com.fasterxml.jackson.databind.SerializationFeature;
-        import com.fasterxml.jackson.databind.MapperFeature;
+import cz.fi.muni.pa165.service.config.ServiceConfiguration;
+import org.springframework.context.annotation.*;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.MapperFeature;
 
-        import java.text.SimpleDateFormat;
-        import java.util.List;
-        import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * @author Radim Sasinka, 456315
