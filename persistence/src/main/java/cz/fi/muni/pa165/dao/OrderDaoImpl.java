@@ -34,8 +34,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> findAll() {
-        Query query = entityManager.createQuery("SELECT o FROM Order o");
-        return (List<Order>) query.getResultList();
+        return  entityManager.createQuery("SELECT o FROM Order o", Order.class).getResultList();
     }
 
     @Override
@@ -59,7 +58,7 @@ public class OrderDaoImpl implements OrderDao {
         if (order == null) {
             throw new DataAccessException("Attempting to update null order."){};
         }
-        calculateTotalPrice(order);
+        //calculateTotalPrice(order);
         entityManager.merge(order);
     }
 
@@ -106,13 +105,19 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public BigDecimal calculateTotalPrice(Order order) {
+        if (order == null)
+            return new BigDecimal(0);
         BigDecimal totalPrice = new BigDecimal(0);
-        for (Tire tire : order.getTires()) {
-            totalPrice.add(tire.getPrice());
+        if (order.getTires() != null) {
+            for (Tire tire : order.getTires()) {
+                totalPrice = totalPrice.add(tire.getPrice());
+            }
         }
 
-        for (Service service : order.getServices()) {
-            totalPrice.add(service.getPrice());
+        if (order.getServices() != null) {
+            for (Service service : order.getServices()) {
+                totalPrice = totalPrice.add(service.getPrice());
+            }
         }
 
         order.setTotalPrice(totalPrice);

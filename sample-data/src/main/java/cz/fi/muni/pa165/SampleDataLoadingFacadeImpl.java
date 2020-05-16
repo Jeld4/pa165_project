@@ -2,7 +2,8 @@ package cz.fi.muni.pa165;
 
 import cz.fi.muni.pa165.entity.*;
 import cz.fi.muni.pa165.enums.OrderState;
-import cz.fi.muni.pa165.service.TireService;
+import cz.fi.muni.pa165.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,12 +13,25 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Component
 @Transactional
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Autowired
     private TireService tireService;
+	
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private ServiceService serviceService;
+
+    @Autowired
+    private CarService carService;
+
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public void loadData() throws IOException {
@@ -56,14 +70,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         User jessica = user("jessica123", "jessica", "Jessica", false);
 
         Order order1 = order(pepa, tires1, services1);
-        Order order2 = order(jessica, tires2, services1);
-        Order order3 = order(pepa, tires2, null);
-        Order order4 = order(jessica, tires1, null);
-        Order order5 = order(admin, tires2, services1);
+        Order order2 = order(jessica, null, null);
+        Order order3 = order(pepa, null, null);
+        Order order4 = order(jessica, null, null);
+        Order order5 = order(admin, null, null);
 
         Car c1 = car("SUV", "SUV", "7B8 - 5670");
         Car c2 = car("truck", "Truck", "8AX - 5877");
-
     }
 
     private Tire tire(String man, String season, String type, BigDecimal price){
@@ -84,6 +97,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         user.setName(name);
         user.setIsAdmin(isAdmin);
 
+        userService.create(user);
         return user;
     }
 
@@ -95,6 +109,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         order.setTotalPrice(new BigDecimal(50));
         order.setServices(services);
 
+        orderService.create(order);
         return order;
     }
 
@@ -104,6 +119,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         car.setTireType(tireType);
         car.setLicencePlate(licencePlate);
 
+        carService.create(car);
         return car;
     }
 
@@ -113,6 +129,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         service.setDescription(description);
         service.setName(name);
 
+        serviceService.create(service);
         return service;
     }
 }

@@ -63,4 +63,16 @@ public interface UserDao {
 	 */
 	void removeOrder(Long userId, Long orderId);
 	
+	/**
+	 * Add car to User
+	 * @param o
+	 */
+	void addCar(Long userId, Long carId); 
+
+	/**
+	 * Remove car from User
+	 * @param o
+	 */
+	void removeCar(Long userId, Long carId);
+	
 }

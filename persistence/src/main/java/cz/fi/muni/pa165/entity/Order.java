@@ -16,7 +16,7 @@ import java.util.Objects;
  * @author Jan Jelínek
  */
 @Entity
-@Table(name = "Ordersss")
+@Table(name = "Orders")
 public class Order {
 
     @Id
