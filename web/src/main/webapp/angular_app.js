@@ -16,6 +16,7 @@ pneuApp.config(['$routeProvider',
         when('/allOrders', {templateUrl: 'partials/all_orders.html', controller: 'AllOrdersCtrl'}).
         when('/order/:orderId', {templateUrl: 'partials/order_info.html', controller: 'OrderInfoCtrl'}).
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
+        when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -53,6 +54,40 @@ eshopControllers.controller('AllTiresCtrl',
     })
 
 
+    eshopControllers.controller('LoginCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+    $scope.user = {
+            'name': 'BLANK',
+            'login': '',
+            'password': '',
+            'isAdmin': false,
+        };
+    
+    $scope.login = function (user) {
+    	console.log(user)
+        $http({
+            method: 'GET',
+            url: 'api/v1/login',
+            data: user
+        }).then(function success(response) {
+            $rootScope.successAlert = 'success';
+            $rootScope.logedUser = response.data; 
+            $location.path("/");
+        }, function error(response) {
+            console.log("error when creating user");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'wrong login or password';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot login user ! Reason given by the server: '+response.data.message;
+                    break;
+            }
+        });
+    };
+});
+    
 pneuApp.run(function ($rootScope,$http) {
     // alert closing functions defined in root scope to be available in every template
     $rootScope.hideSuccessAlert = function () {

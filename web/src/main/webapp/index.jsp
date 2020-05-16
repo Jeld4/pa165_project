@@ -31,12 +31,20 @@
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">Pneuservis</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#!/allUsers">All users</a></li>
-                <li><a href="#!/allOrders">Orders</a></li>
-                <li><a href="#!/allTires">Tires</a></li>
-                <li><a href="#!/userRegister">Register</a></li>
-            </ul>
+            <ul class="nav navbar-nav" ng-switch on="logedUser">
+        		<li ng-if="logedUser"><a href="#!/userRegister">Register</a></li>
+               	<li ng-if="logedUser == undefined"><a href="#!/login">login</a></li>
+    			<li ng-if="loggedUser != undefined " onclick="$scope.logedUser = undefined" >Log Out</li>
+		    
+		    <li class="dropdown" ng-if="loggedUser && loggedUser.isAdmin">
+            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+	            <ul class="dropdown-menu">
+		            <li><a href="#!/allUsers">All users</a></li>
+	                <li><a href="#!/allOrders">All orders</a></li>
+	             	<li><a href="#!/allTires">All tires</a></li>
+	            </ul>
+         	</li>
+         	</ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
