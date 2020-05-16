@@ -15,9 +15,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular-route.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/angular_app.js"></script>
+    
 </head>
 
-<body>
+<body ng-app="pneuApp">
 <!-- navigation bar -->
 <nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
@@ -31,19 +32,19 @@
             <a class="navbar-brand" href="${pageContext.request.contextPath}/">Pneuservis</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav" ng-switch on="logedUser">
-        		<li ng-if="logedUser"><a href="#!/userRegister">Register</a></li>
-               	<li ng-if="logedUser == undefined"><a href="#!/login">login</a></li>
-    			<li ng-if="loggedUser != undefined " onclick="$scope.logedUser = undefined" >Log Out</li>
+            <ul class="nav navbar-nav">
+        		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
+               	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
+    			<li ng-if="$root.logedUser != undefined " onclick="$rootScope.logedUser = undefined" ><a>Log Out</a></li>
 		    
-		    <li class="dropdown" ng-if="loggedUser && loggedUser.isAdmin">
-            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-	            <ul class="dropdown-menu">
-		            <li><a href="#!/allUsers">All users</a></li>
-	                <li><a href="#!/allOrders">All orders</a></li>
-	             	<li><a href="#!/allTires">All tires</a></li>
-	            </ul>
-         	</li>
+			    <li class="dropdown" ng-if="$root.logedUser.isAdmin">
+	            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+		            <ul class="dropdown-menu">
+			            <li><a href="#!/allUsers">All users</a></li>
+		                <li><a href="#!/allOrders">All orders</a></li>
+		             	<li><a href="#!/allTires">All tires</a></li>
+		            </ul>
+	         	</li>
          	</ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -51,7 +52,7 @@
 
 <div class="container">
 
-    <div ng-app="pneuApp"><!-- AngularJS takes care of this element -->
+    <div ><!-- AngularJS takes care of this element -->
 
         <!-- Bootstrap-styled alerts, visible when $rootScope.xxxAlert is defined -->
         <div ng-show="warningAlert" class="alert alert-warning alert-dismissible" role="alert">

@@ -68,6 +68,7 @@ eshopControllers.controller('AllTiresCtrl',
         $http({
             method: 'GET',
             url: 'api/v1/login',
+            headers: { 'Content-Type': 'application/json' },  
             data: user
         }).then(function success(response) {
             $rootScope.successAlert = 'success';
@@ -229,6 +230,7 @@ eshopControllers.controller('UserRegisterCtrl',
 	                var createdUser = response.data;
 	                //display confirmation alert
 	                $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created';
+	                $rootScope.logedUser = response.data
 	                //change view to list of products
 	                $location.path("/");
 	            }, function error(response) {
