@@ -15,6 +15,8 @@ pneuApp.config(['$routeProvider',
         when('/userRegister', {templateUrl: 'partials/user_register.html', controller: 'UserRegisterCtrl'}).
         when('/allOrders', {templateUrl: 'partials/all_orders.html', controller: 'AllOrdersCtrl'}).
         when('/order/:orderId', {templateUrl: 'partials/order_info.html', controller: 'OrderInfoCtrl'}).
+        when('/allServices', {templateUrl: 'partials/all_services.html', controller: 'AllServicesCtrl'}).
+        when('/service/:serviceId', {templateUrl: 'partials/service_info.html', controller: 'ServiceInfoCtrl'}).
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
@@ -43,6 +45,16 @@ eshopControllers.controller('AllOrdersCtrl',
             console.log('AJAX loaded all orders ');
         });
     })
+
+
+eshopControllers.controller('AllServicesCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        $http.get('/pa165/api/v1/services').then(function (response) {
+            $scope.services = response.data['_embedded']['serviceDTOList'];
+            console.log('AJAX loaded all services ');
+        });
+    })
+
 
 eshopControllers.controller('AllTiresCtrl',
     function ($scope, $rootScope, $routeParams, $http) {
@@ -111,6 +123,22 @@ eshopControllers.controller('OrderInfoCtrl',
             function error(response) {
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load order: '+response.data.message;
+            }
+        );
+    });
+
+eshopControllers.controller('ServiceInfoCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var serviceId = $routeParams.serviceId;
+        $http.get('/pa165/api/v1/services/' + serviceId).then(
+            function (response) {
+                console.log(response)
+                $scope.service = response.data;
+                console.log('AJAX loaded detail of service ' + $scope.service.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load service: '+response.data.message;
             }
         );
     });

@@ -1,0 +1,51 @@
+
+<H2> All services</H2>
+<table >
+    <tr ng-repeat="service in services track by $index">
+        <td>
+            <table>
+
+                <tr>
+                    <td>
+                        <p>Id: </p>
+                    </td>
+                    <td>
+                        <p>{{service.id}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Name: </p>
+                    </td>
+                    <td>
+                        <p>{{service.name}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Description: </p>
+                    </td>
+                    <td>
+                        <p>{{service.description}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Price: </p>
+                    </td>
+                    <td>
+                        <p>{{service.price}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#!/service/{{service.id}}"> Details</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
