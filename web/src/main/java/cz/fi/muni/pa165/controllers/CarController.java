@@ -61,9 +61,9 @@ public class CarController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<CarDTO>> createUser(@RequestBody @Valid CarCreateDTO car, BindingResult bindingResult){
+    public final HttpEntity<EntityModel<CarDTO>> createCar(@RequestBody @Valid CarCreateDTO car, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
-            throw new InvalidRequestException("Failed validation during user creating");
+            throw new InvalidRequestException("Failed validation during car creating");
         }
 
         Long id = carFacade.createCar(car);

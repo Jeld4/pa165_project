@@ -72,7 +72,7 @@ public class ServiceController {
         try {
             serviceFacade.deleteService(id);
         } catch (IllegalArgumentException ex) {
-            throw new ResourceNotFoundException("Car with id " + id + " cannot be found.");
+            throw new ResourceNotFoundException("Service with id " + id + " cannot be found.");
         }
     }
 }
