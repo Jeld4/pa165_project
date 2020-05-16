@@ -33,6 +33,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#!/allUsers">All users</a></li>
+                <li><a href="#!/allOrders">All orders</a></li>
                 <li><a href="#!/userRegister">Register</a></li>
             </ul>
         </div><!--/.nav-collapse -->

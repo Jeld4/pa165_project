@@ -1,0 +1,45 @@
+<H2> Order info</H2>
+<h3>ID# {{order.id}}</h3>
+
+<table>
+
+    <tr>
+        <td>
+            <p>Id: </p>
+        </td>
+        <td>
+            <p>{{order.id}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Date of order: </p>
+        </td>
+        <td>
+            <p>{{order.dateOfOrder}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>State: </p>
+        </td>
+        <td>
+            <p>{{order.state}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Total price: </p>
+        </td>
+        <td>
+            <p>{{order.totalPrice}}</p>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <button ng-click="removeOrder(order)" type="submit" class="btn btn-primary">Delete</button>
+</div>

@@ -1,0 +1,51 @@
+
+<H2> All orders</H2>
+<table >
+    <tr ng-repeat="order in orders track by $index">
+        <td>
+            <table>
+
+                <tr>
+                    <td>
+                        <p>Id: </p>
+                    </td>
+                    <td>
+                        <p>{{order.id}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Date of order: </p>
+                    </td>
+                    <td>
+                        <p>{{order.dateOfOrder}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>State: </p>
+                    </td>
+                    <td>
+                        <p>{{order.state}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <p>Total price: </p>
+                    </td>
+                    <td>
+                        <p>{{order.totalPrice}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#!/order/{{order.id}}"> Details</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
