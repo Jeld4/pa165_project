@@ -65,6 +65,7 @@ public class ServiceFacadeImpl implements ServiceFacade {
 
     @Override
     public ServiceDTO getServiceWithId(Long id) {
-        return beanMappingService.mapTo(serviceService.findById(id), ServiceDTO.class);
+        Service service = serviceService.findById(id);
+        return (service == null) ? null : beanMappingService.mapTo(serviceService.findById(id), ServiceDTO.class);
     }
 }
