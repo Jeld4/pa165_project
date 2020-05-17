@@ -1,0 +1,68 @@
+<H2>User profile</H2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Login</th>
+        <th scope="col">Is Admin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.isAdmin}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<H3>Orders</H3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">State</th>
+        <th scope="col">Date</th>
+        <th scope="col">Price</th>
+        <th scope="col">Cancel</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="order in orders track by $index">
+    <tr>
+        <td>{{order.state}}</td>
+        <td>{{order.dateOfOrder}}</td>
+        <td>{{order.totalPrice}}</td>
+        <td>
+            <button ng-click="deleteOrder(order)" type="submit" class="btn btn-primary">Cancel</button>
+        </td>
+        <td>
+            <a class="btn btn-primary" target="_blank" href="#!/order/{{order.id}}">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<H3>Cars</H3>
+
+<td>
+    <a class="btn btn-primary" target="_blank" href="#!/createCar">Add car</a>
+</td>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Licence plate</th>
+        <th scope="col">Model</th>
+        <th scope="col">Tire type</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="car in cars track by $index">
+    <tr>
+        <td>{{car.licencePlate}}</td>
+        <td>{{car.model}}</td>
+        <td>{{car.tireType}}</td>
+    </tr>
+    </tbody>
+</table>

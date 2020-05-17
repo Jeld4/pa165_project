@@ -40,8 +40,11 @@ public class Order {
     @OneToMany
     private List<Service> services;
 
-    @ManyToOne(optional=false)
+    @ManyToOne
     private User user;
+
+    @OneToOne
+    private Car car;
 
     /**
      * order nonparametric constructor
@@ -51,6 +54,14 @@ public class Order {
         this.tires = new ArrayList<>();
         this.services = new ArrayList<>();
         this.state = OrderState.PENDING;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     /**

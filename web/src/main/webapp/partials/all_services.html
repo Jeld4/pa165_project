@@ -6,6 +6,7 @@
         <th scope="col">Description</th>
         <th scope="col">Price</th>
         <th scope="col">Detail</th>
+        <th scope="col">Edit</th>
     </tr>
     </thead>
     <tbody ng-repeat="service in services track by $index">
@@ -15,6 +16,9 @@
         <td>{{service.price}}</td>
         <td>
             <a class="btn btn-primary" target="_blank" href="#!/service/{{service.id}}">Detail</a>
+        </td>
+        <td>
+            <a class="btn btn-primary" target="_blank" href="#!/service/{{service.id}}">Edit</a>
         </td>
     </tr>
     </tbody>

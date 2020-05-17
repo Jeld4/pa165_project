@@ -1,0 +1,17 @@
+<H2>All cars</H2>
+<table class="table">
+	<thead>
+	<tr>
+		<th scope="col">Licence plate</th>
+		<th scope="col">Model</th>
+		<th scope="col">Tire type</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="car in cars track by $index">
+	<tr>
+		<td>{{car.licencePlate}}</td>
+		<td>{{car.model}}</td>
+		<td>{{car.tireType}}</td>
+	</tr>
+	</tbody>
+</table>

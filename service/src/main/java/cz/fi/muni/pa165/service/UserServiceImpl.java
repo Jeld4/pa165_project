@@ -55,18 +55,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void addOrderToUser(Long userId, Long orderId) {
-		userDao.addOrder(userId, orderId);
-		
-	}
-
-	@Override
-	public void removeOrderFromUser(Long userId, Long orderId) {
-		userDao.removeOrder(userId, orderId);
-		
-	}
-	
-	@Override
 	public void addCarToUser(Long userId, Long carId) {
 		userDao.addCar(userId, carId);
 		

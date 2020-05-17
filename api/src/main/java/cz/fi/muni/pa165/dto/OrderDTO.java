@@ -26,6 +26,16 @@ public class OrderDTO {
 
     private UserDTO user;
 
+    private CarDTO car;
+
+    public CarDTO getCar() {
+        return car;
+    }
+
+    public void setCar(CarDTO car) {
+        this.car = car;
+    }
+
     /**
      * Method used to get user of the order
      * @return user of the order

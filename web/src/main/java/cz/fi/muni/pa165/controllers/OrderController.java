@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerErrorException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @ExposesResourceFor(OrderDTO.class)
@@ -42,10 +43,10 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<OrderDTO>> getUser(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> getOrder(@PathVariable("id") long id) throws Exception {
 
         OrderDTO orderDTO = orderFacade.getOrderById(id);
-        if (orderDTO == null) throw new ResourceNotFoundException("user " + id + " not found");
+        if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
         EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
@@ -58,7 +59,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteUser(@PathVariable("id") long id) throws Exception {
+    public final void deleteOrder(@PathVariable("id") long id) throws Exception {
         try {
             orderFacade.removeOrder(id);
         } catch (IllegalArgumentException ex) {
@@ -70,6 +71,18 @@ public class OrderController {
             }
             throw new ServerErrorException(rootCause.getMessage());
         }
+    }
+
+    @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
+    public final HttpEntity<CollectionModel<EntityModel<OrderDTO>>> getOrdersByUser(@PathVariable("id") long id) throws Exception {
+
+        List<OrderDTO> ordersListDTO = orderFacade.getOrdersByUser(id);
+
+        if (ordersListDTO == null) throw new ResourceNotFoundException("orders " + id + " not found");
+
+        CollectionModel<EntityModel<OrderDTO>> ordersCollectionModel = orderRepresentationModelAssembler.toCollectionModel(ordersListDTO);
+
+        return new ResponseEntity<>(ordersCollectionModel, HttpStatus.OK);
     }
 
 }
