@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.controllers;
 
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
+import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
@@ -49,6 +50,12 @@ public class OrderController {
         EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
+    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) throws Exception {
+
+        Long id = orderFacade.createOrder(order,userLogin);
+        return HttpStatus.OK;
 
     @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
