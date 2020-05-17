@@ -87,4 +87,7 @@ public class OrderFacadeImpl implements OrderFacade {
         orderService.remove(orderService.findById(id));
     }
 
+    @Override
+    public void confirmOrder(Long id) {orderService.confirm(orderService.findById(id)); }
+
 }
