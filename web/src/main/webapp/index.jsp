@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
+<%= request.getSession().getAttribute("currentUserId") %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>

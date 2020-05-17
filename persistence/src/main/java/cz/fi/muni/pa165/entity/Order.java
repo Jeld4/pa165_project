@@ -36,7 +36,7 @@ public class Order {
     @OneToMany
     private List<Service> services;
 
-    @ManyToOne(optional=false)
+    @ManyToOne
     private User user;
 
     /**

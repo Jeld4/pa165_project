@@ -42,21 +42,6 @@ public interface UserFacade {
 	UserDTO getUserWithLogin(String login);
 	
 	/**
-	 * Adds order to user
-	 * @param userId
-	 * @param orderId
-	 */
-	void addOrderToUser(Long userId, Long orderId);
-	
-
-	/**
-	 * Remove order to user
-	 * @param userId
-	 * @param orderId
-	 */
-	void removeOrderFromUser(Long userId, Long orderId);
-	
-	/**
 	 * Adds car to user
 	 * @param userId
 	 * @param carrId

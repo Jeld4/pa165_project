@@ -13,8 +13,9 @@ public interface OrderService {
     /**
      * Creates order in the system
      * @param order to be created
+     * @param userLogin user login
      */
-    void create(Order order);
+    void create(Order order, String userLogin);
 
     /**
      * Removes car from the system
@@ -36,7 +37,7 @@ public interface OrderService {
     List<Order> findAll();
 
     /**
-     * Returns order with belongs to the user
+     * Returns order witch belongs to the user
      * @param user which order we want to find
      * @return user´s order
      */

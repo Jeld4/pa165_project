@@ -18,6 +18,7 @@ pneuApp.config(['$routeProvider',
         when('/allServices', {templateUrl: 'partials/all_services.html', controller: 'AllServicesCtrl'}).
         when('/service/:serviceId', {templateUrl: 'partials/service_info.html', controller: 'ServiceInfoCtrl'}).
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
+        when('/user/profile/:userId', {templateUrl: 'partials/user_profile.html', controller: 'UserProfileCtrl'}).
         when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
@@ -311,4 +312,24 @@ eshopControllers.controller('UserRegisterCtrl',
 	        };
 	    });
 
+eshopControllers.controller('UserProfileCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        // get user id from URL fragment #/user/:userId
+        var userId = $routeParams.userId;
+        $http.get('/pa165/api/v1/users/' + userId).then(
+
+            function (response) {
+
+                $scope.user = response.data;
+                console.log(response.data)
+                console.log('AJAX loaded detail of user ' + $scope.user.name);
+            },
+
+            function error(response) {
+                console.log("failed to load user "+userId);
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
+            }
+        );
+    });
 

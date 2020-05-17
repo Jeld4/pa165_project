@@ -1,9 +1,11 @@
 package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.OrderDao;
+import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -18,9 +20,24 @@ public class OrderServiceImpl implements OrderService {
     @Inject
     private OrderDao orderDao;
 
+    @Inject
+    private UserDao userDao;
+
     @Override
-    public void create(Order order) {
+    public void create(Order order, String userLogin) {
+        User user = userDao.getUserByLogin(userLogin);
+        order.setUser(user);
         orderDao.create(order);
+
+        /*
+        List<Order> orders = null;
+        orders = user.getOrders();
+        orders.add(order);
+        user.setOrders(orders);
+        userDao.updateUser(user);
+        
+         */
+
     }
 
     @Override
@@ -35,7 +52,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
-        return orderDao.findAll();
+        List<Order> orders = null;
+        try {
+            orders = orderDao.findAll();
+        } catch (DataAccessException ex){
+            throw new RuntimeException(ex);
+        }
+        return orders;
     }
 
     @Override
