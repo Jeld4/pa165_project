@@ -161,23 +161,6 @@ pneuApp.run(function ($rootScope,$http) {
 /*
  * Product detail page
  */
-eshopControllers.controller('TireDetailCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
-        // get user id from URL fragment #/user/:userId
-        $http.get('/pa165/api/v1/tires/1').then(
-            function (response) {
-            	console.log(response)
-                $scope.user = response.data;
-                console.log('AJAX loaded detail of user ' + $scope.user.name);
-            },
-            function error(response) {
-                //console.log("failed to load user "+userId);
-                console.log(response);
-                $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
-            }
-        );
-    });
-
 eshopControllers.controller('OrderInfoCtrl',
     function ($scope, $rootScope, $routeParams, $http) {
         var orderId = $routeParams.orderId;
