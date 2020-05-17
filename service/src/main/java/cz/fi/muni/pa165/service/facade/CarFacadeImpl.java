@@ -88,4 +88,12 @@ public class CarFacadeImpl implements CarFacade {
                 , beanMappingService.mapTo(tire, Tire.class));
 
     }
+
+    @Override
+    public List<CarDTO> getCarsByUser(Long userId) {
+
+        List<Car> cars = carService.getCarsByUser(userId);
+
+        return beanMappingService.mapTo(cars, CarDTO.class);
+    }
 }

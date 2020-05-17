@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.facade;
 
 import java.util.List;
 
+import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
 
@@ -75,5 +76,7 @@ public interface OrderFacade {
      * @param serviceId id of the service
      */
     void addServiceToOrder(Long orderId, Long serviceId);
+
+    CarDTO getOrderCar(Long orderId);
 
 }

@@ -1,7 +1,9 @@
 package cz.fi.muni.pa165.service.facade;
 
+import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
+import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.facade.OrderFacade;
@@ -49,6 +51,12 @@ public class OrderFacadeImpl implements OrderFacade {
     @Override
     public void addServiceToOrder(Long orderId, Long serviceId) {
         orderService.addServiceToOrder(orderId, serviceId);
+    }
+
+    @Override
+    public CarDTO getOrderCar(Long orderId) {
+        Car car = orderService.getOrderCar(orderId);
+        return beanMappingService.mapTo(car, CarDTO.class);
     }
 
     @Override

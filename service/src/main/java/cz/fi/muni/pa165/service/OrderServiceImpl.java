@@ -1,7 +1,10 @@
 package cz.fi.muni.pa165.service;
 
+import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dao.OrderDao;
 import cz.fi.muni.pa165.dao.UserDao;
+import cz.fi.muni.pa165.dto.CarDTO;
+import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
@@ -22,6 +25,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Inject
     private UserDao userDao;
+
+    @Inject
+    private CarDao carDao;
 
     @Override
     public void create(Order order, String userLogin) {
@@ -84,6 +90,12 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void addServiceToOrder(Long orderId, Long serviceId) {
         orderDao.addService(orderId, serviceId);
+    }
+
+    @Override
+    public Car getOrderCar(Long orderId) {
+        Order order = orderDao.findById(orderId);
+        return carDao.findById(order.getCar().getId());
     }
 
     @Override
