@@ -1,4 +1,4 @@
-<H2> All services</H2>
+<H2> Selected services</H2>
 <table class="table">
     <thead>
     <tr>
@@ -15,6 +15,28 @@
         <td>{{service.price}}</td>
         <td>
             <a class="btn btn-primary" target="_blank" href="#!/service/{{service.id}}">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<H2> Selected orders</H2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">State</th>
+        <th scope="col">Date</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="order in orders track by $index">
+    <tr>
+        <td>{{order.state}}</td>
+        <td>{{order.dateOfOrder}}</td>
+        <td>{{order.totalPrice}}</td>
+        <td>
+            <a class="btn btn-primary" target="_blank"  >Remove</a>
         </td>
     </tr>
     </tbody>

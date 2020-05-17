@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.controllers;
 
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
+import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
@@ -49,14 +50,14 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) throws Exception{
-        if(bindingResult.hasErrors()) {
+    @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
+    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order, BindingResult bindingResult) throws Exception {
+       
+        if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
         }
-        Long id = orderFacade.createOrder(order, user.getLogin());
-        EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderFacade.getOrderById(id));
-        return new ResponseEntity<>(orderModel, HttpStatus.OK);
+        Long id = orderFacade.createOrder(order,userLogin);
+        return HttpStatus.OK;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

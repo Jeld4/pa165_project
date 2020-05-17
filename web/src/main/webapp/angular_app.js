@@ -20,6 +20,7 @@ pneuApp.config(['$routeProvider',
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
         when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
+        when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -44,6 +45,7 @@ eshopControllers.controller('AllOrdersCtrl',
     function ($scope, $rootScope, $routeParams, $http) {
         $http.get('/pa165/api/v1/orders').then(function (response) {
             $scope.orders = response.data['_embedded']['orderDTOList'];
+            console.log($scope.orders )
             console.log('AJAX loaded all orders ');
         });
     })
@@ -310,5 +312,75 @@ eshopControllers.controller('UserRegisterCtrl',
 	            });
 	        };
 	    });
+
+eshopControllers.controller('CreateOrderCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+	        //set object bound to form fields
+	        $scope.order = {
+	            'user': $rootScope.logedUser,
+	            'dateOfOrder': new Date(),
+	            'state': "PENDING",
+	            'tires': [],
+	            'services': [],
+	        };
+	     
+	        
+	        $http.get('/pa165/api/v1/tires').then(function (response) {
+	            $scope.tires = response.data['_embedded']['tireDTOList'];
+	            console.log('AJAX loaded all tires ');
+	        });
+	        
+	        $http.get('/pa165/api/v1/services').then(function (response) {
+	            $scope.services = response.data['_embedded']['serviceDTOList'];
+	            console.log('AJAX loaded all services ');
+	        });
+	        
+	        $scope.create = (order) => {
+	        	console.log(order)
+	        	$http({
+		                method: 'POST',
+		                url: 'api/v1/orders/create/' + $rootScope.logedUser.login,
+		                data: order,
+		                headers: { 'Content-Type': 'application/hal+json' }
+		            }).then(function success(response) {
+		                console.log('created order');
+		                var createdUser = response.data;
+		                //display confirmation alert
+		                $rootScope.successAlert = 'A new order was created';
+		                $location.path("/");
+		                
+		            }, function error(response) {
+		                //display error
+		                console.log("error when creating order");
+		                console.log(response);
+		                switch (response.data.code) {
+		                    case 'InvalidRequestException':
+		                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+		                        break;
+		                    default:
+		                        $rootScope.errorAlert = 'Cannot create order ! Reason given by the server: '+response.data.message;
+		                        break;
+		                }
+		            });
+	        	}
+	        
+	        
+	        $scope.addService = (service) => {
+	        	$scope.order.services.push(service)
+	        }
+
+	        $scope.addTire = (tire) => {
+	        	$scope.order.tires.push(tire)
+	        }
+	        
+	        $scope.removeService = (service) => {
+	        	$scope.order.services = $scope.order.services.filter(ser => {return ser.id != service.id})
+	        }   
+	        $scope.removeTire = (tire) => {
+	        	$scope.order.tires = $scope.order.tires.filter(tir => {return tir.id != tire.id})
+	        }
+	   }
+	)
+
 
 
