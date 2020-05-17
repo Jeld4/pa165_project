@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.controllers;
 
+import cz.fi.muni.pa165.config.RestSpringMVCConfig;
 import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.exceptions.InvalidRequestException;
@@ -7,6 +8,7 @@ import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.UserRepresentationModelAssembler;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/login")
+@Import(RestSpringMVCConfig.class)
 public class LoginController {
 
     private UserFacade userFacade;
@@ -37,17 +40,16 @@ public class LoginController {
         this.userRepresentationModelAssembler = userRepresentationModelAssembler;
     }
 
-    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<UserDTO>> login(@RequestBody @Valid UserCreateDTO userCreateDTO, BindingResult bindingResult){
+    @RequestMapping(method = RequestMethod.POST)
+    public final HttpStatus login(@RequestBody UserCreateDTO userCreateDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation during user login validation");
         }
         UserDTO foundUser = userFacade.getUserWithLogin(userCreateDTO.getLogin());
         if (foundUser != null && DigestUtils.md2Hex(userCreateDTO.getPassword()).equals(foundUser.getPassword())){
-            EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(foundUser);
-            return new ResponseEntity<>(userModel, HttpStatus.OK);
+            return HttpStatus.OK;
         }else{
-            return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+            return HttpStatus.FORBIDDEN;
         }
     }
 }
