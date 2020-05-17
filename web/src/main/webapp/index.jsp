@@ -46,6 +46,7 @@
 		                <li><a href="#!/allOrders">All orders</a></li>
 		             	<li><a href="#!/allTires">All tires</a></li>
                         <li><a href="#!/allServices">All services</a></li>
+                        <li><a href="#!/allCars">All cars</a></li>
 		            </ul>
 	         	</li>
          	</ul>
