@@ -50,7 +50,7 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/confirm", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
@@ -58,7 +58,7 @@ public class OrderController {
         EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
-    @RequestMapping(value = "/{id}/cancel", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/cancel", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
@@ -67,7 +67,7 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}/finish", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}/finish", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> finishOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
