@@ -7,6 +7,7 @@
             <th scope="col">Size</th>
             <th scope="col">Season</th>
             <th scope="col">Price</th>
+            <th scope="col">Detail</th>
         </tr>
     </thead>
     <tbody ng-repeat="tire in tires track by $index">
@@ -16,6 +17,9 @@
             <td>{{tire.size}}</td>
             <td>{{tire.season}}</td>
             <td>{{tire.price}}</td>
+            <td>
+                <a class="btn btn-primary" target="_blank" href="#!/tire/{{tire.id}}">Detail</a>
+            </td>
         </tr>
     </tbody>
 </table>
