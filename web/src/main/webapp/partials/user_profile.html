@@ -28,7 +28,7 @@
         <th scope="col">Detail</th>
     </tr>
     </thead>
-    <tbody ng-repeat="order in user.orders track by $index">
+    <tbody ng-repeat="order in orders track by $index">
     <tr>
         <td>{{order.state}}</td>
         <td>{{order.dateOfOrder}}</td>

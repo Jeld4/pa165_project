@@ -317,19 +317,22 @@ eshopControllers.controller('UserProfileCtrl',
         // get user id from URL fragment #/user/:userId
         var userId = $routeParams.userId;
         $http.get('/pa165/api/v1/users/' + userId).then(
-
             function (response) {
-
                 $scope.user = response.data;
                 console.log(response.data)
                 console.log('AJAX loaded detail of user ' + $scope.user.name);
             },
-
             function error(response) {
                 console.log("failed to load user "+userId);
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
-            }
+            }, $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
+                function (response) {
+                    $scope.orders = response.data;
+                    console.log(response.data)
+                    console.log('AJAX loaded user orders');
+                }
+            )
         );
     });
 
