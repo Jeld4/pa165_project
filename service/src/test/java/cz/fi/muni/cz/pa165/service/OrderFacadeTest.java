@@ -172,7 +172,8 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     public void getOrdersByUser() {
 
         Long orderId = orderFacade.createOrder(order1, user1.getLogin());
-        assert (orderFacade.getOrdersByUser(userId).size() == 1);
+        orderFacade.createOrder(order2, user1.getLogin());
+        assert (orderFacade.getOrdersByUser(userId).size() == 2);
     }
 
 

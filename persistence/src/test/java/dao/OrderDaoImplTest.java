@@ -156,6 +156,17 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         AssertJUnit.assertEquals(orderDao.findById(order3.getId()),order3);
     }
 
+    @Test
+    public void findByUser() {
+        User user = new User();
+        userDao.createUser(user);
+        Order order = new Order();
+        order.setUser(user);
+        orderDao.create(order);
+
+        assert(orderDao.findByUser(user).size() == 1);
+    }
+
     @Test(expectedExceptions = DataAccessException.class)
     public void createNullOrder() {
         orderDao.create(null);
