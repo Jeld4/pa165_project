@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.config;
 
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import cz.fi.muni.pa165.EshopWithSampleDataConfig;
 import org.springframework.context.annotation.Bean;
@@ -54,6 +55,7 @@ public class RestSpringMVCConfig implements WebMvcConfigurer {
         //configuring mapper for HAL
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH));
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
     }
 

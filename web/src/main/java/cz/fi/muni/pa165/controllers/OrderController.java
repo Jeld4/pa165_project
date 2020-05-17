@@ -51,11 +51,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
-    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order, BindingResult bindingResult) throws Exception {
-       
-        if (bindingResult.hasErrors()) {
-            throw new InvalidRequestException("Failed validation");
-        }
+    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) throws Exception {
+
         Long id = orderFacade.createOrder(order,userLogin);
         return HttpStatus.OK;
     }
