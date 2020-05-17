@@ -36,6 +36,7 @@
         		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
                	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
     			<li ng-if="$root.logedUser != undefined " ng-click="logout()" ><a>Log Out</a></li>
+		    	<li ng-if="$root.logedUser != undefined "><a href="#!/user/{{logedUser.id}}">User info</a></li>
 		    
 			    <li class="dropdown" ng-if="$root.logedUser.isAdmin == true">
 	            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
