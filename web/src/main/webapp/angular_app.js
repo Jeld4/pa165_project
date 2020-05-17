@@ -23,9 +23,10 @@ pneuApp.config(['$routeProvider',
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
 
         when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
+
         when('/tire/edit:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
-        when('/service//edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
-        when('/user//edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
+        when('/service/edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user/edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
@@ -429,44 +430,6 @@ eshopControllers.controller('CreateOrderCtrl',
 	)
 
 
-eshopControllers.controller('CarRegisterCtrl',
-    function ($scope, $routeParams, $http, $location, $rootScope) {
-        //set object bound to form fields
-        $scope.car = {
-            'licencePlate': '',
-            'model': '',
-        };
-
-        // function called when submit button is clicked, creates product on server
-        $scope.create = function (car) {
-            console.log(car)
-            $http({
-                method: 'POST',
-                url: 'api/v1/cars/create/' + $rootScope.logedUser.id,
-                data: car
-            }).then(function success(response) {
-                console.log('created car');
-                var createdCar = response.data;
-                //display confirmation alert
-                $rootScope.successAlert = 'A new car "' + createdCar.licencePlate + '" was created';
-                $rootScope.logedUser = response.data
-                //change view to list of products
-                $location.path("/");
-            }, function error(response) {
-                //display error
-                console.log("error when creating user");
-                console.log(response);
-                switch (response.data.code) {
-                    case 'InvalidRequestException':
-                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
-                        break;
-                    default:
-                        $rootScope.errorAlert = 'Cannot create car ! Reason given by the server: '+response.data.message;
-                        break;
-                }
-            });
-        };
-    });
 
 eshopControllers.controller('CarRegisterCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
@@ -474,7 +437,6 @@ eshopControllers.controller('CarRegisterCtrl',
         $scope.car = {
             'licencePlate': '',
             'model': '',
-            'tireType': '',
         };
 
         // function called when submit button is clicked, creates product on server
@@ -489,7 +451,6 @@ eshopControllers.controller('CarRegisterCtrl',
                 var createdCar = response.data;
                 //display confirmation alert
                 $rootScope.successAlert = 'A new user "' + createdCar.licencePlate + '" was created';
-                $rootScope.logedUser = response.data
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -532,7 +493,9 @@ eshopControllers.controller('UserProfileCtrl',
                         console.log('deleted order ' + order.id + ' on server');
                         //display confirmation alert
                         $rootScope.successAlert = 'Deleted order';
+
                         $scope.user.orders = $scope.user.orders.filter( ord => {return ord.id != order.id})
+
                     },
                     function error(response) {
                         console.log("error when deleting user");
