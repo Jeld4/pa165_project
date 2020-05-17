@@ -25,6 +25,7 @@ pneuApp.config(['$routeProvider',
         when('/service/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
         when('/user/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
+        when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -371,6 +372,46 @@ eshopControllers.controller('UserRegisterCtrl',
 	            });
 	        };
 	    });
+
+eshopControllers.controller('CarRegisterCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        $scope.car = {
+            'licencePlate': '',
+            'model': '',
+            'tireType': '',
+        };
+
+        // function called when submit button is clicked, creates product on server
+        $scope.create = function (car) {
+            console.log(car)
+            $http({
+                method: 'POST',
+                url: 'api/v1/cars/create/' + $rootScope.logedUser.id,
+                data: car
+            }).then(function success(response) {
+                console.log('created car');
+                var createdCar = response.data;
+                //display confirmation alert
+                $rootScope.successAlert = 'A new user "' + createdCar.licencePlate + '" was created';
+                $rootScope.logedUser = response.data
+                //change view to list of products
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating user");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create car ! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
 
 eshopControllers.controller('UserProfileCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {

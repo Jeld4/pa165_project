@@ -3,9 +3,11 @@ package cz.fi.muni.pa165.controllers;
 import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dto.CarCreateDTO;
 import cz.fi.muni.pa165.dto.CarDTO;
+import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.CarFacade;
+import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.CarRepresentationModelAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerErrorException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Radim Sasinka, 456315
@@ -36,6 +39,7 @@ public class CarController {
 
     private CarFacade carFacade;
     private CarRepresentationModelAssembler carRepresentationModelAssembler;
+    private UserFacade userFacade;
 
     public CarController(@Autowired CarFacade carFacade,
                          @Autowired CarRepresentationModelAssembler carRepresentationModelAssembler) {
@@ -68,6 +72,20 @@ public class CarController {
 
         Long id = carFacade.createCar(car);
         EntityModel<CarDTO> carModel = carRepresentationModelAssembler.toModel(carFacade.getCarWithId(id));
+        return new ResponseEntity<>(carModel, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/create/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public final HttpEntity<EntityModel<CarDTO>> createCarByCustomer(@RequestBody @Valid CarCreateDTO car, @PathVariable("id") long id, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InvalidRequestException("Failed validation during car creating");
+        }
+
+        UserDTO user = userFacade.getUserWithId(id);
+
+        Long carId = carFacade.createCar(car);
+        userFacade.addCarToUser(user.getId(), carId);
+        EntityModel<CarDTO> carModel = carRepresentationModelAssembler.toModel(carFacade.getCarWithId(carId));
         return new ResponseEntity<>(carModel, HttpStatus.OK);
     }
 
