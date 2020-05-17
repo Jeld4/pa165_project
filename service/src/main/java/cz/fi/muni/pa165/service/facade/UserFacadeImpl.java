@@ -61,18 +61,6 @@ public class UserFacadeImpl implements UserFacade {
 	}
 
 	@Override
-	public void addOrderToUser(Long userId, Long orderId) {
-		userService.addOrderToUser(userId, orderId);
-		
-	}
-
-	@Override
-	public void removeOrderFromUser(Long userId, Long orderId) {
-		userService.removeOrderFromUser(userId, orderId);
-		
-	}
-	
-	@Override
 	public void addCarToUser(Long userId, Long carId) {
 		userService.addCarToUser(userId, carId);
 		

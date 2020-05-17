@@ -1,5 +1,7 @@
 package cz.fi.muni.pa165.service;
 
+import cz.fi.muni.pa165.dto.CarDTO;
+import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 
@@ -13,8 +15,9 @@ public interface OrderService {
     /**
      * Creates order in the system
      * @param order to be created
+     * @param userLogin user login
      */
-    void create(Order order);
+    void create(Order order, String userLogin);
 
     /**
      * Removes car from the system
@@ -36,11 +39,17 @@ public interface OrderService {
     List<Order> findAll();
 
     /**
-     * Returns order with belongs to the user
+     * Returns order witch belongs to the user
      * @param user which order we want to find
      * @return user´s order
      */
     List<Order> getOrdersByUser(User user);
+
+    /**
+     * Sets the order Confirm status
+     * @param order to be changed
+     */
+    void confirm(Order order);
 
     /**
      * Sets the order Cancel status
@@ -67,4 +76,6 @@ public interface OrderService {
      * @param serviceId id of the service we want to add to order
      */
     void addServiceToOrder(Long orderId, Long serviceId);
+
+    Car getOrderCar(Long orderId);
 }

@@ -49,4 +49,6 @@ public interface CarService {
      * @param tire Tire to be changed
      */
     void changeTire(Long carId, Tire tire);
+
+    List<Car> getCarsByUser(Long userId);
 }

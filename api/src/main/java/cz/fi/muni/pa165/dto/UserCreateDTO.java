@@ -27,7 +27,6 @@ public class UserCreateDTO {
     
     
 	private Boolean isAdmin;
-	private List<OrderDTO> orders;
 	private List<CarDTO> cars;
 
 	/**
@@ -95,22 +94,6 @@ public class UserCreateDTO {
 	}
 
 	/**
-	 * Gets User's orders
-	 * @return user's orders
-	 */
-    public List<OrderDTO> getOrders() {
-		return orders;
-	}
-
-	/**
-	 * Sets User's orders
-	 * @param orders of the user
-	 */
-	public void setOrders(List<OrderDTO> orders) {
-		this.orders = orders;
-	}
-	
-	/**
 	 * Gets User's cars
 	 * @return user's cars
 	 */
@@ -135,13 +118,12 @@ public class UserCreateDTO {
 				Objects.equals(login, that.login) &&
 				Objects.equals(password, that.password) &&
 				Objects.equals(isAdmin, that.isAdmin) &&
-				Objects.equals(orders, that.orders) &&
 				Objects.equals(cars, that.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, login, password, isAdmin, orders,cars);
+		return Objects.hash(name, login, password, isAdmin, cars);
 	}
 
 	@Override
@@ -151,7 +133,6 @@ public class UserCreateDTO {
 				", login='" + login + '\'' +
 				", password='" + password + '\'' +
 				", isAdmin=" + isAdmin +
-				", orders=" + orders +
 				", cars=" + cars +
 				'}';
 	}

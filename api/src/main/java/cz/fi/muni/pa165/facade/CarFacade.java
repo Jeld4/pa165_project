@@ -48,4 +48,6 @@ public interface CarFacade {
      * @param tire Tire which should be changed
      */
     void changeTireType(CarDTO car, TireDTO tire);
+
+    List<CarDTO> getCarsByUser(Long userId);
 }

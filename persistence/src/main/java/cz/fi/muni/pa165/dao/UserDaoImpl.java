@@ -59,23 +59,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void addOrder(Long userId, Long orderId) {
-        User user = getUserById(userId);
-        Order order = em.find(Order.class, orderId);
-        user.getOrders().add(order);
-        updateUser(user);
-		
-	}
-
-	@Override
-	public void removeOrder(Long userId, Long orderId) {
-		User user = getUserById(userId);
-        Order order = em.find(Order.class, orderId);
-        user.getOrders().remove(order);
-        updateUser(user);
-	}
-	
-	@Override
 	public void addCar(Long userId, Long carId) {
         User user = getUserById(userId);
         Car car = em.find(Car.class, carId);
@@ -88,7 +71,6 @@ public class UserDaoImpl implements UserDao {
 	public void removeCar(Long userId, Long carId) {
 		User user = getUserById(userId);
         Car car = em.find(Car.class, carId);
-        user.getOrders().remove(car);
         updateUser(user);
 	}
 	
