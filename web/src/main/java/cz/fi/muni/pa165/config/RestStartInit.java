@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 public class RestStartInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{RestSpringMVCConfig.class, RestSecSecurityConfig.class};
+        return new Class<?>[]{RestSpringMVCConfig.class};
     }
 
     @Override

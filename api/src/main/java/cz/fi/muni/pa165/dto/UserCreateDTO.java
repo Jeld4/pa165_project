@@ -17,12 +17,12 @@ public class UserCreateDTO {
 	private String name;
     
 	@NotBlank
-    @Size(min = 8, max=32)
+    @Size(min = 3, max=32)
 	private String login;
 
     
 	@NotBlank
-    @Size(min = 8, max=32)
+    @Size(min = 3, max=32)
 	private String password;
     
     

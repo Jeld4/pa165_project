@@ -33,6 +33,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
+<<<<<<< HEAD
         		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
                	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
     			<li ng-if="$root.logedUser != undefined " onclick="$rootScope.logedUser = undefined" ><a>Log Out</a></li>
@@ -46,6 +47,14 @@
 		            </ul>
 	         	</li>
          	</ul>
+=======
+                <li><a href="#!/allUsers">Users</a></li>
+                <li><a href="#!/allOrders">Orders</a></li>
+                <li><a href="#!/allServices">Services</a></li>
+                <li><a href="#!/allTires">Tires</a></li>
+                <li><a href="#!/userRegister">Register</a></li>
+            </ul>
+>>>>>>> origin/master
         </div><!--/.nav-collapse -->
     </div>
 </nav>
