@@ -20,7 +20,7 @@
 
 <body ng-app="pneuApp">
 <!-- navigation bar -->
-<nav class="navbar navbar-inverse navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top" ng-controller="MenuCtrl">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -35,9 +35,9 @@
             <ul class="nav navbar-nav">
         		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
                	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
-    			<li ng-if="$root.logedUser != undefined " onclick="$rootScope.logedUser = undefined" ><a>Log Out</a></li>
+    			<li ng-if="$root.logedUser != undefined " ng-click="logout()" ><a>Log Out</a></li>
 		    
-			    <li class="dropdown" ng-if="$root.logedUser.isAdmin">
+			    <li class="dropdown" ng-if="$root.logedUser.isAdmin == true">
 	            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
 		            <ul class="dropdown-menu">
 			            <li><a href="#!/allUsers">All users</a></li>

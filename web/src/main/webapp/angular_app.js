@@ -65,7 +65,16 @@ eshopControllers.controller('AllTiresCtrl',
         });
     })
 
-
+    eshopControllers.controller('MenuCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+    	$scope.logout = () => {
+            $rootScope.successAlert = 'success';
+            $rootScope.logedUser = undefined; 
+            $location.path("/");
+    	}
+    });
+    
+    
     eshopControllers.controller('LoginCtrl',
 	    function ($scope, $routeParams, $http, $location, $rootScope) {
     $scope.user = {
@@ -84,8 +93,16 @@ eshopControllers.controller('AllTiresCtrl',
             data: user
         }).then(function success(response) {
             $rootScope.successAlert = 'success';
-            $rootScope.logedUser = response.data; 
-            $location.path("/");
+            $http({
+                method: 'GET',
+                url: 'api/v1/users/login/' + user.login,
+                headers: { 'Content-Type': 'application/hal+json' },
+                data: user
+            }).then(function success(res) {
+                $rootScope.logedUser = res.data; 
+                $location.path("/");
+            })
+            
         }, function error(response) {
             console.log("error when creating user");
             console.log(response);

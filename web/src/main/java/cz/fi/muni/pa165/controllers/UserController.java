@@ -52,6 +52,15 @@ public class UserController {
         EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
+ 
+    @RequestMapping(value = "login/{login}", method = RequestMethod.GET)
+    public final HttpEntity<EntityModel<UserDTO>> getUserByLogin(@PathVariable("login") String login) throws Exception {
+        
+        UserDTO userDTO = userFacade.getUserWithLogin(login);
+        if (userDTO == null) throw new ResourceNotFoundException("user " + login + " not found");
+        EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
+        return new ResponseEntity<>(userModel, HttpStatus.OK);
+    }
     
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
