@@ -49,6 +49,12 @@ public interface OrderFacade {
     void removeOrder(Long id);
 
     /**
+     * Changes the status of the order to Confirm
+     * @param id of the Order
+     */
+    void confirmOrder(Long id);
+
+    /**
      * Creates order to the user specified by users login
      * @param order
      * @param userLogin

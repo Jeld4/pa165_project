@@ -67,6 +67,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void confirm(Order order) {
+        order.setState(OrderState.CONFIRMED);
+    }
+
+    @Override
     public void finish(Order order) {
         order.setState(OrderState.DONE);
     }

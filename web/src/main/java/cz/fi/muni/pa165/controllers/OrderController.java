@@ -50,6 +50,33 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
+    public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
+        OrderDTO orderDTO = orderFacade.getOrderById(id);
+        if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
+        orderFacade.confirmOrder(id);
+        EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
+        return new ResponseEntity<>(orderModel, HttpStatus.OK);
+    }
+    @RequestMapping(value = "/{id}/cancel", method = RequestMethod.POST)
+    public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) throws Exception {
+        OrderDTO orderDTO = orderFacade.getOrderById(id);
+        if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
+        orderFacade.cancelOrder(id);
+        EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
+        return new ResponseEntity<>(orderModel, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/{id}/finish", method = RequestMethod.POST)
+    public final HttpEntity<EntityModel<OrderDTO>> finishOrder(@PathVariable("id") long id) throws Exception {
+        OrderDTO orderDTO = orderFacade.getOrderById(id);
+        if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
+        orderFacade.finishOrder(id);
+        EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
+        return new ResponseEntity<>(orderModel, HttpStatus.OK);
+    }
+
+
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) throws Exception{
         if(bindingResult.hasErrors()) {
