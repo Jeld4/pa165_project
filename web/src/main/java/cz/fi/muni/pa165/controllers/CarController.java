@@ -41,10 +41,11 @@ public class CarController {
     private CarRepresentationModelAssembler carRepresentationModelAssembler;
     private UserFacade userFacade;
 
-    public CarController(@Autowired CarFacade carFacade,
+    public CarController(@Autowired CarFacade carFacade, @Autowired UserFacade userFacade,
                          @Autowired CarRepresentationModelAssembler carRepresentationModelAssembler) {
         this.carFacade = carFacade;
         this.carRepresentationModelAssembler = carRepresentationModelAssembler;
+        this.userFacade = userFacade;
     }
 
     @RequestMapping(method = RequestMethod.GET)

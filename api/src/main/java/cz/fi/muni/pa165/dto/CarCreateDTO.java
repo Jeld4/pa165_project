@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -11,10 +12,10 @@ import java.util.Objects;
 
 public class CarCreateDTO implements Serializable {
 
-    @NotNull
+    @NotBlank
     @Size(min = 4, max=20)
     private String licencePlate;
-    @NotNull
+    @NotBlank
     private String model;
 
     /**

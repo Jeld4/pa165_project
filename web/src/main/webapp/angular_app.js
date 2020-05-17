@@ -23,12 +23,12 @@ pneuApp.config(['$routeProvider',
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
 
         when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
-        when('/tire/:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
-        when('/service/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
-        when('/user/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
+
+        when('/tire/edit:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
+        when('/service/edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user/edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
-
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -430,13 +430,13 @@ eshopControllers.controller('CreateOrderCtrl',
 	)
 
 
+
 eshopControllers.controller('CarRegisterCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
         //set object bound to form fields
         $scope.car = {
             'licencePlate': '',
             'model': '',
-            'tireType': '',
         };
 
         // function called when submit button is clicked, creates product on server
@@ -451,7 +451,6 @@ eshopControllers.controller('CarRegisterCtrl',
                 var createdCar = response.data;
                 //display confirmation alert
                 $rootScope.successAlert = 'A new user "' + createdCar.licencePlate + '" was created';
-                $rootScope.logedUser = response.data
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -494,6 +493,9 @@ eshopControllers.controller('UserProfileCtrl',
                         console.log('deleted order ' + order.id + ' on server');
                         //display confirmation alert
                         $rootScope.successAlert = 'Deleted order';
+
+                        $scope.user.orders = $scope.user.orders.filter( ord => {return ord.id != order.id})
+
                     },
                     function error(response) {
                         console.log("error when deleting user");
