@@ -67,17 +67,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         Car c1 = car("SUV", "SUV", "7B8 - 5670");
         Car c2 = car("truck", "Truck", "8AX - 5877");
+        Car c3 = car("trabant", "trabant", "XXX - 1234");
 
         List<Car> cars1 = new ArrayList<>();
         cars1.add(c1);
         cars1.add(c2);
 
         List<Car> cars2 = new ArrayList<>();
-        cars2.add(c1);
+        cars2.add(c3);
 
         User admin = user("admin", "admin", "admin", true, cars2);
         User pepa = user("pepa123", "pepa123", "Pepa", false, cars1);
-        User jessica = user("jessica123", "jessica", "Jessica", false, cars2);
+        User jessica = user("jessica123", "jessica", "Jessica", false, null);
 
         Order order1 = order(pepa, tires1, services1);
         Order order2 = order(jessica, null, null);

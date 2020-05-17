@@ -22,7 +22,7 @@ public class User {
 	private String password;
 	private Boolean isAdmin;
 
-    @OneToMany( fetch = FetchType.LAZY, cascade = { CascadeType.ALL } )
+    @OneToMany
 	private List<Car> cars;
 
 
