@@ -103,13 +103,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     private Order order(User user, List<Tire> tires, List<Service> services) {
         Order order = new Order();
-        order.setUser(user);
         order.setTires(tires);
         order.setState(OrderState.PENDING);
         order.setTotalPrice(new BigDecimal(50));
         order.setServices(services);
 
-        orderService.create(order);
+        orderService.create(order, user.getLogin());
         return order;
     }
 

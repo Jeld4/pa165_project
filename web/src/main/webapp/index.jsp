@@ -1,5 +1,6 @@
 <%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
+<%= request.getSession().getAttribute("currentUserId") %>
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -36,6 +37,7 @@
                 <li><a href="#!/allOrders">Orders</a></li>
                 <li><a href="#!/allServices">Services</a></li>
                 <li><a href="#!/allTires">Tires</a></li>
+                <li><a href="#!/user/profile/1">Profile</a>
                 <li><a href="#!/userRegister">Register</a></li>
             </ul>
         </div><!--/.nav-collapse -->

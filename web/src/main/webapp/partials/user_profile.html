@@ -1,0 +1,41 @@
+<H2>User profile</H2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Login</th>
+        <th scope="col">Is Admin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{user.name}}</td>
+        <td>{{user.login}}</td>
+        <td>{{user.isAdmin}}</td>
+    </tr>
+    </tbody>
+</table>
+
+<H3>Orders</H3>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">State</th>
+        <th scope="col">Date</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="order in user.orders track by $index">
+    <tr>
+        <td>{{order.state}}</td>
+        <td>{{order.dateOfOrder}}</td>
+        <td>{{order.totalPrice}}</td>
+        <td>
+            <button ng-click="deleteOrder(order)" type="submit" class="btn btn-primary">Cancel</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

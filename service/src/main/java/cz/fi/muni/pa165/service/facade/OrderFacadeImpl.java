@@ -37,9 +37,7 @@ public class OrderFacadeImpl implements OrderFacade {
         Order newOrder = new Order();
         newOrder.setState(order.getState());
         newOrder.setDateOfOrder(order.getDateOfOrder());
-        User user = userService.findByLogin(userLogin);
-        newOrder.setUser(user);
-        orderService.create(newOrder);
+        orderService.create(newOrder, userLogin);
         return newOrder.getId();
     }
 
