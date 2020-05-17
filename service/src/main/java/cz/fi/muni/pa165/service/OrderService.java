@@ -46,6 +46,12 @@ public interface OrderService {
     List<Order> getOrdersByUser(User user);
 
     /**
+     * Sets the order Confirm status
+     * @param order to be changed
+     */
+    void confirm(Order order);
+
+    /**
      * Sets the order Cancel status
      * @param order to be changed
      */
