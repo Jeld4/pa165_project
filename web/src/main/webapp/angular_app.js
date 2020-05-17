@@ -451,11 +451,43 @@ eshopControllers.controller('UserProfileCtrl',
                         }
                     }
                 );
-            }, $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
+            },
+
+            $scope.deleteCar = (car) => {
+                console.log("deleting car with id=" + car.id);
+                $http.delete('/pa165/api/v1/cars/' + car.id).then(
+
+                    function success(response) {
+                        console.log('deleted car ' + car.id + ' on server');
+                        //display confirmation alert
+                        $rootScope.successAlert = 'Deleted car';
+                    },
+                    function error(response) {
+                        console.log("error when deleting car");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent car ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete car ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
+            },
+
+            $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
                 function (response) {
                     $scope.orders = response.data['_embedded']['orderDTOList'];
                     console.log($scope.orders);
                     console.log('AJAX loaded user orders');
+                }
+            ), $http.get('/pa165/api/v1/cars/getByUser/' + userId).then(
+                function (response) {
+                    $scope.cars = response.data['_embedded']['carDTOList'];
+                    console.log($scope.cars);
+                    console.log('AJAX loaded user cars');
                 }
             )
         );

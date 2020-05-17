@@ -105,11 +105,16 @@ public class CarController {
         }
     }
 
+    @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
+    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) throws Exception {
 
+        List<CarDTO> carsListDTO = carFacade.getCarsByUser(id);
 
+        if (carsListDTO == null) throw new ResourceNotFoundException("cars " + id + " not found");
 
+        CollectionModel<EntityModel<CarDTO>> ordersCollectionModel = carRepresentationModelAssembler.toCollectionModel(carsListDTO);
 
-
-
+        return new ResponseEntity<>(ordersCollectionModel, HttpStatus.OK);
+    }
 
 }
