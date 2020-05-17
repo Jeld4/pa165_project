@@ -326,10 +326,34 @@ eshopControllers.controller('UserProfileCtrl',
                 console.log("failed to load user "+userId);
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
+            },
+
+            $scope.deleteOrder = (order) => {
+                console.log("deleting order with id=" + order.id);
+                $http.delete('/pa165/api/v1/orders/' + order.id).then(
+
+                    function success(response) {
+                        console.log('deleted order ' + order.id + ' on server');
+                        //display confirmation alert
+                        $rootScope.successAlert = 'Deleted order';
+                    },
+                    function error(response) {
+                        console.log("error when deleting user");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete order ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
             }, $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
                 function (response) {
-                    $scope.orders = response.data;
-                    console.log(response.data)
+                    $scope.orders = response.data['_embedded']['orderDTOList'];
+                    console.log($scope.orders);
                     console.log('AJAX loaded user orders');
                 }
             )

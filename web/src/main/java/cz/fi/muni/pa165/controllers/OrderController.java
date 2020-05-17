@@ -61,7 +61,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteUser(@PathVariable("id") long id) throws Exception {
+    public final void deleteOrder(@PathVariable("id") long id) throws Exception {
         try {
             orderFacade.removeOrder(id);
         } catch (IllegalArgumentException ex) {
@@ -82,7 +82,7 @@ public class OrderController {
 
         if (ordersListDTO == null) throw new ResourceNotFoundException("orders " + id + " not found");
 
-        CollectionModel<EntityModel<OrderDTO>> ordersCollectionModel = orderRepresentationModelAssembler.toCollectionModel(orderFacade.getAllOrders());
+        CollectionModel<EntityModel<OrderDTO>> ordersCollectionModel = orderRepresentationModelAssembler.toCollectionModel(ordersListDTO);
 
         return new ResponseEntity<>(ordersCollectionModel, HttpStatus.OK);
     }
