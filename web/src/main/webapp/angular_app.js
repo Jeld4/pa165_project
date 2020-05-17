@@ -76,11 +76,11 @@ eshopControllers.controller('AllTiresCtrl',
         };
     
     $scope.login = function (user) {
-    	console.log(user)
+    	console.log(user);
         $http({
-            method: 'GET',
+            method: 'POST',
             url: 'api/v1/login',
-            headers: { 'Content-Type': 'application/json' },  
+            headers: { 'Content-Type': 'application/hal+json' },
             data: user
         }).then(function success(response) {
             $rootScope.successAlert = 'success';
