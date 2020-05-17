@@ -1,31 +1,22 @@
 <form name="form"  novalidate class="form-horizontal">
-    <div class="form-group" ng-class="{'has-error': !(form.licencePlate.$valid)}">
+    <div class="form-group" >
         <label for="licencePlate" class="col-sm-2 control-label">Licence plate</label>
         <div class="col-sm-10">
-            <input placeholder="licencePlate" id="licencePlate" type="text" ng-minlength="2" ng-maxlength="32" name="licencePlate" class="form-control" ng-model="car.licencePlate" required/>
-            <p class="help-block" ng-show="form.name.$error.required">Licence plate is required</p>
-            <p class="help-block" ng-show="form.name.$error.minlength">Licence plate be at least 2 characters</p>
-            <p class="help-block" ng-show="form.name.$error.maxlength">Licence plate can't be longer then 32 characters</p>
+            <input placeholder="" id="licencePlate" type="text"  name="licencePlate" class="form-control" ng-model="car.licencePlate" required/>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.model.$valid)}">
-        <label for="model" class="col-sm-2 control-label">Model</label>
+    <div class="form-group">
+        <label for="model" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
-            <input placeholder="model" id="model" type="text" ng-minlength="2" ng-maxlength="32" name="model" class="form-control" ng-model="car.model" required/>
-            <p class="help-block" ng-show="form.login.$error.required">Model is required</p>
-            <p class="help-block" ng-show="form.login.$error.minlength">Model must be at least 8 characters</p>
-            <p class="help-block" ng-show="form.login.$error.maxlength">Model can't be longer then 32 characters</p>
+            <input placeholder="" id="model" type="text" name="model" class="form-control" ng-model="car.model" required/>
         </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': !(form.tireType.$valid)}">
-        <label for="tireType" class="col-sm-2 control-label">Tire type</label>
+    <div class="form-group">
+        <label for="tireType" class="col-sm-2 control-label">Password</label>
         <div class="col-sm-10">
-            <input placeholder="tireType" id="tireType" type="text" ng-minlength="2" ng-maxlength="32" name="tireType" class="form-control" ng-model="car.tireType" required/>
-            <p class="help-block" ng-show="form.password.$error.required">Tyre type is required</p>
-            <p class="help-block" ng-show="form.password.$error.minlength">Tyre type must be at least 8 characters</p>
-            <p class="help-block" ng-show="form.password.$error.maxlength">Tyre type can't be longer then 32 characters</p>
+            <input placeholder="" id="tireType" type="text" name="tireType" class="form-control" ng-model="car.tireType" required/>
         </div>
     </div>
     <!-- show disabled button if form is not valid -->
-    <button ng-disabled="!form.$valid" class="btn btn-primary" type="submit" ng-click="create(car)">Add car</button>
+    <button  class="btn btn-primary" type="submit" ng-click="create(car)">Create car</button>
 </form>
