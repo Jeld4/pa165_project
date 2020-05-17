@@ -21,10 +21,7 @@ public class User {
 	private String login;
 	private String password;
 	private Boolean isAdmin;
-	
-	@OneToMany
-	private List<Order> orders;
-    
+
     @OneToMany
 	private List<Car> cars;
 
@@ -32,9 +29,7 @@ public class User {
 	/**
 	 * user nonparametric constructor
 	 */
-	public User() {
-		orders = new ArrayList<>();
-	}
+	public User() {}
 
 	/**
 	 * user parametric constructor
@@ -129,24 +124,6 @@ public class User {
 	}
 
 	/**
-	 * set orders
-	 * @param orders
-	 */
-	public void setOrders (List<Order> orders) {
-		this.orders = orders;
-	}
-
-	/**
-	 * get orders
-	 * @return orders
-	 */
-	public List<Order> getOrders () {
-		return orders;
-	}
-
-	
-
-	/**
 	 * get cars
 	 * @return orders
 	 */
@@ -173,12 +150,11 @@ public class User {
 				Objects.equals(login, user.login) &&
 				Objects.equals(password, user.password) &&
 				Objects.equals(isAdmin, user.isAdmin) &&
-				Objects.equals(orders, user.orders) &&
 				Objects.equals(cars, user.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, login, password, isAdmin, orders, cars);
+		return Objects.hash(id, name, login, password, isAdmin, cars);
 	}
 }

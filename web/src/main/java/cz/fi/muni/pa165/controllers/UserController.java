@@ -80,5 +80,14 @@ public class UserController {
             throw new ServerErrorException(rootCause.getMessage());
         }
     }
+
+    @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
+    public final HttpEntity<EntityModel<UserDTO>> getUserProfile(@PathVariable("id") long id) throws Exception {
+
+        UserDTO userDTO = userFacade.getUserWithId(id);
+        if (userDTO == null) throw new ResourceNotFoundException("user " + id + " not found");
+        EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
+        return new ResponseEntity<>(userModel, HttpStatus.OK);
+    }
     
 }

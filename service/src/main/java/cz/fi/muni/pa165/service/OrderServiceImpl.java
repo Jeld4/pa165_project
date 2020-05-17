@@ -42,8 +42,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void remove(Order order) {
-        User user =  userDao.getUserByLogin(order.getUser().getLogin());
-        user.getOrders().remove(order);
         orderDao.remove(order);
     }
 

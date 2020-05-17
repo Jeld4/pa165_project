@@ -37,7 +37,7 @@ public interface OrderService {
     List<Order> findAll();
 
     /**
-     * Returns order with belongs to the user
+     * Returns order witch belongs to the user
      * @param user which order we want to find
      * @return user´s order
      */

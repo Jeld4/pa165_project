@@ -52,18 +52,6 @@ public interface UserDao {
 	User getUserByLogin(String login);
 	
 	/**
-	 * Add order to User
-	 * @param o
-	 */
-	void addOrder(Long userId, Long orderId); 
-
-	/**
-	 * Remove order from User
-	 * @param o
-	 */
-	void removeOrder(Long userId, Long orderId);
-	
-	/**
 	 * Add car to User
 	 * @param o
 	 */
