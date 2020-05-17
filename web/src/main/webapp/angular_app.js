@@ -23,9 +23,9 @@ pneuApp.config(['$routeProvider',
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
 
         when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
-        when('/tire/:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
-        when('/service/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
-        when('/user/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
+        when('/tire/edit:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
+        when('/service//edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user//edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
@@ -532,6 +532,7 @@ eshopControllers.controller('UserProfileCtrl',
                         console.log('deleted order ' + order.id + ' on server');
                         //display confirmation alert
                         $rootScope.successAlert = 'Deleted order';
+                        $scope.user.orders = $scope.user.orders.filter( ord => {return ord.id != order.id})
                     },
                     function error(response) {
                         console.log("error when deleting user");
