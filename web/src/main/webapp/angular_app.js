@@ -19,6 +19,7 @@ pneuApp.config(['$routeProvider',
         when('/service/:serviceId', {templateUrl: 'partials/service_info.html', controller: 'ServiceInfoCtrl'}).
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
         when('/user/profile/:userId', {templateUrl: 'partials/user_profile.html', controller: 'UserProfileCtrl'}).
+        when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
@@ -66,7 +67,59 @@ eshopControllers.controller('AllTiresCtrl',
         });
     })
 
-
+    eshopControllers.controller('MenuCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+    	$scope.logout = () => {
+            $rootScope.successAlert = 'success';
+            $rootScope.logedUser = undefined; 
+            $location.path("/");
+    	}
+    });
+    
+    
+    eshopControllers.controller('LoginCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+    $scope.user = {
+            'name': 'BLANK',
+            'login': '',
+            'password': '',
+            'isAdmin': false,
+        };
+    
+    $scope.login = function (user) {
+    	console.log(user);
+        $http({
+            method: 'POST',
+            url: 'api/v1/login',
+            headers: { 'Content-Type': 'application/hal+json' },
+            data: user
+        }).then(function success(response) {
+            $rootScope.successAlert = 'success';
+            $http({
+                method: 'GET',
+                url: 'api/v1/users/login/' + user.login,
+                headers: { 'Content-Type': 'application/hal+json' },
+                data: user
+            }).then(function success(res) {
+                $rootScope.logedUser = res.data; 
+                $location.path("/");
+            })
+            
+        }, function error(response) {
+            console.log("error when creating user");
+            console.log(response);
+            switch (response.data.code) {
+                case 'InvalidRequestException':
+                    $rootScope.errorAlert = 'wrong login or password';
+                    break;
+                default:
+                    $rootScope.errorAlert = 'Cannot login user ! Reason given by the server: '+response.data.message;
+                    break;
+            }
+        });
+    };
+});
+    
 pneuApp.run(function ($rootScope,$http) {
     // alert closing functions defined in root scope to be available in every template
     $rootScope.hideSuccessAlert = function () {
@@ -240,6 +293,7 @@ eshopControllers.controller('UserRegisterCtrl',
 	                var createdUser = response.data;
 	                //display confirmation alert
 	                $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created';
+	                $rootScope.logedUser = response.data
 	                //change view to list of products
 	                $location.path("/");
 	            }, function error(response) {
