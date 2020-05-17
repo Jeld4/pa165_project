@@ -18,6 +18,7 @@ pneuApp.config(['$routeProvider',
         when('/allServices', {templateUrl: 'partials/all_services.html', controller: 'AllServicesCtrl'}).
         when('/service/:serviceId', {templateUrl: 'partials/service_info.html', controller: 'ServiceInfoCtrl'}).
         when('/allTires', {templateUrl: 'partials/all_tires.html', controller: 'AllTiresCtrl'}).
+        when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -135,6 +136,22 @@ eshopControllers.controller('ServiceInfoCtrl',
                 console.log(response)
                 $scope.service = response.data;
                 console.log('AJAX loaded detail of service ' + $scope.service.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load service: '+response.data.message;
+            }
+        );
+    });
+
+eshopControllers.controller('TireInfoCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var tireId = $routeParams.tireId;
+        $http.get('/pa165/api/v1/tires/' + tireId).then(
+            function (response) {
+                console.log(response)
+                $scope.tire = response.data;
+                console.log('AJAX loaded detail of tire ' + $scope.tire.id);
             },
             function error(response) {
                 console.log(response);

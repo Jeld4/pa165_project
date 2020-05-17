@@ -1,0 +1,63 @@
+<H2> Tire info</H2>
+<h3>ID# {{tire.id}}</h3>
+
+<table>
+
+    <tr>
+        <td>
+            <p>Id: </p>
+        </td>
+        <td>
+            <p>{{tire.id}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Manufacturer: </p>
+        </td>
+        <td>
+            <p>{{tire.manufacturer}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Type: </p>
+        </td>
+        <td>
+            <p>{{tire.type}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Size: </p>
+        </td>
+        <td>
+            <p>{{tire.size}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Season: </p>
+        </td>
+        <td>
+            <p>{{tire.season}}</p>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <p>Price: </p>
+        </td>
+        <td>
+            <p>{{tire.price}}</p>
+        </td>
+    </tr>
+</table>
+
+<div>
+    <button ng-click="removeTire(tire)" type="submit" class="btn btn-primary">Delete</button>
+</div>
