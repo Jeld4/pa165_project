@@ -71,14 +71,8 @@ public class TireController {
     public final void deleteTire(@PathVariable("id") long id) throws Exception {
         try {
             tireFacade.deleteTire(id);
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Tire with id " + id + " cannot be found.");
-        } catch (Throwable ex){
-            Throwable rootCause = ex;
-            while ((ex = ex.getCause()) != null) {
-                rootCause = ex;
-            }
-            throw new ServerErrorException(rootCause.getMessage());
         }
     }
 

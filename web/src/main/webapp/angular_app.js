@@ -21,6 +21,9 @@ pneuApp.config(['$routeProvider',
         when('/user/profile/:userId', {templateUrl: 'partials/user_profile.html', controller: 'UserProfileCtrl'}).
         when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
+        when('/tire/:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
+        when('/service/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -209,7 +212,55 @@ eshopControllers.controller('TireInfoCtrl',
             },
             function error(response) {
                 console.log(response);
-                $rootScope.warningAlert = 'Cannot load service: '+response.data.message;
+                $rootScope.warningAlert = 'Cannot load tire: '+response.data.message;
+            }
+        );
+    });
+
+eshopControllers.controller('TireEditCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var tireId = $routeParams.tireId;
+        $http.get('/pa165/api/v1/tires/' + tireId).then(
+            function (response) {
+                console.log(response)
+                $scope.tire = response.data;
+                console.log('AJAX loaded edit of tire ' + $scope.tire.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load tire edit: '+response.data.message;
+            }
+        );
+    });
+
+eshopControllers.controller('ServiceEditCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var serviceId = $routeParams.serviceId;
+        $http.get('/pa165/api/v1/services/' + serviceId).then(
+            function (response) {
+                console.log(response)
+                $scope.service = response.data;
+                console.log('AJAX loaded edit of service ' + $scope.service.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load service edit: '+response.data.message;
+            }
+        );
+    });
+
+eshopControllers.controller('UserEditCtrl',
+    function ($scope, $rootScope, $routeParams, $http) {
+        var userId = $routeParams.userId;
+        $http.get('/pa165/api/v1/users/' + userId).then(
+            function (response) {
+                console.log(response)
+                $scope.user = response.data;
+                console.log('AJAX loaded edit of user ' + $scope.user.id);
+            },
+            function error(response) {
+                console.log(response);
+                $rootScope.warningAlert = 'Cannot load user edit: '+response.data.message;
             }
         );
     });

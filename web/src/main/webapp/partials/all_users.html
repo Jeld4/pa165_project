@@ -6,6 +6,7 @@
 		<th scope="col">Login</th>
 		<th scope="col">Is Admin</th>
 		<th scope="col">Detail</th>
+		<th scope="col">Edit</th>
 	</tr>
 	</thead>
 	<tbody ng-repeat="user in users track by $index">
@@ -15,6 +16,9 @@
 		<td>{{user.isAdmin}}</td>
 		<td>
 			<a class="btn btn-primary" target="_blank" href="#!/user/{{user.id}}">Detail</a>
+		</td>
+		<td>
+			<a class="btn btn-primary" target="_blank" href="#!/user/{{user.id}}">Edit</a>
 		</td>
 	</tr>
 	</tbody>
