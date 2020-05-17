@@ -56,7 +56,7 @@ public class OrderController {
 
         Long id = orderFacade.createOrder(order,userLogin);
         return HttpStatus.OK;
-
+    }
     @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
