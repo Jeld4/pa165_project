@@ -38,7 +38,7 @@ public class ServiceDaoImplTest extends AbstractTestNGSpringContextTests {
         service1.setName("Engine oil renewal");
         service2.setName("Brake fluid renewal");
 
-        service1.setDescription("Exactly what <name> says1");
+        service1.setDescription("Exactly what <> says1");
         service2.setDescription("Exactly what <name> says2");
 
         service1.setPrice(new BigDecimal("1250"));

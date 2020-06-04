@@ -1,6 +1,8 @@
 package cz.fi.muni.pa165.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -16,8 +18,12 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String description;
+
     private BigDecimal price;
 
     /**

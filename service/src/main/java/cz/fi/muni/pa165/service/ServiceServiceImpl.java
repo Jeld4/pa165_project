@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.service;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import cz.fi.muni.pa165.dao.ServiceDao;
 import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Service;
@@ -19,6 +20,10 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public Service findById(Long id) {
+        if(id == null){
+            throw new IllegalArgumentException("Service ID cannot be null");
+        }
+
         Service service = null;
 
         try {
@@ -41,6 +46,11 @@ public class ServiceServiceImpl implements ServiceService {
     }
     @Override
     public void create(Service service) {
+
+        if(service == null){
+            throw new IllegalArgumentException("Service object cannot be null");
+        }
+
         try {
             serviceDao.create(service);
         }catch (DataAccessException ex){
@@ -50,6 +60,9 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public void remove(Service service) {
+        if(service == null){
+            throw new IllegalArgumentException("Service object cannot be null");
+        }
         try {
             serviceDao.remove(service);
         }catch (DataAccessException ex){

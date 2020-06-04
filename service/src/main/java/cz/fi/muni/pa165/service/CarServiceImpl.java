@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.service;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Car;
@@ -25,6 +26,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findById(Long id) {
+        if (id== null){
+            throw new IllegalArgumentException("ID of car cannot be null");
+        }
         Car car = null;
         try {
             car = carDao.findById(id);
@@ -61,6 +65,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void create(Car car) {
+        if (car == null){
+            throw new IllegalArgumentException("Car object cannot be null");
+        }
         try {
             carDao.create(car);
         }catch (DataAccessException ex){
@@ -70,6 +77,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void remove(Car car) {
+        if (car == null){
+            throw new IllegalArgumentException("Car object cannot be null");
+        }
         try {
             carDao.remove(car);
         }catch (DataAccessException ex){
@@ -91,6 +101,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<Car> getCarsByUser(Long userId) {
+        if(userId == null){
+            throw new IllegalArgumentException("User ID cannot be null");
+        }
         User user = userDao.getUserById(userId);
         return user.getCars();
     }
