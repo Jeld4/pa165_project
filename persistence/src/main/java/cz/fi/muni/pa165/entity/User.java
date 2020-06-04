@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,6 +23,8 @@ public class User {
 	private String login;
 	private String password;
 	private Boolean isAdmin;
+	private String userAddress;
+	private String telephone;
 
     @OneToMany
 	private List<Car> cars;
@@ -142,7 +143,31 @@ public class User {
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
 	}
-	
+
+	public Boolean getAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(Boolean admin) {
+		isAdmin = admin;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
