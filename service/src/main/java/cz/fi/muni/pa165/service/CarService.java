@@ -50,5 +50,10 @@ public interface CarService {
      */
     void changeTire(Long carId, Tire tire);
 
+    /**
+     * Returns list of cars that belongs to given user
+     * @param userId ID use user
+     * @return List of user cars
+     */
     List<Car> getCarsByUser(Long userId);
 }

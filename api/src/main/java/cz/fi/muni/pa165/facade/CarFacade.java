@@ -49,5 +49,10 @@ public interface CarFacade {
      */
     void changeTireType(CarDTO car, TireDTO tire);
 
+    /**
+     * Returns list of cars that belongs to given user
+     * @param userId ID use user
+     * @return List of user cars
+     */
     List<CarDTO> getCarsByUser(Long userId);
 }

@@ -3,13 +3,14 @@ package cz.fi.muni.pa165.service;
 import cz.fi.muni.pa165.dao.TireDao;
 import cz.fi.muni.pa165.entity.Tire;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 import java.util.List;
 /**
  * @author Jakub Malý, 456389
  */
-@org.springframework.stereotype.Service
+@Service
 public class TireServiceImpl implements TireService {
 
     @Autowired
