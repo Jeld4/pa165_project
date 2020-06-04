@@ -33,27 +33,31 @@ public class OrderServiceImpl implements OrderService {
     public void create(Order order, String userLogin) {
         User user = userDao.getUserByLogin(userLogin);
         order.setUser(user);
-        orderDao.create(order);
-
-        /*
-        List<Order> orders = null;
-        orders = user.getOrders();
-        orders.add(order);
-        user.setOrders(orders);
-        userDao.updateUser(user);
-        
-         */
-
+        try {
+            orderDao.create(order);
+        } catch (DataAccessException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public void remove(Order order) {
-        orderDao.remove(order);
+        try {
+            orderDao.remove(order);
+        } catch (DataAccessException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override
     public Order findById(Long id) {
-        return orderDao.findById(id);
+        Order order = null;
+        try {
+            order = orderDao.findById(id);
+        } catch (DataAccessException ex) {
+            throw new RuntimeException(ex);
+        }
+        return order;
     }
 
     @Override
@@ -61,7 +65,7 @@ public class OrderServiceImpl implements OrderService {
         List<Order> orders = null;
         try {
             orders = orderDao.findAll();
-        } catch (DataAccessException ex){
+        } catch (DataAccessException ex) {
             throw new RuntimeException(ex);
         }
         return orders;
