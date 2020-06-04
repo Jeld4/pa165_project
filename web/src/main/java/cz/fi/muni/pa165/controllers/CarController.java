@@ -94,15 +94,8 @@ public class CarController {
     public final void deleteCar(@PathVariable("id") long id) throws Exception{
         try{
             carFacade.deleteCar(id);
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Car with id " + id + " cannot be found.");
-        }catch (Throwable ex){
-            Throwable rootCause = ex;
-            while ((ex = ex.getCause()) != null) {
-                rootCause = ex;
-            }
-            throw new ServerErrorException(rootCause.getMessage());
-
         }
     }
 

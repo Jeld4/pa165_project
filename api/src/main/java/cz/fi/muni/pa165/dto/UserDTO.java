@@ -16,6 +16,8 @@ public class UserDTO {
 	private String login;
 	private String password;
 	private Boolean isAdmin;
+	private String userAddress;
+	private String telephone;
 	
 	private List<Car> cars;
 	

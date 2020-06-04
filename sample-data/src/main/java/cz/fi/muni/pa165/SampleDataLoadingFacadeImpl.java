@@ -76,9 +76,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         List<Car> cars2 = new ArrayList<>();
         cars2.add(c3);
 
-        User admin = user("admin", "admin", "admin", true, cars2);
-        User pepa = user("pepa123", "pepa123", "Pepa", false, cars1);
-        User jessica = user("jessica123", "jessica", "Jessica", false, null);
+        User admin = user("admin", "admin", "Administrator", true, cars2, "BigCity, LongStreet 1243", "+45086713924");
+        User pepa = user("pepa123", "pepa123", "Pepa", false, cars1, "ShortCity, Short 1243", "+45086713924");
+        User jessica = user("jessica123", "jessica", "Jessica", false, null, "Tiny Ville, Blue 1243", "+341243278569");
 
         Order order1 = order(pepa, tires1, services1);
         Order order2 = order(jessica, null, null);
@@ -99,13 +99,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
 
-    private User user(String password, String login, String name, boolean isAdmin, List<Car> cars) {
+    private User user(String password, String login, String name, boolean isAdmin, List<Car> cars, String address, String phone) {
         User user = new User();
         user.setPassword(password);
         user.setLogin(login);
         user.setName(name);
         user.setIsAdmin(isAdmin);
         user.setCars(cars);
+        user.setUserAddress(address);
+        user.setTelephone(phone);
 
         userService.create(user);
         return user;

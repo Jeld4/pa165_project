@@ -24,7 +24,11 @@ public class UserCreateDTO {
 	@NotBlank
     @Size(min = 3, max=32)
 	private String password;
-    
+
+	private String userAddress;
+
+	private String telephone;
+
     
 	private Boolean isAdmin;
 	private List<CarDTO> cars;
@@ -107,6 +111,22 @@ public class UserCreateDTO {
 	 */
 	public void setCars(List<CarDTO> cars) {
 		this.cars = cars;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	@Override
