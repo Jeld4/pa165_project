@@ -3,6 +3,7 @@ package cz.fi.muni.pa165.hateoas;
 import cz.fi.muni.pa165.controllers.OrderController;
 import cz.fi.muni.pa165.controllers.ServiceController;
 import cz.fi.muni.pa165.dto.ServiceDTO;
+import cz.fi.muni.pa165.exceptions.FailToLinkHateosException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.EntityModel;
@@ -24,15 +25,16 @@ public class ServiceRepresentationModelAssembler implements RepresentationModelA
 
     @Override
     public EntityModel<ServiceDTO> toModel(ServiceDTO serviceDTO) {
-        long id  = serviceDTO.getId();
+        long id = serviceDTO.getId();
         EntityModel<ServiceDTO> serviceResource = new EntityModel<>(serviceDTO);
         try {
             serviceResource.add(linkTo(OrderController.class).slash(serviceDTO.getId()).withSelfRel());
 
             Method deleteService = ServiceController.class.getMethod("deleteService", long.class);
             serviceResource.add(linkTo(deleteService.getDeclaringClass(), deleteService, id).withSelfRel());
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.error("cannot link HATEOAS", ex);
+            throw new FailToLinkHateosException("Unable to link HATEOAS for ServiceDTO");
         }
         return serviceResource;
     }
