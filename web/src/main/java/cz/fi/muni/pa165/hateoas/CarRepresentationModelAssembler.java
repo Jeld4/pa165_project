@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hateoas;
 
 import cz.fi.muni.pa165.controllers.CarController;
 import cz.fi.muni.pa165.dto.CarDTO;
+import cz.fi.muni.pa165.exceptions.FailToLinkHateosException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.EntityModel;
@@ -28,10 +29,11 @@ public class CarRepresentationModelAssembler implements RepresentationModelAssem
             carResource.add(linkTo(CarController.class).slash(carDTO.getId()).withSelfRel());
 
             Method deleteCar = CarController.class.getMethod("deleteCar", long.class);
-            carResource.add(linkTo(deleteCar.getDeclaringClass(),deleteCar, id).withSelfRel());
+            carResource.add(linkTo(deleteCar.getDeclaringClass(), deleteCar, id).withSelfRel());
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             log.error("cannot link HATEOAS", ex);
+            throw new FailToLinkHateosException("Unable to link HATEOAS for CarDTO");
         }
         return carResource;
     }

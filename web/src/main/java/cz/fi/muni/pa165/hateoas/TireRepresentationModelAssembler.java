@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hateoas;
 
 import cz.fi.muni.pa165.controllers.TireController;
 import cz.fi.muni.pa165.dto.TireDTO;
+import cz.fi.muni.pa165.exceptions.FailToLinkHateosException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.EntityModel;
@@ -29,9 +30,10 @@ public class TireRepresentationModelAssembler implements RepresentationModelAsse
             tireResource.add(linkTo(TireController.class).slash(tireDTO.getId()).withSelfRel());
 
             Method deleteTire = TireController.class.getMethod("deleteTire", long.class);
-            tireResource.add(linkTo(deleteTire.getDeclaringClass(),deleteTire, id).withSelfRel());
-        } catch (Exception ex){
+            tireResource.add(linkTo(deleteTire.getDeclaringClass(), deleteTire, id).withSelfRel());
+        } catch (Exception ex) {
             log.error("cannot link HATEOAS", ex);
+            throw new FailToLinkHateosException("Unable to link HATEOAS for TireDTO");
         }
         return tireResource;
     }
