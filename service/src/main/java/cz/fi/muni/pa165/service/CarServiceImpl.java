@@ -1,16 +1,14 @@
 package cz.fi.muni.pa165.service;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Car;
-import javax.inject.Inject;
-
 import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
 import java.util.List;
 /**
  * @author Radim Sasinka. 456315
