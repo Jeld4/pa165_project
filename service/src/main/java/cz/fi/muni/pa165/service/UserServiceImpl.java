@@ -7,7 +7,10 @@ import javax.inject.Inject;
 import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 /**
@@ -15,10 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Michal KLíma
  *
  */
-@org.springframework.stereotype.Service
+@Service
 public class UserServiceImpl implements UserService {
 
-    @Inject
+	private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+
+	@Inject
     private UserDao userDao;
 
 	
@@ -65,7 +71,15 @@ public class UserServiceImpl implements UserService {
 		userDao.removeCar(userId, carId);
 		
 	}
-	
-	
+
+	@Override
+	public boolean checkPassword(Long id, String password) {
+		if (id != null && !password.isEmpty()) {
+			log.error("CHECKING PASSWORDS");
+			return DigestUtils.md2Hex(password).toUpperCase().equals(this.findById(id).getPassword().toUpperCase());
+		}
+		return false;
+	}
+
 
 }

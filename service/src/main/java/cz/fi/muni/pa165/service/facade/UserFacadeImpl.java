@@ -70,6 +70,11 @@ public class UserFacadeImpl implements UserFacade {
 	public void removeCarFromUser(Long userId, Long carId) {
 		userService.removeCarFromUser(userId, carId);
 	}
-	
-	
+
+	@Override
+	public boolean checkPassword(Long id, String password) {
+		return userService.checkPassword(id, password);
+	}
+
+
 } 

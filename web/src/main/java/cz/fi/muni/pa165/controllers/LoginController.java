@@ -7,6 +7,8 @@ import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.UserRepresentationModelAssembler;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.hateoas.EntityModel;
@@ -18,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -33,6 +36,8 @@ public class LoginController {
 
     private UserFacade userFacade;
     private UserRepresentationModelAssembler userRepresentationModelAssembler;
+    private final static Logger log = LoggerFactory.getLogger(LoginController.class);
+
 
     public LoginController(@Autowired UserFacade userFacade,
                            @Autowired UserRepresentationModelAssembler userRepresentationModelAssembler) {
@@ -41,15 +46,21 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public final HttpStatus login(@RequestBody UserCreateDTO userCreateDTO, BindingResult bindingResult){
+    @ResponseBody
+    public final ResponseEntity login(@RequestBody UserCreateDTO userCreateDTO, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation during user login validation");
         }
         UserDTO foundUser = userFacade.getUserWithLogin(userCreateDTO.getLogin());
-        if (foundUser != null && DigestUtils.md2Hex(userCreateDTO.getPassword()).equals(foundUser.getPassword())){
-            return HttpStatus.OK;
+        log.debug("GIVEN PASSWORD " + userCreateDTO.getPassword());
+
+        if(foundUser == null){return null;}
+        if (userFacade.checkPassword(foundUser.getId(), userCreateDTO.getPassword())){
+            log.error("RETURNING OK STATUS");
+            return ResponseEntity.status(HttpStatus.OK).body(null);
         }else{
-            return HttpStatus.FORBIDDEN;
+            log.error("RETURNING UNAUTHORIZED STATUS");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
 }

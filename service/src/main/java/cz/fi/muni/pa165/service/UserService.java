@@ -53,4 +53,13 @@ public interface UserService {
      * @param carId
      */
     void removeCarFromUser(Long userId, Long carId);
+
+    /**
+     *  Controls passwords against database
+     * @param password given password
+     * @param id ID of user
+     * @return True if passwords is ok, False otherwise
+     */
+    boolean checkPassword(Long id, String password);
+
 }
