@@ -99,12 +99,6 @@ public class OrderController {
             orderFacade.removeOrder(id);
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("order " + id + " not found");
-        } catch (Throwable ex) {
-            Throwable rootCause=ex;
-            while ((ex = ex.getCause()) != null) {
-                rootCause = ex;
-            }
-            throw new ServerErrorException(rootCause.getMessage());
         }
     }
 
