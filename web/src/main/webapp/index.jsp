@@ -1,6 +1,6 @@
 <%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
-<%= request.getSession().getAttribute("currentUserId") %>
+
 <!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -37,10 +37,12 @@
         		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
                	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
     			<li ng-if="$root.logedUser != undefined " ng-click="logout()" ><a>Log Out</a></li>
-		    	<li ng-if="$root.logedUser != undefined "><a href="#!/user/{{logedUser.id}}">User info</a></li>
+
+		    	<li ng-if="$root.logedUser != undefined "><a href="#!/createOrder">Create order</a></li>
+		    	<li ng-if="$root.logedUser != undefined "><a href="#!/user/profile/{{logedUser.id}}">User info</a></li>
 		    
 			    <li class="dropdown" ng-if="$root.logedUser.isAdmin == true">
-	            		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
+	            		<a  class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
 		            <ul class="dropdown-menu">
 			            <li><a href="#!/allUsers">All users</a></li>
 		                <li><a href="#!/allOrders">All orders</a></li>

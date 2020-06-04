@@ -6,12 +6,15 @@ import java.util.Objects;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * class representing user
  * @author Michal Klima
  */
 @Entity
 @Table(name = "Users")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
 	@Id

@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.facade;
 
 import java.util.List;
 
+import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
 
@@ -49,6 +50,12 @@ public interface OrderFacade {
     void removeOrder(Long id);
 
     /**
+     * Changes the status of the order to Confirm
+     * @param id of the Order
+     */
+    void confirmOrder(Long id);
+
+    /**
      * Creates order to the user specified by users login
      * @param order
      * @param userLogin
@@ -69,5 +76,7 @@ public interface OrderFacade {
      * @param serviceId id of the service
      */
     void addServiceToOrder(Long orderId, Long serviceId);
+
+    CarDTO getOrderCar(Long orderId);
 
 }

@@ -5,6 +5,9 @@ import cz.fi.muni.pa165.enums.OrderState;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +20,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "Orders")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
     @Id
@@ -39,6 +43,9 @@ public class Order {
     @ManyToOne
     private User user;
 
+    @OneToOne
+    private Car car;
+
     /**
      * order nonparametric constructor
      */
@@ -47,6 +54,14 @@ public class Order {
         this.tires = new ArrayList<>();
         this.services = new ArrayList<>();
         this.state = OrderState.PENDING;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     /**

@@ -4,10 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 
-import cz.fi.muni.pa165.dto.OrderCreateDTO;
-import cz.fi.muni.pa165.dto.ServiceCreateDTO;
-import cz.fi.muni.pa165.dto.TireCreateDTO;
-import cz.fi.muni.pa165.dto.UserCreateDTO;
+import cz.fi.muni.pa165.dto.*;
+import cz.fi.muni.pa165.facade.*;
+import cz.fi.muni.pa165.service.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,15 +20,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import cz.fi.muni.pa165.enums.OrderState;
-import cz.fi.muni.pa165.facade.OrderFacade;
-import cz.fi.muni.pa165.facade.ServiceFacade;
-import cz.fi.muni.pa165.facade.TireFacade;
-import cz.fi.muni.pa165.facade.UserFacade;
-import cz.fi.muni.pa165.service.BeanMappingService;
-import cz.fi.muni.pa165.service.OrderService;
-import cz.fi.muni.pa165.service.ServiceService;
-import cz.fi.muni.pa165.service.TireService;
-import cz.fi.muni.pa165.service.UserService;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
@@ -51,6 +41,10 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @InjectMocks
     private TireFacade tireFacade;
 
+    @Autowired
+    @InjectMocks
+    private CarFacade carFacade;
+
     @Mock
     private OrderService orderService;
 
@@ -64,6 +58,9 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     private TireService tireService;
 
     @Mock
+    private CarService carService;
+
+    @Mock
     private BeanMappingService beanMappingService;
 
     private OrderCreateDTO order1;
@@ -71,6 +68,8 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     private OrderCreateDTO order3;
 
     private UserCreateDTO user1;
+
+    private CarCreateDTO car1;
 
     @BeforeClass
     void initMocks() {
@@ -109,11 +108,22 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         order1.setUser(userFacade.getUserWithId(userId));
         order2.setUser(userFacade.getUserWithId(userId));
         order3.setUser(userFacade.getUserWithId(userId));
+
+        car1 = new CarCreateDTO();
+        car1.setModel("aaa");
+        car1.setLicencePlate("asdasd");
+        carFacade.createCar(car1);
     }
 
     @AfterMethod
     void reset() {
         Mockito.reset(orderService);
+    }
+
+    @Test
+    public void getOrderCar() {
+        order1.setCar(carFacade.getAllCars().get(0));
+        assert(order1.getCar() != null);
     }
 
     @Test
@@ -172,7 +182,8 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     public void getOrdersByUser() {
 
         Long orderId = orderFacade.createOrder(order1, user1.getLogin());
-        assert (orderFacade.getOrdersByUser(userId).size() == 1);
+        orderFacade.createOrder(order2, user1.getLogin());
+        assert (orderFacade.getOrdersByUser(userId).size() == 2);
     }
 
 

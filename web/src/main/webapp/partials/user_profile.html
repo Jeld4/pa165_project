@@ -25,10 +25,11 @@
         <th scope="col">State</th>
         <th scope="col">Date</th>
         <th scope="col">Price</th>
+        <th scope="col">Cancel</th>
         <th scope="col">Detail</th>
     </tr>
     </thead>
-    <tbody ng-repeat="order in user.orders track by $index">
+    <tbody ng-repeat="order in orders track by $index">
     <tr>
         <td>{{order.state}}</td>
         <td>{{order.dateOfOrder}}</td>
@@ -36,6 +37,34 @@
         <td>
             <button ng-click="deleteOrder(order)" type="submit" class="btn btn-primary">Cancel</button>
         </td>
+        <td>
+            <a class="btn btn-primary" href="#!/order/{{order.id}}">Detail</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<H3>Cars</H3>
+
+<td>
+    <a class="btn btn-primary" href="#!/createCar">Add car</a>
+
+</td>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Licence plate</th>
+        <th scope="col">Model</th>
+        <th scope="col">Tire type</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="car in cars track by $index">
+    <tr>
+        <td>{{car.licencePlate}}</td>
+        <td>{{car.model}}</td>
+        <td>{{car.tireType}}</td>
     </tr>
     </tbody>
 </table>

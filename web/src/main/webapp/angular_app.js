@@ -21,10 +21,14 @@ pneuApp.config(['$routeProvider',
         when('/user/profile/:userId', {templateUrl: 'partials/user_profile.html', controller: 'UserProfileCtrl'}).
         when('/login', {templateUrl: 'partials/login.html', controller: 'LoginCtrl'}).
         when('/tire/:tireId', {templateUrl: 'partials/tire_info.html', controller: 'TireInfoCtrl'}).
-        when('/tire/:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
-        when('/service/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
-        when('/user/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
+
+        when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
+
+        when('/tire/edit:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
+        when('/service/edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user/edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
+        when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -49,6 +53,7 @@ eshopControllers.controller('AllOrdersCtrl',
     function ($scope, $rootScope, $routeParams, $http) {
         $http.get('/pa165/api/v1/orders').then(function (response) {
             $scope.orders = response.data['_embedded']['orderDTOList'];
+            console.log($scope.orders )
             console.log('AJAX loaded all orders ');
         });
     })
@@ -355,24 +360,195 @@ eshopControllers.controller('UserRegisterCtrl',
 	        };
 	    });
 
+eshopControllers.controller('CreateOrderCtrl',
+	    function ($scope, $routeParams, $http, $location, $rootScope) {
+	        //set object bound to form fields
+	        $scope.order = {
+	            'user': $rootScope.logedUser,
+	            'dateOfOrder': new Date(),
+	            'state': "PENDING",
+	            'tires': [],
+	            'services': [],
+	        };
+	     
+	        
+	        $http.get('/pa165/api/v1/tires').then(function (response) {
+	            $scope.tires = response.data['_embedded']['tireDTOList'];
+	            console.log('AJAX loaded all tires ');
+	        });
+	        
+	        $http.get('/pa165/api/v1/services').then(function (response) {
+	            $scope.services = response.data['_embedded']['serviceDTOList'];
+	            console.log('AJAX loaded all services ');
+	        });
+	        
+	        $scope.create = (order) => {
+	        	console.log(order)
+	        	$http({
+		                method: 'POST',
+		                url: 'api/v1/orders/create/' + $rootScope.logedUser.login,
+		                data: order,
+		                headers: { 'Content-Type': 'application/hal+json' }
+		            }).then(function success(response) {
+		                console.log('created order');
+		                var createdUser = response.data;
+		                //display confirmation alert
+		                $rootScope.successAlert = 'A new order was created';
+		                $location.path("/");
+		                
+		            }, function error(response) {
+		                //display error
+		                console.log("error when creating order");
+		                console.log(response);
+		                switch (response.data.code) {
+		                    case 'InvalidRequestException':
+		                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+		                        break;
+		                    default:
+		                        $rootScope.errorAlert = 'Cannot create order ! Reason given by the server: '+response.data.message;
+		                        break;
+		                }
+		            });
+	        	}
+	        
+	        
+	        $scope.addService = (service) => {
+	        	$scope.order.services.push(service)
+	        }
+
+	        $scope.addTire = (tire) => {
+	        	$scope.order.tires.push(tire)
+	        }
+	        
+	        $scope.removeService = (service) => {
+	        	$scope.order.services = $scope.order.services.filter(ser => {return ser.id != service.id})
+	        }   
+	        $scope.removeTire = (tire) => {
+	        	$scope.order.tires = $scope.order.tires.filter(tir => {return tir.id != tire.id})
+	        }
+	   }
+	)
+
+
+
+eshopControllers.controller('CarRegisterCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        $scope.car = {
+            'licencePlate': '',
+            'model': '',
+        };
+
+        // function called when submit button is clicked, creates product on server
+        $scope.create = function (car) {
+            console.log(car)
+            $http({
+                method: 'POST',
+                url: 'api/v1/cars/create/' + $rootScope.logedUser.id,
+                data: car
+            }).then(function success(response) {
+                console.log('created car');
+                var createdCar = response.data;
+                //display confirmation alert
+                $rootScope.successAlert = 'A new user "' + createdCar.licencePlate + '" was created';
+                //change view to list of products
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating user");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create car ! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
+
 eshopControllers.controller('UserProfileCtrl',
     function ($scope, $routeParams, $http, $location, $rootScope) {
         // get user id from URL fragment #/user/:userId
         var userId = $routeParams.userId;
         $http.get('/pa165/api/v1/users/' + userId).then(
-
             function (response) {
-
                 $scope.user = response.data;
                 console.log(response.data)
                 console.log('AJAX loaded detail of user ' + $scope.user.name);
             },
-
             function error(response) {
                 console.log("failed to load user "+userId);
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load user: '+response.data.message;
-            }
+            },
+
+            $scope.deleteOrder = (order) => {
+                console.log("deleting order with id=" + order.id);
+                $http.delete('/pa165/api/v1/orders/' + order.id).then(
+
+                    function success(response) {
+                        console.log('deleted order ' + order.id + ' on server');
+                        //display confirmation alert
+                        $rootScope.successAlert = 'Deleted order';
+
+                        $scope.user.orders = $scope.user.orders.filter( ord => {return ord.id != order.id})
+
+                    },
+                    function error(response) {
+                        console.log("error when deleting user");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete order ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
+            },
+
+            $scope.deleteCar = (car) => {
+                console.log("deleting car with id=" + car.id);
+                $http.delete('/pa165/api/v1/cars/' + car.id).then(
+
+                    function success(response) {
+                        console.log('deleted car ' + car.id + ' on server');
+                        //display confirmation alert
+                        $rootScope.successAlert = 'Deleted car';
+                    },
+                    function error(response) {
+                        console.log("error when deleting car");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent car ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete car ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
+            },
+
+            $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
+                function (response) {
+                    $scope.orders = response.data['_embedded']['orderDTOList'];
+                    console.log($scope.orders);
+                    console.log('AJAX loaded user orders');
+                }
+            ), $http.get('/pa165/api/v1/cars/getByUser/' + userId).then(
+                function (response) {
+                    $scope.cars = response.data['_embedded']['carDTOList'];
+                    console.log($scope.cars);
+                    console.log('AJAX loaded user cars');
+                }
+            )
         );
     });
 

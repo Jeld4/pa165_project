@@ -1,0 +1,110 @@
+<label class="control-label"><h2>Your current order</h2></label>
+<h3>Date: {{order.dateOfOrder}}</h3>
+<br>
+<H3> Selected services</H3>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="service in order.services track by $index">
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.description}}</td>
+        <td>{{service.price}}</td>
+        <td>
+            <a class="btn btn-primary"  ng-click="removeService(service)">Remove</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<H3> Selected tires</H3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Type</th>
+            <th scope="col">Size</th>
+            <th scope="col">Season</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="tire in order.tires track by $index">
+        <tr>
+            <td>{{tire.manufacturer}}</td>
+            <td>{{tire.type}}</td>
+            <td>{{tire.size}}</td>
+            <td>{{tire.season}}</td>
+            <td>{{tire.price}}</td>
+            <td>
+                <a class="btn btn-primary"  ng-click="removeTire(tire)">Remove</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+  <button class="btn btn-primary" type="submit" ng-click="create(order)">Create order</button>
+
+<br>
+<br>
+<br>
+
+<label class="control-label"><h3>Add to order:</h3></label>
+<br>
+<H2> Add service</H2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="service in services track by $index">
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.description}}</td>
+        <td>{{service.price}}</td>
+        <td>
+            <a class="btn btn-primary"  ng-click="addService(service)">Addl</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<H3> Add tire</H3>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Manufacturer</th>
+            <th scope="col">Type</th>
+            <th scope="col">Size</th>
+            <th scope="col">Season</th>
+            <th scope="col">Price</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="tire in tires track by $index">
+        <tr>
+            <td>{{tire.manufacturer}}</td>
+            <td>{{tire.type}}</td>
+            <td>{{tire.size}}</td>
+            <td>{{tire.season}}</td>
+            <td>{{tire.price}}</td>
+            <td>
+                <a class="btn btn-primary"  ng-click="addTire(tire)">Add</a>
+            </td>
+        </tr>
+	</tbody>
+</table>
+
+
+
+
+    

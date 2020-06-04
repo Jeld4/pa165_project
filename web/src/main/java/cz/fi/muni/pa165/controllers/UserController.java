@@ -63,8 +63,8 @@ public class UserController {
     }
     
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<UserDTO>> createUser(@RequestBody @Valid UserCreateDTO user, BindingResult bindingResult) throws Exception {
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public final HttpEntity<EntityModel<UserDTO>> createUser(@RequestBody UserCreateDTO user, BindingResult bindingResult) throws Exception {
        
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");

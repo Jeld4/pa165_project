@@ -1,10 +1,12 @@
 package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.CarDao;
+import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Car;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.entity.Tire;
+import cz.fi.muni.pa165.entity.User;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class CarServiceImpl implements CarService {
 
     @Inject
     private CarDao carDao;
+
+    @Inject
+    private UserDao userDao;
 
     @Override
     public Car findById(Long id) {
@@ -84,5 +89,9 @@ public class CarServiceImpl implements CarService {
         car.setTireType(tire.getType());
     }
 
-
+    @Override
+    public List<Car> getCarsByUser(Long userId) {
+        User user = userDao.getUserById(userId);
+        return user.getCars();
+    }
 }

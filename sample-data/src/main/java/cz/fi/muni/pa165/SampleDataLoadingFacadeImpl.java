@@ -65,9 +65,20 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         services1.add(s1);
         services1.add(s2);
 
-        User admin = user("admin", "admin", "admin", true);
-        User pepa = user("pepa123", "pepa123", "Pepa", false);
-        User jessica = user("jessica123", "jessica", "Jessica", false);
+        Car c1 = car("SUV", "SUV", "7B8 - 5670");
+        Car c2 = car("truck", "Truck", "8AX - 5877");
+        Car c3 = car("trabant", "trabant", "XXX - 1234");
+
+        List<Car> cars1 = new ArrayList<>();
+        cars1.add(c1);
+        cars1.add(c2);
+
+        List<Car> cars2 = new ArrayList<>();
+        cars2.add(c3);
+
+        User admin = user("admin", "admin", "admin", true, cars2);
+        User pepa = user("pepa123", "pepa123", "Pepa", false, cars1);
+        User jessica = user("jessica123", "jessica", "Jessica", false, null);
 
         Order order1 = order(pepa, tires1, services1);
         Order order2 = order(jessica, null, null);
@@ -75,8 +86,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Order order4 = order(jessica, null, null);
         Order order5 = order(admin, null, null);
 
-        Car c1 = car("SUV", "SUV", "7B8 - 5670");
-        Car c2 = car("truck", "Truck", "8AX - 5877");
     }
 
     private Tire tire(String man, String season, String type, BigDecimal price){
@@ -90,12 +99,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
 
-    private User user(String password, String login, String name, boolean isAdmin) {
+    private User user(String password, String login, String name, boolean isAdmin, List<Car> cars) {
         User user = new User();
         user.setPassword(password);
         user.setLogin(login);
         user.setName(name);
         user.setIsAdmin(isAdmin);
+        user.setCars(cars);
 
         userService.create(user);
         return user;

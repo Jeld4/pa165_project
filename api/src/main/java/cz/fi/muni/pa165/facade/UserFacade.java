@@ -44,7 +44,7 @@ public interface UserFacade {
 	/**
 	 * Adds car to user
 	 * @param userId
-	 * @param carrId
+	 * @param carId
 	 */
 	void addCarToUser(Long userId, Long carId);
 	
