@@ -1,51 +1,55 @@
 <H2> User info</H2>
 <h3>ID# {{user.id}}</h3>
 
-<table>
-
+<table class="table">
+	<thead>
 	<tr>
-		<td>
-			<p>Name: </p>
-		</td>
-		<td>
-			<p>{{user.name}}</p>
-		</td>
+		<th scope="col">Name</th>
+		<th scope="col">Login</th>
+		<th scope="col">Is Admin</th>
+		<th scope="col">Address</th>
+		<th scope="col">Telephone</th>
 	</tr>
-
+	</thead>
+	<tbody>
 	<tr>
-		<td>
-			<p>Login </p>
-		</td>
-		<td>
-			<p>{{user.login}}</p>
-		</td>
+		<td>{{user.name}}</td>
+		<td>{{user.login}}</td>
+		<td>{{user.isAdmin}}</td>
+		<td>{{user.userAddress}}</td>
+		<td>{{user.telephone}}</td>
 	</tr>
-	<tr>
-		<td>
-			<p>IsAdmin</p>
-		</td>
-		<td>
-			<p>{{user.isAdmin}}</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>Address</p>
-		</td>
-		<td>
-			<p>{{user.userAddress}}</p>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<p>Telephone</p>
-		</td>
-		<td>
-			<p>{{user.telephone}}</p>
-		</td>
-	</tr>
+	</tbody>
 </table>
 
 <div>
 	<button ng-click="deleteUser(user)" type="submit" class="btn btn-primary">Delete</button>
 </div>
+
+<H3>Orders</H3>
+
+<table class="table">
+	<thead>
+	<tr>
+		<th scope="col">State</th>
+		<th scope="col">Date</th>
+		<th scope="col">Price</th>
+		<th scope="col">Cancel</th>
+		<th scope="col">Detail</th>
+	</tr>
+	</thead>
+	<tbody ng-repeat="order in orders track by $index">
+	<tr>
+		<td>{{order.state}}</td>
+		<td>{{order.dateOfOrder}}</td>
+		<td>{{order.totalPrice}}</td>
+		<td>
+			<button ng-click="deleteOrder(order)" type="submit" class="btn btn-primary">Cancel</button>
+		</td>
+		<td>
+			<a class="btn btn-primary" href="#!/order/{{order.id}}">Detail</a>
+
+		</td>
+	</tr>
+	</tbody>
+</table>
