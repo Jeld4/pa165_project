@@ -7,6 +7,7 @@
 		<th scope="col">Is Admin</th>
 		<th scope="col">Detail</th>
 		<th scope="col">Edit</th>
+		<th scope="col">Delete</th>
 	</tr>
 	</thead>
 	<tbody ng-repeat="user in users track by $index">
@@ -19,6 +20,9 @@
 		</td>
 		<td>
 			<a class="btn btn-success" href="#!/user/edit{{user.id}}">Edit</a>
+		</td>
+		<td>
+			<button ng-click="deleteUser(user)" type="submit" class="btn btn-danger">Delete</button>
 		</td>
 	</tr>
 	</tbody>

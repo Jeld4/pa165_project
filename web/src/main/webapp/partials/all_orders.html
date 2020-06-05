@@ -6,6 +6,7 @@
         <th scope="col">Date</th>
         <th scope="col">Price</th>
         <th scope="col">Detail</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody ng-repeat="order in orders track by $index">
@@ -15,6 +16,9 @@
         <td>{{order.totalPrice}}</td>
         <td>
             <a class="btn btn-primary"  href="#!/order/{{order.id}}">Detail</a>
+        </td>
+        <td>
+            <button ng-click="deleteOrder(order)" type="submit" class="btn btn-danger">Delete</button>
         </td>
     </tr>
     </tbody>
