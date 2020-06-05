@@ -69,7 +69,7 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
 
         tire = new Tire();
         tire.setType("eee");
-        tire.setSize(50);
+        tire.setSize(BigDecimal.valueOf(50));
         tire.setPrice(new BigDecimal(80));
         tire.setSeason("snow");
         tire.setManufacturer("Michelin");

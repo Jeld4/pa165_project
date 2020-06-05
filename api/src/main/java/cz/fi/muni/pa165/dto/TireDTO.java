@@ -12,7 +12,7 @@ public class TireDTO {
     private long id;
     private String manufacturer;
     private String type;
-    private int size;
+    private BigDecimal size;
     private String season;
     private BigDecimal price;
 
@@ -44,7 +44,7 @@ public class TireDTO {
      * Method used to get size of the tire
      * @return size of the tire
      */
-    public int getSize() {
+    public BigDecimal getSize() {
         return size;
     }
 
@@ -92,7 +92,7 @@ public class TireDTO {
      * Method used to set size of the tire
      * @param size of the tire
      */
-    public void setSize(int size) {
+    public void setSize(BigDecimal size) {
         this.size = size;
     }
 

@@ -39,7 +39,7 @@ public interface TireFacade {
 
     /**
      * Returns tires of given manufacturer
-     * @param String manufacturer name
+     * @param manufacturer
      * @return list of tires
      */
     List<TireDTO> getTiresByManufacturer(String manufacturer);

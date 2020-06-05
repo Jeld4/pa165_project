@@ -22,7 +22,7 @@ public class Tire {
     private Long id;
     private String manufacturer;
     private String type;
-    private int size;
+    private BigDecimal size;
     private String season;
     private BigDecimal price;
 
@@ -40,7 +40,7 @@ public class Tire {
      * @param season
      * @param price
      */
-    public Tire(String manufacturer, String type, int size, String season, BigDecimal price) {
+    public Tire(String manufacturer, String type, BigDecimal size, String season, BigDecimal price) {
         this.manufacturer = manufacturer;
         this.type = type;
         this.size = size;
@@ -100,7 +100,7 @@ public class Tire {
      * get size
      * @return size
      */
-    public int getSize() {
+    public BigDecimal getSize() {
         return size;
     }
 
@@ -108,7 +108,7 @@ public class Tire {
      * set size
      * @param size
      */
-    public void setSize(int size) {
+    public void setSize(BigDecimal size) {
         this.size = size;
     }
 

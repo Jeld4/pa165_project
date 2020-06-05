@@ -36,16 +36,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Override
     public void loadData() throws IOException {
 
-        Tire t1 = tire("Barum","Winter", "Dry", BigDecimal.valueOf(420));
-        Tire t2 = tire("Michelin","Winter", "All-terain", BigDecimal.valueOf(420));
-        Tire t3 = tire("Barum","Winter", "Dry", BigDecimal.valueOf(330));
-        Tire t4 = tire("Cooper","Summer", "Wet", BigDecimal.valueOf(420));
-        Tire t5 = tire("Falken","Summer", "Low profile", BigDecimal.valueOf(500));
-        Tire t6 = tire("Goodyear","Winter", "Wet", BigDecimal.valueOf(430));
-        Tire t7 = tire("Continental","Summer", "Wet", BigDecimal.valueOf(350));
-        Tire t8 = tire("Toyo","Winter", "Truck", BigDecimal.valueOf(555));
-        Tire t9 = tire("Yokohama","Summer", "Snow", BigDecimal.valueOf(358));
-        Tire t10 = tire("Pirelli","Winter", "SUV", BigDecimal.valueOf(500));
+        Tire t1 = tire("Barum", BigDecimal.valueOf(2),"Winter", "Dry", BigDecimal.valueOf(420));
+        Tire t2 = tire("Michelin", BigDecimal.valueOf(3),"Winter", "All-terain", BigDecimal.valueOf(420));
+        Tire t3 = tire("Barum", BigDecimal.valueOf(2),"Winter", "Dry", BigDecimal.valueOf(330));
+        Tire t4 = tire("Cooper", BigDecimal.valueOf(2),"Summer", "Wet", BigDecimal.valueOf(420));
+        Tire t5 = tire("Falken", BigDecimal.valueOf(4),"Summer", "Low profile", BigDecimal.valueOf(500));
+        Tire t6 = tire("Goodyear", BigDecimal.valueOf(5),"Winter", "Wet", BigDecimal.valueOf(430));
+        Tire t7 = tire("Continental", BigDecimal.valueOf(7),"Summer", "Wet", BigDecimal.valueOf(350));
+        Tire t8 = tire("Toyo", BigDecimal.valueOf(1),"Winter", "Truck", BigDecimal.valueOf(555));
+        Tire t9 = tire("Yokohama", BigDecimal.valueOf(6),"Summer", "Snow", BigDecimal.valueOf(358));
+        Tire t10 = tire("Pirelli", BigDecimal.valueOf(2),"Winter", "SUV", BigDecimal.valueOf(500));
 
         List<Tire> tires1 = new ArrayList<>();
         tires1.add(t1);
@@ -83,9 +83,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     }
 
-    private Tire tire(String man, String season, String type, BigDecimal price){
+    private Tire tire(String man, BigDecimal size, String season, String type, BigDecimal price){
         Tire t = new Tire();
         t.setManufacturer(man);
+        t.setSize(size);
         t.setSeason(season);
         t.setPrice(price);
         t.setType(type);
