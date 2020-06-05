@@ -27,6 +27,17 @@ public class UserFacadeImpl implements UserFacade {
 	
 	@Override
 	public Long createUser(UserCreateDTO user) {
+
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null.");
+        } if (user.getLogin().isEmpty()) {
+            throw new IllegalArgumentException("Users login cannot be empty.");
+        } if (user.getName().isEmpty()) {
+            throw new IllegalArgumentException("Users name cannot be empty.");
+        } if (user.getPassword().isEmpty()) {
+            throw new IllegalArgumentException("Users passwor cannot be empty.");
+        }
+		
         User newUser = new User();
         
         newUser.setIsAdmin(user.getIsAdmin());
@@ -70,6 +81,11 @@ public class UserFacadeImpl implements UserFacade {
 	public void removeCarFromUser(Long userId, Long carId) {
 		userService.removeCarFromUser(userId, carId);
 	}
-	
-	
+
+	@Override
+	public boolean checkPassword(Long id, String password) {
+		return userService.checkPassword(id, password);
+	}
+
+
 } 

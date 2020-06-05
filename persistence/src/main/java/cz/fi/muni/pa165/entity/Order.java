@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.enums.OrderState;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -35,9 +36,9 @@ public class Order {
     @Enumerated
     private OrderState state;
 
-    @OneToMany
+    @ManyToMany
     private List<Tire> tires;
-    @OneToMany
+    @ManyToMany
     private List<Service> services;
 
     @ManyToOne

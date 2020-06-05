@@ -48,6 +48,9 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     
     Order order1;
     Order order2;
+
+    List<Service> services;
+    List<Tire> tires;
  
     @BeforeMethod
     public void createOrder() {
@@ -82,13 +85,13 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         tireDao.create(tire1);
         tireDao.create(tire2);
 
-        List<Tire> list1 = new ArrayList<Tire>();
+        tires = new ArrayList<Tire>();
         List<Tire> list2 = new ArrayList<Tire>();
-       
-        list1.add(tire1);
+
+        tires.add(tire1);
         list2.add(tire2);
         
-        order1.setTires(list1);
+        order1.setTires(tires);
         order2.setTires(list2);
 
         Service s1 = new Service();
@@ -98,10 +101,11 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
 
         serviceDao.create(s1);
 
-        List<Service> services = new ArrayList<>();
+        services = new ArrayList<>();
         services.add(s1);
 
         order1.setServices(services);
+        order2.setServices(services);
 
         User user = new User();
         userDao.createUser(user);
@@ -149,6 +153,8 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         List<Order> bef = orderDao.findAll();
         Order order3 = new Order();
         order3.setUser(user);
+        order3.setServices(services);
+        order3.setTires(tires);
         userDao.createUser(user);
         orderDao.create(order3);
         List<Order> aft = orderDao.findAll();
@@ -162,6 +168,8 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         userDao.createUser(user);
         Order order = new Order();
         order.setUser(user);
+        order.setServices(services);
+        order.setTires(tires);
         orderDao.create(order);
 
         assert(orderDao.findByUser(user).size() == 1);

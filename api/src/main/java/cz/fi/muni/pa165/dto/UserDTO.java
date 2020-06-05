@@ -16,6 +16,8 @@ public class UserDTO {
 	private String login;
 	private String password;
 	private Boolean isAdmin;
+	private String userAddress;
+	private String telephone;
 	
 	private List<Car> cars;
 	
@@ -113,7 +115,40 @@ public class UserDTO {
 	 */
 	public void setCars(List<Car> cars) {
 		this.cars = cars;
-	}	
+	}
+
+	/**
+	 * Gets User's Address
+	 * @param cars of the user
+	 */
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	/**
+	 * Sets User's address
+	 * @param cars of the user
+	 */
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	/**
+	 * Gets User's telephone
+	 * @param cars of the user
+	 */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	/**
+	 * Sets User's telephone
+	 * @param cars of the user
+	 */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
 
 	@Override
 	public boolean equals(Object o) {
@@ -138,4 +173,6 @@ public class UserDTO {
 		return name;
 	}
 
+	
+	
 }

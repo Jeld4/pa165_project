@@ -1,4 +1,4 @@
-<H2> All tires</H2>
+<H2>All tires</H2>
 <table class="table">
     <thead>
         <tr>
@@ -9,6 +9,7 @@
             <th scope="col">Price</th>
             <th scope="col">Detail</th>
             <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </tr>
     </thead>
     <tbody ng-repeat="tire in tires track by $index">
@@ -22,10 +23,10 @@
                 <a class="btn btn-primary"  href="#!/tire/{{tire.id}}">Detail</a>
             </td>
             <td>
-                <a class="btn btn-primary"  href="#!/tire/edit/{{tire.id}}">Edit</a>
+                <a class="btn btn-success"  href="#!/tire/edit/{{tire.id}}">Edit</a>
             </td>
             <td>
-                <a class="btn btn-primary" target="_blank" href="#!/tire/{{tire.id}}">Edit</a>
+                <a class="btn btn-danger"  ng-click="deleteTire(tire)">Delete</a>
             </td>
         </tr>
     </tbody>

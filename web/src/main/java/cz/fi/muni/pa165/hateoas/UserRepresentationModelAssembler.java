@@ -2,6 +2,7 @@ package cz.fi.muni.pa165.hateoas;
 
 import cz.fi.muni.pa165.controllers.UserController;
 import cz.fi.muni.pa165.dto.UserDTO;
+import cz.fi.muni.pa165.exceptions.FailToLinkHateosException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.EntityModel;
@@ -31,8 +32,9 @@ public class UserRepresentationModelAssembler implements RepresentationModelAsse
             Method deleteUser = UserController.class.getMethod("deleteUser", long.class);
             userResource.add(linkTo(deleteUser.getDeclaringClass(),deleteUser, id).withRel("delete"));
 
-            } catch (Exception ex){
+            } catch (Exception ex) {
             log.error("cannot link HATEOAS", ex);
+            throw new FailToLinkHateosException("Unable to link HATEOAS for UserDTO");
         }
         return userResource;
     }

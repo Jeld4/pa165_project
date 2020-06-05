@@ -24,9 +24,9 @@ pneuApp.config(['$routeProvider',
 
         when('/createOrder', {templateUrl: 'partials/create_order.html', controller: 'CreateOrderCtrl'}).
 
-        when('/tire/edit:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
-        when('/service/edit:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
-        when('/user/edit:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
+        when('/tire/edit/:tireId', {templateUrl: 'partials/tire_edit.html', controller: 'TireEditCtrl'}).
+        when('/service/edit/:serviceId', {templateUrl: 'partials/service_edit.html', controller: 'ServiceEditCtrl'}).
+        when('/user/edit/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
@@ -81,6 +81,30 @@ eshopControllers.controller('AllTiresCtrl',
         $http.get('/pa165/api/v1/tires').then(function (response) {
             $scope.tires = response.data['_embedded']['tireDTOList'];
             console.log('AJAX loaded all tires ');
+            
+            $scope.deleteTire = (tire) => {
+                console.log("deleting tire with id = " + tire.id);
+                $http.delete('/pa165/api/v1/tires/' + tire.id).then(
+                    function success(response) {
+                        console.log('deleted tire ' + tire.id + ' on server');
+                        $rootScope.successAlert = 'Deleted tire';
+                    },
+                    function error(response) {
+                        console.log("error when deleting user");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete order ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
+
+            }
+            
         });
     })
 
@@ -167,7 +191,7 @@ pneuApp.run(function ($rootScope,$http) {
  * Product detail page
  */
 eshopControllers.controller('OrderInfoCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
+    function ($scope, $rootScope, $routeParams, $location, $http) {
         var orderId = $routeParams.orderId;
         $http.get('/pa165/api/v1/orders/' + orderId).then(
             function (response) {
@@ -178,7 +202,33 @@ eshopControllers.controller('OrderInfoCtrl',
             function error(response) {
                 console.log(response);
                 $rootScope.warningAlert = 'Cannot load order: '+response.data.message;
+            },
+            
+            $scope.removeOrder = (order) => {
+                console.log("deleting order with id = " + order.id);
+                $http.delete('/pa165/api/v1/orders/' + order.id).then(
+                    function success(response) {
+                    	
+                        console.log('deleted order ' + order.id + ' on server');
+                        //display confirmation alert
+                        $rootScope.successAlert = 'Deleted order';
+                        $location.path("/allOrders");
+                    },
+                    function error(response) {
+                        console.log("error when deleting user");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete order ! Reason given by the server: '+response.data.message;
+                                break;
+                        }
+                    }
+                );
             }
+            
         );
     });
 
@@ -314,7 +364,14 @@ eshopControllers.controller('UserInfoCtrl',
                         }
                     }
                 );
-    		}
+    		},
+            $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
+                function (response) {
+                    $scope.orders = response.data['_embedded']['orderDTOList'];
+                    console.log($scope.orders);
+                    console.log('AJAX loaded user orders');
+                }
+            )
         );
     });
 
@@ -384,6 +441,11 @@ eshopControllers.controller('CreateOrderCtrl',
 	        
 	        $scope.create = (order) => {
 	        	console.log(order)
+	        	
+	        	if (!order.tires && !order.services) {
+	        		$rootScope.errorAlert = 'Cannot create empty order';
+	        	}
+	        	
 	        	$http({
 		                method: 'POST',
 		                url: 'api/v1/orders/create/' + $rootScope.logedUser.login,

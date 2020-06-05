@@ -53,17 +53,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         tires1.add(t3);
         tires1.add(t4);
         List<Tire> tires2 = new ArrayList<>();
-        tires1.add(t5);
-        tires1.add(t6);
-        tires1.add(t7);
-        tires1.add(t8);
+        tires2.add(t5);
+        tires2.add(t6);
+        tires2.add(t7);
+        tires2.add(t8);
 
         Service s1 = service(new BigDecimal(50), "Come to our service and we check/change your tires", "Tires change");
         Service s2 = service(new BigDecimal(150), "Wheel balancing", "Calibration of wheels");
 
         List<Service> services1 = new ArrayList<>();
         services1.add(s1);
-        services1.add(s2);
 
         Car c1 = car("SUV", "SUV", "7B8 - 5670");
         Car c2 = car("truck", "Truck", "8AX - 5877");
@@ -76,15 +75,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         List<Car> cars2 = new ArrayList<>();
         cars2.add(c3);
 
-        User admin = user("admin", "admin", "admin", true, cars2);
-        User pepa = user("pepa123", "pepa123", "Pepa", false, cars1);
-        User jessica = user("jessica123", "jessica", "Jessica", false, null);
+        User admin = user("admin", "admin", "Administrator", true, cars2, "BigCity, LongStreet 1243", "+45086713924");
+        User pepa = user("pepa123", "pepa123", "Pepa", false, cars1, "ShortCity, Short 1243", "+45086713924");
+        User jessica = user("jessica123", "jessica", "Jessica", false, null, "Tiny Ville, Blue 1243", "+341243278569");
 
         Order order1 = order(pepa, tires1, services1);
-        Order order2 = order(jessica, null, null);
-        Order order3 = order(pepa, null, null);
-        Order order4 = order(jessica, null, null);
-        Order order5 = order(admin, null, null);
 
     }
 
@@ -99,13 +94,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return t;
     }
 
-    private User user(String password, String login, String name, boolean isAdmin, List<Car> cars) {
+    private User user(String password, String login, String name, boolean isAdmin, List<Car> cars, String address, String phone) {
         User user = new User();
         user.setPassword(password);
         user.setLogin(login);
         user.setName(name);
         user.setIsAdmin(isAdmin);
         user.setCars(cars);
+        user.setUserAddress(address);
+        user.setTelephone(phone);
 
         userService.create(user);
         return user;

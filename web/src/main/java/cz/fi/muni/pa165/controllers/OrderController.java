@@ -53,9 +53,10 @@ public class OrderController {
     @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
     public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) throws Exception {
 
-        Long id = orderFacade.createOrder(order,userLogin);
+        Long id = orderFacade.createOrder(order, userLogin);
         return HttpStatus.OK;
     }
+
     @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
@@ -64,6 +65,7 @@ public class OrderController {
         EntityModel<OrderDTO> orderModel = orderRepresentationModelAssembler.toModel(orderDTO);
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/{id}/cancel", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) throws Exception {
         OrderDTO orderDTO = orderFacade.getOrderById(id);
@@ -84,8 +86,8 @@ public class OrderController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) throws Exception{
-        if(bindingResult.hasErrors()) {
+    public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) throws Exception {
+        if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
         }
         Long id = orderFacade.createOrder(order, user.getLogin());
@@ -99,12 +101,6 @@ public class OrderController {
             orderFacade.removeOrder(id);
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("order " + id + " not found");
-        } catch (Throwable ex) {
-            Throwable rootCause=ex;
-            while ((ex = ex.getCause()) != null) {
-                rootCause = ex;
-            }
-            throw new ServerErrorException(rootCause.getMessage());
         }
     }
 

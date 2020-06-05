@@ -3,8 +3,7 @@ package cz.fi.muni.pa165.dto;
 import java.util.List;
 import java.util.Objects;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
@@ -12,19 +11,25 @@ import javax.validation.constraints.Size;
  */
 public class UserCreateDTO {
 	
-	@NotBlank
+	@NotEmpty
     @Size(min = 2, max=32)	
 	private String name;
     
-	@NotBlank
+	@NotEmpty
     @Size(min = 3, max=32)
 	private String login;
 
     
-	@NotBlank
+	@NotEmpty
     @Size(min = 3, max=32)
 	private String password;
-    
+
+	@NotEmpty
+	private String userAddress;
+	
+	@NotEmpty
+	private String telephone;
+
     
 	private Boolean isAdmin;
 	private List<CarDTO> cars;
@@ -107,6 +112,22 @@ public class UserCreateDTO {
 	 */
 	public void setCars(List<CarDTO> cars) {
 		this.cars = cars;
+	}
+
+	public String getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(String userAddress) {
+		this.userAddress = userAddress;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	@Override
