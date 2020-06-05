@@ -364,7 +364,14 @@ eshopControllers.controller('UserInfoCtrl',
                         }
                     }
                 );
-    		}
+    		},
+            $http.get('/pa165/api/v1/orders/getByUser/' + userId).then(
+                function (response) {
+                    $scope.orders = response.data['_embedded']['orderDTOList'];
+                    console.log($scope.orders);
+                    console.log('AJAX loaded user orders');
+                }
+            )
         );
     });
 

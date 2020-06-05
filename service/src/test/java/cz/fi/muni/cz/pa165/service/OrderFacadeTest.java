@@ -110,6 +110,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         user1.setLogin("TestSubject");
         user1.setPassword("Number62");
         user1.setIsAdmin(false);
+        user1.setName("John");
 
         userId = userFacade.createUser(user1);
 

@@ -61,7 +61,7 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
         userCreateDTO3 = new UserCreateDTO();
         userCreateDTO3.setName("Felix Saulovich");
         userCreateDTO3.setLogin("bigSaul_302");
-        userCreateDTO3.setPassword("");
+        userCreateDTO3.setPassword("xxx");
 
 
     }
