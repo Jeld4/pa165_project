@@ -18,6 +18,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerErrorException;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
+import javax.persistence.TransactionRequiredException;
 import javax.validation.Valid;
 
 /**
@@ -73,6 +76,8 @@ public class TireController {
             tireFacade.deleteTire(id);
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Tire with id " + id + " cannot be found.");
+        } catch (TransactionRequiredException ex) {
+        	throw new InvalidRequestException("You cant delete tire which is part of some orders");
         }
     }
 
