@@ -43,7 +43,7 @@ public class TireServiceTest extends AbstractTransactionalTestNGSpringContextTes
         tire.setManufacturer("Barum");
         tire.setPrice(new BigDecimal(6500));
         tire.setSeason("Summer");
-        tire.setSize(16);
+        tire.setSize(BigDecimal.valueOf(16));
     }
 
 

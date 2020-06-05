@@ -1,6 +1,7 @@
 package cz.fi.muni.pa165.dto;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -10,12 +11,22 @@ import java.util.Objects;
  */
 public class TireCreateDTO {
 
-    @NotNull
+    @NotEmpty
+    @Size(min = 2, max=32)
     private String manufacturer;
 
-    @NotNull
+    @NotEmpty
+    @Size(min = 3, max=32)
     private String type;
 
+    @NotEmpty
+    private BigDecimal size;
+
+    @NotEmpty
+    @Size(min = 3, max=32)
+    private String season;
+
+    @NotEmpty
     private BigDecimal price;
 
     /**
@@ -51,6 +62,38 @@ public class TireCreateDTO {
     }
 
     /**
+     * Method to get season
+     * @return season
+     */
+    public String getSeason() {
+        return season;
+    }
+
+    /**
+     * Method to set season
+     * @param season
+     */
+    public void setSeason(String season) {
+        this.season = season;
+    }
+
+    /**
+     * Method to get size
+     * @return size
+     */
+    public BigDecimal getSize() {
+        return size;
+    }
+
+    /**
+     * Method to set size
+     * @param size
+     */
+    public void setSize(BigDecimal size) {
+        this.size = size;
+    }
+
+    /**
      * Method used to get price of the tire
      * @return price of the tire
      */
@@ -67,19 +110,20 @@ public class TireCreateDTO {
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        if (!super.equals(object)) return false;
-        TireCreateDTO that = (TireCreateDTO) object;
-        return price == that.price &&
-                Objects.equals(manufacturer, that.manufacturer) &&
-                Objects.equals(type, that.type);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TireCreateDTO that = (TireCreateDTO) o;
+        return Objects.equals(manufacturer, that.manufacturer) &&
+                Objects.equals(type, that.type) &&
+                Objects.equals(size, that.size) &&
+                Objects.equals(season, that.season) &&
+                Objects.equals(price, that.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(manufacturer, type, price);
+        return Objects.hash(manufacturer, type, size, season, price);
     }
 
     @Override
@@ -87,7 +131,10 @@ public class TireCreateDTO {
         return "TireCreateDTO{" +
                 "manufacturer='" + manufacturer + '\'' +
                 ", type='" + type + '\'' +
+                ", size=" + size +
+                ", season='" + season + '\'' +
                 ", price=" + price +
                 '}';
     }
+
 }

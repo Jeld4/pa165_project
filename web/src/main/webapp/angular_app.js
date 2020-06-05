@@ -29,6 +29,7 @@ pneuApp.config(['$routeProvider',
         when('/user/edit/:userId', {templateUrl: 'partials/user_edit.html', controller: 'UserEditCtrl'}).
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
+        when('/createTire', {templateUrl: 'partials/tire_create.html', controller: 'CreateTireCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
         //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
         //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
@@ -173,7 +174,7 @@ eshopControllers.controller('AllTiresCtrl',
         $http.get('/pa165/api/v1/tires').then(function (response) {
             $scope.tires = response.data['_embedded']['tireDTOList'];
             console.log('AJAX loaded all tires ');
-            
+
             $scope.deleteTire = (tire) => {
                 console.log("deleting tire with id = " + tire.id);
                 $http.delete('/pa165/api/v1/tires/' + tire.id).then(
@@ -583,6 +584,45 @@ eshopControllers.controller('CreateOrderCtrl',
 	   }
 	)
 
+eshopControllers.controller('CreateTireCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        $scope.tire = {
+            'manufacturer': '',
+            'type': '',
+            'size': '',
+            'season': '',
+            'price': '',
+        };
+
+        $scope.create = function (tire) {
+            console.log(tire)
+            $http({
+                method: 'POST',
+                url: 'api/v1/tires/create/',
+                data: tire
+            }).then(function success(response) {
+                console.log('created tire');
+                var createdTire = response.data;
+                //display confirmation alert
+                $rootScope.successAlert = 'A new tire "' + createdTire.id + '" was created';
+                //change view to list of products
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating tire");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server! ';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create tire! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
 
 
 eshopControllers.controller('CarRegisterCtrl',
@@ -604,19 +644,19 @@ eshopControllers.controller('CarRegisterCtrl',
                 console.log('created car');
                 var createdCar = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new user "' + createdCar.licencePlate + '" was created';
+                $rootScope.successAlert = 'A new car "' + createdCar.licencePlate + '" was created';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
                 //display error
-                console.log("error when creating user");
+                console.log("error when creating car");
                 console.log(response);
                 switch (response.data.code) {
                     case 'InvalidRequestException':
-                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
                         break;
                     default:
-                        $rootScope.errorAlert = 'Cannot create car ! Reason given by the server: '+response.data.message;
+                        $rootScope.errorAlert = 'Cannot create car! Reason given by the server: '+response.data.message;
                         break;
                 }
             });
