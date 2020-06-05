@@ -1,4 +1,4 @@
-<label class="control-label"><h2>Your current order</h2></label>
+<h2 style="text-align: center;">New order</h2>
 <h3>Date: {{order.dateOfOrder}}</h3>
 <br>
 <H3> Selected services</H3>
@@ -8,7 +8,7 @@
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Price</th>
-        <th scope="col">Detail</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody ng-repeat="service in order.services track by $index">
@@ -17,7 +17,7 @@
         <td>{{service.description}}</td>
         <td>{{service.price}}</td>
         <td>
-            <a class="btn btn-primary" ng-click="removeService(service)">Remove</a>
+            <a class="btn btn-danger" ng-click="removeService(service)">Remove</a>
         </td>
     </tr>
     </tbody>
@@ -32,7 +32,7 @@
         <th scope="col">Size</th>
         <th scope="col">Season</th>
         <th scope="col">Price</th>
-        <th scope="col"></th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody ng-repeat="tire in order.tires track by $index">
@@ -43,27 +43,28 @@
         <td>{{tire.season}}</td>
         <td>{{tire.price}}</td>
         <td>
-            <a class="btn btn-primary" ng-click="removeTire(tire)">Remove</a>
+            <a class="btn btn-danger" ng-click="removeTire(tire)">Remove</a>
         </td>
     </tr>
     </tbody>
 </table>
-<button class="btn btn-primary" type="submit" ng-click="create(order)">Create order</button>
+<button class="btn btn-success" type="submit" ng-click="create(order)">Create order</button>
 
 <br>
 <br>
 <br>
 
-<label class="control-label"><h3>Add to order:</h3></label>
+<h2 style="text-align: center;">Add to order</h2>
 <br>
-<H2> Add service</H2>
+
+<H3> Add service</H3>
 <table class="table">
     <thead>
     <tr>
         <th scope="col">Name</th>
         <th scope="col">Description</th>
         <th scope="col">Price</th>
-        <th scope="col">Detail</th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody ng-repeat="service in services track by $index">
@@ -72,7 +73,7 @@
         <td>{{service.description}}</td>
         <td>{{service.price}}</td>
         <td>
-            <a class="btn btn-primary" ng-click="addService(service)">Add</a>
+            <a class="btn btn-success" ng-click="addService(service)">Add</a>
         </td>
     </tr>
     </tbody>
@@ -84,10 +85,10 @@
     <tr>
         <th scope="col">Manufacturer</th>
         <th scope="col">Type</th>
-        <th scope="col">Size</th>delete
+        <th scope="col">Size</th>
         <th scope="col">Season</th>
         <th scope="col">Price</th>
-        <th scope="col"></th>
+        <th scope="col">Action</th>
     </tr>
     </thead>
     <tbody ng-repeat="tire in tires track by $index">
@@ -98,7 +99,7 @@
         <td>{{tire.season}}</td>
         <td>{{tire.price}}</td>
         <td>
-            <a class="btn btn-primary" ng-click="addTire(tire)">Add</a>
+            <a class="btn btn-success" ng-click="addTire(tire)">Add</a>
         </td>
     </tr>
     </tbody>
