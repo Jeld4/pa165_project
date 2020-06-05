@@ -42,12 +42,38 @@ pneuApp.config(['$routeProvider',
     }]);
 
 eshopControllers.controller('AllUsersCtrl',
-	    function ($scope, $rootScope, $routeParams, $http) {
-	$http.get('/pa165/api/v1/users').then(function (response) {
-        $scope.users = response.data['_embedded']['userDTOList'];
-        console.log('AJAX loaded all users ');
+    function ($scope, $rootScope, $routeParams, $http) {
+	    $http.get('/pa165/api/v1/users').then(function (response) {
+            $scope.users = response.data['_embedded']['userDTOList'];
+            console.log('AJAX loaded all users ');
+        });
+
+        $scope.deleteUser = (user) => {
+            if ($rootScope.logedUser.id === user.id) {
+                $rootScope.errorAlert = 'It is not possible to delete currently logged user!';
+            } else {
+                console.log("deleting user with id = " + user.id);
+                $http.delete('/pa165/api/v1/users/' + user.id).then(
+                    function success(response) {
+                        console.log('deleted user ' + user.id + ' on server');
+                        $rootScope.successAlert = 'Deleted user';
+                    },
+                    function error(response) {
+                        console.log("error when deleting user");
+                        console.log(response);
+                        switch (response.data.code) {
+                            case 'ResourceNotFoundException':
+                                $rootScope.errorAlert = 'Cannot delete non-existent user! ';
+                                break;
+                            default:
+                                $rootScope.errorAlert = 'Cannot delete user! There are some orders assigned to this user.';
+                                break;
+                        }
+                    }
+                );
+            }
+        }
     });
-	        })
 
 eshopControllers.controller('AllOrdersCtrl',
     function ($scope, $rootScope, $routeParams, $http) {
@@ -56,6 +82,28 @@ eshopControllers.controller('AllOrdersCtrl',
             console.log($scope.orders )
             console.log('AJAX loaded all orders ');
         });
+
+        $scope.deleteOrder = (order) => {
+            console.log("deleting order with id = " + order.id);
+            $http.delete('/pa165/api/v1/orders/' + order.id).then(
+                function success(response) {
+                    console.log('deleted order ' + order.id + ' on server');
+                    $rootScope.successAlert = 'Deleted order';
+                },
+                function error(response) {
+                    console.log("error when deleting order");
+                    console.log(response);
+                    switch (response.data.code) {
+                        case 'ResourceNotFoundException':
+                            $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                            break;
+                        default:
+                            $rootScope.errorAlert = 'Cannot delete order! Reason given by the server: '+response.data.message;
+                            break;
+                    }
+                }
+            );
+        }
     })
 
 eshopControllers.controller('AllCarsCtrl',
@@ -64,6 +112,28 @@ eshopControllers.controller('AllCarsCtrl',
             $scope.cars = response.data['_embedded']['carDTOList'];
             console.log('AJAX loaded all cars ');
         });
+
+        $scope.deleteCar = (car) => {
+            console.log("deleting car with id = " + car.id);
+            $http.delete('/pa165/api/v1/cars/' + car.id).then(
+                function success(response) {
+                    console.log('deleted car ' + car.id + ' on server');
+                    $rootScope.successAlert = 'Deleted car';
+                },
+                function error(response) {
+                    console.log("error when deleting car");
+                    console.log(response);
+                    switch (response.data.code) {
+                        case 'ResourceNotFoundException':
+                            $rootScope.errorAlert = 'Cannot delete non-existent car! ';
+                            break;
+                        default:
+                            $rootScope.errorAlert = 'Cannot delete car! This car is assigned to some user.';
+                            break;
+                    }
+                }
+            );
+        }
     })
 
 
@@ -73,6 +143,28 @@ eshopControllers.controller('AllServicesCtrl',
             $scope.services = response.data['_embedded']['serviceDTOList'];
             console.log('AJAX loaded all services ');
         });
+
+        $scope.deleteService = (service) => {
+            console.log("deleting service with id = " + service.id);
+            $http.delete('/pa165/api/v1/services/' + service.id).then(
+                function success(response) {
+                    console.log('deleted service ' + service.id + ' on server');
+                    $rootScope.successAlert = 'Deleted service';
+                },
+                function error(response) {
+                    console.log("error when deleting service");
+                    console.log(response);
+                    switch (response.data.code) {
+                        case 'ResourceNotFoundException':
+                            $rootScope.errorAlert = 'Cannot delete non-existent service! ';
+                            break;
+                        default:
+                            $rootScope.errorAlert = 'Cannot delete service! It is part of some order.';
+                            break;
+                    }
+                }
+            );
+        }
     })
 
 
@@ -90,14 +182,14 @@ eshopControllers.controller('AllTiresCtrl',
                         $rootScope.successAlert = 'Deleted tire';
                     },
                     function error(response) {
-                        console.log("error when deleting user");
+                        console.log("error when deleting tire");
                         console.log(response);
                         switch (response.data.code) {
                             case 'ResourceNotFoundException':
-                                $rootScope.errorAlert = 'Cannot delete non-existent order ! ';
+                                $rootScope.errorAlert = 'Cannot delete non-existent tire ! ';
                                 break;
                             default:
-                                $rootScope.errorAlert = 'Cannot delete order ! Reason given by the server: '+response.data.message;
+                                $rootScope.errorAlert = 'Cannot delete tire! It is part of some order.';
                                 break;
                         }
                     }

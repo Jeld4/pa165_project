@@ -7,6 +7,7 @@
         <th scope="col">Price</th>
         <th scope="col">Detail</th>
         <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
     </tr>
     </thead>
     <tbody ng-repeat="service in services track by $index">
@@ -19,6 +20,9 @@
         </td>
         <td>
             <a class="btn btn-success"  href="#!/service/edit/{{service.id}}">Edit</a>
+        </td>
+        <td>
+            <button ng-click="deleteService(service)" type="submit" class="btn btn-danger">Delete</button>
         </td>
     </tr>
     </tbody>
