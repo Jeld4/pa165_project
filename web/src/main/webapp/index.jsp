@@ -35,7 +35,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
         		<li ng-if="$root.logedUser == undefined"><a href="#!/userRegister">Register</a></li>
-               	<li ng-if="$root.logedUser == undefined"><a href="#!/login">login</a></li>
+               	<li ng-if="$root.logedUser == undefined"><a href="#!/login">Login</a></li>
     			<li ng-if="$root.logedUser != undefined " ng-click="logout()" ><a>Log Out</a></li>
 
 		    	<li ng-if="$root.logedUser != undefined "><a href="#!/createOrder">Create order</a></li>

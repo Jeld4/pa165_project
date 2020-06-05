@@ -1,45 +1,22 @@
 <H2> Service info</H2>
-<h3>ID# {{service.id}}</h3>
 
-<table>
-
+<table class="table">
+    <thead>
     <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.description}}</td>
+        <td>{{service.price}}</td>
         <td>
-            <p>Id: </p>
-        </td>
-        <td>
-            <p>{{service.id}}</p>
+            <button ng-click="removeService(service)" type="submit" class="btn btn-danger">Delete</button>
         </td>
     </tr>
-
-    <tr>
-        <td>
-            <p>Name: </p>
-        </td>
-        <td>
-            <p>{{service.name}}</p>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <p>Description: </p>
-        </td>
-        <td>
-            <p>{{service.description}}</p>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <p>Price: </p>
-        </td>
-        <td>
-            <p>{{service.price}}</p>
-        </td>
-    </tr>
+    </tbody>
 </table>
-
-<div>
-    <button ng-click="removeService(service)" type="submit" class="btn btn-primary">Delete</button>
-</div>

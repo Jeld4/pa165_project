@@ -1,114 +1,79 @@
-<H2> Order info</H2>
-<h3>ID# {{order.id}}</h3>
+<H3> Order info</H3>
 
-<table>
-
+<table class="table">
+    <thead>
     <tr>
-        <td>
-            <p>Id: </p>
-        </td>
-        <td>
-            <p>{{order.id}}</p>
-        </td>
+        <th scope="col">Id</th>
+        <th scope="col">Date of order</th>
+        <th scope="col">State</th>
     </tr>
-
+    </thead>
+    <tbody>
     <tr>
-        <td>
-            <p>Date of order: </p>
-        </td>
-        <td>
-            <p>{{order.dateOfOrder}}</p>
-        </td>
+        <td>{{order.id}}</td>
+        <td>{{order.dateOfOrder}}</td>
+        <td>{{order.state}}</td>
     </tr>
-
-    <tr>
-        <td>
-            <p>State: </p>
-        </td>
-        <td>
-            <p>{{order.state}}</p>
-        </td>
-    </tr>
-
-    <tr>
-        <td>
-            <p>Tires: </p>
-        </td>
-    </tr>
-
-    <tr>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Manufacturer</th>
-                    <th scope="col">Type</th>
-                    <th scope="col">Size</th>
-                    <th scope="col">Season</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Detail</th>
-                </tr>
-                </thead>
-                <tbody ng-repeat="tire in order.tires track by $index">
-                <tr>
-                    <td>{{tire.manufacturer}}</td>
-                    <td>{{tire.type}}</td>
-                    <td>{{tire.size}}</td>
-                    <td>{{tire.season}}</td>
-                    <td>{{tire.price}}</td>
-                    <td>
-
-                        <a class="btn btn-primary"  href="#!/tire/{{tire.id}}">Detail</a>
-
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-    </tr>
-
-    <tr>
-        <td>
-            <p>Services: </p>
-        </td>
-    </tr>
-
-    <tr>
-
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Detail</th>
-                </tr>
-                </thead>
-                <tbody ng-repeat="service in order.services track by $index">
-                <tr>
-                    <td>{{service.name}}</td>
-                    <td>{{service.description}}</td>
-                    <td>{{service.price}}</td>
-                    <td>
-                        <a class="btn btn-primary"  href="#!/service/{{service.id}}">Detail</a>
-
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-    </tr>
-
-    <tr>
-        <td>
-            <p>Total price: </p>
-        </td>
-        <td>
-            <p>{{order.totalPrice}}</p>
-        </td>
-    </tr>
+    </tbody>
 </table>
 
+<h2>Tires</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Type</th>
+        <th scope="col">Size</th>
+        <th scope="col">Season</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="tire in order.tires track by $index">
+    <tr>
+        <td>{{tire.manufacturer}}</td>
+        <td>{{tire.type}}</td>
+        <td>{{tire.size}}</td>
+        <td>{{tire.season}}</td>
+        <td>{{tire.price}}</td>
+        <td>
+
+            <a class="btn btn-primary" href="#!/tire/{{tire.id}}">Detail</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Services</h2>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="service in order.services track by $index">
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.description}}</td>
+        <td>{{service.price}}</td>
+        <td>
+            <a class="btn btn-primary" href="#!/service/{{service.id}}">Detail</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Total Price</h2>
+<h2>{{order.totalPrice}}</h2>
+
+
 <div>
-    <button ng-click="removeOrder(order)" type="submit" class="btn btn-primary">Delete</button>
+    <button ng-click="removeOrder(order)" type="submit" class="btn btn-danger">Delete</button>
 </div>

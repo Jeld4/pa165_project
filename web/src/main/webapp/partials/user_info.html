@@ -23,7 +23,7 @@
 </table>
 
 <div>
-	<button ng-click="deleteUser(user)" type="submit" class="btn btn-primary">Delete</button>
+	<button ng-click="deleteUser(user)" type="submit" class="btn btn-danger">Delete</button>
 </div>
 
 <H3>Orders</H3>
@@ -44,7 +44,7 @@
 		<td>{{order.dateOfOrder}}</td>
 		<td>{{order.totalPrice}}</td>
 		<td>
-			<button ng-click="deleteOrder(order)" type="submit" class="btn btn-primary">Cancel</button>
+			<button ng-click="deleteOrder(order)" type="submit" class="btn btn-danger">Cancel</button>
 		</td>
 		<td>
 			<a class="btn btn-primary" href="#!/order/{{order.id}}">Detail</a>
