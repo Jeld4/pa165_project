@@ -5,6 +5,7 @@ import cz.fi.muni.pa165.dto.OrderCreateDTO;
 import cz.fi.muni.pa165.dto.OrderDTO;
 import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
+import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
@@ -47,6 +48,10 @@ public class OrderFacadeImpl implements OrderFacade {
         Order newOrder = new Order();
         newOrder.setState(order.getState());
         newOrder.setDateOfOrder(order.getDateOfOrder());
+        List<cz.fi.muni.pa165.entity.Service> services = beanMappingService.mapTo(order.getServices(), cz.fi.muni.pa165.entity.Service.class);
+        newOrder.setServices(services);
+        List<Tire> tires = beanMappingService.mapTo(order.getTires(), Tire.class);
+        newOrder.setTires(tires);
         orderService.create(newOrder, userLogin);
         return newOrder.getId();
     }

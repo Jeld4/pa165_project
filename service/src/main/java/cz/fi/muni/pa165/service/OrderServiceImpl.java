@@ -31,6 +31,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void create(Order order, String userLogin) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null.");
+        }
+        if (order.getServices().isEmpty() && order.getTires().isEmpty()) {
+            throw new IllegalArgumentException("Cannot create empty order.");
+        }
         User user = userDao.getUserByLogin(userLogin);
         order.setUser(user);
         try {
@@ -42,6 +48,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void remove(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order cannot be null");
+        }
         try {
             orderDao.remove(order);
         } catch (DataAccessException ex) {
@@ -51,6 +60,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
         Order order = null;
         try {
             order = orderDao.findById(id);
@@ -73,37 +85,64 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrdersByUser(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null");
+        }
         return orderDao.findByUser(user);
     }
 
     @Override
     public void confirm(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
         order.setState(OrderState.CONFIRMED);
     }
 
     @Override
     public void finish(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
         order.setState(OrderState.DONE);
     }
 
     @Override
     public void addTireToOrder(Long orderId, Long tireId) {
+        if (orderId == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
+        if (tireId == null) {
+            throw new IllegalArgumentException("Service id cannot be null");
+        }
         orderDao.addTire(orderId, tireId);
     }
 
     @Override
     public void addServiceToOrder(Long orderId, Long serviceId) {
+        if (orderId == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
+        if (serviceId == null) {
+            throw new IllegalArgumentException("Service id cannot be null");
+        }
         orderDao.addService(orderId, serviceId);
     }
 
     @Override
     public Car getOrderCar(Long orderId) {
+        if (orderId == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
         Order order = orderDao.findById(orderId);
         return carDao.findById(order.getCar().getId());
     }
 
     @Override
     public void cancel(Order order) {
+        if (order == null) {
+            throw new IllegalArgumentException("Order id cannot be null");
+        }
         order.setState(OrderState.CANCELED);
     }
 }
