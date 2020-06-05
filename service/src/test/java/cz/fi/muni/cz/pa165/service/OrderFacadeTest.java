@@ -130,6 +130,23 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         tires = new ArrayList<>();
         tires.add(tireFacade.getTireWithId(tireId));
 
+        TireCreateDTO tire2 = new TireCreateDTO();
+        tire2.setPrice(new BigDecimal(50));
+        tire2.setType("snow");
+        tire2.setManufacturer("Michelin");
+        tireId = tireFacade.createTire(tire2);
+        List<TireDTO> tires2 = new ArrayList<>();
+        tires2.add(tireFacade.getTireWithId(tireId));
+
+        TireCreateDTO tire3 = new TireCreateDTO();
+        tire3.setPrice(new BigDecimal(50));
+        tire3.setType("snow");
+        tire3.setManufacturer("Michelin");
+        tireId = tireFacade.createTire(tire3);
+        List<TireDTO> tires3 = new ArrayList<>();
+        tires3.add(tireFacade.getTireWithId(tireId));
+
+
         service = new ServiceCreateDTO();
         service.setDescription("service to wash car");
         service.setName("washing car");
@@ -138,12 +155,28 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         services = new ArrayList<>();
         services.add(serviceFacade.getServiceWithId(serviceId));
 
+        ServiceCreateDTO service2 = new ServiceCreateDTO();
+        service2.setDescription("service to wash car");
+        service2.setName("washing car");
+        service2.setPrice(new BigDecimal(80));
+        serviceId = serviceFacade.createService(service2);
+        List<ServiceDTO> services2 = new ArrayList<>();
+        services2.add(serviceFacade.getServiceWithId(serviceId));
+
+        ServiceCreateDTO service3 = new ServiceCreateDTO();
+        service3.setDescription("service to wash car");
+        service3.setName("washing car");
+        service3.setPrice(new BigDecimal(80));
+        serviceId = serviceFacade.createService(service3);
+        List<ServiceDTO> services3 = new ArrayList<>();
+        services3.add(serviceFacade.getServiceWithId(serviceId));
+
         order1.setTires(tires);
         order1.setServices(services);
-        order2.setTires(tires);
-        order2.setServices(services);
-        order3.setTires(tires);
-        order3.setServices(services);
+        order2.setTires(tires2);
+        order2.setServices(services2);
+        order3.setTires(tires3);
+        order3.setServices(services3);
     }
 
     @AfterMethod
@@ -232,7 +265,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         orderFacade.addTireToOrder(orderId, tireId);
 
         assert (tireFacade.getTireWithId(tireId).equals(tireFacade.getTireWithId(tireId)));
-        assert (orderFacade.getOrderById(orderId).getTires().get(0).equals(tireFacade.getTireWithId(tireId)));
+        assert (orderFacade.getOrderById(orderId).getTires().get(1).equals(tireFacade.getTireWithId(tireId)));
     }
 
     @Test
@@ -248,7 +281,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
 
         orderFacade.addServiceToOrder(orderId, serviceId);
 
-        assert (orderFacade.getOrderById(orderId).getServices().get(0).equals(serviceFacade.getServiceWithId(serviceId)));
+        assert (orderFacade.getOrderById(orderId).getServices().get(1).equals(serviceFacade.getServiceWithId(serviceId)));
     }
 
 

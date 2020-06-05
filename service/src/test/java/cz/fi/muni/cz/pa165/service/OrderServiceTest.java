@@ -88,13 +88,13 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
         services.add(service);
     }
 
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void create() {
         assert(userService.findAll().size() == 1);
-
+        //order.setServices(services);
+        //order.setTires(tires);
         orderService.create(order, user.getLogin());
-        order.setServices(services);
-        order.setTires(tires);
+
         int size = orderService.findAll().size();
 
         //assert(orderService.findAll().size() == 1);
