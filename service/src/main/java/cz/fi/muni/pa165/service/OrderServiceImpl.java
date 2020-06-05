@@ -8,6 +8,9 @@ import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.enums.OrderState;
+import cz.fi.muni.pa165.service.facade.OrderFacadeImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +32,12 @@ public class OrderServiceImpl implements OrderService {
     @Inject
     private CarDao carDao;
 
+    private final static Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
+
     @Override
     public void create(Order order, String userLogin) {
+        log.debug("service create order");
+
         if (order == null) {
             throw new IllegalArgumentException("Order cannot be null.");
         }
@@ -48,6 +55,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void remove(Order order) {
+        log.debug("service remove order");
         if (order == null) {
             throw new IllegalArgumentException("Order cannot be null");
         }
@@ -60,6 +68,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order findById(Long id) {
+        log.debug("service findById({})", id);
         if (id == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -74,6 +83,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> findAll() {
+        log.debug("service findAll()");
         List<Order> orders = null;
         try {
             orders = orderDao.findAll();
@@ -85,6 +95,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getOrdersByUser(User user) {
+        log.debug("service get orders by user");
         if (user == null) {
             throw new IllegalArgumentException("User cannot be null");
         }
@@ -93,6 +104,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void confirm(Order order) {
+        log.debug("service confirm order");
         if (order == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -101,6 +113,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void finish(Order order) {
+        log.debug("service finish order");
         if (order == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -109,6 +122,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void addTireToOrder(Long orderId, Long tireId) {
+        log.debug("service addTireToOrder({}, {})", orderId, tireId);
         if (orderId == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -120,6 +134,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void addServiceToOrder(Long orderId, Long serviceId) {
+        log.debug("service addServiceToOrder({}, {})", orderId, serviceId);
         if (orderId == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -131,6 +146,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Car getOrderCar(Long orderId) {
+        log.debug("service getOrderCar({})", orderId);
         if (orderId == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -140,6 +156,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void cancel(Order order) {
+        log.debug("service cancel order");
         if (order == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }

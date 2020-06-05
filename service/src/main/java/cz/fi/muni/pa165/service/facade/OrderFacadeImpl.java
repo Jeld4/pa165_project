@@ -11,6 +11,8 @@ import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.service.BeanMappingService;
 import cz.fi.muni.pa165.service.OrderService;
 import cz.fi.muni.pa165.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,8 +36,12 @@ public class OrderFacadeImpl implements OrderFacade {
     @Autowired
     private BeanMappingService beanMappingService;
 
+    private final static Logger log = LoggerFactory.getLogger(OrderFacadeImpl.class);
+
     @Override
     public Long createOrder(OrderCreateDTO order, String userLogin) {
+        log.debug("facade createOrder");
+
         if (order == null) {
             throw new IllegalArgumentException("Order cannot be null.");
         }
@@ -58,6 +64,8 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public void addTireToOrder(Long orderId, Long tireId) {
+        log.debug("facade addTireToOrder({}, {})", orderId, tireId);
+
         if (orderId == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -69,6 +77,8 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public void addServiceToOrder(Long orderId, Long serviceId) {
+        log.debug("facade addServiceToOrder({}, {})", orderId, serviceId);
+
         if (orderId == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -80,13 +90,15 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public CarDTO getOrderCar(Long orderId) {
+        log.debug("facade getOrderCar({})", orderId);
+
         Car car = orderService.getOrderCar(orderId);
         return beanMappingService.mapTo(car, CarDTO.class);
     }
 
     @Override
     public List<OrderDTO> getOrdersByUser(Long userId) {
-
+        log.debug("facade getOrdersByUser({})", userId);
         User user = userService.findById(userId);
         List<Order> orders = orderService.getOrdersByUser(user);
 
@@ -95,18 +107,21 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public List<OrderDTO> getAllOrders() {
+        log.debug("facade getAllOrders()");
         return beanMappingService.mapTo(orderService.findAll(),
                 OrderDTO.class);
     }
 
     @Override
     public OrderDTO getOrderById(Long id) {
+        log.debug("facade getOrderById({})", id);
         Order order = orderService.findById(id);
         return (order == null) ? null : beanMappingService.mapTo(order, OrderDTO.class);
     }
 
     @Override
     public void finishOrder(Long id) {
+        log.debug("facade finishOrder({})", id);
         if (id == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -115,6 +130,7 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public void cancelOrder(Long id) {
+        log.debug("facade cancelOrder({})", id);
         if (id == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -123,6 +139,7 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public void removeOrder(Long id) {
+        log.debug("facade removeOrder({})", id);
         if (id == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
@@ -131,10 +148,10 @@ public class OrderFacadeImpl implements OrderFacade {
 
     @Override
     public void confirmOrder(Long id) {
+        log.debug("facade confirmOrder({})", id);
         if (id == null) {
             throw new IllegalArgumentException("Order id cannot be null");
         }
         orderService.confirm(orderService.findById(id));
     }
-
 }
