@@ -7,6 +7,8 @@ import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.OrderFacade;
 import cz.fi.muni.pa165.hateoas.OrderRepresentationModelAssembler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -22,6 +24,9 @@ import org.springframework.web.server.ServerErrorException;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * @author Jan Jelínek
+ */
 @RestController
 @ExposesResourceFor(OrderDTO.class)
 @RequestMapping("/orders")
@@ -29,6 +34,7 @@ public class OrderController {
 
     private OrderFacade orderFacade;
     private OrderRepresentationModelAssembler orderRepresentationModelAssembler;
+    private final static Logger log = LoggerFactory.getLogger(OrderController.class);
 
     private OrderController(@Autowired OrderFacade orderFacade, @Autowired OrderRepresentationModelAssembler orderRepresentationModelAssembler) {
         this.orderFacade = orderFacade;
@@ -37,12 +43,15 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<OrderDTO>>> getOrders() {
+        log.debug("rest getOrders()");
+
         CollectionModel<EntityModel<OrderDTO>> ordersCollectionModel = orderRepresentationModelAssembler.toCollectionModel(orderFacade.getAllOrders());
         return new ResponseEntity<>(ordersCollectionModel, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<OrderDTO>> getOrder(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> getOrder(@PathVariable("id") long id) {
+        log.debug("rest getOrder({})", id);
 
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
@@ -51,14 +60,17 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
-    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) throws Exception {
+    public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) {
+        log.debug("rest createOrder()");
 
         Long id = orderFacade.createOrder(order, userLogin);
         return HttpStatus.OK;
     }
 
     @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
-    public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) {
+        log.debug("rest confirmOrder({})", id);
+
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
         orderFacade.confirmOrder(id);
@@ -67,7 +79,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}/cancel", method = RequestMethod.POST)
-    public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) {
+        log.debug("rest cancelOrder({})", id);
+
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
         orderFacade.cancelOrder(id);
@@ -76,7 +90,9 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}/finish", method = RequestMethod.POST)
-    public final HttpEntity<EntityModel<OrderDTO>> finishOrder(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> finishOrder(@PathVariable("id") long id) {
+        log.debug("rest finishOrder({})", id);
+
         OrderDTO orderDTO = orderFacade.getOrderById(id);
         if (orderDTO == null) throw new ResourceNotFoundException("order " + id + " not found");
         orderFacade.finishOrder(id);
@@ -86,7 +102,9 @@ public class OrderController {
 
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) throws Exception {
+    public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) {
+        log.debug("rest createOrder()");
+
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
         }
@@ -96,7 +114,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteOrder(@PathVariable("id") long id) throws Exception {
+    public final void deleteOrder(@PathVariable("id") long id) {
+        log.debug("rest deleteOrder({})", id);
         try {
             orderFacade.removeOrder(id);
         } catch (IllegalArgumentException ex) {
@@ -106,6 +125,7 @@ public class OrderController {
 
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<OrderDTO>>> getOrdersByUser(@PathVariable("id") long id) throws Exception {
+        log.debug("rest getOrdersByUser({})", id);
 
         List<OrderDTO> ordersListDTO = orderFacade.getOrdersByUser(id);
 
