@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-
 /**
  * @author Jakub Malý, 456389
  */

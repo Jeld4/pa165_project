@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.controllers;
 
-import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dto.CarCreateDTO;
 import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerErrorException;
 
 import javax.validation.Valid;
 import java.util.List;

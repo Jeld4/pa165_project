@@ -6,15 +6,11 @@ import cz.fi.muni.pa165.dto.UserDTO;
 import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.UserRepresentationModelAssembler;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 
 /**
  * @author Radim Sasinka, 456315

@@ -16,9 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ServerErrorException;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.persistence.TransactionRequiredException;
 import javax.validation.Valid;

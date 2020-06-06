@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Objects;
 
 import cz.fi.muni.pa165.entity.Car;
-import cz.fi.muni.pa165.entity.Order;
 
 /**
  * @author Michal Klíma

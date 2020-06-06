@@ -3,7 +3,6 @@ package cz.fi.muni.pa165.dto;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-
 /**
  * @author Jakub Malý, 456389
  */

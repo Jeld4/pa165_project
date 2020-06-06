@@ -3,10 +3,6 @@ package cz.fi.muni.pa165.entity;
 import cz.fi.muni.pa165.enums.OrderState;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
@@ -67,9 +63,9 @@ public class Order {
 
     /**
      * order parametric constructor
-     * @param totalPrice
-     * @param dateOfOrder
-     * @param state
+     * @param totalPrice price of the order
+     * @param dateOfOrder date of the order
+     * @param state of the order
      */
     public Order(BigDecimal totalPrice, Date dateOfOrder, OrderState state) {
         this.totalPrice = totalPrice;
@@ -89,7 +85,7 @@ public class Order {
 
     /**
      * set user
-     * @param user
+     * @param user who belongs the order
      */
     public void setUser(User user) {
         this.user = user;
@@ -129,7 +125,7 @@ public class Order {
 
     /**
      * set services
-     * @param services
+     * @param services list of services
      */
     public void setServices(List<Service> services) {
         this.services = services;
@@ -145,7 +141,7 @@ public class Order {
 
     /**
      * set total price
-     * @param totalPrice
+     * @param totalPrice pice of the order
      */
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
@@ -153,7 +149,7 @@ public class Order {
 
     /**
      * set date of order
-     * @param dateOfOrder
+     * @param dateOfOrder date of the order
      */
     public void setDateOfOrder(Date dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
@@ -161,7 +157,7 @@ public class Order {
 
     /**
      * set state
-     * @param state
+     * @param state of the order
      */
     public void setState(OrderState state) {
         this.state = state;
@@ -169,7 +165,7 @@ public class Order {
 
     /**
      * set ID
-     * @param id
+     * @param id of the order
      */
     public void setId(Long id) {
         this.id = id;
@@ -185,7 +181,7 @@ public class Order {
 
     /**
      * set tires
-     * @param tires
+     * @param tires list of tires
      */
     public void setTires(List<Tire> tires) {
         this.tires = tires;

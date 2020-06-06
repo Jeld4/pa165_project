@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-
 /**
  * @author Jan Jelínek 445416
  */
@@ -58,7 +57,7 @@ public class OrderCreateDTO {
 
     /**
      * Method to set date of the order
-     * @param dateOfOrder
+     * @param dateOfOrder date when the order is created
      */
     public void setDateOfOrder(Date dateOfOrder) {
         this.dateOfOrder = dateOfOrder;
