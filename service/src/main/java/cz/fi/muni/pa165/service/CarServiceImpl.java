@@ -5,6 +5,8 @@ import cz.fi.muni.pa165.dao.UserDao;
 import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,9 @@ public class CarServiceImpl implements CarService {
     @Inject
     private UserDao userDao;
 
+    private final static Logger log = LoggerFactory.getLogger(CarServiceImpl.class);
+
+
     @Override
     public Car findById(Long id) {
         if (id== null){
@@ -33,6 +38,7 @@ public class CarServiceImpl implements CarService {
         } catch (DataAccessException ex) {
             throw new RuntimeException(ex);
         }
+        log.debug("Service - find car with ID {}", id);
         return car;
     }
 
@@ -44,6 +50,7 @@ public class CarServiceImpl implements CarService {
         } catch (DataAccessException ex){
             throw new RuntimeException(ex);
         }
+        log.debug("Service - find all cars");
         return cars;
     }
 
@@ -58,6 +65,7 @@ public class CarServiceImpl implements CarService {
         } catch (DataAccessException ex) {
             throw new RuntimeException(ex);
         }
+        log.debug("Service - find car with licence plate {}", licencePlate);
         return car;
     }
 
@@ -67,6 +75,7 @@ public class CarServiceImpl implements CarService {
             throw new IllegalArgumentException("Car object cannot be null");
         }
         try {
+            log.debug("Service - Create car");
             carDao.create(car);
         }catch (DataAccessException ex){
             throw new RuntimeException(ex);
@@ -79,6 +88,7 @@ public class CarServiceImpl implements CarService {
             throw new IllegalArgumentException("Car object cannot be null");
         }
         try {
+            log.debug("Service - Remove car");
             carDao.remove(car);
         }catch (DataAccessException ex){
             throw new RuntimeException(ex);
@@ -94,6 +104,7 @@ public class CarServiceImpl implements CarService {
             throw new IllegalArgumentException("Tire cannot be null");
         }
         Car car = this.findById(carId);
+        log.debug("Service - Change tires with ID {} for car with ID {}", tire.getId(), carId);
         car.setTireType(tire.getType());
     }
 
@@ -102,6 +113,7 @@ public class CarServiceImpl implements CarService {
         if(userId == null){
             throw new IllegalArgumentException("User ID cannot be null");
         }
+        log.debug("Service - get cars belonging to user with ID {}", userId);
         User user = userDao.getUserById(userId);
         return user.getCars();
     }

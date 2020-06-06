@@ -126,6 +126,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         tire.setPrice(new BigDecimal(50));
         tire.setType("snow");
         tire.setManufacturer("Michelin");
+        tire.setSeason("autumn");
         Long tireId = tireFacade.createTire(tire);
         tires = new ArrayList<>();
         tires.add(tireFacade.getTireWithId(tireId));
@@ -133,6 +134,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         TireCreateDTO tire2 = new TireCreateDTO();
         tire2.setPrice(new BigDecimal(50));
         tire2.setType("snow");
+        tire2.setSeason("autumn");
         tire2.setManufacturer("Michelin");
         tireId = tireFacade.createTire(tire2);
         List<TireDTO> tires2 = new ArrayList<>();
@@ -141,6 +143,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         TireCreateDTO tire3 = new TireCreateDTO();
         tire3.setPrice(new BigDecimal(50));
         tire3.setType("snow");
+        tire3.setSeason("autumn");
         tire3.setManufacturer("Michelin");
         tireId = tireFacade.createTire(tire3);
         List<TireDTO> tires3 = new ArrayList<>();
@@ -258,6 +261,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         tireCreateDTO.setManufacturer("Michellin");
         tireCreateDTO.setPrice(new BigDecimal(7500));
         tireCreateDTO.setType("SuperBlack");
+        tireCreateDTO.setSeason("autumn");
 
         Long tireId = tireFacade.createTire(tireCreateDTO);
         Long orderId = orderFacade.createOrder(order1, user1.getLogin());

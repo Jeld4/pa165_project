@@ -6,6 +6,8 @@ import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.TireFacade;
 import cz.fi.muni.pa165.hateoas.TireRepresentationModelAssembler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -32,6 +34,8 @@ public class TireController {
     private TireFacade tireFacade;
     private TireRepresentationModelAssembler tireRepresentationModelAssembler;
 
+    private final static Logger log = LoggerFactory.getLogger(ServiceController.class);
+
     public TireController(@Autowired TireFacade tireFacade,
                           @Autowired TireRepresentationModelAssembler tireRepresentationModelAssembler){
         this.tireFacade = tireFacade;
@@ -41,6 +45,7 @@ public class TireController {
 
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<TireDTO>>> getTires(){
+        log.debug("Controller - get all tires");
         CollectionModel<EntityModel<TireDTO>> tiresCollectionModel
                 = tireRepresentationModelAssembler.toCollectionModel(tireFacade.getAllTires());
         return new ResponseEntity<>(tiresCollectionModel, HttpStatus.OK);
@@ -49,6 +54,7 @@ public class TireController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) {
         TireDTO tireDTO = tireFacade.getTireWithId(id);
+        log.debug("Controller - get tire by ID");
         if (tireDTO == null){
             throw new ResourceNotFoundException("Tire " + id + "not found");
         }
@@ -62,6 +68,7 @@ public class TireController {
         if (bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation");
         }
+        log.debug("Controller - create tire");
         Long id = tireFacade.createTire(tire);
         EntityModel<TireDTO> tireModel = tireRepresentationModelAssembler.toModel(tireFacade.getTireWithId(id));
         return new ResponseEntity<>(tireModel, HttpStatus.OK);
@@ -71,6 +78,7 @@ public class TireController {
     public final void deleteTire(@PathVariable("id") long id) {
         try {
             tireFacade.deleteTire(id);
+            log.debug("Controller - delete tire with ID {}", id);
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Tire with id " + id + " cannot be found.");
         } catch (TransactionRequiredException ex) {
