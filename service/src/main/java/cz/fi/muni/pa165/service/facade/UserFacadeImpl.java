@@ -35,7 +35,11 @@ public class UserFacadeImpl implements UserFacade {
         } if (user.getName().isEmpty()) {
             throw new IllegalArgumentException("Users name cannot be empty.");
         } if (user.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("Users passwor cannot be empty.");
+            throw new IllegalArgumentException("Users password cannot be empty.");
+        } if (user.getUserAddress().isEmpty()) {
+            throw new IllegalArgumentException("Users address cannot be empty.");
+        } if (user.getTelephone().isEmpty()) {
+            throw new IllegalArgumentException("Users telephone cannot be empty.");
         }
 		
         User newUser = new User();
@@ -44,6 +48,8 @@ public class UserFacadeImpl implements UserFacade {
         newUser.setLogin(user.getLogin());
         newUser.setName(user.getName());
         newUser.setPassword(user.getPassword());
+        newUser.setUserAddress(user.getUserAddress());
+        newUser.setTelephone(user.getTelephone());
         
         userService.create(newUser);
         return  newUser.getId();

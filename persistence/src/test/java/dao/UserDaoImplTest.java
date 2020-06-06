@@ -37,6 +37,15 @@ public class UserDaoImplTest extends AbstractTestNGSpringContextTests {
     
          user1.setName("user1");
          user2.setName("user2");
+
+         user1.setPassword("passss");
+         user2.setPassword("worddd");
+
+         user1.setUserAddress("Prague");
+         user2.setUserAddress("Brno");
+
+         user1.setTelephone("666555444");
+         user2.setTelephone("554423212");
     
          userDao.createUser(user1);
          userDao.createUser(user2);

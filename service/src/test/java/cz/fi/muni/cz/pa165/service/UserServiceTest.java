@@ -37,9 +37,11 @@ public class UserServiceTest extends AbstractTransactionalTestNGSpringContextTes
     @BeforeMethod
     public void prepare(){
         user = new User();
-        user.setLogin("admin");
-        user.setPassword("admin");
+        user.setLogin("admain");
+        user.setPassword("aadmin");
         user.setName("name");
+        user.setTelephone("555444666");
+        user.setUserAddress("Brno");
     }
 
     @Test

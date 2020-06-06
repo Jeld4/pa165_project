@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,11 +21,25 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@NotEmpty
+	@Size(min = 2, max=32)
 	private String name;
+
+	@NotEmpty
+	@Size(min = 5, max=32)
 	private String login;
+
+	@NotEmpty
+	@Size(min = 5, max=32)
 	private String password;
+
 	private Boolean isAdmin;
+
+	@NotEmpty
 	private String userAddress;
+
+	@NotEmpty
 	private String telephone;
 
     @OneToMany
@@ -40,11 +56,15 @@ public class User {
 	 * @param name
 	 * @param login
 	 * @param password
+	 * @param userAddress
+	 * @param telephone
 	 */
-	public User(String name, String login, String password) {
+	public User(String name, String login, String password, String userAddress, String telephone) {
 		this.name = name;
 		this.login = login;
 		this.password = password;
+		this.userAddress = userAddress;
+		this.telephone = telephone;
 	}
 
 	/**
@@ -178,11 +198,27 @@ public class User {
 				Objects.equals(login, user.login) &&
 				Objects.equals(password, user.password) &&
 				Objects.equals(isAdmin, user.isAdmin) &&
+				Objects.equals(userAddress, user.userAddress) &&
+				Objects.equals(telephone, user.telephone) &&
 				Objects.equals(cars, user.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, login, password, isAdmin, cars);
+		return Objects.hash(id, name, login, password, isAdmin, userAddress, telephone, cars);
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				", isAdmin=" + isAdmin +
+				", userAddress='" + userAddress + '\'' +
+				", telephone='" + telephone + '\'' +
+				", cars=" + cars +
+				'}';
 	}
 }

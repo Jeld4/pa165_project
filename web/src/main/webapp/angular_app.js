@@ -228,7 +228,7 @@ eshopControllers.controller('AllTiresCtrl',
             headers: { 'Content-Type': 'application/hal+json' },
             data: user
         }).then(function success(response) {
-            $rootScope.successAlert = 'success';
+            $rootScope.successAlert = 'You are logged in.';
             $http({
                 method: 'GET',
                 url: 'api/v1/users/login/' + user.login,
@@ -475,6 +475,8 @@ eshopControllers.controller('UserRegisterCtrl',
 	            'name': '',
 	            'login': '',
 	            'password': '',
+                'userAddress': '',
+                'telephone': '',
 	            'isAdmin': false,
 
 	        };
@@ -484,10 +486,10 @@ eshopControllers.controller('UserRegisterCtrl',
 	        	console.log(user)
 	            $http({
 	                method: 'POST',
-                    url: 'api/v1/cars/create/',
+                    url: 'api/v1/users/create/',
 	                data: user
 	            }).then(function success(response) {
-	                console.log('created user');
+	                console.log('User was created.');
 	                var createdUser = response.data;
 	                //display confirmation alert
 	                $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created';
@@ -500,10 +502,10 @@ eshopControllers.controller('UserRegisterCtrl',
 	                console.log(response);
 	                switch (response.data.code) {
 	                    case 'InvalidRequestException':
-	                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+	                        $rootScope.errorAlert = 'Sent data were found to be invalid by server! ';
 	                        break;
 	                    default:
-	                        $rootScope.errorAlert = 'Cannot create user ! Reason given by the server: '+response.data.message;
+	                        $rootScope.errorAlert = 'Cannot create user due to wrong input.';
 	                        break;
 	                }
 	            });
