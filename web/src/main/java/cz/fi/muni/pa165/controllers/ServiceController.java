@@ -48,7 +48,7 @@ public class ServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) {
         ServiceDTO serviceDTO = serviceFacade.getServiceWithId(id);
         if (serviceDTO == null){
             throw new ResourceNotFoundException("Resource with id " + id + " was not found.");
@@ -68,7 +68,7 @@ public class ServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteService(@PathVariable("id") long id) throws Exception {
+    public final void deleteService(@PathVariable("id") long id) {
         try {
             serviceFacade.deleteService(id);
         } catch (IllegalArgumentException ex) {

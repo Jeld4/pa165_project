@@ -54,7 +54,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<CarDTO>> getCar(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<CarDTO>> getCar(@PathVariable("id") long id) {
         CarDTO carDTO = carFacade.getCarWithId(id);
         if (carDTO == null){
             throw new ResourceNotFoundException("Car " + id + "not found");
@@ -89,7 +89,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteCar(@PathVariable("id") long id) throws Exception{
+    public final void deleteCar(@PathVariable("id") long id) {
         try{
             carFacade.deleteCar(id);
         } catch (IllegalArgumentException ex) {
@@ -98,7 +98,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
-    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) {
 
         List<CarDTO> carsListDTO = carFacade.getCarsByUser(id);
 

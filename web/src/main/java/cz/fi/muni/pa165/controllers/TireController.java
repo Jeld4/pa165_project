@@ -47,7 +47,7 @@ public class TireController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) {
         TireDTO tireDTO = tireFacade.getTireWithId(id);
         if (tireDTO == null){
             throw new ResourceNotFoundException("Tire " + id + "not found");
@@ -58,7 +58,7 @@ public class TireController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<TireDTO>> createTire(@RequestBody @Valid TireCreateDTO tire,
-                                                             BindingResult bindingResult) throws Exception {
+                                                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation");
         }
@@ -68,7 +68,7 @@ public class TireController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteTire(@PathVariable("id") long id) throws Exception {
+    public final void deleteTire(@PathVariable("id") long id) {
         try {
             tireFacade.deleteTire(id);
         } catch (IllegalArgumentException ex) {

@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import cz.fi.muni.pa165.dto.*;
-import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.facade.*;
 import cz.fi.muni.pa165.service.*;
 import org.mockito.InjectMocks;
