@@ -132,6 +132,7 @@ public class CarFacadeTest extends AbstractTransactionalTestNGSpringContextTests
         TireCreateDTO tire = new TireCreateDTO();
         tire.setManufacturer("Michelin");
         tire.setType("Winter");
+        tire.setSeason("Spring");
         Long tireId = tireFacade.createTire(tire);
 
         carFacade.changeTireType(carFacade.getCarWithId(id1), tireFacade.getTireWithId(tireId));

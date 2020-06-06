@@ -62,26 +62,31 @@ public class TireFacadeTest extends AbstractTransactionalTestNGSpringContextTest
         tireCreateDTO.setManufacturer("Michellin");
         tireCreateDTO.setPrice(new BigDecimal(7500));
         tireCreateDTO.setType("SuperBlack");
+        tireCreateDTO.setSeason("winter");
 
         tireCreateDTO3 = new TireCreateDTO();
         tireCreateDTO3.setManufacturer("Michellin");
         tireCreateDTO3.setPrice(new BigDecimal(7500));
         tireCreateDTO3.setType("SuperDuper");
+        tireCreateDTO3.setSeason("winter");
 
         tireCreateDTO4 = new TireCreateDTO();
         tireCreateDTO4.setManufacturer("Michellin");
         tireCreateDTO4.setPrice(new BigDecimal(7500));
         tireCreateDTO4.setType("SuperTrooper");
+        tireCreateDTO4.setSeason("winter");
 
         tireCreateDTO2 = new TireCreateDTO();
         tireCreateDTO2.setManufacturer("Barumm");
         tireCreateDTO2.setPrice(new BigDecimal(7500));
         tireCreateDTO2.setType("White");
+        tireCreateDTO2.setSeason("winter");
 
         tire = new Tire();
         tire.setManufacturer("Michellin");
         tire.setPrice(new BigDecimal(7500));
         tire.setType("SuperBlack");
+        tire.setSeason("winter");
     }
 
     @AfterMethod
