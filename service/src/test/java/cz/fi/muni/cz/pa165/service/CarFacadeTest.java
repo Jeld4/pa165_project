@@ -58,14 +58,17 @@ public class CarFacadeTest extends AbstractTransactionalTestNGSpringContextTests
         car01 = new CarCreateDTO();
         car01.setLicencePlate("1234");
         car01.setModel("SUV");
+        car01.setTireType("winter");
 
         car02 = new CarCreateDTO();
         car02.setLicencePlate("5678");
         car02.setModel("cabriolet");
+        car02.setTireType("winter");
 
         car03 = new CarCreateDTO();
         car03.setLicencePlate("7890");
         car03.setModel("truck");
+        car03.setTireType("winter");
     }
 
     @AfterMethod
@@ -127,11 +130,11 @@ public class CarFacadeTest extends AbstractTransactionalTestNGSpringContextTests
     public void changeTireType() {
         Long id1 = carFacade.createCar(car01);
         assert(carFacade.getAllCars().size() == 1);
-        Assert.assertEquals(carFacade.getCarWithId(id1).getTireType(), null);
+        Assert.assertEquals(carFacade.getCarWithId(id1).getTireType(), "winter");
 
         TireCreateDTO tire = new TireCreateDTO();
         tire.setManufacturer("Michelin");
-        tire.setType("Winter");
+        tire.setType("Summer");
         tire.setSeason("Spring");
         Long tireId = tireFacade.createTire(tire);
 

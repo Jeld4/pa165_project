@@ -711,6 +711,7 @@ eshopControllers.controller('CarRegisterCtrl',
         $scope.car = {
             'licencePlate': '',
             'model': '',
+            'tireType': '',
         };
 
         // function called when submit button is clicked, creates product on server

@@ -120,6 +120,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         car1 = new CarCreateDTO();
         car1.setModel("aaa");
         car1.setLicencePlate("asdasd");
+        car1.setTireType("winter");
         carFacade.createCar(car1);
 
         tire = new TireCreateDTO();
