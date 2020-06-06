@@ -5,6 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -19,10 +23,23 @@ public class Tire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotEmpty
+    @Size(min = 3, max=32)
     private String manufacturer;
+
+    @NotEmpty
+    @Size(min = 3, max=32)
     private String type;
+
+    @Min(0)
     private BigDecimal size;
+
+    @NotEmpty
+    @Size(min = 3, max=32)
     private String season;
+
+    @Min(0)
     private BigDecimal price;
 
     /**
