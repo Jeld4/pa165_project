@@ -9,6 +9,8 @@ import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.CarFacade;
 import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.CarRepresentationModelAssembler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -40,6 +42,7 @@ public class CarController {
     private CarFacade carFacade;
     private CarRepresentationModelAssembler carRepresentationModelAssembler;
     private UserFacade userFacade;
+    private final static Logger log = LoggerFactory.getLogger(CarController.class);
 
     public CarController(@Autowired CarFacade carFacade, @Autowired UserFacade userFacade,
                          @Autowired CarRepresentationModelAssembler carRepresentationModelAssembler) {
@@ -50,6 +53,7 @@ public class CarController {
 
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getCars(){
+        log.debug("Controller - get all cars");
         CollectionModel<EntityModel<CarDTO>> carDTOCollectionModel
                 = carRepresentationModelAssembler.toCollectionModel(carFacade.getAllCars());
         return new ResponseEntity<>(carDTOCollectionModel, HttpStatus.OK);
@@ -61,6 +65,7 @@ public class CarController {
         if (carDTO == null){
             throw new ResourceNotFoundException("Car " + id + "not found");
         }
+        log.debug("Controller - get car with ID {}", id);
         EntityModel<CarDTO> carModel = carRepresentationModelAssembler.toModel(carDTO);
         return new ResponseEntity<>(carModel, HttpStatus.OK);
     }
@@ -70,7 +75,7 @@ public class CarController {
         if(bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation during car creating");
         }
-
+        log.debug("Controller - create car");
         Long id = carFacade.createCar(car);
         EntityModel<CarDTO> carModel = carRepresentationModelAssembler.toModel(carFacade.getCarWithId(id));
         return new ResponseEntity<>(carModel, HttpStatus.OK);
@@ -85,6 +90,7 @@ public class CarController {
         UserDTO user = userFacade.getUserWithId(id);
 
         Long carId = carFacade.createCar(car);
+        log.debug("Controller -  create car by customer");
         userFacade.addCarToUser(user.getId(), carId);
         EntityModel<CarDTO> carModel = carRepresentationModelAssembler.toModel(carFacade.getCarWithId(carId));
         return new ResponseEntity<>(carModel, HttpStatus.OK);
@@ -94,13 +100,16 @@ public class CarController {
     public final void deleteCar(@PathVariable("id") long id) throws Exception{
         try{
             carFacade.deleteCar(id);
+            log.debug("Controller - delete car with ID {}", id);
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Car with id " + id + " cannot be found.");
         }
     }
 
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
-    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getCarsByUser(@PathVariable("id") long id) throws Exception {
+
+        log.debug("Controller - get cars by user with ID {}", id);
 
         List<CarDTO> carsListDTO = carFacade.getCarsByUser(id);
 
