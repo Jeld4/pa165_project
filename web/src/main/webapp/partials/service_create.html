@@ -1,0 +1,32 @@
+<form name="form"  novalidate class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input placeholder="name" id="name" type="text" ng-minlength="3" name="name" class="form-control"
+                   ng-model="service.name" required/>
+            <p class="help-block" ng-show="form.manufacturer.$error.required">name is required</p>
+            <p class="help-block" ng-show="form.manufacturer.$error.minlength">name must be at least 3 characters</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !(form.description.$valid)}">
+        <label for="description" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-10">
+            <input placeholder="description" id="description" type="text" ng-minlength="3" name="description"
+                   class="form-control" ng-model="service.description" required/>
+            <p class="help-block" ng-show="form.manufacturer.$error.required">description is required</p>
+            <p class="help-block" ng-show="form.manufacturer.$error.minlength">description must be at least 3 characters</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="price" class="col-sm-2 control-label">Price</label>
+
+        <div class="col-sm-10">
+            <input placeholder="" id="price" type="number" name="price" class="form-control" ng-model="service.price" required/>
+        </div>
+    </div>
+
+    <!-- show disabled button if form is not valid -->
+    <button  class="btn btn-primary" type="submit" ng-click="create(service)">Create service</button>
+</form>

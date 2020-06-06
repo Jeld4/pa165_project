@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -12,7 +13,7 @@ import java.util.Objects;
 public class TireCreateDTO {
 
     @NotEmpty
-    @Size(min = 2, max=32)
+    @Size(min = 3, max=32)
     private String manufacturer;
 
     @NotEmpty
@@ -20,6 +21,7 @@ public class TireCreateDTO {
     private String type;
 
     @NotEmpty
+    @Min(0)
     private BigDecimal size;
 
     @NotEmpty
@@ -27,6 +29,7 @@ public class TireCreateDTO {
     private String season;
 
     @NotEmpty
+    @Min(0)
     private BigDecimal price;
 
     /**

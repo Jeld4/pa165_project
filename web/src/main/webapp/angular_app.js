@@ -30,9 +30,9 @@ pneuApp.config(['$routeProvider',
         when('/allCars', {templateUrl: 'partials/all_cars.html', controller: 'AllCarsCtrl'}).
         when('/createCar', {templateUrl: 'partials/car_create.html', controller: 'CarRegisterCtrl'}).
         when('/createTire', {templateUrl: 'partials/tire_create.html', controller: 'CreateTireCtrl'}).
+        when('/createService', {templateUrl: 'partials/service_create.html', controller: 'CreateServiceCtrl'}).
+        when('/createUser', {templateUrl: 'partials/user_create.html', controller: 'CreateUserCtrl'}).
         //when('/category/:categoryId', {templateUrl: 'partials/category_detail.html', controller: 'CategoryDetailCtrl'}).
-        //when('/admin/users', {templateUrl: './partials/tire_detail.html', controller: 'TireDetailCtrl'}).
-        //when('/admin/newuser', {templateUrl: 'partials/admin_new_user.html', controller: 'AdminNewProductCtrl'}).
         //when('/admin/categories', {templateUrl: 'partials/admin_categories.html', controller: 'AdminCategoriesCtrl'}).
         //when('/admin/newcategory', {
         //    templateUrl: 'partials/admin_new_category.html',
@@ -590,22 +590,22 @@ eshopControllers.controller('CreateTireCtrl',
         $scope.tire = {
             'manufacturer': '',
             'type': '',
-            'size': '',
+            'size': 0,
             'season': '',
-            'price': '',
+            'price': 0,
         };
 
         $scope.create = function (tire) {
             console.log(tire)
             $http({
                 method: 'POST',
-                url: 'api/v1/tires/create/',
+                url: 'api/v1/tires/create/' + $rootScope.logedUser.login,
                 data: tire
             }).then(function success(response) {
                 console.log('created tire');
                 var createdTire = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new tire "' + createdTire.id + '" was created';
+                $rootScope.successAlert = 'A new tire "' + createdTire.manufacturer + '" was created';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -618,6 +618,86 @@ eshopControllers.controller('CreateTireCtrl',
                         break;
                     default:
                         $rootScope.errorAlert = 'Cannot create tire! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
+
+eshopControllers.controller('CreateUserCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        $scope.user = {
+            'name': '',
+            'login': '',
+            'password': '',
+            'userAddress': '',
+            'telephone': '',
+        };
+
+        // function called when submit button is clicked, creates product on server
+        $scope.create = function (user) {
+            console.log(user)
+            $http({
+                method: 'POST',
+                url: 'api/v1/users/create/' + $rootScope.logedUser.name,
+                data: user
+            }).then(function success(response) {
+                console.log('created user');
+                var createdUser = response.data;
+                //display confirmation alert
+                $rootScope.successAlert = 'A new user "' + createdUser.login + '" was created';
+                //change view to list of products
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating user");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create user! Reason given by the server: '+response.data.message;
+                        break;
+                }
+            });
+        };
+    });
+
+eshopControllers.controller('CreateServiceCtrl',
+    function ($scope, $routeParams, $http, $location, $rootScope) {
+        //set object bound to form fields
+        $scope.service = {
+            'name': '',
+            'description': '',
+            'price': 0,
+        };
+
+        // function called when submit button is clicked, creates product on server
+        $scope.create = function (service) {
+            console.log(service)
+            $http({
+                method: 'POST',
+                url: 'api/v1/services/create/' + $rootScope.logedUser.login,
+                data: service
+            }).then(function success(response) {
+                console.log('created service');
+                var createdService = response.data;
+                //display confirmation alert
+                $rootScope.successAlert = 'A new service "' + createdService.name + '" was created';
+                //change view to list of products
+                $location.path("/");
+            }, function error(response) {
+                //display error
+                console.log("error when creating service");
+                console.log(response);
+                switch (response.data.code) {
+                    case 'InvalidRequestException':
+                        $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
+                        break;
+                    default:
+                        $rootScope.errorAlert = 'Cannot create service! Reason given by the server: '+response.data.message;
                         break;
                 }
             });

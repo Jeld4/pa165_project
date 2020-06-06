@@ -1,0 +1,52 @@
+<form name="form"  novalidate class="form-horizontal">
+    <div class="form-group" ng-class="{'has-error': !(form.name.$valid)}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+            <input placeholder="name" id="name" type="text" ng-minlength="2" name="name" class="form-control"
+                   ng-model="user.name" required/>
+            <p class="help-block" ng-show="form.user.$error.required">name is required</p>
+            <p class="help-block" ng-show="form.user.$error.minlength">name must be at least 2 characters</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !(form.login.$valid)}">
+        <label for="login" class="col-sm-2 control-label">Login</label>
+        <div class="col-sm-10">
+            <input placeholder="login" id="login" type="text" ng-minlength="3" name="login" class="form-control"
+                   ng-model="user.login" required/>
+            <p class="help-block" ng-show="form.user.$error.required">login is required</p>
+            <p class="help-block" ng-show="form.user.$error.minlength">login must be at least 2 characters</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !(form.password.$valid)}">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input placeholder="password" id="password" type="text" ng-minlength="3" name="password" class="form-control"
+                   ng-model="user.password" required/>
+            <p class="help-block" ng-show="form.user.$error.required">password is required</p>
+            <p class="help-block" ng-show="form.user.$error.minlength">password must be at least 3 characters</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !(form.userAddress.$valid)}">
+        <label for="userAddress" class="col-sm-2 control-label">User address</label>
+        <div class="col-sm-10">
+            <input placeholder="userAddress" id="userAddress" type="text" name="userAddress" class="form-control"
+                   ng-model="user.userAddress" required/>
+            <p class="help-block" ng-show="form.user.$error.required">User address is required</p>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': !(form.telephone.$valid)}">
+        <label for="telephone" class="col-sm-2 control-label">Telephone</label>
+        <div class="col-sm-10">
+            <input placeholder="telephone" id="telephone" type="text" name="telephone" class="form-control"
+                   ng-model="user.telephone" required/>
+            <p class="help-block" ng-show="form.user.$error.required">Telephone address is required</p>
+        </div>
+    </div>
+
+    <!-- show disabled button if form is not valid -->
+    <button  class="btn btn-primary" type="submit" ng-click="create(user)">Create user</button>
+</form>
