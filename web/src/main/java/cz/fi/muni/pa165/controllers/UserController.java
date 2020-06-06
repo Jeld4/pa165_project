@@ -12,13 +12,9 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ServerErrorException;
-
-import javax.validation.Valid;
 
 @RestController
 @ExposesResourceFor(UserDTO.class)
@@ -45,7 +41,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<UserDTO>> getUser(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<UserDTO>> getUser(@PathVariable("id") long id) {
         
         UserDTO userDTO = userFacade.getUserWithId(id);
         if (userDTO == null) throw new ResourceNotFoundException("user " + id + " not found");
@@ -54,7 +50,7 @@ public class UserController {
     }
  
     @RequestMapping(value = "login/{login}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<UserDTO>> getUserByLogin(@PathVariable("login") String login) throws Exception {
+    public final HttpEntity<EntityModel<UserDTO>> getUserByLogin(@PathVariable("login") String login) {
         
         UserDTO userDTO = userFacade.getUserWithLogin(login);
         if (userDTO == null) throw new ResourceNotFoundException("user " + login + " not found");
@@ -64,7 +60,7 @@ public class UserController {
     
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public final HttpEntity<EntityModel<UserDTO>> createUser(@RequestBody UserCreateDTO user, BindingResult bindingResult) throws Exception {
+    public final HttpEntity<EntityModel<UserDTO>> createUser(@RequestBody UserCreateDTO user, BindingResult bindingResult) {
        
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
@@ -76,7 +72,7 @@ public class UserController {
 
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteUser(@PathVariable("id") long id) throws Exception {
+    public final void deleteUser(@PathVariable("id") long id) {
         try {
             userFacade.deleteUser(id);
         } catch (IllegalArgumentException ex) {
@@ -85,7 +81,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<UserDTO>> getUserProfile(@PathVariable("id") long id) throws Exception {
+    public final HttpEntity<EntityModel<UserDTO>> getUserProfile(@PathVariable("id") long id) {
 
         UserDTO userDTO = userFacade.getUserWithId(id);
         if (userDTO == null) throw new ResourceNotFoundException("user " + id + " not found");

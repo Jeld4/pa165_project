@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.service;
 
-import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.User;
@@ -77,5 +76,10 @@ public interface OrderService {
      */
     void addServiceToOrder(Long orderId, Long serviceId);
 
+    /**
+     * Get car of the order
+     * @param orderId id of the order
+     * @return car of the order
+     */
     Car getOrderCar(Long orderId);
 }
