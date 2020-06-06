@@ -56,7 +56,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car findByLicencePlate(String licencePlate) {
-        if(licencePlate.isEmpty()){
+        if(licencePlate == null || licencePlate.isEmpty()){
             throw new IllegalArgumentException("Licence plate cannot be empty");
         }
         Car car = null;

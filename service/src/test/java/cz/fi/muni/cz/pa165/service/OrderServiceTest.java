@@ -58,7 +58,7 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
     private List<Tire> tires;
 
     @BeforeMethod
-    public void prepareTire(){
+    public void prepare(){
         order = new Order();
         user = new User();
         user.setUserAddress("Brno");
