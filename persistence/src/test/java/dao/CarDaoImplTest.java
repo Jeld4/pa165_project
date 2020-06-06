@@ -30,8 +30,8 @@ public class CarDaoImplTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void createCar() {
-        ferrari = new Car("4A2 3000", "Cabriolet");
-        porsche = new Car("4B1 3244", "SUV");
+        ferrari = new Car("4A2 3000", "Cabriolet", "nice");
+        porsche = new Car("4B1 3244", "SUV", "notnice");
 
         ferrari.setTireType("winter");
         porsche.setTireType("summer");
@@ -52,7 +52,7 @@ public class CarDaoImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createCarTest() {
         List<Car> carListBefore = carDao.findAll();
-        Car felicia = new Car("4C1 5887", "winter");
+        Car felicia = new Car("4C1 5887", "winter", "winter");
         carDao.create(felicia);
         List<Car> carListAfter = carDao.findAll();
         assert(carListAfter.size() == carListBefore.size() + 1);

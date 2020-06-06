@@ -23,6 +23,7 @@ public class Car {
     @NotEmpty
     private String model;
 
+    @NotEmpty
     private String tireType;
 
     /**
@@ -30,15 +31,20 @@ public class Car {
      * @param licencePlate
      * @param model
      */
-    public Car(String licencePlate, String model){
+    public Car(String licencePlate, String model, String tireType){
         if(licencePlate.isEmpty()){
             throw new IllegalArgumentException("Licence plate cannot be empty");
         }
         if(model.isEmpty()){
             throw new IllegalArgumentException("Car model cannot be empty");
         }
+
+        if(tireType.isEmpty()){
+            throw new IllegalArgumentException("Tire type cannot be empty");
+        }
         this.licencePlate = licencePlate;
         this.model = model;
+        this.tireType = tireType;
     }
 
     /**

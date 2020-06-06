@@ -1,5 +1,6 @@
 package cz.fi.muni.pa165.dto;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -11,10 +12,10 @@ import java.util.Objects;
  */
 public class ServiceCreateDTO implements Serializable {
 
-    @NotNull
+    @NotEmpty
     @Size(min = 3, max = 50)
     private String name;
-    @NotNull
+    @NotEmpty
     @Size(min = 3, max = 200)
     private String description;
 

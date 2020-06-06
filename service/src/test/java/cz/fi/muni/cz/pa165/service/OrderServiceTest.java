@@ -61,9 +61,11 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
     public void prepareTire(){
         order = new Order();
         user = new User();
-        user.setLogin("admin");
-        user.setPassword("admin");
-        user.setName("name");
+        user.setUserAddress("Brno");
+        user.setTelephone("555444888");
+        user.setPassword("password");
+        user.setLogin("login");
+        user.setName("useros");
         userService.create(user);
 
         tire = new Tire();

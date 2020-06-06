@@ -108,6 +108,11 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
         order2.setServices(services);
 
         User user = new User();
+        user.setUserAddress("Brno");
+        user.setTelephone("555444888");
+        user.setPassword("password");
+        user.setLogin("login");
+        user.setName("useros");
         userDao.createUser(user);
 
         order1.setUser(user);
@@ -149,6 +154,11 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createAnotherOrder() {
         User user = new User();
+        user.setUserAddress("Brno");
+        user.setTelephone("555444888");
+        user.setPassword("password");
+        user.setLogin("login");
+        user.setName("useros");
         userDao.createUser(user);
         List<Order> bef = orderDao.findAll();
         Order order3 = new Order();
@@ -165,6 +175,11 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findByUser() {
         User user = new User();
+        user.setUserAddress("Brno");
+        user.setTelephone("555444888");
+        user.setPassword("password");
+        user.setLogin("login");
+        user.setName("useros");
         userDao.createUser(user);
         Order order = new Order();
         order.setUser(user);

@@ -95,6 +95,8 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         user1.setPassword("Number62");
         user1.setIsAdmin(false);
         user1.setName("John");
+        user1.setTelephone("123654987");
+        user1.setUserAddress("brno");
 
         userId = userFacade.createUser(user1);
 
@@ -105,6 +107,7 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
         car1 = new CarCreateDTO();
         car1.setModel("aaa");
         car1.setLicencePlate("asdasd");
+        car1.setTireType("winter");
         carFacade.createCar(car1);
 
         tire = new TireCreateDTO();
