@@ -42,14 +42,17 @@ public class TireDaoImplTest extends AbstractTestNGSpringContextTests {
         tire1.setType("black");
         tire2.setType("white");
 
+        tire1.setManufacturer("boss");
+        tire2.setManufacturer("noboss");
+
         tire1.setSeason("winter");
         tire2.setSeason("summer");
 
         tire1.setPrice(new BigDecimal(45000));
         tire2.setPrice(new BigDecimal(4567));
 
-        tire1.setSize(BigDecimal.valueOf(340));
-        tire2.setSize(BigDecimal.valueOf(340));
+        tire1.setSize(new BigDecimal(15));
+        tire2.setSize(new BigDecimal(16));
 
         tireDao.create(tire1);
         tireDao.create(tire2);
