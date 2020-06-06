@@ -29,7 +29,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void create(Order order) {
-        log.debug("dao delete order");
+        log.debug("dao create order");
 
         if (order == null) {
             throw new DataAccessException("Attempting to create null order."){};

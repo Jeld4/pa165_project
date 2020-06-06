@@ -52,14 +52,12 @@ public class LoginController {
             throw new InvalidRequestException("Failed validation during user login validation");
         }
         UserDTO foundUser = userFacade.getUserWithLogin(userCreateDTO.getLogin());
-        log.debug("GIVEN PASSWORD " + userCreateDTO.getPassword());
-
         if(foundUser == null){return null;}
         if (userFacade.checkPassword(foundUser.getId(), userCreateDTO.getPassword())){
-            log.error("RETURNING OK STATUS");
+            log.error("Controller - login returning ok status");
             return ResponseEntity.status(HttpStatus.OK).body(null);
         }else{
-            log.error("RETURNING UNAUTHORIZED STATUS");
+            log.error("Controller - login returning unauthorized status");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
