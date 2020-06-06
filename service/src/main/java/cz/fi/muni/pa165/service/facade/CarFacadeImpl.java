@@ -44,10 +44,14 @@ public class CarFacadeImpl implements CarFacade {
         if(car.getModel().isEmpty()){
             throw new IllegalArgumentException("Car needs to have assigned model type");
         }
+        if(car.getTireType().isEmpty()){
+            throw new IllegalArgumentException("Car needs to have assigned tire type");
+        }
         log.debug("Facade - create car");
         Car newCar = new Car();
         newCar.setModel(car.getModel());
         newCar.setLicencePlate(car.getLicencePlate());
+        newCar.setTireType(car.getTireType());
         carService.create(newCar);
         return  newCar.getId();
 
@@ -98,7 +102,7 @@ public class CarFacadeImpl implements CarFacade {
         }
 
         if(tire == null){
-            throw new IllegalArgumentException("Car cannot be null");
+            throw new IllegalArgumentException("Tire cannot be null");
         }
 
         log.debug("Facade - changing tires {} for car with ID {}", tire.getId(), car.getId());

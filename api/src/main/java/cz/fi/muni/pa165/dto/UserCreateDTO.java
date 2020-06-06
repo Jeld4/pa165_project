@@ -16,12 +16,11 @@ public class UserCreateDTO {
 	private String name;
     
 	@NotEmpty
-    @Size(min = 3, max=32)
+    @Size(min = 5, max=32)
 	private String login;
-
     
 	@NotEmpty
-    @Size(min = 3, max=32)
+    @Size(min = 5, max=32)
 	private String password;
 
 	@NotEmpty
@@ -138,13 +137,15 @@ public class UserCreateDTO {
 		return Objects.equals(name, that.name) &&
 				Objects.equals(login, that.login) &&
 				Objects.equals(password, that.password) &&
+				Objects.equals(userAddress, that.userAddress) &&
+				Objects.equals(telephone, that.telephone) &&
 				Objects.equals(isAdmin, that.isAdmin) &&
 				Objects.equals(cars, that.cars);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(name, login, password, isAdmin, cars);
+		return Objects.hash(name, login, password, userAddress, telephone, isAdmin, cars);
 	}
 
 	@Override
@@ -153,6 +154,8 @@ public class UserCreateDTO {
 				"name='" + name + '\'' +
 				", login='" + login + '\'' +
 				", password='" + password + '\'' +
+				", userAddress='" + userAddress + '\'' +
+				", telephone='" + telephone + '\'' +
 				", isAdmin=" + isAdmin +
 				", cars=" + cars +
 				'}';

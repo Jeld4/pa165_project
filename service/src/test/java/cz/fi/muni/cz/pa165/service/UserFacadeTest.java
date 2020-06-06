@@ -52,16 +52,22 @@ public class UserFacadeTest extends AbstractTransactionalTestNGSpringContextTest
         userCreateDTO1.setName("Omre Bro");
         userCreateDTO1.setLogin("omrebro123");
         userCreateDTO1.setPassword("omre");
+        userCreateDTO1.setUserAddress("Brno");
+        userCreateDTO1.setTelephone("112345687");
 
         userCreateDTO2 = new UserCreateDTO();
         userCreateDTO2.setName("Holly Socks");
         userCreateDTO2.setLogin("solly-hocks");
         userCreateDTO2.setPassword("solly");
+        userCreateDTO2.setUserAddress("Brno");
+        userCreateDTO2.setTelephone("192345687");
 
         userCreateDTO3 = new UserCreateDTO();
         userCreateDTO3.setName("Felix Saulovich");
         userCreateDTO3.setLogin("bigSaul_302");
         userCreateDTO3.setPassword("xxx");
+        userCreateDTO3.setUserAddress("Brno");
+        userCreateDTO3.setTelephone("115345687");
 
 
     }

@@ -16,6 +16,8 @@ public class CarCreateDTO implements Serializable {
     private String licencePlate;
     @NotBlank
     private String model;
+    @NotBlank
+    private String tireType;
 
     /**
      * This method is used to get licence plate of the car
@@ -49,18 +51,35 @@ public class CarCreateDTO implements Serializable {
         this.model = model;
     }
 
+    /**
+     * Method used to get tire type of the car
+     * @return tire typ
+     */
+    public String getTireType() {
+        return tireType;
+    }
+
+    /**
+     * Method used to set tire type of the car
+     * @param tireType
+     */
+    public void setTireType(String tireType) {
+        this.tireType = tireType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CarCreateDTO that = (CarCreateDTO) o;
         return Objects.equals(licencePlate, that.licencePlate) &&
-                Objects.equals(model, that.model);
+                Objects.equals(model, that.model) &&
+                Objects.equals(tireType, that.tireType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(licencePlate, model);
+        return Objects.hash(licencePlate, model, tireType);
     }
 
     @Override
@@ -68,6 +87,7 @@ public class CarCreateDTO implements Serializable {
         return "CarCreateDTO{" +
                 "licencePlate='" + licencePlate + '\'' +
                 ", model='" + model + '\'' +
+                ", tireType='" + tireType + '\'' +
                 '}';
     }
 }
