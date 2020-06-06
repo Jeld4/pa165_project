@@ -73,8 +73,7 @@ public class UserFacadeImpl implements UserFacade {
 
 	@Override
 	public void addCarToUser(Long userId, Long carId) {
-		userService.addCarToUser(userId, carId);
-		
+		userService.addCarToUser(userId, carId);	
 	}
 
 	@Override
