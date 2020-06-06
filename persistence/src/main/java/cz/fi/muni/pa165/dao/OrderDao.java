@@ -13,41 +13,41 @@ public interface OrderDao {
 
     /**
      * Method to create a new order.
-     * @param order
+     * @param order order to create
      */
     void create(Order order);
 
     /**
      * Method to find all orders.
-     * @return
+     * @return list of all orders
      */
     List<Order> findAll();
 
     /**
      * Method to find order by id.
-     * @param id
-     * @return
+     * @param id of the order we want to find
+     * @return order
      */
     Order findById(Long id);
 
     /**
      * Method used to remove order.
-     * @param order
+     * @param order to be removed
      */
     void remove(Order order);
 
     /**
      * Method to update existing order.
-     * @param order
+     * @param order to be updated
      */
     void update(Order order);
 
     /**
      * Finds order by user
-     * @param u
-     * @return
+     * @param user to find his orders
+     * @return list of user's orders
      */
-    List<Order> findByUser(User u);
+    List<Order> findByUser(User user);
 
     /**
      * Adds service to order
@@ -62,7 +62,7 @@ public interface OrderDao {
     /**
      * Calculates and set total price of order
      * @param order to be set
-     * @return total price of orde
+     * @return total price of order
      */
     BigDecimal calculateTotalPrice(Order order);
 }

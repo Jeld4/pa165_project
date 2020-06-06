@@ -1,6 +1,5 @@
 package cz.fi.muni.pa165.controllers;
 
-import cz.fi.muni.pa165.dao.CarDao;
 import cz.fi.muni.pa165.dto.CarCreateDTO;
 import cz.fi.muni.pa165.dto.CarDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerErrorException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -60,7 +58,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<CarDTO>> getCar(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<CarDTO>> getCar(@PathVariable("id") long id) {
         CarDTO carDTO = carFacade.getCarWithId(id);
         if (carDTO == null){
             throw new ResourceNotFoundException("Car " + id + "not found");
@@ -97,7 +95,7 @@ public class CarController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteCar(@PathVariable("id") long id) throws Exception{
+    public final void deleteCar(@PathVariable("id") long id) {
         try{
             carFacade.deleteCar(id);
             log.debug("Controller - delete car with ID {}", id);
@@ -107,9 +105,11 @@ public class CarController {
     }
 
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
-    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getCarsByUser(@PathVariable("id") long id) throws Exception {
+
+    public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) {
 
         log.debug("Controller - get cars by user with ID {}", id);
+
 
         List<CarDTO> carsListDTO = carFacade.getCarsByUser(id);
 

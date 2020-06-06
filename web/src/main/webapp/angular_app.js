@@ -599,7 +599,7 @@ eshopControllers.controller('CreateTireCtrl',
             console.log(tire)
             $http({
                 method: 'POST',
-                url: 'api/v1/tires/create/' + $rootScope.logedUser.login,
+                url: 'api/v1/tires/create',
                 data: tire
             }).then(function success(response) {
                 console.log('created tire');
@@ -640,7 +640,7 @@ eshopControllers.controller('CreateUserCtrl',
             console.log(user)
             $http({
                 method: 'POST',
-                url: 'api/v1/users/create/' + $rootScope.logedUser.name,
+                url: 'api/v1/users/create/',
                 data: user
             }).then(function success(response) {
                 console.log('created user');
@@ -679,7 +679,7 @@ eshopControllers.controller('CreateServiceCtrl',
             console.log(service)
             $http({
                 method: 'POST',
-                url: 'api/v1/services/create/' + $rootScope.logedUser.login,
+                url: 'api/v1/services/create/',
                 data: service
             }).then(function success(response) {
                 console.log('created service');
@@ -718,7 +718,7 @@ eshopControllers.controller('CarRegisterCtrl',
             console.log(car)
             $http({
                 method: 'POST',
-                url: 'api/v1/cars/create/' + $rootScope.logedUser.id,
+                url: 'api/v1/cars/create/',
                 data: car
             }).then(function success(response) {
                 console.log('created car');

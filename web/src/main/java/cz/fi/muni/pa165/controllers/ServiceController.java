@@ -54,7 +54,7 @@ public class ServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) {
         ServiceDTO serviceDTO = serviceFacade.getServiceWithId(id);
         log.debug("Controller - get service with ID {}", id);
 
@@ -77,7 +77,7 @@ public class ServiceController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteService(@PathVariable("id") long id) throws Exception {
+    public final void deleteService(@PathVariable("id") long id) {
         try {
             serviceFacade.deleteService(id);
             log.debug("Controller - delete service with ID {}", id);

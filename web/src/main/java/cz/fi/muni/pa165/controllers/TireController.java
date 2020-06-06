@@ -18,9 +18,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ServerErrorException;
-
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.persistence.TransactionRequiredException;
 import javax.validation.Valid;
@@ -55,7 +52,7 @@ public class TireController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) throws Exception{
+    public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) {
         TireDTO tireDTO = tireFacade.getTireWithId(id);
         log.debug("Controller - get tire by ID");
         if (tireDTO == null){
@@ -67,7 +64,7 @@ public class TireController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<TireDTO>> createTire(@RequestBody @Valid TireCreateDTO tire,
-                                                             BindingResult bindingResult) throws Exception {
+                                                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
             throw new InvalidRequestException("Failed validation");
         }
@@ -78,7 +75,7 @@ public class TireController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public final void deleteTire(@PathVariable("id") long id) throws Exception {
+    public final void deleteTire(@PathVariable("id") long id) {
         try {
             tireFacade.deleteTire(id);
             log.debug("Controller - delete tire with ID {}", id);

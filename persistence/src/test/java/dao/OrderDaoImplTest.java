@@ -46,11 +46,11 @@ public class OrderDaoImplTest extends AbstractTestNGSpringContextTests {
     @Autowired
     public ServiceDao serviceDao;
     
-    Order order1;
-    Order order2;
+    private Order order1;
+    private Order order2;
 
-    List<Service> services;
-    List<Tire> tires;
+    private List<Service> services;
+    private List<Tire> tires;
  
     @BeforeMethod
     public void createOrder() {

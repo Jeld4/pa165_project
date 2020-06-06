@@ -6,7 +6,6 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-
 /**
  * @author Jakub Malý, 456389
  */
@@ -20,7 +19,6 @@ public class TireCreateDTO {
     @Size(min = 3, max=32)
     private String type;
 
-    @NotEmpty
     @Min(0)
     private BigDecimal size;
 
@@ -28,7 +26,6 @@ public class TireCreateDTO {
     @Size(min = 3, max=32)
     private String season;
 
-    @NotEmpty
     @Min(0)
     private BigDecimal price;
 
