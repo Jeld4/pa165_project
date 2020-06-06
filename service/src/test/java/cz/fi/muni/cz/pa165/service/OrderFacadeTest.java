@@ -49,21 +49,6 @@ public class OrderFacadeTest extends AbstractTransactionalTestNGSpringContextTes
     @Mock
     private OrderService orderService;
 
-    @Mock
-    private UserService userService;
-
-    @Mock
-    private ServiceService serviceService;
-
-    @Mock
-    private TireService tireService;
-
-    @Mock
-    private CarService carService;
-
-    @Mock
-    private BeanMappingService beanMappingService;
-
     private OrderCreateDTO order1;
     private OrderCreateDTO order2;
     private OrderCreateDTO order3;

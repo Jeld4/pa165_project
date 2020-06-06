@@ -42,6 +42,9 @@ public class OrderServiceImpl implements OrderService {
         if (order.getServices().isEmpty() && order.getTires().isEmpty()) {
             throw new IllegalArgumentException("Cannot create empty order.");
         }
+        if (userLogin == null) {
+            throw new IllegalArgumentException("User login cannot be null.");
+        }
         User user = userDao.getUserByLogin(userLogin);
         order.setUser(user);
         try {

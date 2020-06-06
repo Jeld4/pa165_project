@@ -50,6 +50,7 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
     }
 
     private Order order;
+    private Order order2;
     private User user;
     private Tire tire;
     private Service service;
@@ -84,18 +85,60 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
         tires.add(tire);
         services = new ArrayList<>();
         services.add(service);
+
+        order.setServices(services);
+        order.setTires(tires);
+
+        order2 = new Order();
+        order2.setTires(tires);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test
     public void create() {
         assert(userService.findAll().size() == 1);
-        //order.setServices(services);
-        //order.setTires(tires);
+
         orderService.create(order, user.getLogin());
 
         int size = orderService.findAll().size();
 
-        //assert(orderService.findAll().size() == 1);
+        assert(size == 1);
+    }
+
+    @Test
+    public void remove() {
+        assert(orderService.findAll().size() == 0);
+
+        assert(userService.findAll().size() == 1);
+
+        orderService.create(order, user.getLogin());
+
+        assert(orderService.findAll().size() == 1);
+
+        orderService.remove(order);
+
+        assert(orderService.findAll().size() == 0);
+    }
+
+    @Test
+    public void findById() {
+        orderService.create(order, user.getLogin());
+        orderService.create(order2, user.getLogin());
+
+        assert(orderService.findAll().size() == 2);
+        assert(orderService.findById(order2.getId()) == order2);
+    }
+
+    @Test
+    public void findAll() {
+        List<Order> orders = new ArrayList<>();
+        orders.add(order);
+        orders.add(order2);
+
+        orderService.create(order, user.getLogin());
+        orderService.create(order2, user.getLogin());
+
+        assert(orderService.findAll().size() == 2);
+        assert(orderService.findAll().containsAll(orders));
     }
 
     @Test
@@ -110,5 +153,112 @@ public class OrderServiceTest extends AbstractTransactionalTestNGSpringContextTe
 
         assert(orderService.getOrdersByUser(user).size() == 1);
         assert(orderService.getOrdersByUser(user).get(0) == order);
+    }
+
+    @Test
+    public void confirm() {
+        orderService.create(order, user.getLogin());
+        assert(orderService.findById(order.getId()).getState() == OrderState.PENDING);
+
+        orderService.confirm(orderService.findById(order.getId()));
+        assert(orderService.findById(order.getId()).getState() == OrderState.CONFIRMED);
+    }
+
+    @Test
+    public void cancel() {
+        orderService.create(order, user.getLogin());
+        assert(orderService.findById(order.getId()).getState() == OrderState.PENDING);
+
+        orderService.cancel(orderService.findById(order.getId()));
+        assert(orderService.findById(order.getId()).getState() == OrderState.CANCELED);
+    }
+
+    @Test
+    public void finish() {
+        orderService.create(order2, user.getLogin());
+        assert(orderService.findById(order2.getId()).getState() == OrderState.PENDING);
+
+        orderService.finish(orderService.findById(order2.getId()));
+        assert(orderService.findById(order2.getId()).getState() == OrderState.DONE);
+    }
+
+    @Test
+    public void addTireToOrder() {
+        orderService.create(order, user.getLogin());
+
+        assert(orderService.findById(order.getId()).getTires().size() == 1);
+
+        Long orderId = orderService.findById(order.getId()).getId();
+        orderService.addTireToOrder(orderId, tire.getId());
+
+        assert(orderService.findById(order.getId()).getTires().size() == 2);
+    }
+
+    @Test
+    public void addServiceToOrder() {
+        orderService.create(order, user.getLogin());
+
+        assert(orderService.findById(order.getId()).getServices().size() == 1);
+
+        Long orderId = orderService.findById(order.getId()).getId();
+        orderService.addServiceToOrder(orderId, service.getId());
+
+        assert(orderService.findById(order.getId()).getServices().size() == 2);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullOrder() {
+        orderService.create(null, user.getLogin());
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createOrderWithNoUserId() {
+        orderService.create(order, null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeNullOrder() {
+        orderService.remove(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findOrderWithNullId() {
+        orderService.findById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getOrdersByNullUser() {
+        orderService.getOrdersByUser(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void confirmNullOrder() {
+        orderService.confirm(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void cancelNullOrder() {
+        orderService.cancel(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void finishNullOrder() {
+        orderService.finish(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void addTireToOrderWithNullIds() {
+        orderService.create(order, user.getLogin());
+        orderService.addTireToOrder(null, null);
+        orderService.addTireToOrder(order.getId(), null);
+        orderService.addTireToOrder(null, tire.getId());
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void addServiceToOrderWithNullIds() {
+        orderService.create(order, user.getLogin());
+        orderService.addServiceToOrder(null, null);
+        orderService.addServiceToOrder(order.getId(), null);
+        orderService.addServiceToOrder(null, service.getId());
     }
 }
