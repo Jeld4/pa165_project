@@ -484,7 +484,7 @@ eshopControllers.controller('UserRegisterCtrl',
 	        	console.log(user)
 	            $http({
 	                method: 'POST',
-	                url: 'api/v1/users/create',
+                    url: 'api/v1/cars/create/',
 	                data: user
 	            }).then(function success(response) {
 	                console.log('created user');
@@ -718,7 +718,7 @@ eshopControllers.controller('CarRegisterCtrl',
             console.log(car)
             $http({
                 method: 'POST',
-                url: 'api/v1/cars/create/',
+                url: 'api/v1/cars/create/' + $rootScope.logedUser.id,
                 data: car
             }).then(function success(response) {
                 console.log('created car');
