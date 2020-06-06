@@ -4,6 +4,8 @@ import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.Service;
 import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +25,12 @@ public class OrderDaoImpl implements OrderDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    private final static Logger log = LoggerFactory.getLogger(OrderDaoImpl.class);
+
     @Override
     public void create(Order order) {
+        log.debug("dao create order");
+
         if (order == null) {
             throw new DataAccessException("Attempting to create null order."){};
         }
@@ -34,11 +40,15 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> findAll() {
+        log.debug("dao find all orders");
+
         return  entityManager.createQuery("SELECT o FROM Order o", Order.class).getResultList();
     }
 
     @Override
     public Order findById(Long id) {
+        log.debug("dao find order({})", id);
+
         if (id == null) {
             throw new DataAccessException("Cannot find order, because id is null."){};
         }
@@ -47,6 +57,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void remove(Order order) {
+        log.debug("dao remove order");
         if (order == null) {
             throw new DataAccessException("Attempting to remove null order."){};
         }
@@ -55,15 +66,17 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void update (Order order) {
+        log.debug("dao update order");
         if (order == null) {
             throw new DataAccessException("Attempting to update null order."){};
         }
-        //calculateTotalPrice(order);
+        calculateTotalPrice(order);
         entityManager.merge(order);
     }
 
     @Override
     public List<Order> findByUser(User user) {
+        log.debug("dao find order by user");
         if (user == null) {
             throw new DataAccessException("Attempting to find order by null user."){};
         }
@@ -77,6 +90,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void addService(Long orderId, Long serviceID) {
+        log.debug("dao addService to order");
+
         if (orderId == null) {
             throw new DataAccessException("Cannot add service to order, because orderId is null."){};
         }
@@ -91,6 +106,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public void addTire(Long orderId, Long tireID) {
+        log.debug("dao addTire to order");
         if (orderId == null) {
             throw new DataAccessException("Cannot add service to order, because orderId is null."){};
         }
@@ -105,6 +121,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public BigDecimal calculateTotalPrice(Order order) {
+        log.debug("dao calculate total order price");
         if (order == null)
             return new BigDecimal(0);
         BigDecimal totalPrice = new BigDecimal(0);

@@ -2,6 +2,8 @@ package cz.fi.muni.pa165.service;
 
 import cz.fi.muni.pa165.dao.ServiceDao;
 import cz.fi.muni.pa165.entity.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 
@@ -15,6 +17,8 @@ public class ServiceServiceImpl implements ServiceService {
     @Autowired
     private ServiceDao serviceDao;
 
+    private final static Logger log = LoggerFactory.getLogger(ServiceServiceImpl.class);
+
     @Override
     public Service findById(Long id) {
         if(id == null){
@@ -25,9 +29,11 @@ public class ServiceServiceImpl implements ServiceService {
 
         try {
             service = serviceDao.findById(id);
+
         }catch (DataAccessException ex){
             throw new RuntimeException(ex);
         }
+        log.debug("Service - find service with ID {}", id);
         return service;
     }
 
@@ -39,6 +45,7 @@ public class ServiceServiceImpl implements ServiceService {
         } catch (DataAccessException ex){
             throw new RuntimeException(ex);
         }
+        log.debug("Service - find all cars");
         return services;
     }
     @Override
@@ -50,6 +57,7 @@ public class ServiceServiceImpl implements ServiceService {
 
         try {
             serviceDao.create(service);
+            log.debug("Service - Create car");
         }catch (DataAccessException ex){
             throw new RuntimeException(ex);
         }
@@ -62,6 +70,7 @@ public class ServiceServiceImpl implements ServiceService {
         }
         try {
             serviceDao.remove(service);
+            log.debug("Service - Remove car");
         }catch (DataAccessException ex){
             throw new RuntimeException(ex);
         }

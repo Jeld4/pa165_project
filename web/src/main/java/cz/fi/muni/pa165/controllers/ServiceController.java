@@ -6,6 +6,8 @@ import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.ServiceFacade;
 import cz.fi.muni.pa165.hateoas.ServiceRepresentationModelAssembler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -35,6 +37,9 @@ public class ServiceController {
     private ServiceFacade serviceFacade;
     private ServiceRepresentationModelAssembler serviceRepresentationModelAssembler;
 
+    private final static Logger log = LoggerFactory.getLogger(ServiceController.class);
+
+
     public ServiceController(@Autowired ServiceFacade serviceFacade,@Autowired ServiceRepresentationModelAssembler serviceRepresentationModelAssembler) {
         this.serviceFacade = serviceFacade;
         this.serviceRepresentationModelAssembler = serviceRepresentationModelAssembler;
@@ -42,6 +47,7 @@ public class ServiceController {
 
     @RequestMapping(method = RequestMethod.GET)
     private final HttpEntity<CollectionModel<EntityModel<ServiceDTO>>> getServices(){
+        log.debug("Controller - get all services");
         CollectionModel<EntityModel<ServiceDTO>> servicesCollectionModel
                 = serviceRepresentationModelAssembler.toCollectionModel(serviceFacade.getAllServices());
         return new ResponseEntity<>(servicesCollectionModel, HttpStatus.OK);
@@ -50,6 +56,8 @@ public class ServiceController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) throws Exception{
         ServiceDTO serviceDTO = serviceFacade.getServiceWithId(id);
+        log.debug("Controller - get service with ID {}", id);
+
         if (serviceDTO == null){
             throw new ResourceNotFoundException("Resource with id " + id + " was not found.");
         }
@@ -62,6 +70,7 @@ public class ServiceController {
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
         }
+        log.debug("Controller - create service");
         Long id = serviceFacade.createService(serviceCreateDTO);
         EntityModel<ServiceDTO> serviceModel = serviceRepresentationModelAssembler.toModel(serviceFacade.getServiceWithId(id));
         return new ResponseEntity<>(serviceModel, HttpStatus.OK);
@@ -71,6 +80,8 @@ public class ServiceController {
     public final void deleteService(@PathVariable("id") long id) throws Exception {
         try {
             serviceFacade.deleteService(id);
+            log.debug("Controller - delete service with ID {}", id);
+
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Service with id " + id + " cannot be found.");
         }
