@@ -6,7 +6,6 @@
 		<th scope="col">Login</th>
 		<th scope="col">Is Admin</th>
 		<th scope="col">Detail</th>
-		<th scope="col">Edit</th>
 		<th scope="col">Delete</th>
 	</tr>
 	</thead>
@@ -19,11 +18,14 @@
 			<a class="btn btn-primary"  href="#!/user/{{user.id}}">Detail</a>
 		</td>
 		<td>
-			<a class="btn btn-success" href="#!/user/edit{{user.id}}">Edit</a>
-		</td>
-		<td>
 			<button ng-click="deleteUser(user)" type="submit" class="btn btn-danger">Delete</button>
 		</td>
 	</tr>
 	</tbody>
 </table>
+
+<br>
+
+<td>
+	<a class="btn btn-success" href="#!/createUser">Create a new user</a>
+</td>
