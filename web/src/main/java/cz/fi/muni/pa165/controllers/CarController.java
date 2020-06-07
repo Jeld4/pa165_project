@@ -49,6 +49,11 @@ public class CarController {
         this.userFacade = userFacade;
     }
 
+
+    /**
+     * REST function for returning all cars
+     * @return Response entity containing all cars
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getCars(){
         log.debug("Controller - get all cars");
@@ -57,6 +62,11 @@ public class CarController {
         return new ResponseEntity<>(carDTOCollectionModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for getting one specific car
+     * @param id ID of the car
+     * @return Response entity containing desired car
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<CarDTO>> getCar(@PathVariable("id") long id) {
         CarDTO carDTO = carFacade.getCarWithId(id);
@@ -68,6 +78,12 @@ public class CarController {
         return new ResponseEntity<>(carModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for creating new car
+     * @param car CarCreateDTO obj of the new car
+     * @param bindingResult  bindingResult
+     * @return Response entity containing new created car
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<CarDTO>> createCar(@RequestBody @Valid CarCreateDTO car, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -79,6 +95,13 @@ public class CarController {
         return new ResponseEntity<>(carModel, HttpStatus.OK);
     }
 
+    /**
+     * Creates car under specific customer
+     * @param car Car to be created
+     * @param id ID of the user
+     * @param bindingResult bindingResult
+     * @return Response entity containing new created car
+     */
     @RequestMapping(value = "/create/{id}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<CarDTO>> createCarByCustomer(@RequestBody @Valid CarCreateDTO car, @PathVariable("id") long id, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
@@ -94,6 +117,10 @@ public class CarController {
         return new ResponseEntity<>(carModel, HttpStatus.OK);
     }
 
+    /**
+     * REST Function for deleting specific car
+     * @param id ID of the car
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteCar(@PathVariable("id") long id) {
         try{
@@ -104,8 +131,12 @@ public class CarController {
         }
     }
 
+    /**
+     * Returns all cars under specific user
+     * @param id ID of the user
+     * @return Response entity containing collection of cars belonging to the user
+     */
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
-
     public final HttpEntity<CollectionModel<EntityModel<CarDTO>>> getOrdersByUser(@PathVariable("id") long id) {
 
         log.debug("Controller - get cars by user with ID {}", id);

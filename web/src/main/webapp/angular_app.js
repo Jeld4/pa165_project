@@ -113,6 +113,27 @@ eshopControllers.controller('AllOrdersCtrl',
                 }
             );
         }
+
+        $scope.confirm = (order) => {
+            console.log("confirming order with id = " + order.id);
+            $http.post('/pa165/api/v1/orders/' + order.id + '/confirm').then(function (response) {
+                $location.path("/allOrders");
+            });
+        }
+
+        $scope.finish = (order) => {
+            console.log("finishing order with id = " + order.id);
+            $http.post('/pa165/api/v1/orders/' + order.id + '/finish').then(function (response) {
+                $location.path("/allOrders");
+            });
+        }
+
+        $scope.cancel = (order) => {
+            console.log("canceling order with id = " + order.id);
+            $http.post('/pa165/api/v1/orders/' + order.id + '/cancel').then(function (response) {
+                $location.path("/allOrders");
+            });
+        }
     })
 
 eshopControllers.controller('AllCarsCtrl',
