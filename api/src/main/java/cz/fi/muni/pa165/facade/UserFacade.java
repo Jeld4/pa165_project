@@ -5,6 +5,10 @@ import java.util.List;
 import cz.fi.muni.pa165.dto.UserCreateDTO;
 import cz.fi.muni.pa165.dto.UserDTO;
 
+
+/**
+ * @author Michal Klíma, 456234	
+ */
 public interface UserFacade {
     
 	/**

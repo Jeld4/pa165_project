@@ -5,16 +5,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cz.fi.muni.pa165.dao.UserDao;
+import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 
 /**
  * 
- * @author Michal KLíma
+ * @author Michal Klíma
  *
  */
 @Service
@@ -29,14 +31,32 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User findById(Long id) {
-		log.debug("User service - find user with ID {}", id);
-		return userDao.getUserById(id);
+	     if(id == null){
+	            throw new IllegalArgumentException("User ID cannot be null");
+	        }
+
+	        cz.fi.muni.pa165.entity.User user = null;
+
+	        try {
+	            user = userDao.getUserById(id);
+
+	        }catch (DataAccessException ex){
+	            throw new RuntimeException(ex);
+	        }
+	        log.debug("User service - find tire with ID {}", id);
+	        return user;
 	}
 
 	@Override
 	public List<User> findAll() {
-		log.debug("User service - find all users");
-		return userDao.findAllUsers();
+        List<User> users = null;
+        try {
+            users = userDao.findAllUsers();
+        } catch (DataAccessException ex){
+            throw new RuntimeException(ex);
+        }
+        log.debug("User service - find all users");
+        return users;
 	}
 
 	@Override

@@ -33,6 +33,7 @@ public class OrderDaoImpl implements OrderDao {
         if (order == null) {
             throw new DataAccessException("Attempting to create null order."){};
         }
+        
         calculateTotalPrice(order);
         entityManager.persist(order);
     }
