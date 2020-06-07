@@ -88,7 +88,7 @@ public class UserDaoImpl implements UserDao {
         Car car = em.find(Car.class, carId);
         user.getCars().add(car);
         updateUser(user);
-		
+
 	}
 
 	@Override
@@ -102,6 +102,7 @@ public class UserDaoImpl implements UserDao {
 		log.debug("DAO - Remove car");
 		User user = getUserById(userId);
         Car car = em.find(Car.class, carId);
+        user.getCars().remove(car);
         updateUser(user);
 	}
 	

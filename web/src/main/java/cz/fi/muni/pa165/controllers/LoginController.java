@@ -40,6 +40,12 @@ public class LoginController {
         this.userRepresentationModelAssembler = userRepresentationModelAssembler;
     }
 
+    /**
+     * REST method for checking user password
+     * @param userCreateDTO user that tries to log in
+     * @param bindingResult bindingResult
+     * @return either OK or UNAUTHORIZED HTTP status
+     */
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public final ResponseEntity login(@RequestBody UserCreateDTO userCreateDTO, BindingResult bindingResult){

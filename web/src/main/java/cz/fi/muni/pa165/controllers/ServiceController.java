@@ -45,6 +45,10 @@ public class ServiceController {
         this.serviceRepresentationModelAssembler = serviceRepresentationModelAssembler;
     }
 
+    /**
+     * REST method for returning all services
+     * @return Response entity containing all services
+     */
     @RequestMapping(method = RequestMethod.GET)
     private final HttpEntity<CollectionModel<EntityModel<ServiceDTO>>> getServices(){
         log.debug("Controller - get all services");
@@ -53,6 +57,11 @@ public class ServiceController {
         return new ResponseEntity<>(servicesCollectionModel, HttpStatus.OK);
     }
 
+    /**
+     * REST method for returning one service
+     * @param id ID of the service
+     * @return Response entity containing service
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<ServiceDTO>> getService(@PathVariable("id") long id) {
         ServiceDTO serviceDTO = serviceFacade.getServiceWithId(id);
@@ -65,6 +74,12 @@ public class ServiceController {
         return new ResponseEntity<>(serviceModel, HttpStatus.OK);
     }
 
+    /**
+     * REST method for creating new service
+     * @param serviceCreateDTO Service to be created
+     * @param bindingResult bindingResult
+     * @return Response entity containing new service
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<ServiceDTO>> createService(@RequestBody @Valid ServiceCreateDTO serviceCreateDTO, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
@@ -76,6 +91,10 @@ public class ServiceController {
         return new ResponseEntity<>(serviceModel, HttpStatus.OK);
     }
 
+    /**
+     * REST method for deleting specific service
+     * @param id ID of the service to be deleted
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteService(@PathVariable("id") long id) {
         try {
