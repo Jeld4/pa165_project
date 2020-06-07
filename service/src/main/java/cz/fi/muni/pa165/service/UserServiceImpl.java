@@ -29,46 +29,76 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User findById(Long id) {
-        return userDao.getUserById(id);
+		log.debug("User service - find user with ID {}", id);
+		return userDao.getUserById(id);
 	}
 
 	@Override
 	public List<User> findAll() {
-        return userDao.findAllUsers();
+		log.debug("User service - find all users");
+		return userDao.findAllUsers();
 	}
 
 	@Override
 	public User findByLogin(String login) {
-	     return userDao.getUserByLogin(login);
+		if(login == null){
+			throw new IllegalArgumentException("login cannot be null");
+		}
+		log.debug("User service - find all user by login");
+		return userDao.getUserByLogin(login);
 	}
 
 	@Override
 	public void create(User user) {
+		if(user == null){
+			throw new IllegalArgumentException("user cannot be null");
+		}
+		log.debug("User service - create user");
 		user.setPassword(encryptPassword(user.getPassword()));
 		userDao.createUser(user);
 		
 	}
 
 	private String encryptPassword(String password) {
+		if(password == null){
+			throw new IllegalArgumentException("password cannot be null");
+		}
+		log.debug("User service - encrypt password");
 		return DigestUtils.md2Hex(password).toUpperCase();
 	}
 
 	@Override
 	public void remove(User user) {
+		if(user == null){
+			throw new IllegalArgumentException("user cannot be null");
+		}
+		log.debug("User service - remove user");
 		userDao.removeUser(user);
 		
 	}
 
 	@Override
 	public void addCarToUser(Long userId, Long carId) {
+		if(userId == null){
+			throw new IllegalArgumentException("Cannot add car with null userid");
+		}
+		if(carId == null){
+			throw new IllegalArgumentException("Cannot add car with null carid");
+		}
+		log.debug("User service - Add car");
 		userDao.addCar(userId, carId);
-		
 	}
 
 	@Override
 	public void removeCarFromUser(Long userId, Long carId) {
+		if(userId == null){
+			throw new IllegalArgumentException("Cannot remove car with null userid");
+		}
+		if(carId == null){
+			throw new IllegalArgumentException("Cannot remove car with null carid");
+		}
+		log.debug("User service - Remove car");
 		userDao.removeCar(userId, carId);
-		
 	}
 
 	@Override
