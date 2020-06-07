@@ -82,7 +82,7 @@ public class TireController {
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("Tire with id " + id + " cannot be found.");
         } catch (TransactionRequiredException ex) {
-        	throw new InvalidRequestException("You cant delete tire which is part of some orders");
+        	throw new InvalidRequestException("You cant delete tire which is part of some order.");
         }
     }
 
