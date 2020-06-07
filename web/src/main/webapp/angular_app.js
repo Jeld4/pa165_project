@@ -830,12 +830,20 @@ eshopControllers.controller('UserProfileCtrl',
 
             $scope.deleteCar = (car) => {
                 console.log("deleting car with id=" + car.id);
-                $http.delete('/pa165/api/v1/cars/' + car.id).then(
+                $http({
+                    method: 'POST',
+                    url: 'api/v1/users/'+ userId + "/"+ car.id,
+                    data: car
+                }).then(
 
                     function success(response) {
                         console.log('Car with ID: ' + car.id + ' was successfully deleted.');
                         //display confirmation alert
                         $rootScope.successAlert = 'Deleted car';
+                        $http.delete('/pa165/api/v1/cars/' + car.id).then(
+                        		$scope.cars = $scope.cars.filter(c => {return c.id != car.id}) 
+                        )
+                        
                     },
                     function error(response) {
                         console.log("error when deleting car");

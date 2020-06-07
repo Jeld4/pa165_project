@@ -40,6 +40,10 @@ public class OrderController {
         this.orderRepresentationModelAssembler = orderRepresentationModelAssembler;
     }
 
+    /**
+     * REST function for returning all orders
+     * @return Response entity containing all orders
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<OrderDTO>>> getOrders() {
         log.debug("rest getOrders()");
@@ -48,6 +52,11 @@ public class OrderController {
         return new ResponseEntity<>(ordersCollectionModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for getting one specific order
+     * @param id ID of the order
+     * @return Response entity containing desired order
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<OrderDTO>> getOrder(@PathVariable("id") long id) {
         log.debug("rest getOrder({})", id);
@@ -58,6 +67,12 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for creating new order
+     * @param userLogin users login who creates the order
+     * @param order OrderCreateDTO obj of the new car
+     * @return http response
+     */
     @RequestMapping(value = "/create/{userLogin}", method = RequestMethod.POST)
     public final HttpStatus createOrder(@PathVariable("userLogin") String userLogin, @RequestBody OrderCreateDTO order) {
         log.debug("rest createOrder()");
@@ -66,7 +81,12 @@ public class OrderController {
         return HttpStatus.OK;
     }
 
-    	
+    /**
+     * Controller used to call confirm function
+     * @param id of the order
+     * @return Response entity containing the order
+     */
+    @RequestMapping(value = "/{id}/confirm", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> confirmOrder(@PathVariable("id") long id) {
         log.debug("rest confirmOrder({})", id);
 
@@ -77,6 +97,11 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
+    /**
+     * Controller used to call cancel function
+     * @param id of the order
+     * @return Response entity containing the order
+     */
     @RequestMapping(value = "/{id}/cancel", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> cancelOrder(@PathVariable("id") long id) {
         log.debug("rest cancelOrder({})", id);
@@ -88,6 +113,11 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
+    /**
+     * Controller used to call finish function
+     * @param id of the order
+     * @return Response entity containing the order
+     */
     @RequestMapping(value = "/{id}/finish", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<OrderDTO>> finishOrder(@PathVariable("id") long id) {
         log.debug("rest finishOrder({})", id);
@@ -99,7 +129,13 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
-
+    /**
+     * REST function for creating new order
+     * @param user user who creates the order
+     * @param order OrderCreateDTO obj of the new car
+     * @param bindingResult bindingResult
+     * @return Response entity containing new created order
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<OrderDTO>> createOrder(@RequestBody @Valid OrderCreateDTO order, @RequestBody @Valid UserDTO user, BindingResult bindingResult) {
         log.debug("rest createOrder()");
@@ -112,6 +148,10 @@ public class OrderController {
         return new ResponseEntity<>(orderModel, HttpStatus.OK);
     }
 
+    /**
+     * REST Function for deleting specific order
+     * @param id of the order
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteOrder(@PathVariable("id") long id) {
         log.debug("rest deleteOrder({})", id);
@@ -122,6 +162,11 @@ public class OrderController {
         }
     }
 
+    /**
+     * Returns all orders under specific user
+     * @param id of the user
+     * @return Response entity containing collection of orders belonging to the user
+     */
     @RequestMapping(value = "/getByUser/{id}", method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<OrderDTO>>> getOrdersByUser(@PathVariable("id") long id) {
         log.debug("rest getOrdersByUser({})", id);
