@@ -1,12 +1,10 @@
 package cz.fi.muni.cz.pa165.service;
 
-import cz.fi.muni.pa165.dao.TireDao;
 import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.service.TireService;
 import cz.fi.muni.pa165.service.config.ServiceConfiguration;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

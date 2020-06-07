@@ -43,6 +43,10 @@ public class TireController {
 
     }
 
+    /**
+     * REST function for returning all tires
+     * @return Response entity containing all tires
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<TireDTO>>> getTires(){
         log.debug("Controller - get all tires");
@@ -51,6 +55,11 @@ public class TireController {
         return new ResponseEntity<>(tiresCollectionModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for getting one specific tire
+     * @param id ID of the tire
+     * @return Response entity containing desired tire
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<TireDTO>> getTire(@PathVariable("id") long id) {
         TireDTO tireDTO = tireFacade.getTireWithId(id);
@@ -62,6 +71,12 @@ public class TireController {
         return new ResponseEntity<>(tireModel, HttpStatus.OK);
     }
 
+    /**
+     * REST function for creating new tire
+     * @param tire TireCreateDTO obj of the new tire
+     * @param bindingResult  bindingResult
+     * @return Response entity containing newly created tire
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public final HttpEntity<EntityModel<TireDTO>> createTire(@RequestBody @Valid TireCreateDTO tire,
                                                              BindingResult bindingResult) {
@@ -74,6 +89,10 @@ public class TireController {
         return new ResponseEntity<>(tireModel, HttpStatus.OK);
     }
 
+    /**
+     * REST Function for deleting specific tire
+     * @param id ID of the tire
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteTire(@PathVariable("id") long id) {
         try {
