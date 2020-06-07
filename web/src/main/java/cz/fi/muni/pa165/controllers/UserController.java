@@ -124,4 +124,14 @@ public class UserController {
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
     
+    @RequestMapping(value = "/{userId}/{carId}", method = RequestMethod.POST)
+    public final void deleteOrder(@PathVariable("userId") long userId, @PathVariable("carId") long carId) {
+        log.debug("rest deleteRemoveCarFromUser({},{})", userId,carId);
+        try {
+            userFacade.removeCarFromUser(userId, carId);
+        } catch (IllegalArgumentException ex) {
+            throw new ResourceNotFoundException("error when removing car " + carId + " from user " + userId);
+        }
+    }
+    
 }
