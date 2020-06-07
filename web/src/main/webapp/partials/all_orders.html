@@ -10,6 +10,9 @@
         <th scope="col">Price</th>
         <th scope="col">Detail</th>
         <th scope="col">Delete</th>
+        <th scope="col">Confirm</th>
+        <th scope="col">Cancel</th>
+        <th scope="col">Finish</th>
     </tr>
     </thead>
     <tbody ng-repeat="order in orders track by $index">
@@ -22,6 +25,15 @@
         </td>
         <td>
             <button ng-click="deleteOrder(order)" type="submit" class="btn btn-danger">Delete</button>
+        </td>
+        <td>
+            <button ng-click="confirm(order)" type="submit" class="btn btn-warning">Confirm</button>
+        </td>
+        <td>
+            <button ng-click="cancel(order)" type="submit" class="btn btn-dark">Cancel</button>
+        </td>
+        <td>
+            <button ng-click="finish(order)" type="submit" class="btn btn-info">Finish</button>
         </td>
     </tr>
     </tbody>
