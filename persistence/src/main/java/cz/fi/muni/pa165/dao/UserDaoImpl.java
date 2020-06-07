@@ -4,6 +4,7 @@ import cz.fi.muni.pa165.entity.Car;
 import cz.fi.muni.pa165.entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -25,19 +26,27 @@ public class UserDaoImpl implements UserDao {
 
     @Override
 	public void createUser(User user) {
+        if (user == null) {
+            throw new DataAccessException("Attempting to create null user."){};
+        }
 		em.persist(user);
 	}
 
     @Override
-	public User getUserById(long id) {
+	public User getUserById(Long id) {
+        if (id == null) {
+            throw new DataAccessException("Cannot find user, because id is null."){};
+        }
 		return em.find(User.class, id);
 	}
 	
     @Override
 	public void removeUser(User user) {
+        if (user == null) {
+            throw new DataAccessException("Attempting to remove null user."){};
+        }
 		em.remove(user);
 	}
-
 
     @Override
 	public List<User> findAllUsers() {
@@ -88,7 +97,7 @@ public class UserDaoImpl implements UserDao {
         Car car = em.find(Car.class, carId);
         user.getCars().add(car);
         updateUser(user);
-
+		
 	}
 
 	@Override
@@ -102,7 +111,6 @@ public class UserDaoImpl implements UserDao {
 		log.debug("DAO - Remove car");
 		User user = getUserById(userId);
         Car car = em.find(Car.class, carId);
-        user.getCars().remove(car);
         updateUser(user);
 	}
 	

@@ -5,7 +5,7 @@ import java.util.List;
 import cz.fi.muni.pa165.entity.User;
 /**
  * 
- * @author Michal KLíma
+ * @author Michal Klíma
  *
  */
 public interface UserService {

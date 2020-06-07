@@ -18,6 +18,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author Michal Klíma, 456234	
+ */
 @RestController
 @ExposesResourceFor(UserDTO.class)
 @RequestMapping("/users")
@@ -34,15 +37,22 @@ public class UserController {
     private UserFacade userFacade;
     private UserRepresentationModelAssembler userRepresentationModelAssembler;
 
+    /**
+     * REST function for returning all users
+     * @return Response entity containing all users
+     */
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<UserDTO>>> getUsers(){
         log.debug("Controller - get all users");
         CollectionModel<EntityModel<UserDTO>> usersCollectionModel = userRepresentationModelAssembler.toCollectionModel(userFacade.getAllUsers());
-        //usersCollectionModel.add(linkTo(UserController.class).withSelfRel());
-        //usersCollectionModel.add(linkTo(UserController.class).slash("/create").withRel("create"));
         return new ResponseEntity<>(usersCollectionModel, HttpStatus.OK);
     }
     
+    /**
+     * REST function for getting one specific user
+     * @param id ID of the user
+     * @return Response entity containing desired user
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<UserDTO>> getUser(@PathVariable("id") long id) {
         log.debug("Controller - get user by id");
@@ -52,6 +62,11 @@ public class UserController {
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
  
+    /**
+     * REST function for getting one specific user by login
+     * @param login of the user
+     * @return Response entity containing desired user
+     */
     @RequestMapping(value = "login/{login}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<UserDTO>> getUserByLogin(@PathVariable("login") String login) {
         
@@ -62,7 +77,12 @@ public class UserController {
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
     
-
+    /**
+     * Creates user
+     * @param user User to be created
+     * @param bindingResult bindingResult
+     * @return Response entity containing new created user
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public final HttpEntity<EntityModel<UserDTO>> createUser(@RequestBody UserCreateDTO user, BindingResult bindingResult) {
        
@@ -75,7 +95,10 @@ public class UserController {
         return new ResponseEntity<>(userModel, HttpStatus.OK);
     }
 
-    
+    /**
+     * REST Function for deleting specific user
+     * @param id ID of the user
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void deleteUser(@PathVariable("id") long id) {
         try {
@@ -86,6 +109,11 @@ public class UserController {
         }
     }
 
+    /**
+     * REST function for getting one specific user profile
+     * @param id ID of the user
+     * @return Response entity containing desired user
+     */
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<UserDTO>> getUserProfile(@PathVariable("id") long id) {
 

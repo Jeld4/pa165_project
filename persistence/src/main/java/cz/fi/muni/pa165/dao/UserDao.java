@@ -21,7 +21,7 @@ public interface UserDao {
      * Method to find a User by id.
      * @param id
      */
-	User getUserById(long id);
+	User getUserById(Long id);
 	
 	
     /**

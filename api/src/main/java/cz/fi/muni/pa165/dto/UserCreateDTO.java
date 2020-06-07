@@ -113,18 +113,35 @@ public class UserCreateDTO {
 		this.cars = cars;
 	}
 
+	
+	/**
+	 * Gets User's Address
+	 * @param cars of the user
+	 */
 	public String getUserAddress() {
 		return userAddress;
 	}
 
+	/**
+	 * Sets User's Address
+	 * @param cars of the user
+	 */
 	public void setUserAddress(String userAddress) {
 		this.userAddress = userAddress;
 	}
 
+	/**
+	 * Gets User's Telephone
+	 * @param cars of the user
+	 */
 	public String getTelephone() {
 		return telephone;
 	}
 
+	/**
+	 * Sets User's Telephone
+	 * @param cars of the user
+	 */
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
