@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.math.BigDecimal;
 
@@ -21,9 +22,6 @@ import java.math.BigDecimal;
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class TireServiceTest extends AbstractTransactionalTestNGSpringContextTests {
-
-    @Mock
-    private TireDao tireDao;
 
     @Autowired
     @InjectMocks
@@ -34,17 +32,64 @@ public class TireServiceTest extends AbstractTransactionalTestNGSpringContextTes
         MockitoAnnotations.initMocks(this);
     }
 
-    private Tire tire;
+    private Tire tire1;
+    private Tire tire2;
+
 
     @BeforeMethod
     public void prepareTire(){
-        tire = new Tire();
-        tire.setType("Super Swift");
-        tire.setManufacturer("Barum");
-        tire.setPrice(new BigDecimal(6500));
-        tire.setSeason("Summer");
-        tire.setSize(BigDecimal.valueOf(16));
+        tire1 = new Tire();
+        tire1.setType("Super Swift");
+        tire1.setManufacturer("Barum");
+        tire1.setPrice(new BigDecimal(6500));
+        tire1.setSeason("Summer");
+        tire1.setSize(BigDecimal.valueOf(16));
+
+
+        tire2 = new Tire();
+        tire2.setType("Super Slow");
+        tire2.setManufacturer("Micheel");
+        tire2.setPrice(new BigDecimal(4300));
+        tire2.setSeason("All");
+        tire2.setSize(BigDecimal.valueOf(12));
     }
 
+    @Test
+    public void create(){
+        tireService.create(tire1);
+        tireService.create(tire2);
+        assert(tireService.findAll().size() == 2);
+    }
+
+    @Test
+    public void findByID(){
+        tireService.create(tire1);
+        tireService.create(tire2);
+        assert(tireService.findById(tire1.getId()).equals(tire1));
+        assert(tireService.findById(tire2.getId()).equals(tire2));
+    }
+
+    @Test
+    public void findAll(){
+        tireService.create(tire1);
+        assert(tireService.findAll().size() == 1);
+        tireService.create(tire2);
+        assert(tireService.findAll().size() == 2);
+    }
+
+    @Test
+    public void findByManufacturer(){
+        tireService.create(tire1);
+        tireService.create(tire2);
+        assert(tireService.findByManufacturer("Barum").get(0).equals(tire1));
+    }
+
+    @Test
+    public void remove(){
+        tireService.create(tire1);
+        tireService.create(tire2);
+        tireService.remove(tire1);
+        assert(tireService.findAll().contains(tire2));
+    }
 
 }
