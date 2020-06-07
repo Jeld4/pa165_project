@@ -1,7 +1,6 @@
 package cz.fi.muni.cz.pa165.service;
 
 import cz.fi.muni.pa165.entity.Car;
-import cz.fi.muni.pa165.entity.Order;
 import cz.fi.muni.pa165.entity.Tire;
 import cz.fi.muni.pa165.entity.User;
 import cz.fi.muni.pa165.service.CarService;

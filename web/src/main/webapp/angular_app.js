@@ -57,7 +57,7 @@ eshopControllers.controller('AllUsersCtrl',
                 $http.delete('/pa165/api/v1/users/' + user.id).then(
                     function success(response) {
                         console.log('deleted user ' + user.id + ' on server');
-                        $rootScope.successAlert = 'Deleted user';
+                        $rootScope.successAlert = 'User was successfully deleted.';
                     },
                     function error(response) {
                         console.log("error when deleting user");
@@ -89,7 +89,7 @@ eshopControllers.controller('AllOrdersCtrl',
             $http.delete('/pa165/api/v1/orders/' + order.id).then(
                 function success(response) {
                     console.log('deleted order ' + order.id + ' on server');
-                    $rootScope.successAlert = 'Deleted order';
+                    $rootScope.successAlert = 'Order was successfully deleted.';
                 },
                 function error(response) {
                     console.log("error when deleting order");
@@ -119,7 +119,7 @@ eshopControllers.controller('AllCarsCtrl',
             $http.delete('/pa165/api/v1/cars/' + car.id).then(
                 function success(response) {
                     console.log('deleted car ' + car.id + ' on server');
-                    $rootScope.successAlert = 'Deleted car';
+                    $rootScope.successAlert = 'Car was successfully deleted.';
                 },
                 function error(response) {
                     console.log("error when deleting car");
@@ -150,7 +150,7 @@ eshopControllers.controller('AllServicesCtrl',
             $http.delete('/pa165/api/v1/services/' + service.id).then(
                 function success(response) {
                     console.log('deleted service ' + service.id + ' on server');
-                    $rootScope.successAlert = 'Deleted service';
+                    $rootScope.successAlert = 'Service was successfully deleted.';
                 },
                 function error(response) {
                     console.log("error when deleting service");
@@ -180,7 +180,7 @@ eshopControllers.controller('AllTiresCtrl',
                 $http.delete('/pa165/api/v1/tires/' + tire.id).then(
                     function success(response) {
                         console.log('deleted tire ' + tire.id + ' on server');
-                        $rootScope.successAlert = 'Deleted tire';
+                        $rootScope.successAlert = 'Tire was successfully deleted.';
                     },
                     function error(response) {
                         console.log("error when deleting tire");
@@ -204,7 +204,7 @@ eshopControllers.controller('AllTiresCtrl',
     eshopControllers.controller('MenuCtrl',
 	    function ($scope, $routeParams, $http, $location, $rootScope) {
     	$scope.logout = () => {
-            $rootScope.successAlert = 'success';
+            $rootScope.successAlert = 'You are now logged out.';
             $rootScope.logedUser = undefined; 
             $location.path("/");
     	}
@@ -228,7 +228,7 @@ eshopControllers.controller('AllTiresCtrl',
             headers: { 'Content-Type': 'application/hal+json' },
             data: user
         }).then(function success(response) {
-            $rootScope.successAlert = 'You are logged in.';
+            $rootScope.successAlert = 'You are now logged in.';
             $http({
                 method: 'GET',
                 url: 'api/v1/users/login/' + user.login,
@@ -244,10 +244,10 @@ eshopControllers.controller('AllTiresCtrl',
             console.log(response);
             switch (response.data.code) {
                 case 'InvalidRequestException':
-                    $rootScope.errorAlert = 'wrong login or password';
+                    $rootScope.errorAlert = 'Wrong login or password.';
                     break;
                 default:
-                    $rootScope.errorAlert = 'Cannot login user ! Reason given by the server: '+response.data.message;
+                    $rootScope.errorAlert = 'Wrong login or password. Try again.';
                     break;
             }
         });
@@ -304,7 +304,7 @@ eshopControllers.controller('OrderInfoCtrl',
                     	
                         console.log('deleted order ' + order.id + ' on server');
                         //display confirmation alert
-                        $rootScope.successAlert = 'Deleted order';
+                        $rootScope.successAlert = 'Order was successfully deleted.';
                         $location.path("/allOrders");
                     },
                     function error(response) {
@@ -440,7 +440,7 @@ eshopControllers.controller('UserInfoCtrl',
                     function success(response) {
                         console.log('deleted user ' + user.id + ' on server');
                         //display confirmation alert
-                        $rootScope.successAlert = 'Deleted user "' + user.name + '"';
+                        $rootScope.successAlert = 'User "' + user.name + '" was successfully deleted.';
                         //load new list of all users
                         $location.path("/allUsers");
                     },
@@ -492,7 +492,7 @@ eshopControllers.controller('UserRegisterCtrl',
 	                console.log('User was created.');
 	                var createdUser = response.data;
 	                //display confirmation alert
-	                $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created';
+	                $rootScope.successAlert = 'A new user "' + createdUser.name + '" was created.';
 	                $rootScope.logedUser = response.data
 	                //change view to list of products
 	                $location.path("/");
@@ -505,7 +505,7 @@ eshopControllers.controller('UserRegisterCtrl',
 	                        $rootScope.errorAlert = 'Sent data were found to be invalid by server! ';
 	                        break;
 	                    default:
-	                        $rootScope.errorAlert = 'Cannot create user due to wrong input.';
+	                        $rootScope.errorAlert = 'Cannot create user due to wrong values.';
 	                        break;
 	                }
 	            });
@@ -550,7 +550,7 @@ eshopControllers.controller('CreateOrderCtrl',
 		                console.log('created order');
 		                var createdUser = response.data;
 		                //display confirmation alert
-		                $rootScope.successAlert = 'A new order was created';
+		                $rootScope.successAlert = 'A new order was created.';
 		                $location.path("/");
 		                
 		            }, function error(response) {
@@ -559,10 +559,10 @@ eshopControllers.controller('CreateOrderCtrl',
 		                console.log(response);
 		                switch (response.data.code) {
 		                    case 'InvalidRequestException':
-		                        $rootScope.errorAlert = 'Sent data were found to be invalid by server ! ';
+		                        $rootScope.errorAlert = 'Sent data were found to be invalid by server! ';
 		                        break;
 		                    default:
-		                        $rootScope.errorAlert = 'Cannot create order ! Reason given by the server: '+response.data.message;
+		                        $rootScope.errorAlert = 'It is not possible to create an empty order.';
 		                        break;
 		                }
 		            });
@@ -607,7 +607,7 @@ eshopControllers.controller('CreateTireCtrl',
                 console.log('created tire');
                 var createdTire = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new tire "' + createdTire.manufacturer + '" was created';
+                $rootScope.successAlert = 'A new tire "' + createdTire.manufacturer + '" was created.';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -619,7 +619,7 @@ eshopControllers.controller('CreateTireCtrl',
                         $rootScope.errorAlert = 'Sent data were found to be invalid by server! ';
                         break;
                     default:
-                        $rootScope.errorAlert = 'Cannot create tire! Reason given by the server: '+response.data.message;
+                        $rootScope.errorAlert = 'Cannot create tire due to wrong or missing values!';
                         break;
                 }
             });
@@ -648,7 +648,7 @@ eshopControllers.controller('CreateUserCtrl',
                 console.log('created user');
                 var createdUser = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new user "' + createdUser.login + '" was created';
+                $rootScope.successAlert = 'A new user "' + createdUser.login + '" was created.';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -660,7 +660,7 @@ eshopControllers.controller('CreateUserCtrl',
                         $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
                         break;
                     default:
-                        $rootScope.errorAlert = 'Cannot create user! Reason given by the server: '+response.data.message;
+                        $rootScope.errorAlert = 'Cannot create user due to wrong or missing values!';
                         break;
                 }
             });
@@ -687,7 +687,7 @@ eshopControllers.controller('CreateServiceCtrl',
                 console.log('created service');
                 var createdService = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new service "' + createdService.name + '" was created';
+                $rootScope.successAlert = 'A new service "' + createdService.name + '" was created.';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -699,7 +699,7 @@ eshopControllers.controller('CreateServiceCtrl',
                         $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
                         break;
                     default:
-                        $rootScope.errorAlert = 'Cannot create service! Reason given by the server: '+response.data.message;
+                        $rootScope.errorAlert = 'Cannot create service due to wrong or missing values!';
                         break;
                 }
             });
@@ -727,7 +727,7 @@ eshopControllers.controller('CarRegisterCtrl',
                 console.log('created car');
                 var createdCar = response.data;
                 //display confirmation alert
-                $rootScope.successAlert = 'A new car "' + createdCar.licencePlate + '" was created';
+                $rootScope.successAlert = 'A new car "' + createdCar.licencePlate + '" was created.';
                 //change view to list of products
                 $location.path("/");
             }, function error(response) {
@@ -739,7 +739,7 @@ eshopControllers.controller('CarRegisterCtrl',
                         $rootScope.errorAlert = 'Sent data were found to be invalid by server!';
                         break;
                     default:
-                        $rootScope.errorAlert = 'Cannot create car! Reason given by the server: '+response.data.message;
+                        $rootScope.errorAlert = 'Cannot create car due to wrong or missing values!';
                         break;
                 }
             });
@@ -767,9 +767,9 @@ eshopControllers.controller('UserProfileCtrl',
                 $http.delete('/pa165/api/v1/orders/' + order.id).then(
 
                     function success(response) {
-                        console.log('deleted order ' + order.id + ' on server');
+                        console.log('Order with ID: ' + order.id + ' was successfully deleted');
                         //display confirmation alert
-                        $rootScope.successAlert = 'Deleted order';
+                        $rootScope.successAlert = 'Order was successfully canceled.';
 
                         $scope.user.orders = $scope.user.orders.filter( ord => {return ord.id != order.id})
 
@@ -794,7 +794,7 @@ eshopControllers.controller('UserProfileCtrl',
                 $http.delete('/pa165/api/v1/cars/' + car.id).then(
 
                     function success(response) {
-                        console.log('deleted car ' + car.id + ' on server');
+                        console.log('Car with ID: ' + car.id + ' was successfully deleted.');
                         //display confirmation alert
                         $rootScope.successAlert = 'Deleted car';
                     },
@@ -806,7 +806,7 @@ eshopControllers.controller('UserProfileCtrl',
                                 $rootScope.errorAlert = 'Cannot delete non-existent car ! ';
                                 break;
                             default:
-                                $rootScope.errorAlert = 'Cannot delete car ! Reason given by the server: '+response.data.message;
+                                $rootScope.errorAlert = 'Cannot delete car! Reason given by the server: '+response.data.message;
                                 break;
                         }
                     }
