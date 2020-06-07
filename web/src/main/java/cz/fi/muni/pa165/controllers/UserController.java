@@ -6,6 +6,8 @@ import cz.fi.muni.pa165.exceptions.InvalidRequestException;
 import cz.fi.muni.pa165.exceptions.ResourceNotFoundException;
 import cz.fi.muni.pa165.facade.UserFacade;
 import cz.fi.muni.pa165.hateoas.UserRepresentationModelAssembler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
+    private final static Logger log = LoggerFactory.getLogger(ServiceController.class);
 
     private UserController(@Autowired UserFacade userFacade, @Autowired UserRepresentationModelAssembler userRepresentationModelAssembler){
         this.userFacade = userFacade;
@@ -33,7 +36,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET)
     public final HttpEntity<CollectionModel<EntityModel<UserDTO>>> getUsers(){
-        // log.debug("rest getUsers");
+        log.debug("Controller - get all users");
         CollectionModel<EntityModel<UserDTO>> usersCollectionModel = userRepresentationModelAssembler.toCollectionModel(userFacade.getAllUsers());
         //usersCollectionModel.add(linkTo(UserController.class).withSelfRel());
         //usersCollectionModel.add(linkTo(UserController.class).slash("/create").withRel("create"));
@@ -42,7 +45,7 @@ public class UserController {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public final HttpEntity<EntityModel<UserDTO>> getUser(@PathVariable("id") long id) {
-        
+        log.debug("Controller - get user by id");
         UserDTO userDTO = userFacade.getUserWithId(id);
         if (userDTO == null) throw new ResourceNotFoundException("user " + id + " not found");
         EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
@@ -53,6 +56,7 @@ public class UserController {
     public final HttpEntity<EntityModel<UserDTO>> getUserByLogin(@PathVariable("login") String login) {
         
         UserDTO userDTO = userFacade.getUserWithLogin(login);
+        log.debug("Controller - get user by login");
         if (userDTO == null) throw new ResourceNotFoundException("user " + login + " not found");
         EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
         return new ResponseEntity<>(userModel, HttpStatus.OK);
@@ -65,6 +69,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             throw new InvalidRequestException("Failed validation");
         }
+        log.debug("Controller - create user");
         Long id = userFacade.createUser(user);
         EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userFacade.getUserWithId(id));
         return new ResponseEntity<>(userModel, HttpStatus.OK);
@@ -75,6 +80,7 @@ public class UserController {
     public final void deleteUser(@PathVariable("id") long id) {
         try {
             userFacade.deleteUser(id);
+            log.debug("Controller - delete user");
         } catch (IllegalArgumentException ex) {
             throw new ResourceNotFoundException("user " + id + " not found");
         }
@@ -84,6 +90,7 @@ public class UserController {
     public final HttpEntity<EntityModel<UserDTO>> getUserProfile(@PathVariable("id") long id) {
 
         UserDTO userDTO = userFacade.getUserWithId(id);
+        log.debug("Controller - get user profile");
         if (userDTO == null) throw new ResourceNotFoundException("user " + id + " not found");
         EntityModel<UserDTO> userModel = userRepresentationModelAssembler.toModel(userDTO);
         return new ResponseEntity<>(userModel, HttpStatus.OK);

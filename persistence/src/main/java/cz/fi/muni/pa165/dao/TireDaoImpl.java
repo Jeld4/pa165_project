@@ -33,12 +33,16 @@ public class TireDaoImpl implements TireDao {
 
     @Override
     public List<Tire> findAll() {
+        log.debug("DAO - Find all tires");
         return em.createQuery("select t from Tire t", Tire.class).getResultList();
     }
 
     @Override
     public Tire findById(Long id) {
-        log.debug("DAO - Find all tires");
+        if(id == null){
+            throw new DataAccessException("Cannot find tire under null ID"){};
+        }
+        log.debug("DAO - Find tire by ID");
         return em.find(Tire.class, id);
     }
 
