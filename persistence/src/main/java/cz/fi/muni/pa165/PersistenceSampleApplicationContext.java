@@ -27,6 +27,7 @@ import javax.sql.DataSource;
 @ComponentScan(basePackages = "cz.fi.muni.pa165")
 public class PersistenceSampleApplicationContext {
 
+
     @Bean
     public PersistenceExceptionTranslationPostProcessor postProcessor() {
         return new PersistenceExceptionTranslationPostProcessor();
@@ -41,7 +42,7 @@ public class PersistenceSampleApplicationContext {
         LocalContainerEntityManagerFactoryBean jpaFactoryBean = new LocalContainerEntityManagerFactoryBean();
         jpaFactoryBean.setDataSource(db());
         jpaFactoryBean.setLoadTimeWeaver(instrumentationLoadTimeWeaver());
-        jpaFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        jpaFactoryBean.setPersistenceProvider(new HibernatePersistenceProvider());
         return jpaFactoryBean;
     }
 
