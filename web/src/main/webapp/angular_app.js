@@ -45,8 +45,11 @@ pneuApp.config(['$routeProvider',
     }]);
 
 eshopControllers.controller('AllUsersCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
+    function ($scope, $rootScope, $routeParams, $http, $location) {
 	    $http.get('/pa165/api/v1/users').then(function (response) {
+            if(!$rootScope.logedUser || !$rootScope.logedUser.isAdmin) {
+                $location.path("/");
+            }
             $scope.users = response.data['_embedded']['userDTOList'];
             console.log('AJAX loaded all users ');
         });
@@ -81,6 +84,9 @@ eshopControllers.controller('AllUsersCtrl',
 eshopControllers.controller('AllOrdersCtrl',
     function ($scope, $rootScope, $routeParams, $http, $location) {
         $http.get('/pa165/api/v1/orders').then(function (response) {
+            if(!$rootScope.logedUser || !$rootScope.logedUser.isAdmin) {
+                $location.path("/");
+            }
             $scope.orders = response.data['_embedded']['orderDTOList'];
             console.log($scope.orders )
             console.log('AJAX loaded all orders ');
@@ -131,8 +137,11 @@ eshopControllers.controller('AllOrdersCtrl',
     })
 
 eshopControllers.controller('AllCarsCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
+    function ($scope, $rootScope, $routeParams, $http, $location) {
         $http.get('/pa165/api/v1/cars').then(function (response) {
+            if(!$rootScope.logedUser || !$rootScope.logedUser.isAdmin) {
+                $location.path("/");
+            }
             $scope.cars = response.data['_embedded']['carDTOList'];
             console.log('AJAX loaded all cars ');
         });
@@ -162,8 +171,11 @@ eshopControllers.controller('AllCarsCtrl',
 
 
 eshopControllers.controller('AllServicesCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
+    function ($scope, $rootScope, $routeParams, $http, $location) {
         $http.get('/pa165/api/v1/services').then(function (response) {
+            if(!$rootScope.logedUser || !$rootScope.logedUser.isAdmin) {
+                $location.path("/");
+            }
             $scope.services = response.data['_embedded']['serviceDTOList'];
             console.log('AJAX loaded all services ');
         });
@@ -193,8 +205,11 @@ eshopControllers.controller('AllServicesCtrl',
 
 
 eshopControllers.controller('AllTiresCtrl',
-    function ($scope, $rootScope, $routeParams, $http) {
+    function ($scope, $rootScope, $routeParams, $http, $location) {
         $http.get('/pa165/api/v1/tires').then(function (response) {
+            if(!$rootScope.logedUser || !$rootScope.logedUser.isAdmin) {
+                $location.path("/");
+            }
             $scope.tires = response.data['_embedded']['tireDTOList'];
             console.log('AJAX loaded all tires ');
 
