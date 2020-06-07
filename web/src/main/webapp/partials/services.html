@@ -1,0 +1,24 @@
+<H2>All services</H2>
+
+<br>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody ng-repeat="service in services track by $index">
+    <tr>
+        <td>{{service.name}}</td>
+        <td>{{service.description}}</td>
+        <td>{{service.price}}</td>
+        <td>
+            <a class="btn btn-primary"  href="#!/service/{{service.id}}">Detail</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
